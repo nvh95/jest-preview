@@ -1,6 +1,8 @@
 import { prettyDOM, render, screen } from "@testing-library/react";
-import App from "../App";
+import userEvent from "@testing-library/user-event";
 import { writeFileSync } from "fs";
+import App from "../App";
+
 describe("App", () => {
   it("should work as expected", () => {
     const { container } = render(<App />);
@@ -10,6 +12,11 @@ describe("App", () => {
         highlight: false,
       })
     );
+
+    userEvent.click(screen.getByTestId("increase"));
+    userEvent.click(screen.getByTestId("increase"));
+    userEvent.click(screen.getByTestId("increase"));
+    userEvent.click(screen.getByTestId("increase"));
     writeFileSync(
       "./server/index.html",
       prettyDOM(container, 50000, {

@@ -13,7 +13,11 @@ function App() {
           process.env.VITE_APP_FAVORITE_FRUIT || "banana"
         }`}</p>
         <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
+          <button
+            data-testid="increase"
+            type="button"
+            onClick={() => setCount((count) => count + 1)}
+          >
             count is: {count}
           </button>
         </p>
