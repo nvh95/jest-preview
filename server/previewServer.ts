@@ -1,3 +1,7 @@
+// We can move this file to globalSetup, globalTeardown
+// Reference:
+// - https://jestjs.io/docs/puppeteer
+// - https://jestjs.io/docs/configuration#globalsetup-string
 const express = require("express");
 const app = express();
 const port = 3006;
@@ -9,12 +13,12 @@ app.get("/", (req, res) => {
     "./node_modules/.cache/jest-preview-dom/index.html",
     "utf8"
   );
-  console.log(html);
+  // console.log(html);
   const css = readFileSync(
     "./node_modules/.cache/jest-preview-dom/App.css",
     "utf8"
   );
-  console.log(css);
+  // console.log(css);
   const content = `
   <style>${css}</style>
   ${html}
