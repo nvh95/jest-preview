@@ -9,4 +9,12 @@
     - You can see `UI will be updated to here`
   - Execute the test (type `a`)
   - Revisit http://localhost:3006 => see UI of the app!!
-    - However, no CSS. Need a way to display css
+
+### To do
+
+- [] Support CSS
+  - [x] Intercept .css via cssTransform.js
+  - [] How about css-injs
+- [] Support image
+- [] How to make a great DX
+  - [] User just install package and do not need to configure too much
