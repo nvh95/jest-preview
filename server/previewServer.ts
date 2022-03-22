@@ -2,6 +2,7 @@
 // Reference:
 // - https://jestjs.io/docs/puppeteer
 // - https://jestjs.io/docs/configuration#globalsetup-string
+// No, we can't. Since jest will terminate the express server after test finish running
 const express = require("express");
 const app = express();
 const port = 3006;
@@ -14,6 +15,9 @@ app.get("/", (req, res) => {
     "utf8"
   );
   // console.log(html);
+  // TODO1: HIGH PRIORITY: Hard code App.css. We need to find all css file and inject them to html
+  // TODO2: How do we preserve the order of importing css file?
+  // For now I think it's not very important, but this is the room for improvement in next versions
   const css = readFileSync(
     "./node_modules/.cache/jest-preview-dom/App.css",
     "utf8"

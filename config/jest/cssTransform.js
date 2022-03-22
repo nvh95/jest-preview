@@ -25,7 +25,7 @@ module.exports = {
     );
     return "module.exports = {};";
   },
-  // TODO: To research about getCacheKey
+  // TODO: MEDIUM PRIORITY To research about getCacheKey
   // Reference:
   // - https://jestjs.io/docs/code-transformation#writing-custom-transformers
   // - https://github.com/swc-project/jest/blob/17cf883b46c050a485975d8ce96a05277cf6032f/index.ts#L37-L52

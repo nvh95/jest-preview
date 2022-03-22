@@ -1,9 +1,7 @@
 import { prettyDOM, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "../App";
-// TODO: Why fs cannot used as ESM here???
 import * as fs from "fs";
-// const fs = require("fs");
 
 describe("App", () => {
   it("should work as expected", () => {
