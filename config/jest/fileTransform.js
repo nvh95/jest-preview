@@ -12,7 +12,8 @@ module.exports = {
   // Currently, we copy to preview folder. But convert to base64 might be a better idea
   // Since we can avoid the File I/O operations and keep images in the memory
   // To experiment about this idea but low priority. First, make it work.
-  // TODO2: What about files that are not images? e.g. pdf, doc, mp3?
+
+  // TODO2: HIGH PRIORITY What about files that are not images? e.g. pdf, doc, mp3?
   // I suppose it's OK. Because as I recalled, webpack still convert pdf, doc, mp3 => link (file-loader?)
   process(src, filename) {
     const assetFilename = JSON.stringify(path.basename(filename));
@@ -27,6 +28,8 @@ module.exports = {
     // However, we might not need to make it nested if we using hashing to differentiate.
     // Hash might be a better solution for 0.0.1
     // Same for cssTransform
+    // assets/images/abc.png => fdsfs343r3.png
+    // demo/abc.png  => dfdfsgs.png
     if (!fs.existsSync("./node_modules/.cache/jest-preview-dom")) {
       fs.mkdirSync("./node_modules/.cache/jest-preview-dom", {
         recursive: true,

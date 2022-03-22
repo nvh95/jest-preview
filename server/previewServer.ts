@@ -18,6 +18,8 @@ app.get("/", (req, res) => {
   // TODO1: HIGH PRIORITY: Hard code App.css. We need to find all css file and inject them to html
   // TODO2: How do we preserve the order of importing css file?
   // For now I think it's not very important, but this is the room for improvement in next versions
+  // TODO3: not support styled-components. Might refer to jest-styled-components
+  // Target for version > 0.0.1
   const css = readFileSync(
     "./node_modules/.cache/jest-preview-dom/App.css",
     "utf8"
