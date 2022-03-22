@@ -3,14 +3,17 @@
 // - https://jestjs.io/docs/puppeteer
 // - https://jestjs.io/docs/configuration#globalsetup-string
 // No, we can't. Since jest will terminate the express server after test finish running
+// TODO: Is there any simpler solution compare to express? We just need to serve a file
+// How vite starts a server? Can we leverage this?
+// http-server? http?
 const express = require("express");
 const app = express();
-const port = 3006;
+const port = process.env.PORT || 3336;
 
 const path = require("path");
 const { readFileSync, readdirSync } = require("fs");
 
-app.get("/", (req, res) => {
+app.get("/", (req: any, res: any) => {
   const html = readFileSync(
     "./node_modules/.cache/jest-preview-dom/index.html",
     "utf8"
@@ -41,3 +44,5 @@ app.use(express.static("./node_modules/.cache/jest-preview-dom"));
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
+
+export {};
