@@ -1,24 +1,25 @@
 import { useState } from "react";
 import logo from "./logo.svg";
-import "./App.css";
+import logo2 from "./assets/images/logo.svg";
 
+import "./App.css";
+import "./App2.css";
 function App() {
   const [count, setCount] = useState(0);
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <img src={logo2} className="logo2" alt="logo2" />
         <p>Hello Vite + React!</p>
-        <p>{`My favorite fruit is ${
-          process.env.VITE_APP_FAVORITE_FRUIT || "banana"
-        }`}</p>
+
         <p>
           <button
             data-testid="increase"
             type="button"
             onClick={() => setCount((count) => count + 1)}
           >
-            count is: {count}
+            count is: <div data-testid="count">{count}</div>
           </button>
         </p>
         <p>

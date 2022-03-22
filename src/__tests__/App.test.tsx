@@ -34,6 +34,6 @@ describe("App", () => {
         flag: "w",
       }
     );
-    expect(screen.getByText("My favorite fruit is banana")).toBeInTheDocument();
+    expect(screen.getByTestId("count")).toContainHTML("6");
   });
 });
