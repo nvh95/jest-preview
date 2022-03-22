@@ -32,6 +32,7 @@ export default defineConfig(({ mode }) => {
         name: "jest-preview",
         fileName: (format) => `index.${format}.js`,
         formats: ["es", "cjs"],
+        // TODO: Export types
       },
     },
   };
