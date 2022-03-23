@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // We can move this file to globalSetup, globalTeardown
 // Reference:
 // - https://jestjs.io/docs/puppeteer
