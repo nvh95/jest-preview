@@ -23,6 +23,7 @@
     "preview": "vite preview",
     "dom": "nodemon server/previewServer.js",
     "test:only": "npm run clearCache && NODE_ENV=test jest --watch",
+    "test:ci": "npm run clearCache && NODE_ENV=test jest",
     "clearCache": "rimraf node_modules/.cache/jest-preview-dom && jest --clearCache",
     "test": "npm-run-all -p dom test:only",
     "prettier": "prettier server src --check",
