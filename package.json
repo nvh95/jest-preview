@@ -2,8 +2,7 @@
   "name": "jest-preview",
   "private": true,
   "version": "0.0.0",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.es.js",
+  "main": "dist/index.js",
   "files": [
     "dist",
     "server"
@@ -11,15 +10,11 @@
   "bin": {
     "jest-preview": "./server/previewServer.js"
   },
-  "exports": {
-    ".": {
-      "import": "./dist/my-lib.es.js",
-      "require": "./dist/my-lib.umd.js"
-    }
-  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -p tsconfig.prod.json && vite build",
+    "types": "tsc src/index.ts --declaration --emitDeclarationOnly --jsx react --esModuleInterop --outDir dist",
+    "build": "tsc -p tsconfig.prod.json && vite build && npm run types",
+    "build:watch": "vite build --watch",
     "preview": "vite preview",
     "dom": "nodemon server/previewServer.js",
     "test:only": "npm run clearCache && NODE_ENV=test jest --watch",

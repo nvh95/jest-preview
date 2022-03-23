@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 
 import userEvent from '@testing-library/user-event';
 import App from '../App';
-import preview from '../../dist/index.es';
+import preview from '../../dist/index';
 
 describe('App', () => {
   it('should work as expected', () => {

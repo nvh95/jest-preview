@@ -1,25 +1,25 @@
-import { defineConfig, loadEnv } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig, loadEnv } from 'vite';
+import react from '@vitejs/plugin-react';
 
-const path = require("path");
+const path = require('path');
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   // expose .env as process.env instead of import.meta.env
   // Reference: https://github.com/vitejs/vite/issues/1149#issuecomment-857686209
-  const env = loadEnv(mode, process.cwd(), "VITE_APP");
+  const env = loadEnv(mode, process.cwd(), 'VITE_APP');
   const envWithProcessPrefix = Object.entries(env).reduce(
     (prev, [key, val]) => {
       return {
         ...prev,
-        ["process.env." + key]: `"${val}"`,
+        ['process.env.' + key]: `"${val}"`,
       };
     },
-    {}
+    {},
   );
 
   // Inject NODE_ENV and make sure envWithProcessPrefix is not empty
-  envWithProcessPrefix["process.env.NODE_ENV"] = `'${mode}'`;
+  envWithProcessPrefix['process.env.NODE_ENV'] = `'${mode}'`;
 
   return {
     plugins: [react()],
@@ -28,16 +28,16 @@ export default defineConfig(({ mode }) => {
     define: envWithProcessPrefix,
     build: {
       lib: {
-        entry: path.resolve(__dirname, "src/index.ts"),
-        name: "jest-preview",
-        fileName: (format) => `index.${format}.js`,
-        formats: ["es", "cjs"],
+        entry: path.resolve(__dirname, 'src/index.ts'),
+        name: 'jest-preview',
+        fileName: () => `index.js`,
+        formats: ['cjs'],
         // TODO: Export types
       },
       rollupOptions: {
         // make sure to externalize deps that shouldn't be bundled
         // into your library
-        external: ["@testing-library/dom"],
+        external: ['@testing-library/dom'],
       },
     },
   };
