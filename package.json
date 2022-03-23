@@ -5,8 +5,12 @@
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "files": [
-    "dist"
+    "dist",
+    "server"
   ],
+  "bin": {
+    "jest-preview": "./server/previewServer.js"
+  },
   "exports": {
     ".": {
       "import": "./dist/my-lib.es.js",
