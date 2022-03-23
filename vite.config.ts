@@ -34,6 +34,11 @@ export default defineConfig(({ mode }) => {
         formats: ["es", "cjs"],
         // TODO: Export types
       },
+      rollupOptions: {
+        // make sure to externalize deps that shouldn't be bundled
+        // into your library
+        external: ["@testing-library/dom"],
+      },
     },
   };
 });
