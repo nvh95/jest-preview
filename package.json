@@ -17,10 +17,12 @@
     "dev": "vite",
     "build": "tsc -p tsconfig.prod.json && vite build",
     "preview": "vite preview",
-    "dom": "nodemon server/previewServer.ts",
+    "dom": "nodemon server/previewServer.js",
     "test:only": "npm run clearCache && NODE_ENV=test jest --watch",
     "clearCache": "rimraf node_modules/.cache/jest-preview-dom && jest --clearCache",
-    "test": "npm-run-all -p dom test:only"
+    "test": "npm-run-all -p dom test:only",
+    "prettier": "prettier server src --check",
+    "prettier:fix": "npm run prettier -- --write"
   },
   "dependencies": {
     "express": "^4.17.3",
@@ -40,6 +42,7 @@
     "@vitejs/plugin-react": "^1.0.7",
     "jest": "^27.5.1",
     "jest-watch-typeahead": "^1.0.0",
+    "prettier": "^2.6.0",
     "typescript": "^4.5.4",
     "vite": "^2.8.0"
   }

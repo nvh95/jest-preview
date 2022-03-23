@@ -13,7 +13,7 @@ const port = process.env.PORT || 3336;
 const path = require("path");
 const { readFileSync, readdirSync } = require("fs");
 
-app.get("/", (req: any, res: any) => {
+app.get("/", (req, res) => {
   const html = readFileSync(
     "./node_modules/.cache/jest-preview-dom/index.html",
     "utf8"
@@ -23,13 +23,16 @@ app.get("/", (req: any, res: any) => {
   // For now I think it's not very important, but this is the room for improvement in next versions
   // TODO3: not support styled-components. Might refer to jest-styled-components
   // Target for version > 0.0.1
-  let css = '';
+  let css = "";
   const allFiles = readdirSync("./node_modules/.cache/jest-preview-dom");
   allFiles.forEach((file) => {
     if (file.endsWith(".css")) {
-      css += `\n<style>${readFileSync(`./node_modules/.cache/jest-preview-dom/${path.basename(file)}`, "utf8")}</style>`;
+      css += `\n<style>${readFileSync(
+        `./node_modules/.cache/jest-preview-dom/${path.basename(file)}`,
+        "utf8"
+      )}</style>`;
     }
-  })
+  });
   // console.log(css);
   const content = `
     ${css}
@@ -44,5 +47,3 @@ app.use(express.static("./node_modules/.cache/jest-preview-dom"));
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
-
-export {};
