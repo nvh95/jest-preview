@@ -24,14 +24,14 @@ app.get("/", (req, res) => {
   const allFiles = readdirSync("./node_modules/.cache/jest-preview-dom");
   allFiles.forEach((file) => {
     if (file.endsWith(".css")) {
-      css += readFileSync(`./node_modules/.cache/jest-preview-dom/${path.basename(file)}`, "utf8");
+      css += `\n<style>${readFileSync(`./node_modules/.cache/jest-preview-dom/${path.basename(file)}`, "utf8")}</style>`;
     }
   })
   // console.log(css);
   const content = `
-  <style>${css}</style>
-  ${html}
-`;
+    ${css}
+    ${html}
+  `;
   // res.sendFile("index.html", { root: __dirname });
   res.send(content);
 });
