@@ -1,14 +1,7 @@
-'use strict';
-
-// This is a custom Jest transformer turning style imports into empty objects.
-// http://facebook.github.io/jest/docs/en/webpack.html
+const { processCss } = require('jest-preview');
 
 module.exports = {
-  process() {
-    return 'module.exports = {};';
-  },
-  getCacheKey() {
-    // The output is always the same.
-    return 'cssTransform';
+  process(src, filename) {
+    return processCss(src, filename);
   },
 };
