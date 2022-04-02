@@ -1,7 +1,6 @@
 {
   "name": "jest-preview",
-  "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.0",
   "main": "dist/index.js",
   "files": [
     "dist",
@@ -14,6 +13,9 @@
     "dev": "vite",
     "types": "tsc src/index.ts --declaration --emitDeclarationOnly --jsx react --esModuleInterop --outDir dist",
     "build": "tsc -p tsconfig.prod.json && vite build && npm run types",
+    "prepublishOnly": "npm run build",
+    "publish:alpha": "npm run build && npm publish --tag alpha",
+    "publish:latest": "npm run build && npm publish",
     "build:watch": "vite build --watch",
     "preview": "vite preview",
     "dom": "nodemon server/previewServer.js",
