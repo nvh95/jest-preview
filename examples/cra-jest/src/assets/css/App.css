@@ -2,3 +2,9 @@
   max-width: 300px;
   background: yellow;
 }
+
+.App-logo-wrapper {
+  display: flex;
+  flex-direction: 'row';
+  gap: 8px;
+}

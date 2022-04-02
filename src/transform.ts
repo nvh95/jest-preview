@@ -3,6 +3,7 @@ import createCacheKey from '@jest/create-cache-key-function';
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const camelcase = require('camelcase');
 
 const generateHashedFilename = (filename: string): string => {
   const [basename, ext] = filename.split('.');
@@ -21,7 +22,11 @@ const generateHashedFilename = (filename: string): string => {
 
 // TODO2: HIGH PRIORITY What about files that are not images? e.g. pdf, doc, mp3?
 // I suppose it's OK. Because as I recalled, webpack still convert pdf, doc, mp3 => link (file-loader?)
-export function processFile(src: string, filename: string): string {
+export function processFile(
+  src: string,
+  filename: string,
+  option?: { supportSvgComponent?: boolean },
+): string {
   // Hash to avoid 2 files in different folders with the same name.
   // E.g: `assets/images/abc.png` vs `demo/abc.png`
   const hashedFilename = generateHashedFilename(filename);
@@ -39,7 +44,34 @@ export function processFile(src: string, filename: string): string {
     },
   );
 
-  return `module.exports = ${JSON.stringify(hashedFilename)};`;
+  const stringifiedHashedFilename = JSON.stringify(hashedFilename);
+
+  if (filename.match(/\.svg$/)) {
+    // Based on how SVGR generates a component name:
+    // https://github.com/smooth-code/svgr/blob/01b194cf967347d43d4cbe6b434404731b87cf27/packages/core/src/state.js#L6
+    const pascalCaseFilename = camelcase(path.parse(filename).name, {
+      pascalCase: true,
+    });
+    const componentName = `Svg${pascalCaseFilename}`;
+    return `const React = require('react');
+      module.exports = {
+        __esModule: true,
+        default: ${stringifiedHashedFilename},
+        ReactComponent: React.forwardRef(function ${componentName}(props, ref) {
+          return {
+            $$typeof: Symbol.for('react.element'),
+            type: 'img',
+            ref: ref,
+            key: null,
+            props: Object.assign({}, props, {
+              src: ${stringifiedHashedFilename}
+            })
+          };
+        }),
+      };`;
+  }
+
+  return `module.exports = ${stringifiedHashedFilename};`;
 }
 
 export function processCss(src: string, filename: string): string {

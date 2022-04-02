@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ReactComponent as Logo } from './logo.svg';
 import logo from './logo.svg';
 import logo2 from './assets/images/logo.svg';
 
@@ -10,7 +11,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <div className="App-logo-wrapper">
+          <Logo className="App-logo" />
+          <img src={logo} className="App-logo" alt="logo" />
+        </div>
         <img src={logo2} className="logo2" alt="logo2" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
