@@ -22,7 +22,9 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/36792554?v=4",
       "profile": "https://github.com/ntt261298",
       "contributions": [
-        "code"
+        "code",
+        "doc",
+        "example"
       ]
     }
   ],
