@@ -11,6 +11,10 @@ Jest Preview
 <p align="center">
 Preview your HTML code while using Jest
 <p>
+  
+<p align="center">
+  <img align="center" src="https://user-images.githubusercontent.com/8603085/161395967-a99e70d2-2153-46cc-985e-aa54839e4183.gif" alt="Jest Preview Demo" />
+<p>
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
@@ -18,7 +22,7 @@ Preview your HTML code while using Jest
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-TODO insert GIF demo
+
 
 ## Why **jest-preview**
 
