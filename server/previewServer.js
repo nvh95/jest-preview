@@ -58,4 +58,5 @@ app.use(express.static('./node_modules/.cache/jest-preview-dom'));
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
+  // TODO: Clear all file in ./node_modules/.cache/jest-preview-dom
 });
