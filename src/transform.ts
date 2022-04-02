@@ -22,11 +22,7 @@ const generateHashedFilename = (filename: string): string => {
 
 // TODO2: HIGH PRIORITY What about files that are not images? e.g. pdf, doc, mp3?
 // I suppose it's OK. Because as I recalled, webpack still convert pdf, doc, mp3 => link (file-loader?)
-export function processFile(
-  src: string,
-  filename: string,
-  option?: { supportSvgComponent?: boolean },
-): string {
+export function processFile(src: string, filename: string): string {
   // Hash to avoid 2 files in different folders with the same name.
   // E.g: `assets/images/abc.png` vs `demo/abc.png`
   const hashedFilename = generateHashedFilename(filename);
