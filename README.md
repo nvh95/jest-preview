@@ -143,8 +143,9 @@ describe('App', () => {
 });
 ```
 
-Then visit http://localhost:3336
-TODO: Add image
+Then visit http://localhost:3336 to see the preview
+  
+<img alt="Preview your jest test in the browser" src="https://user-images.githubusercontent.com/8603085/161393898-7e283e38-6114-4064-9414-a0ce6d52361d.png" width="600" />
 
 ## Upcoming features
 
