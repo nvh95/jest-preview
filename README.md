@@ -1,11 +1,11 @@
 <p align="center">
 <!-- TODO: Add logo -->
 <!-- <img src="" height=""> -->
-🛠🖼
+
 </p>
 
 <h1 align="center">
-Jest Preview
+Jest Preview 🛠🖼 
 </h1>
 
 <p align="center">
@@ -39,10 +39,8 @@ When writing tests using Jest, we usually debug by reading the HTML code. Someti
 
 ## Examples
 
-<!-- TODO: Update url -->
-
-- Use with [Vite](https://vitejs.dev/): https://github.com/nvh95/jest-preview/tree/main/examples/cra-jest
-- Use with [Create React App](https://create-react-app.dev/): https://github.com/nvh95/jest-preview/tree/main/examples/vite-jest
+- Use with [Vite](https://vitejs.dev/): [Example with Vite](https://github.com/nvh95/jest-preview/tree/main/examples/vite)
+- Use with [Create React App](https://create-react-app.dev/): [Example with CRA](https://github.com/nvh95/jest-preview/tree/main/examples/create-react-app)
 
 ## Installation
 
