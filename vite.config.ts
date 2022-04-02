@@ -32,13 +32,8 @@ export default defineConfig(({ mode }) => {
         name: 'jest-preview',
         fileName: () => `index.js`,
         formats: ['cjs'],
-        // TODO: Export types
       },
-      rollupOptions: {
-        // make sure to externalize deps that shouldn't be bundled
-        // into your library
-        external: ['@testing-library/dom'],
-      },
+      rollupOptions: {},
     },
   };
 });
