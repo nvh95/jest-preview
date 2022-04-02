@@ -90,10 +90,9 @@ transform: {
 
 ## Usage
 
-1. Update to package.json
+1. Update to `package.json`
 
 ```json
-// package.json
 {
   "scripts": {
     "jest-preview": "jest-preview"
@@ -104,7 +103,6 @@ transform: {
 Optionally, you can use `npm-run-all` to run jest and `jest-preview` server in parallel
 
 ```json
-// package.json
 {
   "scripts": {
     "test:debug": "npm-run-all -p test jest-preview"
