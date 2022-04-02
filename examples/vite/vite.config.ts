@@ -26,19 +26,5 @@ export default defineConfig(({ mode }) => {
     // If `envWithProcessPrefix` is an empty object, `process.env` will be undefined and the app cannot be loaded
     // Caveat: Cannot access `process.env` in build mode, always use `process.env.VARIABLE_NAME`
     define: envWithProcessPrefix,
-    build: {
-      lib: {
-        entry: path.resolve(__dirname, 'src/index.ts'),
-        name: 'jest-preview',
-        fileName: () => `index.js`,
-        formats: ['cjs'],
-        // TODO: Export types
-      },
-      rollupOptions: {
-        // make sure to externalize deps that shouldn't be bundled
-        // into your library
-        external: ['@testing-library/dom'],
-      },
-    },
   };
 });

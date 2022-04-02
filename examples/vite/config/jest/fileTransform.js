@@ -1,6 +1,6 @@
 'use strict';
 
-const { processFile } = require('../../dist/index');
+const { processFile } = require('jest-preview');
 
 module.exports = {
   process(src, filename) {

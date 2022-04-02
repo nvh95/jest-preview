@@ -1,26 +1,30 @@
 {
   "name": "jest-preview",
-  "private": true,
-  "version": "0.0.0",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.es.js",
+  "version": "0.0.1-alpha.0",
+  "main": "dist/index.js",
   "files": [
-    "dist"
+    "dist",
+    "server"
   ],
-  "exports": {
-    ".": {
-      "import": "./dist/my-lib.es.js",
-      "require": "./dist/my-lib.umd.js"
-    }
+  "bin": {
+    "jest-preview": "./server/previewServer.js"
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -p tsconfig.prod.json && vite build",
+    "types": "tsc src/index.ts --declaration --emitDeclarationOnly --jsx react --esModuleInterop --outDir dist",
+    "build": "tsc -p tsconfig.prod.json && vite build && npm run types",
+    "prepublishOnly": "npm run build",
+    "publish:alpha": "npm run build && npm publish --tag alpha",
+    "publish:latest": "npm run build && npm publish",
+    "build:watch": "vite build --watch",
     "preview": "vite preview",
-    "dom": "nodemon server/previewServer.ts",
+    "dom": "nodemon server/previewServer.js",
     "test:only": "npm run clearCache && NODE_ENV=test jest --watch",
+    "test:ci": "npm run clearCache && NODE_ENV=test jest",
     "clearCache": "rimraf node_modules/.cache/jest-preview-dom && jest --clearCache",
-    "test": "npm-run-all -p dom test:only"
+    "test": "npm-run-all -p dom test:only",
+    "prettier": "prettier server src --check",
+    "prettier:fix": "npm run prettier -- --write"
   },
   "dependencies": {
     "express": "^4.17.3",
@@ -37,10 +41,11 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
-    "@vitejs/plugin-react": "^1.0.7",
+    "@vitejs/plugin-react": "^1.3.0",
     "jest": "^27.5.1",
     "jest-watch-typeahead": "^1.0.0",
-    "typescript": "^4.5.4",
-    "vite": "^2.8.0"
+    "prettier": "^2.6.0",
+    "typescript": "^4.6.3",
+    "vite": "^2.9.1"
   }
 }
