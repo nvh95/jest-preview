@@ -13,6 +13,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "nvh95",
+      "name": "Hung Viet Nguyen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8603085?v=4",
+      "profile": "https://hung.dev",
+      "contributions": [
+        "code",
+        "doc",
+        "example"
+      ]
     }
   ],
   "contributorsPerLine": 7,
