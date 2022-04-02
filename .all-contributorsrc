@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "ntt261298",
+      "name": "Truong Nguyen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36792554?v=4",
+      "profile": "https://github.com/ntt261298",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "jest-preview",
+  "projectOwner": "nvh95",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
