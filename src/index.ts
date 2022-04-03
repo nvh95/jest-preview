@@ -1,5 +1,5 @@
-import { processFile, processCss } from './transform';
+import { processFile, processCss, generateAssetFile } from './transform';
 import { preview } from './preview';
 
-export { processCss, processFile };
+export { processCss, processFile, generateAssetFile };
 export default preview;
