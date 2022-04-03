@@ -12,6 +12,7 @@ const connect = require('connect');
 const sirv = require('sirv');
 const app = connect();
 const chokidar = require('chokidar');
+const open = require('open');
 
 const port = process.env.PORT || 3336;
 // TODO: Can we reuse `port`, I think Vite they can do that
@@ -111,4 +112,6 @@ const server = http.createServer(app);
 server.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
   // TODO: Clear all file in ./node_modules/.cache/jest-preview-dom
+  // TODO: To improve: to focus on opened tab instead of always open new tab
+  open(`http://localhost:${port}`);
 });

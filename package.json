@@ -31,6 +31,7 @@
   "dependencies": {
     "chokidar": "^3.5.3",
     "connect": "^3.7.0",
+    "open": "^8.4.0",
     "rimraf": "^3.0.2",
     "sirv": "^2.0.2",
     "ws": "^8.5.0"
