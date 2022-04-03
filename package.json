@@ -1,6 +1,22 @@
 {
   "name": "jest-preview",
   "version": "0.0.1-alpha.0",
+  "description": "Preview your HTML code while using Jest",
+  "keywords": [
+    "testing",
+    "jest",
+    "frontend",
+    "productivity",
+    "debug",
+    "preview jest"
+  ],
+  "homepage": "https://github.com/nvh95/jest-preview",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nvh95/jest-preview.git"
+  },
+  "license": "MIT",
+  "author": "nvh95",
   "main": "dist/index.js",
   "bin": {
     "jest-preview": "./server/previewServer.js"
@@ -55,5 +71,8 @@
     "styled-components": "^5.3.5",
     "typescript": "^4.6.3",
     "vite": "^2.9.1"
+  },
+  "bug": {
+    "url": "https://github.com/nvh95/jest-preview/issues"
   }
 }
