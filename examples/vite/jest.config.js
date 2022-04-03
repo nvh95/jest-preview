@@ -23,6 +23,7 @@ module.exports = {
   moduleNameMapper: {
     '^react-native$': 'react-native-web',
     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
+    '^styled-components$': '<rootDir>/node_modules/styled-components',
   },
   moduleFileExtensions: [
     // Place tsx and ts to beginning as suggestion from Jest team

@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import styled from 'styled-components';
+
 import logo from './logo.svg';
 import logo2 from './assets/images/logo.svg';
-
 import './App.css';
 import './assets/css/App.css';
+
 function App() {
   const [count, setCount] = useState(0);
   return (
@@ -12,6 +14,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <img src={logo2} className="logo2" alt="logo2" />
         <p>Hello Vite + React!</p>
+        <StyledText>This text is styled by styled-components</StyledText>
 
         <p>
           <button
@@ -48,5 +51,9 @@ function App() {
     </div>
   );
 }
+
+const StyledText = styled.p`
+  color: red;
+`;
 
 export default App;

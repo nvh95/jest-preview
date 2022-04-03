@@ -7,6 +7,22 @@ export function preview(element: Element): void {
     });
   }
 
+  // If user doesn't use styled-components, this try-catch just be silent
+  try {
+    import('./styled-components').then(({ getStyle }) => {
+      fs.writeFileSync(
+        './node_modules/.cache/jest-preview-dom/styled-components.css',
+        getStyle(),
+        {
+          encoding: 'utf-8',
+          flag: 'w',
+        },
+      );
+    });
+  } catch (error) {
+    // `styled-components` is not in used
+  }
+
   fs.writeFileSync(
     './node_modules/.cache/jest-preview-dom/index.html',
     element.outerHTML,
