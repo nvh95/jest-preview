@@ -23,7 +23,7 @@ Preview your HTML code while using Jest
 <!-- prettier-ignore-end -->
 
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)
-![npm](https://img.shields.io/npm/v/jest-preview)
+[![npm](https://img.shields.io/npm/v/jest-preview)](https://www.npmjs.com/package/jest-preview)
 
 ## Why **jest-preview**
 
