@@ -11,7 +11,7 @@ jest is setup with create-react-app by default, we don't need to do anything mor
 Please refer to [Installation](../../README.md#installation) and [Usage](../../README.md#usage).
 Except for step 2 of installation: Create `fileTransform.js`:
 
-- Because `create-react-app` allows user to [use svg files as React components](https://create-react-app.dev/docs/adding-images-fonts-and-files/#adding-svgs), jest therefore needs to support that, so we use the below config:
+- Because `create-react-app` allows user to [use svg files as React components](https://create-react-app.dev/docs/adding-images-fonts-and-files/#adding-svgs), `jest-preview` therefore needs to support that, so we use the below config:
 
 ```javascript
 // config/jest/fileTransform.js

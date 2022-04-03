@@ -16,7 +16,7 @@ describe('App', () => {
     userEvent.click(screen.getByTestId('increase'));
 
     // Open http://localhost:3336 to see preview
-    // Require to run `jest-preview` before
+    // Require to run `jest-preview` server before
     preview(container);
 
     expect(screen.getByTestId('count')).toContainHTML('6');
