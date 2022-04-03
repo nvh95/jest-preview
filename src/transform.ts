@@ -3,7 +3,7 @@ import createCacheKey from '@jest/create-cache-key-function';
 const fs = require('fs');
 const crypto = require('crypto');
 
-export function generateHashedFilename(filename: string): string {
+function generateHashedFilename(filename: string): string {
   const [basename, ext] = filename.split('.');
   const hashedBasename = crypto
     .createHash('md5')
@@ -12,15 +12,7 @@ export function generateHashedFilename(filename: string): string {
   return `${hashedBasename}.${ext}`;
 }
 
-// TODO1: We can support image import by convert image to base 64
-// or just copy image to preview folder
-// Currently, we copy to preview folder. But convert to base64 might be a better idea
-// Since we can avoid the File I/O operations and keep images in the memory
-// To experiment about this idea but low priority. First, make it work.
-
-// TODO2: HIGH PRIORITY What about files that are not images? e.g. pdf, doc, mp3?
-// I suppose it's OK. Because as I recalled, webpack still convert pdf, doc, mp3 => link (file-loader?)
-export function processFile(src: string, filename: string): string {
+export function generateAssetFile(src: string, filename: string) {
   // Hash to avoid 2 files in different folders with the same name.
   // E.g: `assets/images/abc.png` vs `demo/abc.png`
   const hashedFilename = generateHashedFilename(filename);
@@ -37,6 +29,19 @@ export function processFile(src: string, filename: string): string {
       flag: 'w',
     },
   );
+  return hashedFilename;
+}
+
+// TODO1: We can support image import by convert image to base 64
+// or just copy image to preview folder
+// Currently, we copy to preview folder. But convert to base64 might be a better idea
+// Since we can avoid the File I/O operations and keep images in the memory
+// To experiment about this idea but low priority. First, make it work.
+
+// TODO2: HIGH PRIORITY What about files that are not images? e.g. pdf, doc, mp3?
+// I suppose it's OK. Because as I recalled, webpack still convert pdf, doc, mp3 => link (file-loader?)
+export function processFile(src: string, filename: string): string {
+  const hashedFilename = generateAssetFile(src, filename);
   return `module.exports = ${JSON.stringify(hashedFilename)};`;
 }
 
@@ -45,20 +50,7 @@ export function processCss(src: string, filename: string): string {
   // console.log("cssTransform");
   // console.log("src", src);
   // console.log("filename", filename);
-  const hashedFilename = generateHashedFilename(filename);
-
-  if (!fs.existsSync('./node_modules/.cache/jest-preview-dom')) {
-    fs.mkdirSync('./node_modules/.cache/jest-preview-dom', {
-      recursive: true,
-    });
-  }
-  fs.writeFileSync(
-    `./node_modules/.cache/jest-preview-dom/${hashedFilename}`,
-    src,
-    {
-      flag: 'w',
-    },
-  );
+  const hashedFilename = generateAssetFile(src, filename);
   return `module.exports = ${JSON.stringify(hashedFilename)};`;
 }
 
