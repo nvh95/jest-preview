@@ -20,7 +20,7 @@ export function preview(element: Element): void {
       );
     });
   } catch (error) {
-    // `styled-components` is not in used');
+    // `styled-components` is not in used
   }
 
   fs.writeFileSync(
