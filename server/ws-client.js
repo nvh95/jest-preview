@@ -1,4 +1,4 @@
-// $PORT is replaced by `jest-dom` server
+// PORT is replaced by `jest-dom` server
 const port = '$PORT';
 
 const socket = new WebSocket(`ws://localhost:${port}`);
