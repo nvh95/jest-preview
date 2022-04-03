@@ -15,7 +15,9 @@ function App() {
         <img src={logo2} className="logo2" alt="logo2" />
         <p>Hello Vite + React!</p>
         <StyledText>This text is styled by styled-components</StyledText>
-
+        <p className="global-css">
+          This text is styled by global css which is not imported to App.tsx
+        </p>
         <p>
           <button
             data-testid="increase"
