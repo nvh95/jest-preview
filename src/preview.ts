@@ -7,6 +7,7 @@ export function preview(element: Element): void {
     });
   }
 
+  // If user doesn't use styled-components, this try-catch just be silent
   try {
     import('./styled-components').then(({ getStyle }) => {
       fs.writeFileSync(
