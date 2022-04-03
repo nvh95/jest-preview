@@ -94,8 +94,8 @@ app.use('/', (req, res) => {
   });
   const scriptContent = fs
     .readFileSync(path.join(__dirname, './ws-client.js'), 'utf-8')
-    .replace('$PORT', wsPort);
-  // console.log(scriptContent);
+    .replace(/\$PORT/g, wsPort);
+  console.log(scriptContent);
   const htmlContent = `<!DOCTYPE html>
 <html>
 <head>${css}</head>
