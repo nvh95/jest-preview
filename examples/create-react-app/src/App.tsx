@@ -11,10 +11,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div className="App-logo-wrapper">
-          <Logo className="App-logo" />
-          <img src={logo} className="App-logo" alt="logo" />
-        </div>
+        <Logo className="svg-component" />
+        <img src={logo} className="App-logo" alt="logo" />
         <img src={logo2} className="logo2" alt="logo2" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.

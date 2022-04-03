@@ -3,8 +3,6 @@
   background: yellow;
 }
 
-.App-logo-wrapper {
-  display: flex;
-  flex-direction: 'row';
-  gap: 8px;
+.svg-component {
+  display: none;
 }
