@@ -66,7 +66,8 @@ app.use((req, res, next) => {
 app.use('/', (req, res) => {
   if (!fs.existsSync(HTML_PATH)) {
     // Make it looks nice
-    return res.send(`
+    return res.end(`
+    <html>
     No preview found.<br/>
     Please run: <br /> <br />
     <code>
@@ -75,6 +76,7 @@ app.use('/', (req, res) => {
     </code>
     <br /><br />
     then revisit this page.
+    </html>
     `);
   }
   const html = fs.readFileSync(HTML_PATH, 'utf8');
@@ -112,6 +114,8 @@ const server = http.createServer(app);
 server.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
   // TODO: Clear all file in ./node_modules/.cache/jest-preview-dom
+  // Answer: Clear all files is not a good option. Since jest already cache the transform.
+  // So, files are not copied over `.cache` folder anymore. We better to use those file directly (full name strategy)
   // TODO: To improve: to focus on opened tab instead of always open new tab
   open(`http://localhost:${port}`);
 });
