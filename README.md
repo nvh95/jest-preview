@@ -33,9 +33,10 @@ When writing tests using Jest, we usually debug by reading the HTML code. Someti
 
 ## Features
 
-- Preview your actual app's HTML in a browser.
-- Support direct import css.
-- Support viewing images.
+- 👀 Preview your actual app's HTML in a browser.
+- 🔄 Auto reload browser on new preview
+- 💅 Support direct import css.
+- 🌄 Support viewing images.
 
 ## Examples
 
@@ -153,7 +154,7 @@ Then visit http://localhost:3336 to see the preview
 ## Upcoming features
 
 - Support css-in-js
-- Multiple preview
+- Multiple preview (in progress)
 - [You name it](https://github.com/nvh95/jest-preview/labels/feature_request)
 
 ## Run jest-preview locally
