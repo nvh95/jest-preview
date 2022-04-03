@@ -11,8 +11,43 @@ const fs = require('fs');
 const connect = require('connect');
 const sirv = require('sirv');
 const app = connect();
+const chokidar = require('chokidar');
 
 const port = process.env.PORT || 3336;
+// TODO: Can we reuse `port`, I think Vite they can do that
+// https://github.com/vitejs/vite/blob/50a876537cc7b934ec5c1d11171b5ce02e3891a8/packages/vite/src/node/server/ws.ts#L97
+// TODO: Increase port by 1 is not a good strategy, we should check if it's also available
+const wsPort = Number(port) + 1;
+
+// Websocket server
+const { WebSocketServer } = require('ws');
+
+const HTML_PATH = './node_modules/.cache/jest-preview-dom/index.html';
+
+const wss = new WebSocketServer({ port: wsPort });
+
+wss.on('connection', function connection(ws) {
+  ws.on('message', function message(data) {
+    console.log('received: %s', data);
+  });
+});
+
+const watcher = chokidar.watch(HTML_PATH, {
+  // ignored: ['**/node_modules/**', '**/.git/**'],
+  ignoreInitial: true,
+  ignorePermissionErrors: true,
+  disableGlobbing: true,
+});
+
+// TODO: Do we need to unregister?
+watcher.on('change', () => {
+  wss.clients.forEach((client) => {
+    console.log(client);
+    if (client.readyState === 1) {
+      client.send(JSON.stringify({ type: 'reload' }));
+    }
+  });
+});
 
 app.use((req, res, next) => {
   // Learn from https://github.com/vitejs/vite/blob/2b7dad1ea1d78d7977e0569fcca4c585b4014e85/packages/vite/src/node/server/middlewares/static.ts#L38
@@ -28,7 +63,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/', (req, res) => {
-  const HTML_PATH = './node_modules/.cache/jest-preview-dom/index.html';
   if (!fs.existsSync(HTML_PATH)) {
     // Make it looks nice
     return res.send(`
@@ -57,11 +91,19 @@ app.use('/', (req, res) => {
       )}</style>`;
     }
   });
-  const content = `
-    ${css}
-    ${html}
-  `;
-  res.end(content);
+  const scriptContent = fs
+    .readFileSync(path.join(__dirname, './ws-client.js'), 'utf-8')
+    .replace('$PORT', wsPort);
+  // console.log(scriptContent);
+  const htmlContent = `<!DOCTYPE html>
+<html>
+<head>${css}</head>
+<body>
+  ${html}
+</body>
+<script>${scriptContent}</script>
+</html>`;
+  res.end(htmlContent);
 });
 
 const server = http.createServer(app);
