@@ -38,6 +38,7 @@ When writing tests using Jest, we usually debug by reading the HTML code. Someti
 - 💅 Support CSS:
   - ✅ Direct CSS import
   - ✅ [Styled-components](https://styled-components.com/)
+  - ✅ External CSS
 - 🌄 Support viewing images.
 
 ## Examples
@@ -51,7 +52,7 @@ When writing tests using Jest, we usually debug by reading the HTML code. Someti
 
 ```bash
 npm install jest-preview
-#Or
+# Or
 yarn add jest-preview
 pnpm install jest-preview
 ```
@@ -204,7 +205,7 @@ Run `jest` and ` jest-preview` simultaneously
 npm run test
 ```
 
-Open chrome at http://localhost:3006 to see the preview
+Open chrome at http://localhost:3336 to see the preview
 
 ## Contributors ✨
 
