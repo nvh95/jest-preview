@@ -107,7 +107,7 @@ Sometimes, there are some CSS files imported outside your current test component
 
 ```js
 // ./config/jest/setupTests.js
-import { jestPreviewConfigure } from '../../dist/index';
+import { jestPreviewConfigure } from 'jest-preview';
 
 jestPreviewConfigure({
   externalCss: [
