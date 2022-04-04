@@ -1,3 +1,13 @@
+# 0.0.2-alpha.0
+
+### Fixes
+
+- [x] Fix #15
+
+### Chores
+
+- [x] Update publish scripts
+
 # 0.0.1
 
 ## Features
