@@ -12,7 +12,7 @@ const connect = require('connect');
 const sirv = require('sirv');
 const app = connect();
 const chokidar = require('chokidar');
-const open = require('open');
+const { openBrowser } = require('./browser');
 
 const port = process.env.PORT || 3336;
 // TODO: Can we reuse `port`, I think Vite they can do that
@@ -119,6 +119,5 @@ server.listen(port, () => {
   // TODO: Clear all file in ./node_modules/.cache/jest-preview-dom
   // Answer: Clear all files is not a good option. Since jest already cache the transform.
   // So, files are not copied over `.cache` folder anymore. We better to use those file directly (full name strategy)
-  // TODO: To improve: to focus on opened tab instead of always open new tab
-  open(`http://localhost:${port}`);
+  openBrowser(`http://localhost:${port}`);
 });
