@@ -40,14 +40,19 @@ const watcher = chokidar.watch(HTML_PATH, {
   disableGlobbing: true,
 });
 
-// TODO: Do we need to unregister?
-watcher.on('change', () => {
+function handleFileChange() {
   wss.clients.forEach((client) => {
     if (client.readyState === 1) {
       client.send(JSON.stringify({ type: 'reload' }));
     }
   });
-});
+}
+
+// TODO: Do we need to unregister?
+watcher
+  .on('change', handleFileChange)
+  .on('add', handleFileChange)
+  .on('unlink', handleFileChange);
 
 app.use((req, res, next) => {
   // Learn from https://github.com/vitejs/vite/blob/2b7dad1ea1d78d7977e0569fcca4c585b4014e85/packages/vite/src/node/server/middlewares/static.ts#L38
@@ -63,20 +68,25 @@ app.use((req, res, next) => {
 });
 
 app.use('/', (req, res) => {
+  const reloadScriptContent = fs
+    .readFileSync(path.join(__dirname, './ws-client.js'), 'utf-8')
+    .replace(/\$PORT/g, wsPort);
+
   if (!fs.existsSync(HTML_PATH)) {
     // Make it looks nice
-    return res.end(`
-    <html>
-    No preview found.<br/>
-    Please run: <br /> <br />
-    <code>
-    const { container } = render(<App />);<br/>
-    preview(container);
-    </code>
-    <br /><br />
-    then revisit this page.
-    </html>
-    `);
+    return res.end(`<html>
+<body>
+No preview found.<br/>
+Please run: <br /> <br />
+<code>
+const { container } = render(<App />);<br/>
+preview(container);
+</code>
+<br /><br />
+then revisit this page.
+</body>
+<script>${reloadScriptContent}</script>
+</html>`);
   }
   const html = fs.readFileSync(HTML_PATH, 'utf8');
   // TODO2: How do we preserve the order of importing css file?
@@ -92,17 +102,13 @@ app.use('/', (req, res) => {
     }
   });
 
-  const scriptContent = fs
-    .readFileSync(path.join(__dirname, './ws-client.js'), 'utf-8')
-    .replace(/\$PORT/g, wsPort);
-
   const htmlContent = `<!DOCTYPE html>
 <html>
 <head>${css}</head>
 <body>
   ${html}
 </body>
-<script>${scriptContent}</script>
+<script>${reloadScriptContent}</script>
 </html>`;
   res.end(htmlContent);
 });

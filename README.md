@@ -34,7 +34,7 @@ When writing tests using Jest, we usually debug by reading the HTML code. Someti
 ## Features
 
 - 👀 Preview your actual app's HTML in a browser.
-- 🔄 Auto reload browser on new preview.
+- 🔄 Auto reload browser when execute `preview(htmlContainer)`.
 - 💅 Support CSS:
   - ✅ Direct CSS import
   - ✅ [Styled-components](https://styled-components.com/)
