@@ -13,8 +13,9 @@ Preview your HTML code while using Jest
 <p>
   
 <p align="center">
-  <img align="center" src="https://user-images.githubusercontent.com/8603085/161395967-a99e70d2-2153-46cc-985e-aa54839e4183.gif" alt="Jest Preview Demo" />
+  <img align="center" src="https://user-images.githubusercontent.com/8603085/161533827-50a0f0a3-4d49-4db7-a4ab-571b31441b3d.gif" alt="Jest Preview Demo" />
 <p>
+
 
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
