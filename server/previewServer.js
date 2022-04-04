@@ -56,7 +56,7 @@ watcher
 
 app.use((req, res, next) => {
   // Learn from https://github.com/vitejs/vite/blob/2b7dad1ea1d78d7977e0569fcca4c585b4014e85/packages/vite/src/node/server/middlewares/static.ts#L38
-  const serve = sirv('./node_modules/.cache/jest-preview-dom', {
+  const serve = sirv('.', {
     dev: true,
     etag: true,
   });

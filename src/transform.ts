@@ -32,19 +32,19 @@ export function generateAssetFile(src: string, filename: string) {
   return hashedFilename;
 }
 
-// TODO1: We can support image import by convert image to base 64
-// or just copy image to preview folder
-// Currently, we copy to preview folder. But convert to base64 might be a better idea
-// Since we can avoid the File I/O operations and keep images in the memory
-// To experiment about this idea but low priority. First, make it work.
-
-// TODO2: HIGH PRIORITY What about files that are not images? e.g. pdf, doc, mp3?
+// TODO2: What about files that are not images? e.g. pdf, doc, mp3?
 // I suppose it's OK. Because as I recalled, webpack still convert pdf, doc, mp3 => link (file-loader?)
-export function processFile(src: string, filename: string): string {
-  const hashedFilename = generateAssetFile(src, filename);
-  return `module.exports = ${JSON.stringify(hashedFilename)};`;
+
+function getRelativeFilename(filename: string): string {
+  return filename.split(process.cwd())[1];
 }
 
+export function processFile(src: string, filename: string): string {
+  const relativeFilename = getRelativeFilename(filename);
+  return `module.exports = ${JSON.stringify(relativeFilename)};`;
+}
+
+// TODO: Import a javascript module that load a <style> tag to header
 export function processCss(src: string, filename: string): string {
   // NOTE: Jest only run process once
   // console.log("cssTransform");
