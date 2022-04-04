@@ -83,7 +83,6 @@ const { container } = render(<App />);<br/>
 preview(container);
 </code>
 <br /><br />
-then revisit this page.
 </body>
 <script>${reloadScriptContent}</script>
 </html>`);
