@@ -1,3 +1,21 @@
+# 0.0.2
+
+[0.0.2-alpha.0](#002-alpha0)
+
+### Chores
+
+- Reuse opening jest-preview server tab on Chrome Mac
+
+# 0.0.2-alpha.0
+
+### Fixes
+
+- [x] Fix #15
+
+### Chores
+
+- [x] Update publish scripts
+
 # 0.0.1
 
 ## Features
