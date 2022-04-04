@@ -94,6 +94,30 @@ transform: {
   },
 ```
 
+4. (Optional) Configure external CSS
+
+Sometimes, there are some CSS files imported outside your current test components (e.g: CSS imported in `src/index.js`, `src/main.tsx`). In this case, you can manually add those CSS files to `jest-preview` by `jestPreviewConfigure`.
+
+```js
+  // jest.config.js
+  {
+    setupFilesAfterEnv: ["./config/jest/setupTests.js"],
+  }
+```
+
+```js
+// ./config/jest/setupTests.js
+import { jestPreviewConfigure } from 'jest-preview';
+
+jestPreviewConfigure({
+  externalCss: [
+    'demo/global.css',
+    'node_modules/@your-design-system/css/dist/index.min.css',
+    'node_modules/bootstrap/dist/css/bootstrap.min.css',
+  ],
+});
+```
+
 ## Usage
 
 1. Update to `package.json`

@@ -11,7 +11,7 @@ export function preview(element: Element): void {
   try {
     import('./styled-components').then(({ getStyle }) => {
       fs.writeFileSync(
-        './node_modules/.cache/jest-preview-dom/styled-components.css',
+        './node_modules/.cache/jest-preview-dom/jp-styled-components.css',
         getStyle(),
         {
           encoding: 'utf-8',

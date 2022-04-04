@@ -43,7 +43,6 @@ const watcher = chokidar.watch(HTML_PATH, {
 // TODO: Do we need to unregister?
 watcher.on('change', () => {
   wss.clients.forEach((client) => {
-    console.log(client);
     if (client.readyState === 1) {
       client.send(JSON.stringify({ type: 'reload' }));
     }
@@ -82,8 +81,6 @@ app.use('/', (req, res) => {
   const html = fs.readFileSync(HTML_PATH, 'utf8');
   // TODO2: How do we preserve the order of importing css file?
   // For now I think it's not very important, but this is the room for improvement in next versions
-  // TODO3: not support styled-components. Might refer to jest-styled-components
-  // Target for version > 0.0.1
   let css = '';
   const allFiles = fs.readdirSync('./node_modules/.cache/jest-preview-dom');
   allFiles.forEach((file) => {
@@ -94,10 +91,11 @@ app.use('/', (req, res) => {
       )}</style>`;
     }
   });
+
   const scriptContent = fs
     .readFileSync(path.join(__dirname, './ws-client.js'), 'utf-8')
     .replace(/\$PORT/g, wsPort);
-  console.log(scriptContent);
+
   const htmlContent = `<!DOCTYPE html>
 <html>
 <head>${css}</head>
