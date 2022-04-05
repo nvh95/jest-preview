@@ -1,21 +1,17 @@
 <p align="center">
-<!-- TODO: Add logo -->
-<!-- <img src="" height=""> -->
-
+ <img align="center" alt="Jest Preview Logo" src="https://user-images.githubusercontent.com/8603085/161734233-58d94868-5524-4876-8e20-936ad41496c1.svg" width="250"/>
 </p>
 
 <h1 align="center">
-Jest Preview 🛠🖼 
+Jest Preview
 </h1>
-
 <p align="center">
-Preview your HTML code while using Jest
+Preview your HTML code while using Jest 🛠🖼 
 <p>
   
 <p align="center">
   <img align="center" src="https://user-images.githubusercontent.com/8603085/161533827-50a0f0a3-4d49-4db7-a4ab-571b31441b3d.gif" alt="Jest Preview Demo" />
 <p>
-
 
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
