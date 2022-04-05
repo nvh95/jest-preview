@@ -26,6 +26,15 @@
         "doc",
         "example"
       ]
+    },
+    {
+      "login": "doanhuuviet",
+      "name": "Viet Huu Doan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103036586?v=4",
+      "profile": "https://www.linkedin.com/in/viet-doan-830061a0/",
+      "contributions": [
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 7,
