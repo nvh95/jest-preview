@@ -1,10 +1,10 @@
 <p align="center">
- <img align="center" alt="Jest Preview Logo" src="https://user-images.githubusercontent.com/8603085/161734233-58d94868-5524-4876-8e20-936ad41496c1.svg" width="250"/>
+ <img align="center" alt="Jest Preview Logo" src="https://user-images.githubusercontent.com/8603085/161773309-e3a7efe7-9b79-46b6-a2d5-1b66a40b38db.svg" width="250"/>
 </p>
 
 <h1 align="center">
-Jest Preview
-</h1>
+
+
 <p align="center">
 Preview your HTML code while using Jest 🛠🖼 
 <p>
