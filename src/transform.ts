@@ -44,23 +44,16 @@ export function processFile(src: string, filename: string): string {
   return `module.exports = ${JSON.stringify(relativeFilename)};`;
 }
 
-// TODO: Import a javascript module that load a <style> tag to header
 export function processCss(src: string, filename: string): string {
-  // NOTE: Jest only run process once
-  // console.log("cssTransform");
-  // console.log("src", src);
-  // console.log("filename", filename);
-  // const hashedFilename = generateAssetFile(src, filename);
+  // Transform to a javascript module that load a <link rel="stylesheet"> tag to the page.
   return `const cssFilename = "${filename}";
   const relativeCssPath = cssFilename.split(process.cwd())[1];
-  
   const link = document.createElement('link');
   link.rel = 'stylesheet';
   link.href = relativeCssPath;
   document.body.appendChild(link);
   
-  module.exports = JSON.stringify(relativeCssPath);
-  `;
+  module.exports = JSON.stringify(relativeCssPath);`;
 }
 
 // TODO: MEDIUM PRIORITY To research about getCacheKey
