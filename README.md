@@ -99,6 +99,8 @@ module.exports = {
 };
 ```
 
+For Create React App users, please use `processFileCRA` instead of `processFile`. See more at [examples/create-react-app/README.md](./examples/create-react-app/README.md#installation-and-usage)
+
 3. Configure jest's transform to intercept CSS and files
 
 ```javascript
