@@ -1,6 +1,3 @@
-// TODO2: What about files that are not images? e.g. pdf, doc, mp3?
-// I suppose it's OK. Because as I recalled, webpack still convert pdf, doc, mp3 => link (file-loader?)
-
 function getRelativeFilename(filename: string): string {
   return filename.split(process.cwd())[1];
 }
