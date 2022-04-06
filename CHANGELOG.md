@@ -1,3 +1,13 @@
+# 0.0.3-alpha.0
+
+### Features
+
+- Rewrite transforms. Do not need to copy assets to cache folder.
+
+### Chores
+
+- Simplify the usage in docs and examples: `preview(document.body)`
+
 # 0.0.2
 
 [0.0.2-alpha.0](#002-alpha0)
