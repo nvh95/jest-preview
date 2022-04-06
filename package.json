@@ -46,6 +46,7 @@
     "sort": "npx sort-package-json"
   },
   "dependencies": {
+    "camelcase": "^6.3.0",
     "chokidar": "^3.5.3",
     "connect": "^3.7.0",
     "open": "^8.4.0",
