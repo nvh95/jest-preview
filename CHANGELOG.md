@@ -1,12 +1,14 @@
-# 0.0.3-alpha.0
+# 0.0.3
 
 ### Features
 
 - Rewrite transforms. Do not need to copy assets to cache folder.
+- Add `processFileCRA` for CRA file transform.
+- [BREAKING CHANGES for CRA users] CRA users need to update `fileTransform.js` to use `processFileCRA`. See more at [CRA README.md](./examples/create-react-app/README.md#installation-and-usage)
 
 ### Chores
 
-- Simplify the usage in docs and examples: `preview(document.body)`
+- Simplify the usage in docs and examples: `preview(render(<App />).container)` => `preview(document.body)`.
 
 # 0.0.2
 
