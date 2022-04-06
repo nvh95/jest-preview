@@ -37,6 +37,8 @@ When writing tests using Jest, we usually debug by reading the HTML code. Someti
   - ✅ Direct CSS import
   - ✅ [Styled-components](https://styled-components.com/)
   - ✅ External CSS
+  - 🚧 [CSS Modules](https://github.com/css-modules/css-modules)
+  - 🚧 [Sass](https://sass-lang.com/)
 - 🌄 Support viewing images.
 
 ## How to use `jest-preview` in 2 lines of code
