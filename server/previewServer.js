@@ -79,8 +79,8 @@ app.use('/', (req, res) => {
 No preview found.<br/>
 Please run: <br /> <br />
 <code>
-const { container } = render(<App />);<br/>
-preview(container);
+render(<App />);<br/>
+preview(document.body);
 </code>
 <br /><br />
 </body>

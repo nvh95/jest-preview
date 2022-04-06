@@ -16,7 +16,6 @@ Preview your HTML code while using Jest
   <img align="center" src="https://user-images.githubusercontent.com/8603085/161533827-50a0f0a3-4d49-4db7-a4ab-571b31441b3d.gif" alt="Jest Preview Demo" />
 <p>
 
-
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
@@ -41,6 +40,20 @@ When writing tests using Jest, we usually debug by reading the HTML code. Someti
   - ✅ [Styled-components](https://styled-components.com/)
   - ✅ External CSS
 - 🌄 Support viewing images.
+
+## How to use `jest-preview` in 2 lines of code
+
+```diff
++import preview from 'jest-preview';
+
+describe('App', () => {
+  it('should work as expected', () => {
+    render(<App />);
+
+    preview(document.body);
+  });
+});
+```
 
 ## Examples
 
@@ -162,13 +175,13 @@ import preview from 'jest-preview';
 
 describe('App', () => {
   it('should work as expected', () => {
-    const { container } = render(<App />);
+    render(<App />);
 
     userEvent.click(screen.getByTestId('increase'));
     userEvent.click(screen.getByTestId('increase'));
 
     // Open http://localhost:3336 to see the preview
-    preview(container);
+    preview(document.body);
 
     expect(screen.getByTestId('count')).toContainHTML('2');
   });

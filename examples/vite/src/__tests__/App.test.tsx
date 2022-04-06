@@ -6,7 +6,7 @@ import preview from 'jest-preview';
 
 describe('App', () => {
   it('should work as expected', () => {
-    const { container } = render(<App />);
+    render(<App />);
 
     userEvent.click(screen.getByTestId('increase'));
     userEvent.click(screen.getByTestId('increase'));
@@ -17,7 +17,7 @@ describe('App', () => {
 
     // Open http://localhost:3336 to see preview
     // Require to run `jest-preview` server before
-    preview(container);
+    preview(document.body);
 
     expect(screen.getByTestId('count')).toContainHTML('6');
   });
