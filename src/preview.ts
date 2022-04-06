@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 export function preview(element: Element): void {
   if (!fs.existsSync('./node_modules/.cache/jest-preview-dom')) {

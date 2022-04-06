@@ -1,6 +1,6 @@
-import { processFile, processCss, generateAssetFile } from './transform';
+import { processFile, processFileCRA, processCss } from './transform';
 import { preview } from './preview';
 import { jestPreviewConfigure } from './configure';
 
-export { processCss, processFile, generateAssetFile, jestPreviewConfigure };
+export { processCss, processFile, processFileCRA, jestPreviewConfigure };
 export default preview;

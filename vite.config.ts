@@ -33,7 +33,9 @@ export default defineConfig(({ mode }) => {
         fileName: () => `index.js`,
         formats: ['cjs'],
       },
-      rollupOptions: {},
+      rollupOptions: {
+        external: ['fs', 'path'],
+      },
     },
   };
 });

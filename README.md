@@ -39,6 +39,20 @@ When writing tests using Jest, we usually debug by reading the HTML code. Someti
   - ✅ External CSS
 - 🌄 Support viewing images.
 
+## How to use `jest-preview` in 2 lines of code
+
+```diff
++import preview from 'jest-preview';
+
+describe('App', () => {
+  it('should work as expected', () => {
+    render(<App />);
+
++    preview(document.body);
+  });
+});
+```
+
 ## Examples
 
 - Use with [Vite](https://vitejs.dev/): [Example with Vite](https://github.com/nvh95/jest-preview/tree/main/examples/vite)
@@ -82,6 +96,8 @@ module.exports = {
   },
 };
 ```
+
+For Create React App users, please use `processFileCRA` instead of `processFile`. See more at [examples/create-react-app/README.md](./examples/create-react-app/README.md#installation-and-usage)
 
 3. Configure jest's transform to intercept CSS and files
 
@@ -159,13 +175,13 @@ import preview from 'jest-preview';
 
 describe('App', () => {
   it('should work as expected', () => {
-    const { container } = render(<App />);
+    render(<App />);
 
     userEvent.click(screen.getByTestId('increase'));
     userEvent.click(screen.getByTestId('increase'));
 
     // Open http://localhost:3336 to see the preview
-    preview(container);
+    preview(document.body);
 
     expect(screen.getByTestId('count')).toContainHTML('2');
   });

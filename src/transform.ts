@@ -1,57 +1,57 @@
-import createCacheKey from '@jest/create-cache-key-function';
+import path from 'path';
+import camelcase from 'camelcase';
 
-const fs = require('fs');
-const crypto = require('crypto');
-
-function generateHashedFilename(filename: string): string {
-  const [basename, ext] = filename.split('.');
-  const hashedBasename = crypto
-    .createHash('md5')
-    .update(basename)
-    .digest('hex');
-  return `${hashedBasename}.${ext}`;
+function getRelativeFilename(filename: string): string {
+  return filename.split(process.cwd())[1];
 }
 
-export function generateAssetFile(src: string, filename: string) {
-  // Hash to avoid 2 files in different folders with the same name.
-  // E.g: `assets/images/abc.png` vs `demo/abc.png`
-  const hashedFilename = generateHashedFilename(filename);
-
-  if (!fs.existsSync('./node_modules/.cache/jest-preview-dom')) {
-    fs.mkdirSync('./node_modules/.cache/jest-preview-dom', {
-      recursive: true,
-    });
-  }
-  fs.writeFileSync(
-    `./node_modules/.cache/jest-preview-dom/${hashedFilename}`,
-    src,
-    {
-      flag: 'w',
-    },
-  );
-  return hashedFilename;
-}
-
-// TODO1: We can support image import by convert image to base 64
-// or just copy image to preview folder
-// Currently, we copy to preview folder. But convert to base64 might be a better idea
-// Since we can avoid the File I/O operations and keep images in the memory
-// To experiment about this idea but low priority. First, make it work.
-
-// TODO2: HIGH PRIORITY What about files that are not images? e.g. pdf, doc, mp3?
-// I suppose it's OK. Because as I recalled, webpack still convert pdf, doc, mp3 => link (file-loader?)
 export function processFile(src: string, filename: string): string {
-  const hashedFilename = generateAssetFile(src, filename);
-  return `module.exports = ${JSON.stringify(hashedFilename)};`;
+  const relativeFilename = getRelativeFilename(filename);
+  return `module.exports = ${JSON.stringify(relativeFilename)};`;
+}
+
+export function processFileCRA(src: string, filename: string): string {
+  // /Users/your-name/your-project/src/assets/image.png => /src/assets/image.png
+  const relativeFilename = JSON.stringify(getRelativeFilename(filename));
+
+  if (filename.match(/\.svg$/)) {
+    // Based on how SVGR generates a component name:
+    // https://github.com/smooth-code/svgr/blob/01b194cf967347d43d4cbe6b434404731b87cf27/packages/core/src/state.js#L6
+    const pascalCaseFilename = camelcase(path.parse(filename).name, {
+      pascalCase: true,
+    });
+    const componentName = `Svg${pascalCaseFilename}`;
+    return `const React = require('react');
+    module.exports = {
+      __esModule: true,
+      default: ${relativeFilename},
+      ReactComponent: React.forwardRef(function ${componentName}(props, ref) {
+        return {
+          $$typeof: Symbol.for('react.element'),
+          type: 'svg',
+          ref: ref,
+          key: null,
+          props: Object.assign({}, props, {
+            children: ${relativeFilename}
+          })
+        };
+      }),
+    };`;
+  }
+
+  return `module.exports = ${relativeFilename};`;
 }
 
 export function processCss(src: string, filename: string): string {
-  // NOTE: Jest only run process once
-  // console.log("cssTransform");
-  // console.log("src", src);
-  // console.log("filename", filename);
-  const hashedFilename = generateAssetFile(src, filename);
-  return `module.exports = ${JSON.stringify(hashedFilename)};`;
+  const relativeFilename = getRelativeFilename(filename);
+  // Transform to a javascript module that load a <link rel="stylesheet"> tag to the page.
+  return `const relativeCssPath = "${relativeFilename}";
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = relativeCssPath;
+  document.body.appendChild(link);
+  
+  module.exports = JSON.stringify(relativeCssPath);`;
 }
 
 // TODO: MEDIUM PRIORITY To research about getCacheKey
