@@ -1,12 +1,13 @@
 <p align="center">
- <img align="center" alt="Jest Preview Logo" src="https://user-images.githubusercontent.com/8603085/161734233-58d94868-5524-4876-8e20-936ad41496c1.svg" width="250"/>
+ <img align="center" alt="Jest Preview Logo" src="https://user-images.githubusercontent.com/8603085/161993303-e904a087-78a1-4abd-bb8d-3ef2cc6db442.svg" width="250"/>
 </p>
 
 <h1 align="center">
 Jest Preview
 </h1>
+
 <p align="center">
-Preview your HTML code while using Jest 🛠🖼 
+Preview your HTML code while using Jest. With beautiful UI 🛠🖼 
 <p>
   
 <p align="center">
@@ -30,7 +31,7 @@ When writing tests using Jest, we usually debug by reading the HTML code. Someti
 
 ## Features
 
-- 👀 Preview your actual app's HTML in a browser.
+- 👀 Preview your actual app's HTML in a browser in milliseconds.
 - 🔄 Auto reload browser when execute `preview(htmlContainer)`.
 - 💅 Support CSS:
   - ✅ Direct CSS import
