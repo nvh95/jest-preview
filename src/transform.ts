@@ -45,9 +45,9 @@ export function processFile(src: string, filename: string): string {
 }
 
 export function processCss(src: string, filename: string): string {
+  const relativeFilename = getRelativeFilename(filename);
   // Transform to a javascript module that load a <link rel="stylesheet"> tag to the page.
-  return `const cssFilename = "${filename}";
-  const relativeCssPath = cssFilename.split(process.cwd())[1];
+  return `const relativeCssPath = "${relativeFilename}";
   const link = document.createElement('link');
   link.rel = 'stylesheet';
   link.href = relativeCssPath;
