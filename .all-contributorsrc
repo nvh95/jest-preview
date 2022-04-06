@@ -35,6 +35,15 @@
       "contributions": [
         "design"
       ]
+    },
+    {
+      "login": "ntbinh-Harvey",
+      "name": "HarveyNguyen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57211574?v=4",
+      "profile": "https://github.com/ntbinh-Harvey",
+      "contributions": [
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7,
