@@ -1,3 +1,5 @@
+import path from 'path';
+
 function getRelativeFilename(filename: string): string {
   return filename.split(process.cwd())[1];
 }
