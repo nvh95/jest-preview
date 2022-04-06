@@ -1,37 +1,3 @@
-import createCacheKey from '@jest/create-cache-key-function';
-
-const fs = require('fs');
-const crypto = require('crypto');
-
-function generateHashedFilename(filename: string): string {
-  const [basename, ext] = filename.split('.');
-  const hashedBasename = crypto
-    .createHash('md5')
-    .update(basename)
-    .digest('hex');
-  return `${hashedBasename}.${ext}`;
-}
-
-export function generateAssetFile(src: string, filename: string) {
-  // Hash to avoid 2 files in different folders with the same name.
-  // E.g: `assets/images/abc.png` vs `demo/abc.png`
-  const hashedFilename = generateHashedFilename(filename);
-
-  if (!fs.existsSync('./node_modules/.cache/jest-preview-dom')) {
-    fs.mkdirSync('./node_modules/.cache/jest-preview-dom', {
-      recursive: true,
-    });
-  }
-  fs.writeFileSync(
-    `./node_modules/.cache/jest-preview-dom/${hashedFilename}`,
-    src,
-    {
-      flag: 'w',
-    },
-  );
-  return hashedFilename;
-}
-
 // TODO2: What about files that are not images? e.g. pdf, doc, mp3?
 // I suppose it's OK. Because as I recalled, webpack still convert pdf, doc, mp3 => link (file-loader?)
 

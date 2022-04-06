@@ -21,7 +21,7 @@ const { generateAssetFile } = require('jest-preview');
 
 module.exports = {
   process(src, filename) {
-    const hashedFilename = JSON.stringify(generateAssetFile(src, filename));
+    const relativeFilename = JSON.stringify(filename.split(process.cwd())[1]);
 
     if (filename.match(/\.svg$/)) {
       // Based on how SVGR generates a component name:
@@ -33,7 +33,7 @@ module.exports = {
       return `const React = require('react');
       module.exports = {
         __esModule: true,
-        default: ${hashedFilename},
+        default: ${relativeFilename},
         ReactComponent: React.forwardRef(function ${componentName}(props, ref) {
           return {
             $$typeof: Symbol.for('react.element'),
@@ -41,13 +41,13 @@ module.exports = {
             ref: ref,
             key: null,
             props: Object.assign({}, props, {
-              children: ${hashedFilename}
+              children: ${relativeFilename}
             })
           };
         }),
       };`;
     }
-    return `module.exports = ${hashedFilename};`;
+    return `module.exports = ${relativeFilename};`;
   },
 };
 ```
