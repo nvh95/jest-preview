@@ -50,7 +50,7 @@ describe('App', () => {
   it('should work as expected', () => {
     render(<App />);
 
-    preview(document.body);
++    preview(document.body);
   });
 });
 ```
