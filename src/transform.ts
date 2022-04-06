@@ -50,8 +50,17 @@ export function processCss(src: string, filename: string): string {
   // console.log("cssTransform");
   // console.log("src", src);
   // console.log("filename", filename);
-  const hashedFilename = generateAssetFile(src, filename);
-  return `module.exports = ${JSON.stringify(hashedFilename)};`;
+  // const hashedFilename = generateAssetFile(src, filename);
+  return `const cssFilename = "${filename}";
+  const relativeCssPath = cssFilename.split(process.cwd())[1];
+  
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = relativeCssPath;
+  document.body.appendChild(link);
+  
+  module.exports = JSON.stringify(relativeCssPath);
+  `;
 }
 
 // TODO: MEDIUM PRIORITY To research about getCacheKey
