@@ -3,7 +3,7 @@ const camelcase = require('camelcase');
 
 module.exports = {
   process(src, filename) {
-    // /Users/your-name/your-project/src/assets/image.png => /src/image.png
+    // /Users/your-name/your-project/src/assets/image.png => /src/assets/image.png
     const relativeFilename = JSON.stringify(filename.split(process.cwd())[1]);
 
     if (filename.match(/\.svg$/)) {
