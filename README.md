@@ -6,7 +6,7 @@
 
 
 <p align="center">
-Preview your HTML code while using Jest 🛠🖼 
+Preview your HTML code while using Jest. With beautiful UI 🛠🖼 
 <p>
   
 <p align="center">
@@ -30,7 +30,7 @@ When writing tests using Jest, we usually debug by reading the HTML code. Someti
 
 ## Features
 
-- 👀 Preview your actual app's HTML in a browser.
+- 👀 Preview your actual app's HTML in a browser in milliseconds.
 - 🔄 Auto reload browser when execute `preview(htmlContainer)`.
 - 💅 Support CSS:
   - ✅ Direct CSS import
