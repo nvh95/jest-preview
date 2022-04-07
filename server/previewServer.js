@@ -25,7 +25,7 @@ const { WebSocketServer } = require('ws');
 
 const CACHE_DIRECTORY = './node_modules/.cache/jest-preview-dom';
 const HTML_PATH = path.join(CACHE_DIRECTORY, 'index.html');
-const FAV_ICON_PATH = path.join(CACHE_DIRECTORY, 'favicon.ico');
+const FAV_ICON_PATH = './node_modules/jest-preview/server/favicon.ico';
 
 const wss = new WebSocketServer({ port: wsPort });
 
