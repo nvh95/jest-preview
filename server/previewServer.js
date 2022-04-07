@@ -80,7 +80,7 @@ No preview found.<br/>
 Please run: <br /> <br />
 <code>
 render(<App />);<br/>
-preview(document.body);
+preview.debug();
 </code>
 <br /><br />
 </body>

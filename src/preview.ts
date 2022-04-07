@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-export function preview(element: Element): void {
+export function debug(element: Element = document.body): void {
   if (!fs.existsSync('./node_modules/.cache/jest-preview-dom')) {
     fs.mkdirSync('./node_modules/.cache/jest-preview-dom', {
       recursive: true,

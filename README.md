@@ -32,7 +32,7 @@ When writing tests using Jest, we usually debug by reading the HTML code. Someti
 ## Features
 
 - 👀 Preview your actual app's HTML in a browser in milliseconds.
-- 🔄 Auto reload browser when execute `preview(htmlContainer)`.
+- 🔄 Auto reload browser when execute `preview.debug()`.
 - 💅 Support CSS:
   - ✅ Direct CSS import
   - ✅ [Styled-components](https://styled-components.com/)
@@ -50,7 +50,7 @@ describe('App', () => {
   it('should work as expected', () => {
     render(<App />);
 
-+    preview(document.body);
++    preview.debug();
   });
 });
 ```
@@ -183,7 +183,7 @@ describe('App', () => {
     userEvent.click(screen.getByTestId('increase'));
 
     // Open http://localhost:3336 to see the preview
-    preview(document.body);
+    preview.debug();
 
     expect(screen.getByTestId('count')).toContainHTML('2');
   });
