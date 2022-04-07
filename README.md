@@ -38,9 +38,9 @@ When writing tests using Jest, we usually debug by reading the HTML code. Someti
 - 👀 Preview your actual app's HTML in a browser in milliseconds.
 - 🔄 Auto reload browser when execute `preview.debug()`.
 - 💅 Support CSS:
-  - ✅ Direct CSS import
+  - ✅ [Direct CSS import](#3-configure-jests-transform-to-intercept-css-and-files)
   - ✅ [Styled-components](https://styled-components.com/)
-  - ✅ External CSS
+  - ✅ [External CSS](#4-optional-configure-external-css)
   - 🚧 [CSS Modules](https://github.com/css-modules/css-modules)
   - 🚧 [Sass](https://sass-lang.com/)
 - 🌄 Support viewing images.
@@ -66,7 +66,7 @@ describe('App', () => {
 
 ## Installation
 
-1. Install `jest-preview`
+### 1. Install `jest-preview`
 
 ```bash
 npm install jest-preview
@@ -75,7 +75,7 @@ yarn add jest-preview
 pnpm install jest-preview
 ```
 
-2. Create `cssTransform.js` and `fileTransform.js`
+### 2. Create `cssTransform.js` and `fileTransform.js`
 
 ```javascript
 // config/jest/cssTransform.js
@@ -105,7 +105,7 @@ module.exports = {
 
 For Create React App users, please use `processFileCRA` instead of `processFile`. See more at [examples/create-react-app/README.md](./examples/create-react-app/README.md#installation-and-usage)
 
-3. Configure jest's transform to intercept CSS and files
+### 3. Configure jest's transform to intercept CSS and files
 
 ```javascript
 // jest.config.js
@@ -115,9 +115,9 @@ transform: {
   },
 ```
 
-4. (Optional) Configure external CSS
+### 4. (Optional) Configure external CSS
 
-Sometimes, there are some CSS files imported outside your current test components (e.g: CSS imported in `src/index.js`, `src/main.tsx`). In this case, you can manually add those CSS files to `jest-preview` by `jestPreviewConfigure`.
+Sometimes, there are some CSS files imported outside your current test components (e.g: CSS imported in `src/index.js`, `src/main.tsx`). In this case, you can manually add those CSS files to `jest-preview` by `jestPreviewConfigure`. Notice that they should be path from root of your project.
 
 ```js
   // jest.config.js
@@ -142,7 +142,7 @@ jestPreviewConfigure({
 
 ## Usage
 
-1. Update to `package.json`
+### 1. Update to `package.json`
 
 ```json
 {
@@ -165,7 +165,7 @@ Optionally, you can use `npm-run-all` to run jest and `jest-preview` server in p
 }
 ```
 
-2. Run the `jest-preview` server
+### 2. Run the `jest-preview` server
 
 ```bash
 # You can use PORT to customize port, default to 3336
@@ -175,7 +175,7 @@ yarn jest-preview
 pnpm run jest-preview
 ```
 
-3. Preview your html from jest. Following code demo how to use it with [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/)
+### 3. Preview your html from jest. Following code demo how to use it with [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/)
 
 ```javascript
 import preview from 'jest-preview';
@@ -201,8 +201,7 @@ Then visit http://localhost:3336 to see the preview
 
 ## Upcoming features
 
-- Support css-in-js
-  - ✅ Styled-components
+- Support more `css-in-js` libraries
 - Multiple preview
 - [You name it](https://github.com/nvh95/jest-preview/labels/feature_request)
 
