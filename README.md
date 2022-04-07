@@ -8,11 +8,15 @@ Jest Preview
 
 <p align="center">
 Debug your Jest tests. Effortlessly. 🛠🖼 
-<p>
+</p>
   
 <p align="center">
   <img align="center" src="https://user-images.githubusercontent.com/8603085/162259399-19e47402-cf99-445b-8b5a-d00e82d1fb2d.gif" alt="Jest Preview Demo" />
-<p>
+</p>
+
+<p align="center">
+  <a href="https://stackblitz.com/edit/vitejs-vite-hlfd63?file=README.md" title="Try Jest Preview Now">Try Jest Preview Online</a>. No downloads needed!
+</p>
 
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
