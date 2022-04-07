@@ -97,6 +97,7 @@ preview.debug();
   // TODO2: How do we preserve the order of importing css file?
   // For now I think it's not very important, but this is the room for improvement in next versions
   let css = '';
+  // TODO: Do not need to construct css from files, since we can construct it from memory (client sends css files' location via websocket event)
   const allFiles = fs.readdirSync('./node_modules/.cache/jest-preview-dom');
   allFiles.forEach((file) => {
     if (file.endsWith('.css')) {
