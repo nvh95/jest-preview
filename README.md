@@ -7,11 +7,11 @@ Jest Preview
 </h1>
 
 <p align="center">
-Preview your HTML code while using Jest. With beautiful UI 🛠🖼 
+Debug your Jest tests. Effortlessly. 🛠🖼 
 <p>
   
 <p align="center">
-  <img align="center" src="https://user-images.githubusercontent.com/8603085/161533827-50a0f0a3-4d49-4db7-a4ab-571b31441b3d.gif" alt="Jest Preview Demo" />
+  <img align="center" src="https://user-images.githubusercontent.com/8603085/162259399-19e47402-cf99-445b-8b5a-d00e82d1fb2d.gif" alt="Jest Preview Demo" />
 <p>
 
 <!-- prettier-ignore-start -->
