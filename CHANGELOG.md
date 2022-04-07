@@ -1,3 +1,15 @@
+### 0.1.0
+
+### Features
+
+- [BREAKING CHANGES] Simplify usage of the core function of jest-preview: `preview(htmlElement)` to `preview.debug()`.
+- Users do not need to pass any argument to `preview.debug()`, the default is `document.body` which is the whole page (how authors expect users to use jest-preview).
+- Add `title` and `favicon.ico` for Dashboard
+
+### Fixes
+
+- [x] Fix `externalCss` get cached
+
 # 0.0.3
 
 ### Features

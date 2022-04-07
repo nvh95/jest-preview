@@ -8,4 +8,10 @@
   ],
   "files.insertFinalNewline": true,
   "editor.formatOnPaste": false
+  // Turn off to record video
+  // "editor.quickSuggestions": false,
+  // "editor.suggestOnTriggerCharacters": false,
+  // "editor.wordBasedSuggestions": false,
+  // "editor.parameterHints.enabled": false,
+  // "editor.hover.enabled": false
 }

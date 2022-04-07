@@ -23,7 +23,9 @@ const wsPort = Number(port) + 1;
 // Websocket server
 const { WebSocketServer } = require('ws');
 
-const HTML_PATH = './node_modules/.cache/jest-preview-dom/index.html';
+const CACHE_DIRECTORY = './node_modules/.cache/jest-preview-dom';
+const HTML_PATH = path.join(CACHE_DIRECTORY, 'index.html');
+const FAV_ICON_PATH = './node_modules/jest-preview/server/favicon.ico';
 
 const wss = new WebSocketServer({ port: wsPort });
 
@@ -74,13 +76,17 @@ app.use('/', (req, res) => {
 
   if (!fs.existsSync(HTML_PATH)) {
     // Make it looks nice
-    return res.end(`<html>
+    return res.end(`<!DOCTYPE html>
+<html>
+<head>
+  <link rel="shortcut icon" href="${FAV_ICON_PATH}">
+  <title>Jest Preview Dashboard</title>
+</head>
 <body>
 No preview found.<br/>
 Please run: <br /> <br />
 <code>
-render(<App />);<br/>
-preview(document.body);
+preview.debug();
 </code>
 <br /><br />
 </body>
@@ -91,6 +97,7 @@ preview(document.body);
   // TODO2: How do we preserve the order of importing css file?
   // For now I think it's not very important, but this is the room for improvement in next versions
   let css = '';
+  // TODO: Do not need to construct css from files, since we can construct it from memory (client sends css files' location via websocket event)
   const allFiles = fs.readdirSync('./node_modules/.cache/jest-preview-dom');
   allFiles.forEach((file) => {
     if (file.endsWith('.css')) {
@@ -103,7 +110,11 @@ preview(document.body);
 
   const htmlContent = `<!DOCTYPE html>
 <html>
-<head>${css}</head>
+<head>
+  <link rel="shortcut icon" href="${FAV_ICON_PATH}">
+  <title>Jest Preview Dashboard</title>
+${css}
+</head>
 <body>
   ${html}
 </body>
@@ -115,9 +126,16 @@ preview(document.body);
 const server = http.createServer(app);
 
 server.listen(port, () => {
+  if (fs.existsSync(HTML_PATH)) {
+    // Remove old preview
+    const files = fs.readdirSync(CACHE_DIRECTORY);
+    files.forEach((file) => {
+      if (!file.startsWith('cache-')) {
+        fs.unlinkSync(path.join(CACHE_DIRECTORY, file));
+      }
+    });
+  }
+
   console.log(`Example app listening on port ${port}`);
-  // TODO: Clear all file in ./node_modules/.cache/jest-preview-dom
-  // Answer: Clear all files is not a good option. Since jest already cache the transform.
-  // So, files are not copied over `.cache` folder anymore. We better to use those file directly (full name strategy)
   openBrowser(`http://localhost:${port}`);
 });

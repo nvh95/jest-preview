@@ -17,7 +17,7 @@ describe('App', () => {
 
     // Open http://localhost:3336 to see preview
     // Require to run `jest-preview` server before
-    preview(document.body);
+    preview.debug();
 
     expect(screen.getByTestId('count')).toContainHTML('6');
   });

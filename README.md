@@ -7,11 +7,11 @@ Jest Preview
 </h1>
 
 <p align="center">
-Preview your HTML code while using Jest. With beautiful UI 🛠🖼 
+Debug your Jest tests. Effortlessly. 🛠🖼 
 <p>
   
 <p align="center">
-  <img align="center" src="https://user-images.githubusercontent.com/8603085/161533827-50a0f0a3-4d49-4db7-a4ab-571b31441b3d.gif" alt="Jest Preview Demo" />
+  <img align="center" src="https://user-images.githubusercontent.com/8603085/162259399-19e47402-cf99-445b-8b5a-d00e82d1fb2d.gif" alt="Jest Preview Demo" />
 <p>
 
 <!-- prettier-ignore-start -->
@@ -32,7 +32,7 @@ When writing tests using Jest, we usually debug by reading the HTML code. Someti
 ## Features
 
 - 👀 Preview your actual app's HTML in a browser in milliseconds.
-- 🔄 Auto reload browser when execute `preview(htmlContainer)`.
+- 🔄 Auto reload browser when execute `preview.debug()`.
 - 💅 Support CSS:
   - ✅ Direct CSS import
   - ✅ [Styled-components](https://styled-components.com/)
@@ -50,7 +50,7 @@ describe('App', () => {
   it('should work as expected', () => {
     render(<App />);
 
-+    preview(document.body);
++    preview.debug();
   });
 });
 ```
@@ -126,6 +126,7 @@ Sometimes, there are some CSS files imported outside your current test component
 // ./config/jest/setupTests.js
 import { jestPreviewConfigure } from 'jest-preview';
 
+// Should be path from root of your project
 jestPreviewConfigure({
   externalCss: [
     'demo/global.css',
@@ -183,7 +184,7 @@ describe('App', () => {
     userEvent.click(screen.getByTestId('increase'));
 
     // Open http://localhost:3336 to see the preview
-    preview(document.body);
+    preview.debug();
 
     expect(screen.getByTestId('count')).toContainHTML('2');
   });
