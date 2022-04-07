@@ -1,4 +1,9 @@
 import '@testing-library/jest-dom/extend-expect';
+import { jestPreviewConfigure } from 'jest-preview';
+
+jestPreviewConfigure({
+  externalCss: ['src/index.css'],
+});
 
 window.matchMedia = (query) => ({
   matches: false,
@@ -15,4 +20,3 @@ Object.defineProperty(URL, 'createObjectURL', {
   writable: true,
   value: jest.fn(),
 });
-

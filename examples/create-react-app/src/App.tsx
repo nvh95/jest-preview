@@ -14,9 +14,7 @@ function App() {
         <Logo className="svg-component" />
         <img src={logo} className="App-logo" alt="logo" />
         <img src={logo2} className="logo2" alt="logo2" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
+        <p>Create React App example</p>
         <button
           data-testid="increase"
           type="button"

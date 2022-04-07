@@ -14,7 +14,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <img src={logo2} className="logo2" alt="logo2" />
-        <p>Hello Vite + React!</p>
+        <p>Vite Example</p>
         <StyledText>This text is styled by styled-components</StyledText>
 
         <p>
