@@ -126,6 +126,7 @@ Sometimes, there are some CSS files imported outside your current test component
 // ./config/jest/setupTests.js
 import { jestPreviewConfigure } from 'jest-preview';
 
+// Should be path from root of your project
 jestPreviewConfigure({
   externalCss: [
     'demo/global.css',
