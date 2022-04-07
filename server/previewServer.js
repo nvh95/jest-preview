@@ -23,7 +23,9 @@ const wsPort = Number(port) + 1;
 // Websocket server
 const { WebSocketServer } = require('ws');
 
-const HTML_PATH = './node_modules/.cache/jest-preview-dom/index.html';
+const CACHE_DIRECTORY = './node_modules/.cache/jest-preview-dom';
+const HTML_PATH = path.join(CACHE_DIRECTORY, 'index.html');
+const FAV_ICON_PATH = path.join(CACHE_DIRECTORY, 'favicon.ico');
 
 const wss = new WebSocketServer({ port: wsPort });
 
@@ -74,12 +76,16 @@ app.use('/', (req, res) => {
 
   if (!fs.existsSync(HTML_PATH)) {
     // Make it looks nice
-    return res.end(`<html>
+    return res.end(`<!DOCTYPE html>
+<html>
+<head>
+  <link rel="shortcut icon" href="${FAV_ICON_PATH}">
+  <title>Jest Preview Dashboard</title>
+</head>
 <body>
 No preview found.<br/>
 Please run: <br /> <br />
 <code>
-render(<App />);<br/>
 preview.debug();
 </code>
 <br /><br />
@@ -103,7 +109,11 @@ preview.debug();
 
   const htmlContent = `<!DOCTYPE html>
 <html>
-<head>${css}</head>
+<head>
+  <link rel="shortcut icon" href="${FAV_ICON_PATH}">
+  <title>Jest Preview Dashboard</title>
+${css}
+</head>
 <body>
   ${html}
 </body>
@@ -115,9 +125,16 @@ preview.debug();
 const server = http.createServer(app);
 
 server.listen(port, () => {
+  if (fs.existsSync(HTML_PATH)) {
+    // Remove old preview
+    const files = fs.readdirSync(CACHE_DIRECTORY);
+    files.forEach((file) => {
+      if (!file.startsWith('cache-')) {
+        fs.unlinkSync(path.join(CACHE_DIRECTORY, file));
+      }
+    });
+  }
+
   console.log(`Example app listening on port ${port}`);
-  // TODO: Clear all file in ./node_modules/.cache/jest-preview-dom
-  // Answer: Clear all files is not a good option. Since jest already cache the transform.
-  // So, files are not copied over `.cache` folder anymore. We better to use those file directly (full name strategy)
   openBrowser(`http://localhost:${port}`);
 });
