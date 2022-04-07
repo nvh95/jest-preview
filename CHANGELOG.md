@@ -1,3 +1,10 @@
+### 0.1.0
+
+### Features
+
+- Simplify usage of the core function of jest-preview: Change preview(htmlElement) to preview.debug().
+- Users do not need to pass any argument to `preview.debug()`, the default is `document.body` which is the whole page (how authors expect users to use jest-preview).
+
 # 0.0.3
 
 ### Features
