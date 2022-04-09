@@ -1,5 +1,7 @@
 import path from 'path';
 import camelcase from 'camelcase';
+import postcss from 'postcss';
+import PostcssModulesPlugin from 'postcss-modules';
 
 function getRelativeFilename(filename: string): string {
   return filename.split(process.cwd())[1];
@@ -43,6 +45,7 @@ export function processFileCRA(src: string, filename: string): string {
 }
 
 export function processCss(src: string, filename: string): string {
+  console.log('processCSs', filename);
   const relativeFilename = getRelativeFilename(filename);
   // Transform to a javascript module that load a <link rel="stylesheet"> tag to the page.
   return `const relativeCssPath = "${relativeFilename}";
@@ -63,3 +66,25 @@ export function processCss(src: string, filename: string): string {
 //   const baseCacheKey = cacheKeyFunction(src, filename, ...rest);
 //   return crypto.createHash('md5').update(baseCacheKey).digest('hex');
 // }
+
+export async function processCSSModules(
+  src: string,
+  filename: string,
+): Promise<string> {
+  console.log('processCSSModules', filename);
+  // TODO: To move transform logic into transformed file.
+  const result = await postcss(
+    PostcssModulesPlugin({
+      getJSON: function (cssFilename, json, outputFilename) {
+        console.log('cssFilename', cssFilename);
+        console.log('json', json);
+        console.log('outputFilename', outputFilename);
+      },
+    }),
+  ).process(src);
+  console.log('result css', result.css);
+  console.log('result json', result.map.toJSON());
+  return `module.exports = {
+    cssModule: 'cssModule1',
+  };`;
+}

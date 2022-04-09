@@ -37,5 +37,8 @@ export default defineConfig(({ mode }) => {
         external: ['fs', 'path'],
       },
     },
+    server: {
+      open: true,
+    },
   };
 });

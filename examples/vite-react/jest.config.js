@@ -23,6 +23,7 @@ module.exports = {
   moduleNameMapper: {
     '^react-native$': 'react-native-web',
     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
+    // Used to dedupe `styled-component` when run `npm link` in development
     '^styled-components$': '<rootDir>/node_modules/styled-components',
   },
   moduleFileExtensions: [
