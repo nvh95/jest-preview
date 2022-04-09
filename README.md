@@ -11,8 +11,9 @@ Debug your Jest tests. Effortlessly. 🛠🖼
 </p>
   
 <p align="center">
-  <img align="center" src="https://user-images.githubusercontent.com/8603085/162259399-19e47402-cf99-445b-8b5a-d00e82d1fb2d.gif" alt="Jest Preview Demo" />
+  <img align="center" src="https://user-images.githubusercontent.com/8603085/162563155-7e18c9ef-4fe3-45f2-9065-7fcea8ddb18e.gif" alt="Jest Preview Demo" />
 </p>
+
 
 <p align="center">
   <a href="https://stackblitz.com/edit/jest-preview?file=README.md" title="Try Jest Preview Now">Try Jest Preview Online</a>. No downloads needed!
