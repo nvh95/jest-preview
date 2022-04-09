@@ -73,7 +73,11 @@ export function processCss(src: string, filename: string): string {
 // For now. My idea is tp move transform logic to the transformed file itself (similar to what we do for cssTransform)
 // Reference: https://github.com/facebook/jest/issues/11081#issuecomment-791259034
 // https://github.com/facebook/jest/issues/11458
-
+// Also, there is a inconsistency in jest docs about should `process` be required
+// https://jestjs.io/docs/configuration#transform-objectstring-pathtotransformer--pathtotransformer-object
+// A transformer must be an object with at least a process function
+// https://jestjs.io/docs/code-transformation#writing-custom-transformers
+// As can be seen, only process or processAsync is mandatory to implement
 export async function processCSSModules(
   src: string,
   filename: string,
