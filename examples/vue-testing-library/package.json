@@ -5,13 +5,23 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "jest --watch",
+    "jest-preview": "jest-preview"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.16.11",
     "vue": "^3.2.25"
   },
   "devDependencies": {
+    "@testing-library/vue": "^6.5.1",
+    "@types/jest": "^27.4.1",
     "@vitejs/plugin-vue": "^2.3.0",
+    "@vue/test-utils": "^2.0.0-rc.18",
+    "@vue/vue3-jest": "^27.0.0-alpha.4",
+    "jest": "^27.5.1",
+    "jest-preview": "file:../..",
+    "ts-jest": "^27.1.4",
     "vite": "^2.9.0"
   }
 }
