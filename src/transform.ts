@@ -67,6 +67,13 @@ export function processCss(src: string, filename: string): string {
 //   return crypto.createHash('md5').update(baseCacheKey).digest('hex');
 // }
 
+// We cannot create async transformer if we are using CommonJS
+// We can use that if we opt-in to ESM. But I don't think it's a good idea for now
+// Need to find a way to support async actions (compile CSS Modules)
+// For now. My idea is tp move transform logic to the transformed file itself (similar to what we do for cssTransform)
+// Reference: https://github.com/facebook/jest/issues/11081#issuecomment-791259034
+// https://github.com/facebook/jest/issues/11458
+
 export async function processCSSModules(
   src: string,
   filename: string,
