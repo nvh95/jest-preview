@@ -44,6 +44,15 @@
       "contributions": [
         "test"
       ]
+    },
+    {
+      "login": "mattmurph9",
+      "name": "Matt Murphy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/63432827?v=4",
+      "profile": "https://github.com/mattmurph9",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
