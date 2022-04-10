@@ -70,10 +70,10 @@ describe('App', () => {
 ### 1. Install `jest-preview`
 
 ```bash
-npm install jest-preview
+npm install --save-dev jest-preview
 # Or
-yarn add jest-preview
-pnpm install jest-preview
+yarn add --dev jest-preview
+pnpm install --dev jest-preview
 ```
 
 ### 2. Create `cssTransform.js` and `fileTransform.js`
