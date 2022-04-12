@@ -1,7 +1,5 @@
 import path from 'path';
 import camelcase from 'camelcase';
-import postcss from 'postcss';
-import PostcssModulesPlugin from 'postcss-modules';
 
 function getRelativeFilename(filename: string): string {
   return filename.split(process.cwd())[1];
@@ -78,24 +76,29 @@ export function processCss(src: string, filename: string): string {
 // A transformer must be an object with at least a process function
 // https://jestjs.io/docs/code-transformation#writing-custom-transformers
 // As can be seen, only process or processAsync is mandatory to implement
-export async function processCSSModules(
-  src: string,
-  filename: string,
-): Promise<string> {
-  console.log('processCSSModules', filename);
-  // TODO: To move transform logic into transformed file.
-  const result = await postcss(
-    PostcssModulesPlugin({
-      getJSON: function (cssFilename, json, outputFilename) {
-        console.log('cssFilename', cssFilename);
-        console.log('json', json);
-        console.log('outputFilename', outputFilename);
-      },
-    }),
-  ).process(src);
-  console.log('result css', result.css);
-  console.log('result json', result.map.toJSON());
-  return `module.exports = {
-    cssModule: 'cssModule1',
-  };`;
+export function processCSSModules(src: string, filename: string): string {
+  
+  return `
+const postcss = require('postcss');
+const CSSModulesSync = require('postcss-modules-sync').default;
+const cssSrc = ${JSON.stringify(src)};
+
+let exportedTokens = {};
+
+const result = postcss(
+  CSSModulesSync({
+    getJSON: (tokens) => {
+      exportedTokens = tokens;
+    },
+  }),
+)
+.process(cssSrc, { from: ${JSON.stringify(filename)} })
+
+const style = document.createElement('style');
+style.type = 'text/css';
+style.appendChild(document.createTextNode(result.css));
+document.body.appendChild(style);
+
+result.sync();
+module.exports = exportedTokens`;
 }
