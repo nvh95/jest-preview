@@ -11,9 +11,7 @@ module.exports = {
   modulePaths: ['<rootDir>/demo'],
   transform: {
     '^.+\\.(ts|js|tsx|jsx)$': '@swc/jest',
-    '^.+(?!\\.module)\\.css$': '<rootDir>/config/jest/cssTransform.js',
-    '^.+\\.module\\.(css|sass|scss)$':
-      '<rootDir>/config/jest/cssModulesTransform.js',
+    '^.+\\.css$': '<rootDir>/config/jest/cssTransform.js',
     '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|json)$)':
       '<rootDir>/config/jest/fileTransform.js',
   },
@@ -24,7 +22,6 @@ module.exports = {
   modulePaths: ['<rootDir>/demo'],
   moduleNameMapper: {
     '^react-native$': 'react-native-web',
-    // '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
   },
   moduleFileExtensions: [
     // Place tsx and ts to beginning as suggestion from Jest team
