@@ -104,7 +104,5 @@ style.type = 'text/css';
 style.appendChild(document.createTextNode(result.css));
 document.body.appendChild(style);
 
-// Run ".sync()" to get the exported tokens, otherwise, it's is undefined
-result.sync();
 module.exports = exportedTokens`;
 }
