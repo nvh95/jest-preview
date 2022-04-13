@@ -14,7 +14,6 @@ Debug your Jest tests. Effortlessly. 🛠🖼
   <img align="center" src="https://user-images.githubusercontent.com/8603085/162563155-7e18c9ef-4fe3-45f2-9065-7fcea8ddb18e.gif" alt="Jest Preview Demo" />
 </p>
 
-
 <p align="center">
   <a href="https://stackblitz.com/edit/jest-preview?file=README.md" title="Try Jest Preview Now">Try Jest Preview Online</a>. No downloads needed!
 </p>
@@ -42,7 +41,7 @@ When writing tests using Jest, we usually debug by reading the HTML code. Someti
   - ✅ [Direct CSS import](#3-configure-jests-transform-to-intercept-css-and-files)
   - ✅ [Styled-components](https://styled-components.com/)
   - ✅ [External CSS](#4-optional-configure-external-css)
-  - 🚧 [CSS Modules](https://github.com/css-modules/css-modules)
+  - ✅ [CSS Modules](https://github.com/css-modules/css-modules)
   - 🚧 [Sass](https://sass-lang.com/)
 - 🌄 Support viewing images.
 
@@ -116,7 +115,21 @@ transform: {
   },
 ```
 
-### 4. (Optional) Configure external CSS
+### 4. If you use CSS Modules, make sure it doesn't get ignored
+
+In most cases, CSS Modules is ignored in Jest environment. For example, Create React App default configuration ignores CSS Modules via [transformIgnorePatterns](https://github.com/facebook/create-react-app/blob/63bba07d584a769cfaf7699e0aab92ed99c3c57e/packages/react-scripts/scripts/utils/createJestConfig.js#L53) and [moduleNameMapper](https://github.com/facebook/create-react-app/blob/63bba07d584a769cfaf7699e0aab92ed99c3c57e/packages/react-scripts/scripts/utils/createJestConfig.js#L58). To make CSS Modules works with Jest Preview, we need to make sure it isn't ignored
+
+```diff
+// jest.config.js
+transformIgnorePatterns: [
+-  '^.+\\.module\\.(css|sass|scss)$',
+],
+moduleNameMapper: {
+-  '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
+},
+```
+
+### 5. (Optional) Configure external CSS
 
 Sometimes, there are some CSS files imported outside your current test components (e.g: CSS imported in `src/index.js`, `src/main.tsx`). In this case, you can manually add those CSS files to `jest-preview` by `jestPreviewConfigure`. Notice that they should be path from root of your project.
 
