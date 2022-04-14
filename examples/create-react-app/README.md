@@ -14,9 +14,11 @@ Except for step 2 of installation: **Configure jest's transform to transform CSS
 - Because `create-react-app` allows user to [use svg files as React components](https://create-react-app.dev/docs/adding-images-fonts-and-files/#adding-svgs), `jest-preview` therefore needs to support that, we update Jest's configuration in `package.json` as follow:
 
 ```json
-transform: {
-  // Other transforms
-  "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "jest-preview/transforms/file",
+{
+  "transform": {
+    // Other transforms
+    "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "jest-preview/transforms/file"
+  }
 }
 ```
 

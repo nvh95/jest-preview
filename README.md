@@ -81,7 +81,7 @@ pnpm install --dev jest-preview
 
 Update `jest.config.js`:
 
-```json
+```js
 transform: {
   "^.+\\.css$": "jest-preview/transforms/css",
   "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "jest-preview/transforms/file",
