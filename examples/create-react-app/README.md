@@ -8,18 +8,18 @@ jest is setup with create-react-app by default, we don't need to do anything mor
 
 ## Installation and Usage
 
-Please refer to [Installation](../../README.md#installation) and [Usage](../../README.md#usage).
-Except for step 2 of installation: Create `fileTransform.js`:
+Please refer to [Installation](../../README.md#installation) and [Usage](../../README.md#installation).
+Except for step 2 of installation: **Configure jest's transform to transform CSS and files**
 
-- Because `create-react-app` allows user to [use svg files as React components](https://create-react-app.dev/docs/adding-images-fonts-and-files/#adding-svgs), `jest-preview` therefore needs to support that, so we use the below config:
+- Because `create-react-app` allows user to [use svg files as React components](https://create-react-app.dev/docs/adding-images-fonts-and-files/#adding-svgs), `jest-preview` therefore needs to support that, we update Jest's configuration in `package.json` as follow:
 
-```javascript
-// config/jest/fileTransform.js
-const { processFileCRA } = require('jest-preview');
-
-module.exports = {
-  process(src, filename) {
-    return processFileCRA(src, filename);
+```json
+transform: {
+    // Other transforms
+    "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "jest-preview/transforms/file",
   },
-};
 ```
+
+## Caveats
+
+Even though `jest-preview` itself supports CSS Modules, it doesn't support `create-react-app` without ejecting yet. The support will land in the next version.
