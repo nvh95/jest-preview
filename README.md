@@ -77,14 +77,15 @@ pnpm install --dev jest-preview
 
 ### 2. Configure jest's transform to transform CSS and files
 
-`jest-preview` comes with pre-configured transformations to intercept CSS and files. This is a recommended way to configure. However, you can configure it yourself using exported transform functions as well. See [Advanced configurations](#advanced-configurations) for more
+`jest-preview` comes with pre-configured transformations to intercept CSS and files. This is a recommended way to configure. However, you can configure it yourself using exported transform functions as well. See [Advanced configurations](#advanced-configurations) for more.
+
+Update `jest.config.js`:
 
 ```json
-// jest.config.js
 transform: {
-    "^.+\\.css$": "jest-preview/transforms/css",
-    "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "jest-preview/transforms/file",
-  },
+  "^.+\\.css$": "jest-preview/transforms/css",
+  "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "jest-preview/transforms/file",
+}
 ```
 
 For Create React App users, please use `jest-preview/transforms/fileCRA` instead of `jest-preview/transforms/file`. See more at [examples/create-react-app/README.md](./examples/create-react-app/README.md#installation-and-usage)
