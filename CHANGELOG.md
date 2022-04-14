@@ -3,6 +3,7 @@
 ## Features
 
 - Support CSS Modules
+  - Caveat: Support CSS Modules for CRA in next version.
 
 # 0.1.0
 
