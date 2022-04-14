@@ -23,7 +23,8 @@
   },
   "files": [
     "dist",
-    "server"
+    "server",
+    "transforms"
   ],
   "scripts": {
     "dev": "vite",
