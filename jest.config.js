@@ -11,9 +11,8 @@ module.exports = {
   modulePaths: ['<rootDir>/demo'],
   transform: {
     '^.+\\.(ts|js|tsx|jsx)$': '@swc/jest',
-    '^.+\\.css$': '<rootDir>/config/jest/cssTransform.js',
-    '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|json)$)':
-      '<rootDir>/config/jest/fileTransform.js',
+    '^.+\\.css$': '<rootDir>/transforms/css',
+    '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|json)$)': '<rootDir>/transforms/file',
   },
   transformIgnorePatterns: [
     '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$',

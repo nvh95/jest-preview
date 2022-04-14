@@ -20,6 +20,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:nc": "npm run test -- --no-cache",
     "eject": "react-scripts eject",
     "jest-preview": "jest-preview",
     "test:debug": "npm-run-all -p test jest-preview"
@@ -48,8 +49,8 @@
   },
   "jest": {
     "transform": {
-      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+      "^.+\\.css$": "jest-preview/transforms/css",
+      "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "jest-preview/transforms/fileCRA"
     }
   }
 }

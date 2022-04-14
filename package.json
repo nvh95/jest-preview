@@ -40,7 +40,7 @@
     "preview": "vite preview",
     "server": "node server/previewServer.js",
     "server:watch": "nodemon server/previewServer.js",
-    "test:only": "NODE_ENV=test jest --watch",
+    "test:only": "NODE_ENV=test jest --watch --no-cache",
     "test:ci": "NODE_ENV=test jest",
     "clearCache": "rimraf node_modules/.cache/jest-preview-dom && jest --clearCache",
     "test": "npm-run-all -p server test:only",
