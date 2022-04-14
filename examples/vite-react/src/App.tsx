@@ -7,6 +7,8 @@ import logo2 from './assets/images/logo.svg';
 import './App.css';
 import './assets/css/App.css';
 
+import styles from './style.module.css';
+
 function App() {
   const [count, setCount] = useState(0);
   return (
@@ -16,6 +18,7 @@ function App() {
         <img src={logo2} className="logo2" alt="logo2" />
         <p>Vite Example</p>
         <StyledText>This text is styled by styled-components</StyledText>
+        <p className={styles.green}>This text is styled by CSS Modules</p>
 
         <p>
           <button

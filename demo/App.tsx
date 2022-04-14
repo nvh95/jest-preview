@@ -5,6 +5,7 @@ import logo from './logo.svg';
 import logo2 from './assets/images/logo.svg';
 import './App.css';
 import './assets/css/App.css';
+import { cssModule } from './style.module.css';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -18,6 +19,7 @@ function App() {
         <p className="global-css">
           This text is styled by global css which is not imported to App.tsx
         </p>
+        <p className={cssModule}>This text is styled by CSS Modules</p>
         <p>
           <button
             data-testid="increase"
