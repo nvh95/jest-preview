@@ -1,21 +1,24 @@
 import { defineConfig } from 'rollup';
 import typescript from 'rollup-plugin-typescript2';
 
+function makeBundle({ filePath, dir = 'dist' }) {
+  return {
+    input: filePath,
+    output: {
+      dir: dir,
+      format: 'cjs',
+    },
+    plugins: [typescript()],
+    external: ['path', 'camelcase'],
+  };
+}
+
 export default defineConfig([
-  {
-    input: 'src/index.ts',
-    output: {
-      dir: 'build',
-      format: 'cjs',
-    },
-    plugins: [typescript()],
-  },
-  {
-    input: 'src/preconfig/cssTransform.ts',
-    output: {
-      dir: 'build',
-      format: 'cjs',
-    },
-    plugins: [typescript()],
-  },
+  makeBundle({ filePath: 'src/index.ts' }),
+  makeBundle({ filePath: 'src/preconfigTransform/css.ts', dir: 'transforms' }),
+  makeBundle({ filePath: 'src/preconfigTransform/file.ts', dir: 'transforms' }),
+  makeBundle({
+    filePath: 'src/preconfigTransform/fileCRA.ts',
+    dir: 'transforms',
+  }),
 ]);
