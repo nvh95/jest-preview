@@ -50,12 +50,12 @@ export function processCss(src: string, filename: string): string {
   const relativeFilename = getRelativeFilename(filename);
   // Transform to a javascript module that load a <link rel="stylesheet"> tag to the page.
   return `const relativeCssPath = "${relativeFilename}";
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = relativeCssPath;
-  document.body.appendChild(link);
-  
-  module.exports = JSON.stringify(relativeCssPath);`;
+const link = document.createElement('link');
+link.rel = 'stylesheet';
+link.href = relativeCssPath;
+document.body.appendChild(link);
+
+module.exports = JSON.stringify(relativeCssPath);`;
 }
 
 // TODO: MEDIUM PRIORITY To research about getCacheKey
@@ -83,8 +83,7 @@ export function processCss(src: string, filename: string): string {
 // One notable note is that `postcss-modules` is an async postcss plugin
 // so we need to use `postcss-modules.sync`, with function `sync()`
 function processCSSModules(src: string, filename: string): string {
-  return `
-const postcss = require('postcss');
+  return `const postcss = require('postcss');
 const CSSModulesSync = require('postcss-modules-sync').default;
 const cssSrc = ${JSON.stringify(src)};
 
