@@ -16,7 +16,6 @@ module.exports = {
   },
   transformIgnorePatterns: [
     '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$',
-    // "^.+\\.module\\.(css|sass|scss)$",
   ],
   modulePaths: ['<rootDir>/demo'],
   moduleNameMapper: {

@@ -1,6 +1,6 @@
 {
   "name": "jest-preview",
-  "version": "0.1.1-alpha.0",
+  "version": "0.1.1",
   "description": "Preview your HTML code while using Jest",
   "keywords": [
     "testing",
