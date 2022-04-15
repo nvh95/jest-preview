@@ -1,3 +1,12 @@
+# 0.1.2
+
+## Features
+
+- Add pre-configured transformers, so users can integrate `jest-preview` to their projects easier.
+  - `jest-preview/transforms/css`
+  - `jest-preview/transforms/file`
+  - `jest-preview/transforms/fileCRA`
+
 # 0.1.1
 
 ## Features
