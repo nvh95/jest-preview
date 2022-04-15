@@ -17,7 +17,7 @@ Except for step 2 of installation: **Configure jest's transform to transform CSS
 {
   "transform": {
     // Other transforms
-    "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "jest-preview/transforms/file"
+    "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "jest-preview/transforms/fileCRA"
   }
 }
 ```
