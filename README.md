@@ -75,47 +75,22 @@ yarn add --dev jest-preview
 pnpm install --dev jest-preview
 ```
 
-### 2. Create `cssTransform.js` and `fileTransform.js`
+### 2. Configure jest's transform to transform CSS and files
 
-```javascript
-// config/jest/cssTransform.js
-'use strict';
+`jest-preview` comes with pre-configured transformations to intercept CSS and files. This is a recommended way to configure. However, you can configure it yourself using exported transform functions as well. See [Advanced configurations](#advanced-configurations) for more.
 
-const { processCss } = require('jest-preview');
+Update `jest.config.js`:
 
-module.exports = {
-  process(src, filename) {
-    return processCss(src, filename);
-  },
-};
-```
-
-```javascript
-// config/jest/fileTransform.js
-'use strict';
-
-const { processFile } = require('jest-preview');
-
-module.exports = {
-  process(src, filename) {
-    return processFile(src, filename);
-  },
-};
-```
-
-For Create React App users, please use `processFileCRA` instead of `processFile`. See more at [examples/create-react-app/README.md](./examples/create-react-app/README.md#installation-and-usage)
-
-### 3. Configure jest's transform to intercept CSS and files
-
-```javascript
-// jest.config.js
+```js
 transform: {
-    "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-    "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js",
-  },
+  "^.+\\.css$": "jest-preview/transforms/css",
+  "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "jest-preview/transforms/file",
+}
 ```
 
-### 4. If you use CSS Modules, make sure it doesn't get ignored
+For Create React App users, please use `jest-preview/transforms/fileCRA` instead of `jest-preview/transforms/file`. See more at [examples/create-react-app/README.md](./examples/create-react-app/README.md#installation-and-usage)
+
+### 3. If you use CSS Modules, make sure it doesn't get ignored
 
 In most cases, CSS Modules is ignored in Jest environment. For example, Create React App default configuration ignores CSS Modules via [transformIgnorePatterns](https://github.com/facebook/create-react-app/blob/63bba07d584a769cfaf7699e0aab92ed99c3c57e/packages/react-scripts/scripts/utils/createJestConfig.js#L53) and [moduleNameMapper](https://github.com/facebook/create-react-app/blob/63bba07d584a769cfaf7699e0aab92ed99c3c57e/packages/react-scripts/scripts/utils/createJestConfig.js#L58). To make CSS Modules works with Jest Preview, we need to make sure it isn't ignored. Remove options to ignore CSS Modules or mapping using a third party library (such as [identity-obj-proxy](https://github.com/keyz/identity-obj-proxy)).
 
@@ -129,7 +104,7 @@ moduleNameMapper: {
 },
 ```
 
-### 5. (Optional) Configure external CSS
+### 4. (Optional) Configure external CSS
 
 Sometimes, there are some CSS files imported outside your current test components (e.g: CSS imported in `src/index.js`, `src/main.tsx`). In this case, you can manually add those CSS files to `jest-preview` by `jestPreviewConfigure`. Notice that they should be path from root of your project.
 
@@ -213,11 +188,49 @@ Then visit http://localhost:3336 to see the preview
 
 <img alt="Preview your jest test in the browser" src="https://user-images.githubusercontent.com/8603085/161393898-7e283e38-6114-4064-9414-a0ce6d52361d.png" width="600" />
 
+## Advanced configurations
+
+You should use [Pre-configured transformation](#2-configure-jests-transform-to-transform-css-and-files) in most cases. However, if you have existing code transformation, you can use following provided ones as follow:
+
+- `processCss`: Process CSS files
+- `processFile`: Process files
+- `processFileCRA`: Process files for Create React App
+
+For examples:
+
+````js
+```javascript
+// config/jest/cssTransform.js
+'use strict';
+
+const { processCss } = require('jest-preview');
+
+module.exports = {
+  process(src, filename) {
+    return processCss(src, filename);
+  },
+};
+````
+
+```javascript
+// config/jest/fileTransform.js
+'use strict';
+
+const { processFile } = require('jest-preview');
+// Use processFileCRA for Create React App
+
+module.exports = {
+  process(src, filename) {
+    return processFile(src, filename); // Use processFileCRA for Create React App
+  },
+};
+```
+
 ## Upcoming features
 
-- Support more `css-in-js` libraries
-- Multiple preview
-- [You name it](https://github.com/nvh95/jest-preview/labels/feature_request)
+- Support more `css-in-js` libraries.
+- Multiple preview.
+- [You name it](https://github.com/nvh95/jest-preview/labels/feature_request).
 
 ## Run jest-preview locally
 
