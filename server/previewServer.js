@@ -13,15 +13,16 @@ const sirv = require('sirv');
 const app = connect();
 const chokidar = require('chokidar');
 const { openBrowser } = require('./browser');
+// Websocket server
+const { WebSocketServer } = require('ws');
+
+let publicFolder = '';
 
 const port = process.env.PORT || 3336;
 // TODO: Can we reuse `port`, I think Vite they can do that
 // https://github.com/vitejs/vite/blob/50a876537cc7b934ec5c1d11171b5ce02e3891a8/packages/vite/src/node/server/ws.ts#L97
 // TODO: Increase port by 1 is not a good strategy, we should check if it's also available
 const wsPort = Number(port) + 1;
-
-// Websocket server
-const { WebSocketServer } = require('ws');
 
 const CACHE_DIRECTORY = './node_modules/.cache/jest-preview-dom';
 const HTML_PATH = path.join(CACHE_DIRECTORY, 'index.html');
@@ -32,6 +33,14 @@ const wss = new WebSocketServer({ port: wsPort });
 wss.on('connection', function connection(ws) {
   ws.on('message', function message(data) {
     console.log('received: %s', data);
+    try {
+      const dataJSON = JSON.parse(data);
+      if (dataJSON.type === 'publicFolder') {
+        publicFolder = dataJSON.payload;
+      }
+    } catch (error) {
+      console.error(error);
+    }
   });
 });
 
@@ -49,12 +58,18 @@ function handleFileChange() {
     }
   });
 }
-
+setInterval(() => {
+  console.log(wss.clients.size);
+  // wss.clients.forEach((ws) => {
+  //   console.log(Object.keys(ws));
+  // });
+}, 1000);
 // TODO: Do we need to unregister?
 watcher
   .on('change', handleFileChange)
   .on('add', handleFileChange)
   .on('unlink', handleFileChange);
+console.log('__dirname', __dirname);
 
 app.use((req, res, next) => {
   // Learn from https://github.com/vitejs/vite/blob/2b7dad1ea1d78d7977e0569fcca4c585b4014e85/packages/vite/src/node/server/middlewares/static.ts#L38
@@ -63,8 +78,19 @@ app.use((req, res, next) => {
     etag: true,
   });
   // Do not serve index
+  // console.log('req.url', req.url);
   if (req.url === '/') {
     return next();
+  }
+
+  // TODO: Check if req.url is existed, if not, look up in public directory
+  const filePath = path.join('.', req.url);
+  // console.log('filePath', filePath);
+  if (!fs.existsSync(filePath)) {
+    console.log(req.url, 'not found. Try to find in public folder.');
+    req.url = path.join(publicFolder, req.url);
+    console.log('publicFolder', publicFolder);
+    console.log('req.url', req.url);
   }
   serve(req, res, next);
 });
