@@ -4,6 +4,12 @@
 
 - Support serving files from Public folder
 
+## Fixes
+
+- Update rollup to:
+  - Terser
+  - Transpile to ES2019 (e.g: optional chaining)
+
 ## Chores
 
 - Export `debug` as named also.
