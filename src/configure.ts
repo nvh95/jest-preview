@@ -11,7 +11,6 @@ interface JestPreviewConfigOptions {
 export async function jestPreviewConfigure(
   options: JestPreviewConfigOptions = {
     externalCss: [],
-    publicFolder: 'public',
   },
 ) {
   if (!fs.existsSync('./node_modules/.cache/jest-preview-dom')) {

@@ -13,7 +13,6 @@ const sirv = require('sirv');
 const app = connect();
 const chokidar = require('chokidar');
 const { openBrowser } = require('./browser');
-// Websocket server
 const { WebSocketServer } = require('ws');
 
 const port = process.env.PORT || 3336;
