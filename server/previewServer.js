@@ -16,8 +16,6 @@ const { openBrowser } = require('./browser');
 // Websocket server
 const { WebSocketServer } = require('ws');
 
-let publicFolder = '';
-
 const port = process.env.PORT || 3336;
 // TODO: Can we reuse `port`, I think Vite they can do that
 // https://github.com/vitejs/vite/blob/50a876537cc7b934ec5c1d11171b5ce02e3891a8/packages/vite/src/node/server/ws.ts#L97
@@ -25,8 +23,18 @@ const port = process.env.PORT || 3336;
 const wsPort = Number(port) + 1;
 
 const CACHE_DIRECTORY = './node_modules/.cache/jest-preview-dom';
-const HTML_PATH = path.join(CACHE_DIRECTORY, 'index.html');
+const HTML_BASENAME = 'index.html';
+const HTML_PATH = path.join(CACHE_DIRECTORY, HTML_BASENAME);
+const PUBLIC_CONFIG_BASENAME = 'cache-public.config';
+const PUBLIC_CONFIG_PATH = path.join(CACHE_DIRECTORY, PUBLIC_CONFIG_BASENAME);
 const FAV_ICON_PATH = './node_modules/jest-preview/server/favicon.ico';
+
+// Always set default public folder to `public` if not specified
+let publicFolder = 'public';
+
+if (fs.existsSync(PUBLIC_CONFIG_PATH)) {
+  publicFolder = fs.readFileSync(PUBLIC_CONFIG_PATH, 'utf8').trim();
+}
 
 const wss = new WebSocketServer({ port: wsPort });
 
@@ -44,32 +52,32 @@ wss.on('connection', function connection(ws) {
   });
 });
 
-const watcher = chokidar.watch(HTML_PATH, {
+const watcher = chokidar.watch([HTML_PATH, PUBLIC_CONFIG_PATH], {
   // ignored: ['**/node_modules/**', '**/.git/**'],
   ignoreInitial: true,
   ignorePermissionErrors: true,
   disableGlobbing: true,
 });
 
-function handleFileChange() {
-  wss.clients.forEach((client) => {
-    if (client.readyState === 1) {
-      client.send(JSON.stringify({ type: 'reload' }));
-    }
-  });
+function handleFileChange(filePath) {
+  const basename = path.basename(filePath);
+  if (basename === HTML_BASENAME) {
+    wss.clients.forEach((client) => {
+      if (client.readyState === 1) {
+        client.send(JSON.stringify({ type: 'reload' }));
+      }
+    });
+  }
+
+  if (basename === PUBLIC_CONFIG_BASENAME) {
+    publicFolder = fs.readFileSync(PUBLIC_CONFIG_PATH, 'utf8').trim();
+  }
 }
-setInterval(() => {
-  console.log(wss.clients.size);
-  // wss.clients.forEach((ws) => {
-  //   console.log(Object.keys(ws));
-  // });
-}, 1000);
-// TODO: Do we need to unregister?
+
 watcher
   .on('change', handleFileChange)
   .on('add', handleFileChange)
   .on('unlink', handleFileChange);
-console.log('__dirname', __dirname);
 
 app.use((req, res, next) => {
   // Learn from https://github.com/vitejs/vite/blob/2b7dad1ea1d78d7977e0569fcca4c585b4014e85/packages/vite/src/node/server/middlewares/static.ts#L38
@@ -78,19 +86,17 @@ app.use((req, res, next) => {
     etag: true,
   });
   // Do not serve index
-  // console.log('req.url', req.url);
   if (req.url === '/') {
     return next();
   }
 
-  // TODO: Check if req.url is existed, if not, look up in public directory
+  // Check if req.url is existed, if not, look up in public directory
   const filePath = path.join('.', req.url);
-  // console.log('filePath', filePath);
   if (!fs.existsSync(filePath)) {
-    console.log(req.url, 'not found. Try to find in public folder.');
-    req.url = path.join(publicFolder, req.url);
-    console.log('publicFolder', publicFolder);
-    console.log('req.url', req.url);
+    const newPath = path.join(publicFolder, req.url);
+    if (fs.existsSync(newPath)) {
+      req.url = newPath;
+    }
   }
   serve(req, res, next);
 });
@@ -162,6 +168,6 @@ server.listen(port, () => {
     });
   }
 
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Jest Preview Server listening on port ${port}`);
   openBrowser(`http://localhost:${port}`);
 });
