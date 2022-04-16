@@ -29,7 +29,7 @@
   "scripts": {
     "dev": "vite",
     "types": "tsc src/index.ts --declaration --emitDeclarationOnly --jsx react --esModuleInterop --outDir dist",
-    "build": "npm run build:only && npm run types",
+    "build": "rimraf dist && npm run build:only && npm run types",
     "build:legacy::only": "vite build",
     "build:legacy:watch": "vite build --watch",
     "build:only": "rollup -c",
