@@ -49,6 +49,7 @@
     "sort": "npx sort-package-json"
   },
   "dependencies": {
+    "@jest/create-cache-key-function": "^27.5.1",
     "camelcase": "^6.3.0",
     "chokidar": "^3.5.3",
     "connect": "^3.7.0",
@@ -62,6 +63,7 @@
     "ws": "^8.5.0"
   },
   "devDependencies": {
+    "@jest/transform": "^27.5.1",
     "@swc/core": "^1.2.154",
     "@swc/jest": "^0.2.20",
     "@testing-library/jest-dom": "^5.16.2",

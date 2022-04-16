@@ -1,8 +1,8 @@
 'use strict';
 
-import { processFileCRA } from '../transform';
+import { processFileCRA, getCacheKey } from '../transform';
 
 function process(src: string, filename: string) {
   return processFileCRA(src, filename);
 }
-export default { process };
+export default { process, getCacheKey };

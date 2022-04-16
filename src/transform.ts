@@ -1,5 +1,8 @@
 import path from 'path';
+import * as crypto from 'crypto';
 import camelcase from 'camelcase';
+import createCacheKey from '@jest/create-cache-key-function';
+import type { TransformOptions } from '@jest/transform';
 
 function getRelativeFilename(filename: string): string {
   return filename.split(process.cwd())[1];
@@ -104,4 +107,18 @@ style.appendChild(document.createTextNode(result.css));
 document.body.appendChild(style);
 
 module.exports = exportedTokens`;
+}
+
+// Without implementing `cacheKeyFunction`, Jest still caches the result of the transformer
+// So what's the point of write a custom `getCacheKey`???
+const cacheKeyFunction = createCacheKey();
+export function getCacheKey(src: string, filename: string, ...rest: any[]) {
+  // @ts-expect-error - type overload is confused
+  const baseCacheKey = cacheKeyFunction(src, filename, ...rest);
+
+  // signature mismatch between Jest <27 og >=27
+  const options: TransformOptions =
+    typeof rest[0] === 'string' ? rest[1] : rest[0];
+
+  return crypto.createHash('md5').update(baseCacheKey).digest('hex');
 }
