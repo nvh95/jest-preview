@@ -40,5 +40,6 @@ export default defineConfig(({ mode }) => {
     server: {
       open: true,
     },
+    publicDir: 'demo/public',
   };
 });
