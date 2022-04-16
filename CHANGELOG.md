@@ -1,3 +1,13 @@
+# 0.1.3
+
+## Features
+
+- Support serving files from Public folder
+
+## Chores
+
+- Export `debug` as named also.
+
 # 0.1.2
 
 ## Features
