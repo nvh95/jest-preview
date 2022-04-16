@@ -2,7 +2,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { jestPreviewConfigure } from 'jest-preview';
 
 jestPreviewConfigure({
-  externalCss: ['src/index.css'],
+  externalCss: ['src/index.css', 'src/global-style.scss'],
 });
 
 window.matchMedia = (query) => ({

@@ -1,5 +1,7 @@
+import fs from 'fs';
 import path from 'path';
 import camelcase from 'camelcase';
+import { CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG } from './constants';
 
 function getRelativeFilename(filename: string): string {
   return filename.split(process.cwd())[1];
@@ -45,6 +47,9 @@ export function processFileCRA(src: string, filename: string): string {
 export function processCss(src: string, filename: string): string {
   if (filename.endsWith('.module.css')) {
     return processCSSModules(src, filename);
+  }
+  if (filename.endsWith('.scss') || filename.endsWith('.sass')) {
+    return processSass(src);
   }
 
   const relativeFilename = getRelativeFilename(filename);
@@ -104,4 +109,27 @@ style.appendChild(document.createTextNode(result.css));
 document.body.appendChild(style);
 
 module.exports = exportedTokens`;
+}
+
+function processSass(src: string): string {
+  let sassLoadPaths: string;
+  try {
+    sassLoadPaths = fs
+      .readFileSync(path.join(CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG), 'utf8')
+      .trim();
+  } catch {
+    // File doesn't exist
+    sassLoadPaths = JSON.stringify([]);
+  }
+
+  return `const sass = require('sass');
+const sassSrc = ${JSON.stringify(src)};
+
+const result = sass.compileString(sassSrc, {
+  loadPaths: ${sassLoadPaths},
+});
+const style = document.createElement('style');
+style.appendChild(document.createTextNode(result.css));
+document.body.appendChild(style);
+module.exports = {}`;
 }
