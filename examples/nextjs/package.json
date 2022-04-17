@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.1.1",
+    "jest": "^27.5.1",
     "next": "12.1.5",
     "react": "18.0.0",
     "react-dom": "18.0.0"
