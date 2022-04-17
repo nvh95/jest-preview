@@ -112,13 +112,17 @@ module.exports = exportedTokens`;
 }
 
 function processSass(src: string): string {
+  const sassLoadPathsConfigPath = path.join(
+    CACHE_FOLDER,
+    SASS_LOAD_PATHS_CONFIG,
+  );
   let sassLoadPaths: string;
-  try {
+
+  if (fs.existsSync(sassLoadPathsConfigPath)) {
     sassLoadPaths = fs
       .readFileSync(path.join(CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG), 'utf8')
       .trim();
-  } catch {
-    // File doesn't exist
+  } else {
     sassLoadPaths = JSON.stringify([]);
   }
 
