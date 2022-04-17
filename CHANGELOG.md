@@ -3,6 +3,7 @@
 ## Features
 
 - Support serving files from Public folder
+- Clear Jest cache after installation
 
 ## Fixes
 

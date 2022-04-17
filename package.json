@@ -1,6 +1,6 @@
 {
   "name": "jest-preview",
-  "version": "0.1.3-alpha.1",
+  "version": "0.1.3-alpha.2",
   "description": "Preview your HTML code while using Jest",
   "keywords": [
     "testing",
@@ -47,7 +47,7 @@
     "prettier": "prettier server src --check",
     "prettier:fix": "npm run prettier -- --write",
     "sort": "npx sort-package-json",
-    "postinstall": "jest --clearCache"
+    "postinstall": "echo Post Install && jest --clearCache"
   },
   "dependencies": {
     "camelcase": "^6.3.0",
