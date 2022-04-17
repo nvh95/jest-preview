@@ -47,7 +47,7 @@
     "prettier": "prettier server src --check",
     "prettier:fix": "npm run prettier -- --write",
     "sort": "npx sort-package-json",
-    "postinstall": "[[ $INIT_CWD == $PWD ]] && echo Inside Jest Preview. Do not clear Cache. || jest --clearCache"
+    "postinstall": "bash -c \"[[ $INIT_CWD == $PWD ]] && echo Inside Jest Preview. Do not clear Cache. || jest --clearCache\""
   },
   "dependencies": {
     "camelcase": "^6.3.0",
