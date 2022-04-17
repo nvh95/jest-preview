@@ -24,7 +24,8 @@
   "files": [
     "dist",
     "server",
-    "transforms"
+    "transforms",
+    "postinstall.js"
   ],
   "scripts": {
     "dev": "vite",
