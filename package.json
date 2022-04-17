@@ -46,7 +46,8 @@
     "test": "npm-run-all -p server test:only",
     "prettier": "prettier server src --check",
     "prettier:fix": "npm run prettier -- --write",
-    "sort": "npx sort-package-json"
+    "sort": "npx sort-package-json",
+    "postinstall": "jest --clearCache"
   },
   "dependencies": {
     "camelcase": "^6.3.0",
