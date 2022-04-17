@@ -48,16 +48,16 @@ export function jestPreviewConfigure(
         );
       }
 
+      const sassFile = fs.readFileSync(cssFile, 'utf8');
       // Transform sass to css
-      const sassDestinationFile = destinationFile.replace(
+      const cssResult = sass.compileString(sassFile, {
+        loadPaths: sassLoadPaths,
+      }).css;
+      const cssDestinationFile = destinationFile.replace(
         /\.(scss|sass)$/,
         '.css',
       );
-      const sassFile = fs.readFileSync(cssFile, 'utf8');
-      const sassResult = sass.compileString(sassFile, {
-        loadPaths: sassLoadPaths,
-      });
-      fs.writeFileSync(sassDestinationFile, sassResult.css);
+      fs.writeFileSync(cssDestinationFile, cssResult);
       return;
     }
 
