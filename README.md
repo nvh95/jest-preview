@@ -271,6 +271,13 @@ npm run test
 
 Open chrome at http://localhost:3336 to see the preview
 
+However, it's recommend to run `jest` and `jest-preview` separately
+
+```bash
+npm run server # Run jest-preview server
+npm run test:only # Run jest
+```
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
