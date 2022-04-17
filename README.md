@@ -131,7 +131,7 @@ jestPreviewConfigure({
 
 ### 5. (Optional) Configure public folder
 
-You don't need to do anything if your public folder is `public`. However, it's different, you can configure as following:
+You don't need to do anything if your public folder is `public`. However, if it's different, you can configure as following:
 
 <!-- To add Common public directories as msw does
  when we have a dedicated docs site. https://mswjs.io/docs/getting-started/integrate/browser#where-is-my-public-directory -->
