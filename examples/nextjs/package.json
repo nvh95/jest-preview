@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest --watch"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
@@ -22,6 +23,7 @@
     "@types/react-dom": "18.0.1",
     "eslint": "8.13.0",
     "eslint-config-next": "12.1.5",
+    "jest-preview": "file:../..",
     "typescript": "4.6.3"
   }
 }
