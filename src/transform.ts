@@ -112,28 +112,29 @@ module.exports = exportedTokens`;
 }
 
 function processSass(src: string): string {
+  const sass = require('sass');
+
   const sassLoadPathsConfigPath = path.join(
     CACHE_FOLDER,
     SASS_LOAD_PATHS_CONFIG,
   );
-  let sassLoadPaths: string;
+  let sassLoadPaths: string[];
 
   if (fs.existsSync(sassLoadPathsConfigPath)) {
-    sassLoadPaths = fs
+    const sassLoadPathsString = fs
       .readFileSync(path.join(CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG), 'utf8')
       .trim();
+    sassLoadPaths = JSON.parse(sassLoadPathsString);
   } else {
-    sassLoadPaths = JSON.stringify([]);
+    sassLoadPaths = [];
   }
 
-  return `const sass = require('sass');
-const sassSrc = ${JSON.stringify(src)};
+  const cssResult = sass.compileString(src, {
+    loadPaths: sassLoadPaths,
+  }).css;
 
-const result = sass.compileString(sassSrc, {
-  loadPaths: ${sassLoadPaths},
-});
-const style = document.createElement('style');
-style.appendChild(document.createTextNode(result.css));
+  return `const style = document.createElement('style');
+style.appendChild(document.createTextNode(${JSON.stringify(cssResult)}));
 document.body.appendChild(style);
 module.exports = {}`;
 }
