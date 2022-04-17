@@ -1,4 +1,10 @@
 import '@testing-library/jest-dom/extend-expect';
+import { jestPreviewConfigure } from 'jest-preview';
+
+jestPreviewConfigure({
+  externalCss: ['src/index.css', 'src/global-style.scss'],
+  sassLoadPaths: ['src/assets/_scss/'], // Root for @use, @import
+});
 
 window.matchMedia = (query) => ({
   matches: false,
