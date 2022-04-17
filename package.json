@@ -47,7 +47,7 @@
     "prettier": "prettier server src --check",
     "prettier:fix": "npm run prettier -- --write",
     "sort": "npx sort-package-json",
-    "postinstall": "echo Post Install && jest --clearCache"
+    "postinstall": "node ./postinstall.js"
   },
   "dependencies": {
     "camelcase": "^6.3.0",
