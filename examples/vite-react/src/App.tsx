@@ -7,7 +7,7 @@ import logo2 from './assets/images/logo.svg';
 import './App.css';
 import './assets/css/App.css';
 
-import './assets/css/style.scss';
+import './assets/_scss/style.scss';
 import styles from './style.module.css';
 
 function App() {
