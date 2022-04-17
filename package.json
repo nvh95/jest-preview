@@ -54,7 +54,7 @@
     "connect": "^3.7.0",
     "open": "^8.4.0",
     "postcss": "^8.4.12",
-    "postcss-modules-sync": "^1.0.0",
+    "postcss-modules": "^4.3.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.70.1",
     "rollup-plugin-typescript2": "^0.31.2",
