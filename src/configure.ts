@@ -47,12 +47,18 @@ export function jestPreviewConfigure(
           JSON.stringify(sassLoadPaths),
         );
       }
-
       const sassFile = fs.readFileSync(cssFile, 'utf8');
       // Transform sass to css
-      const cssResult = sass.compileString(sassFile, {
-        loadPaths: sassLoadPaths,
+      const cssFileFullPath = path.join(process.cwd(), cssFile);
+      console.log('cssFileFullPath', cssFileFullPath);
+      // TODO: Jest hang there, output
+      // TypeError: Cannot read property '_location' of null
+      // at Window.get location [as location] (node_modules/jsdom/lib/jsdom/browser/Window.js:375:79)
+      // I suspect there is something different regarding environment in `configure.ts` and `transform.ts`
+      const cssResult = sass.compile(cssFileFullPath, {
+        // loadPaths: sassLoadPaths,
       }).css;
+      console.log('cssResult', cssResult);
       const cssDestinationFile = destinationFile.replace(
         /\.(scss|sass)$/,
         '.css',

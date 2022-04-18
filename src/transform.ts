@@ -49,7 +49,7 @@ export function processCss(src: string, filename: string): string {
     return processCSSModules(src, filename);
   }
   if (filename.endsWith('.scss') || filename.endsWith('.sass')) {
-    return processSass(src);
+    return processSass(src, filename);
   }
 
   const relativeFilename = getRelativeFilename(filename);
@@ -111,7 +111,7 @@ document.body.appendChild(style);
 module.exports = exportedTokens`;
 }
 
-function processSass(src: string): string {
+function processSass(src: string, filename: string): string {
   const sass = require('sass');
 
   const sassLoadPathsConfigPath = path.join(
@@ -128,9 +128,8 @@ function processSass(src: string): string {
   } else {
     sassLoadPaths = [];
   }
-
-  const cssResult = sass.compileString(src, {
-    loadPaths: sassLoadPaths,
+  const cssResult = sass.compile(filename, {
+    // loadPaths: sassLoadPaths,
   }).css;
 
   return `const style = document.createElement('style');
