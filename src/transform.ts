@@ -86,29 +86,38 @@ module.exports = JSON.stringify(relativeCssPath);`;
 // So our approach is making CSS Modules a "CSS-in-JS" solution.
 // CSS Modules will be compiled at run time then inject to the document.body
 // One notable note is that `postcss-modules` is an async postcss plugin
-// so we need to use `postcss-modules.sync`, with function `sync()`
+// We have to use Singleton design pattern to make it works asynchronously.
 function processCSSModules(src: string, filename: string): string {
   return `const postcss = require('postcss');
-const CSSModulesSync = require('postcss-modules-sync').default;
+const PostcssModulesPlugin = require('postcss-modules');
 const cssSrc = ${JSON.stringify(src)};
 
-let exportedTokens = {};
+class Token {
+  set(json) {
+    Object.keys(json).forEach((key) => {
+      this[key] = json[key];
+    });
+  }
+}
 
-const result = postcss(
-  CSSModulesSync({
-    getJSON: (tokens) => {
-      exportedTokens = tokens;
+const exportedTokens = new Token();
+
+postcss(
+  PostcssModulesPlugin({
+    getJSON: (cssFileName, json, outputFileName) => {
+      exportedTokens.set(json);
     },
   }),
 )
 .process(cssSrc, { from: ${JSON.stringify(filename)} })
+.then((result) => {
+  const style = document.createElement('style');
+  style.type = 'text/css';
+  style.appendChild(document.createTextNode(result.css));
+  document.body.appendChild(style);
+});
 
-const style = document.createElement('style');
-style.type = 'text/css';
-style.appendChild(document.createTextNode(result.css));
-document.body.appendChild(style);
-
-module.exports = exportedTokens`;
+module.exports = exportedTokens;`;
 }
 
 function processSass(src: string): string {

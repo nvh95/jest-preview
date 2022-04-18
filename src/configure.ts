@@ -5,9 +5,10 @@ import { CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG } from './constants';
 interface JestPreviewConfigOptions {
   externalCss: string[];
   sassLoadPaths: string[];
+  publicFolder?: string;
 }
 
-export function jestPreviewConfigure(
+export async function jestPreviewConfigure(
   options: JestPreviewConfigOptions = { externalCss: [], sassLoadPaths: [] },
 ) {
   if (!fs.existsSync('./node_modules/.cache/jest-preview-dom')) {
@@ -16,7 +17,7 @@ export function jestPreviewConfigure(
     });
   }
 
-  options.externalCss.forEach((cssFile) => {
+  options.externalCss?.forEach((cssFile) => {
     const basename = path.basename(cssFile);
 
     // Avoid name collision
@@ -74,4 +75,20 @@ export function jestPreviewConfigure(
     });
     // }
   });
+
+  if (options.publicFolder) {
+    if (!fs.existsSync(CACHE_FOLDER)) {
+      fs.mkdirSync(CACHE_FOLDER, {
+        recursive: true,
+      });
+    }
+    fs.writeFileSync(
+      path.join(CACHE_FOLDER, 'cache-public.config'),
+      options.publicFolder,
+      {
+        encoding: 'utf-8',
+        flag: 'w',
+      },
+    );
+  }
 }

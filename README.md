@@ -129,6 +129,23 @@ jestPreviewConfigure({
 });
 ```
 
+### 5. (Optional) Configure public folder
+
+You don't need to do anything if your public folder is `public`. However, if it's different, you can configure as following:
+
+<!-- To add Common public directories as msw does
+ when we have a dedicated docs site. https://mswjs.io/docs/getting-started/integrate/browser#where-is-my-public-directory -->
+
+```js
+// ./config/jest/setupTests.js
+import { jestPreviewConfigure } from 'jest-preview';
+
+// Should be path from root of your project
+jestPreviewConfigure({
+  publicFolder: 'static', // No need to configure if `publicFolder` is `public`
+});
+```
+
 ## Usage
 
 ### 1. Update to `package.json`
@@ -253,6 +270,13 @@ npm run test
 ```
 
 Open chrome at http://localhost:3336 to see the preview
+
+However, it's recommend to run `jest` and `jest-preview` separately
+
+```bash
+npm run server # Run jest-preview server
+npm run test:only # Run jest
+```
 
 ## Contributors ✨
 

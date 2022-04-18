@@ -1,5 +1,6 @@
 import { defineConfig } from 'rollup';
 import typescript from 'rollup-plugin-typescript2';
+import { terser } from 'rollup-plugin-terser';
 
 function makeBundle({ filePath, dir = 'dist' }) {
   return {
@@ -8,7 +9,7 @@ function makeBundle({ filePath, dir = 'dist' }) {
       dir: dir,
       format: 'cjs',
     },
-    plugins: [typescript()],
+    plugins: [typescript(), terser()],
     external: ['path', 'camelcase'],
   };
 }
