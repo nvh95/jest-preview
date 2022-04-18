@@ -1,4 +1,4 @@
-const translate = () => {
+function translate(){
   return (
     <div>
       <h1>Let's Say Hello in many languages</h1>
