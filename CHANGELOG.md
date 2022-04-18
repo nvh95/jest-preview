@@ -2,7 +2,7 @@
 
 ## Fixes
 
-- Hotfix install command broken since `jest` might be installed after `jest-preview`, so we couldn't run `jest --clearCache`, that breaks user's installation.
+- Fix: `jest --clearCache` might break user's installation flow since `jest` might be installed after `jest-preview`.
 
 # 0.1.3
 
