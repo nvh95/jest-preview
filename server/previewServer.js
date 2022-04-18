@@ -144,6 +144,8 @@ preview.debug();
 <head>
   <link rel="shortcut icon" href="${FAV_ICON_PATH}">
   <title>Jest Preview Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
 ${css}
 </head>
 <body>
