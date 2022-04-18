@@ -53,6 +53,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "nottyo",
+      "name": "Traitanit Huangsri",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8110002?v=4",
+      "profile": "https://www.linkedin.com/in/traitanit-huangsri-8701b291/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
