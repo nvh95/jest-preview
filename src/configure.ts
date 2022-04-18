@@ -1,15 +1,14 @@
 import path from 'path';
 import fs from 'fs';
-import { CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG } from './constants';
+import { CACHE_FOLDER } from './constants';
 
 interface JestPreviewConfigOptions {
   externalCss: string[];
-  sassLoadPaths: string[];
   publicFolder?: string;
 }
 
 export async function jestPreviewConfigure(
-  options: JestPreviewConfigOptions = { externalCss: [], sassLoadPaths: [] },
+  options: JestPreviewConfigOptions = { externalCss: [] },
 ) {
   if (!fs.existsSync('./node_modules/.cache/jest-preview-dom')) {
     fs.mkdirSync('./node_modules/.cache/jest-preview-dom', {
@@ -21,50 +20,36 @@ export async function jestPreviewConfigure(
     const basename = path.basename(cssFile);
 
     // Avoid name collision
-    // Add `global` to let `jest-preview` server that we want to cache those files
-    const destinationBasename = `cache-${basename}`;
+    // Example: src/common/styles.css => cache-src___common___styles.css
+    const delimiter = '___';
+    const destinationBasename = `cache-${basename.replace('/', delimiter)}`;
     const destinationFile = path.join(CACHE_FOLDER, destinationBasename);
 
-    // If sass file is passed, we need to transform it to css
+    // Create cache folder if it doesn't exist
+    if (!fs.existsSync(CACHE_FOLDER)) {
+      fs.mkdirSync(CACHE_FOLDER, {
+        recursive: true,
+      });
+    }
+
+    // If sass file is included, we need to transform it to css
     if (cssFile.endsWith('.scss') || cssFile.endsWith('.sass')) {
-      const sass = require('sass');
+      const { exec } = require('child_process');
 
-      // Create cache folder if it doesn't exist
-      if (!fs.existsSync(CACHE_FOLDER)) {
-        fs.mkdirSync(CACHE_FOLDER, {
-          recursive: true,
-        });
-      }
-
-      let sassLoadPaths: string[] = [];
-      // Save sassLoadPaths to cache, so we can use it in the transformer
-      if (options.sassLoadPaths) {
-        sassLoadPaths = options.sassLoadPaths.map(
-          (path) => `${process.cwd()}/${path}`,
-        );
-
-        fs.writeFileSync(
-          path.join(CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG),
-          JSON.stringify(sassLoadPaths),
-        );
-      }
-      const sassFile = fs.readFileSync(cssFile, 'utf8');
-      // Transform sass to css
-      const cssFileFullPath = path.join(process.cwd(), cssFile);
-      console.log('cssFileFullPath', cssFileFullPath);
-      // TODO: Jest hang there, output
-      // TypeError: Cannot read property '_location' of null
-      // at Window.get location [as location] (node_modules/jsdom/lib/jsdom/browser/Window.js:375:79)
-      // I suspect there is something different regarding environment in `configure.ts` and `transform.ts`
-      const cssResult = sass.compile(cssFileFullPath, {
-        // loadPaths: sassLoadPaths,
-      }).css;
-      console.log('cssResult', cssResult);
       const cssDestinationFile = destinationFile.replace(
         /\.(scss|sass)$/,
         '.css',
       );
-      fs.writeFileSync(cssDestinationFile, cssResult);
+
+      // Transform sass to css and save to cache folder
+      exec(
+        `./node_modules/.bin/sass ${cssFile} ${cssDestinationFile} --no-source-map`,
+        (err: any) => {
+          if (err) {
+            console.log(err);
+          }
+        },
+      );
       return;
     }
 

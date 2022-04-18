@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import camelcase from 'camelcase';
-import { CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG } from './constants';
 
 function getRelativeFilename(filename: string): string {
   return filename.split(process.cwd())[1];
@@ -121,25 +120,16 @@ module.exports = exportedTokens;`;
 }
 
 function processSass(src: string, filename: string): string {
-  const sass = require('sass');
+  let sass;
 
-  const sassLoadPathsConfigPath = path.join(
-    CACHE_FOLDER,
-    SASS_LOAD_PATHS_CONFIG,
-  );
-  let sassLoadPaths: string[];
-
-  if (fs.existsSync(sassLoadPathsConfigPath)) {
-    const sassLoadPathsString = fs
-      .readFileSync(path.join(CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG), 'utf8')
-      .trim();
-    sassLoadPaths = JSON.parse(sassLoadPathsString);
-  } else {
-    sassLoadPaths = [];
+  try {
+    sass = require('sass');
+  } catch (err) {
+    console.log(err);
+    return `module.exports = ${JSON.stringify(src)};`;
   }
-  const cssResult = sass.compile(filename, {
-    // loadPaths: sassLoadPaths,
-  }).css;
+
+  const cssResult = sass.compile(filename).css;
 
   return `const style = document.createElement('style');
 style.appendChild(document.createTextNode(${JSON.stringify(cssResult)}));
