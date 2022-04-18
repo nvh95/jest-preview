@@ -1,3 +1,20 @@
+# 0.1.3
+
+## Features
+
+- Support serving files from Public folder
+- Clear Jest cache after installation
+
+## Fixes
+
+- Update rollup to:
+  - Terser
+  - Transpile to ES2019 (e.g: optional chaining)
+
+## Chores
+
+- Export `debug` as named also.
+
 # 0.1.2
 
 ## Features

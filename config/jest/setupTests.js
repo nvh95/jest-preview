@@ -3,6 +3,7 @@ import { jestPreviewConfigure } from '../../dist/index';
 
 jestPreviewConfigure({
   externalCss: ['demo/global.css'],
+  publicFolder: 'demo/public',
 });
 
 window.matchMedia = (query) => ({
