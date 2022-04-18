@@ -1,4 +1,4 @@
-function translate(){
+function Translate(){
   return (
     <div>
       <h1>Let's Say Hello in many languages</h1>
@@ -11,4 +11,4 @@ function translate(){
   )
 }
 
-export default translate;
+export default Translate;
