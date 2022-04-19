@@ -95,6 +95,17 @@ app.use((req, res, next) => {
     const newPath = path.join(publicFolder, req.url);
     if (fs.existsSync(newPath)) {
       req.url = newPath;
+    } else {
+      // Cannot find the file, warns user about it
+      // Likely user has old Jest cached code transformations.
+      // Or just a bug in their source code
+      console.log('[WARN] File not found: ', req.url);
+      console.log(`[WARN] Please check if ${req.url} is existed.`);
+      console.log(
+        `[WARN] If it is existed, likely you forget to setup the code transformation, or you haven't flushed the old cache yet. Try to run "./node_modules/.bin/jest --clearCache" to clear the cache.\n`,
+      );
+      // TODO: To send those warning to browser as an overlay/ toast, the idea is similar to https://www.npmjs.com/package/vite-plugin-checker
+      // TODO: Known issue: in development, we can't find `favicon.ico` yet. So it will yell in the Preview Server logs
     }
   }
   serve(req, res, next);
