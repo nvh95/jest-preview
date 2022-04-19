@@ -3,6 +3,7 @@ import fs from 'fs';
 import { exec } from 'child_process';
 
 import { CACHE_FOLDER } from './constants';
+import { createCacheFolderIfNeeded } from './utils';
 
 interface JestPreviewConfigOptions {
   externalCss: string[];
@@ -25,12 +26,7 @@ export async function jestPreviewConfigure(
     const destinationBasename = `cache-${cssFile.replace(/\//g, delimiter)}`;
     const destinationFile = path.join(CACHE_FOLDER, destinationBasename);
 
-    // Create cache folder if it doesn't exist
-    if (!fs.existsSync(CACHE_FOLDER)) {
-      fs.mkdirSync(CACHE_FOLDER, {
-        recursive: true,
-      });
-    }
+    createCacheFolderIfNeeded();
 
     // If sass file is included, we need to transform it to css
     if (cssFile.endsWith('.scss') || cssFile.endsWith('.sass')) {
@@ -40,6 +36,10 @@ export async function jestPreviewConfigure(
       );
 
       // Transform sass to css and save to cache folder
+      // We use exec instead of sass.compile because running sass.compile in jsdom environment cause unexpected behavior
+      // What we encountered is that filename is automatically added `http://localhost` as the prefix
+      // Example: style.scss => http://localhost/style.scss
+      // As a result, sass.compile cannot find the file
       exec(
         `./node_modules/.bin/sass ${cssFile} ${cssDestinationFile} --no-source-map`,
         (err: any) => {
@@ -66,11 +66,7 @@ export async function jestPreviewConfigure(
   });
 
   if (options.publicFolder) {
-    if (!fs.existsSync(CACHE_FOLDER)) {
-      fs.mkdirSync(CACHE_FOLDER, {
-        recursive: true,
-      });
-    }
+    createCacheFolderIfNeeded();
     fs.writeFileSync(
       path.join(CACHE_FOLDER, 'cache-public.config'),
       options.publicFolder,
