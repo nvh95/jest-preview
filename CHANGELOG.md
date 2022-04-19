@@ -1,3 +1,9 @@
+# 0.1.4
+
+## Fixes
+
+- Fix: `jest --clearCache` might break user's installation flow since `jest` might be installed after `jest-preview`.
+
 # 0.1.3
 
 ## Features
