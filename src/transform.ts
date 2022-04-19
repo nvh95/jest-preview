@@ -126,7 +126,7 @@ function processSass(src: string, filename: string): string {
     sass = require('sass');
   } catch (err) {
     console.log(err);
-    return `module.exports = ${JSON.stringify(src)};`;
+    return `module.exports = ${JSON.stringify(filename)};`;
   }
 
   const cssResult = sass.compile(filename).css;
