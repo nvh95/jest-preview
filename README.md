@@ -59,6 +59,20 @@ describe('App', () => {
 });
 ```
 
+Or:
+
+```diff
++import { debug } from 'jest-preview';
+
+describe('App', () => {
+  it('should work as expected', () => {
+    render(<App />);
+
++    debug();
+  });
+});
+```
+
 ## Examples
 
 - Use with [Vite](https://vitejs.dev/): [Example with Vite](https://github.com/nvh95/jest-preview/tree/main/examples/vite-react)
