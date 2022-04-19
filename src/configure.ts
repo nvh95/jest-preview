@@ -1,5 +1,7 @@
 import path from 'path';
 import fs from 'fs';
+import { exec } from 'child_process';
+
 import { CACHE_FOLDER } from './constants';
 
 interface JestPreviewConfigOptions {
@@ -17,12 +19,10 @@ export async function jestPreviewConfigure(
   }
 
   options.externalCss?.forEach((cssFile) => {
-    const basename = path.basename(cssFile);
-
     // Avoid name collision
     // Example: src/common/styles.css => cache-src___common___styles.css
     const delimiter = '___';
-    const destinationBasename = `cache-${basename.replace('/', delimiter)}`;
+    const destinationBasename = `cache-${cssFile.replace(/\//g, delimiter)}`;
     const destinationFile = path.join(CACHE_FOLDER, destinationBasename);
 
     // Create cache folder if it doesn't exist
@@ -34,8 +34,6 @@ export async function jestPreviewConfigure(
 
     // If sass file is included, we need to transform it to css
     if (cssFile.endsWith('.scss') || cssFile.endsWith('.sass')) {
-      const { exec } = require('child_process');
-
       const cssDestinationFile = destinationFile.replace(
         /\.(scss|sass)$/,
         '.css',
