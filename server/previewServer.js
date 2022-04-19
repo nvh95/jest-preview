@@ -13,6 +13,7 @@ const sirv = require('sirv');
 const app = connect();
 const chokidar = require('chokidar');
 const { openBrowser } = require('./browser');
+const { WebSocketServer } = require('ws');
 
 const port = process.env.PORT || 3336;
 // TODO: Can we reuse `port`, I think Vite they can do that
@@ -20,37 +21,58 @@ const port = process.env.PORT || 3336;
 // TODO: Increase port by 1 is not a good strategy, we should check if it's also available
 const wsPort = Number(port) + 1;
 
-// Websocket server
-const { WebSocketServer } = require('ws');
-
 const CACHE_DIRECTORY = './node_modules/.cache/jest-preview-dom';
-const HTML_PATH = path.join(CACHE_DIRECTORY, 'index.html');
+const HTML_BASENAME = 'index.html';
+const HTML_PATH = path.join(CACHE_DIRECTORY, HTML_BASENAME);
+const PUBLIC_CONFIG_BASENAME = 'cache-public.config';
+const PUBLIC_CONFIG_PATH = path.join(CACHE_DIRECTORY, PUBLIC_CONFIG_BASENAME);
 const FAV_ICON_PATH = './node_modules/jest-preview/server/favicon.ico';
+
+// Always set default public folder to `public` if not specified
+let publicFolder = 'public';
+
+if (fs.existsSync(PUBLIC_CONFIG_PATH)) {
+  publicFolder = fs.readFileSync(PUBLIC_CONFIG_PATH, 'utf8').trim();
+}
 
 const wss = new WebSocketServer({ port: wsPort });
 
 wss.on('connection', function connection(ws) {
   ws.on('message', function message(data) {
     console.log('received: %s', data);
+    try {
+      const dataJSON = JSON.parse(data);
+      if (dataJSON.type === 'publicFolder') {
+        publicFolder = dataJSON.payload;
+      }
+    } catch (error) {
+      console.error(error);
+    }
   });
 });
 
-const watcher = chokidar.watch(HTML_PATH, {
+const watcher = chokidar.watch([HTML_PATH, PUBLIC_CONFIG_PATH], {
   // ignored: ['**/node_modules/**', '**/.git/**'],
   ignoreInitial: true,
   ignorePermissionErrors: true,
   disableGlobbing: true,
 });
 
-function handleFileChange() {
-  wss.clients.forEach((client) => {
-    if (client.readyState === 1) {
-      client.send(JSON.stringify({ type: 'reload' }));
-    }
-  });
+function handleFileChange(filePath) {
+  const basename = path.basename(filePath);
+  if (basename === HTML_BASENAME) {
+    wss.clients.forEach((client) => {
+      if (client.readyState === 1) {
+        client.send(JSON.stringify({ type: 'reload' }));
+      }
+    });
+  }
+
+  if (basename === PUBLIC_CONFIG_BASENAME) {
+    publicFolder = fs.readFileSync(PUBLIC_CONFIG_PATH, 'utf8').trim();
+  }
 }
 
-// TODO: Do we need to unregister?
 watcher
   .on('change', handleFileChange)
   .on('add', handleFileChange)
@@ -65,6 +87,15 @@ app.use((req, res, next) => {
   // Do not serve index
   if (req.url === '/') {
     return next();
+  }
+
+  // Check if req.url is existed, if not, look up in public directory
+  const filePath = path.join('.', req.url);
+  if (!fs.existsSync(filePath)) {
+    const newPath = path.join(publicFolder, req.url);
+    if (fs.existsSync(newPath)) {
+      req.url = newPath;
+    }
   }
   serve(req, res, next);
 });
@@ -113,6 +144,8 @@ preview.debug();
 <head>
   <link rel="shortcut icon" href="${FAV_ICON_PATH}">
   <title>Jest Preview Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
 ${css}
 </head>
 <body>
@@ -136,6 +169,6 @@ server.listen(port, () => {
     });
   }
 
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Jest Preview Server listening on port ${port}`);
   openBrowser(`http://localhost:${port}`);
 });

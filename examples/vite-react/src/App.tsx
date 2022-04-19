@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import logo from './logo.svg';
 import logo2 from './assets/images/logo.svg';
 
 import './App.css';
@@ -14,7 +13,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src="/logo.svg" className="App-logo" alt="logo" />
         <img src={logo2} className="logo2" alt="logo2" />
         <p>Vite Example</p>
         <StyledText>This text is styled by styled-components</StyledText>

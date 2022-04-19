@@ -1,12 +1,17 @@
 import path from 'path';
 import fs from 'fs';
 
+const CACHE_FOLDER = './node_modules/.cache/jest-preview-dom';
+
 interface JestPreviewConfigOptions {
-  externalCss: string[];
+  externalCss?: string[];
+  publicFolder?: string;
 }
 
-export function jestPreviewConfigure(
-  options: JestPreviewConfigOptions = { externalCss: [] },
+export async function jestPreviewConfigure(
+  options: JestPreviewConfigOptions = {
+    externalCss: [],
+  },
 ) {
   if (!fs.existsSync('./node_modules/.cache/jest-preview-dom')) {
     fs.mkdirSync('./node_modules/.cache/jest-preview-dom', {
@@ -14,7 +19,7 @@ export function jestPreviewConfigure(
     });
   }
 
-  options.externalCss.forEach((cssFile) => {
+  options.externalCss?.forEach((cssFile) => {
     const basename = path.basename(cssFile);
     // Avoid name collision
     // Add `global` to let `jest-preview` server that we want to cache those files
@@ -36,4 +41,20 @@ export function jestPreviewConfigure(
     });
     // }
   });
+
+  if (options.publicFolder) {
+    if (!fs.existsSync(CACHE_FOLDER)) {
+      fs.mkdirSync(CACHE_FOLDER, {
+        recursive: true,
+      });
+    }
+    fs.writeFileSync(
+      path.join(CACHE_FOLDER, 'cache-public.config'),
+      options.publicFolder,
+      {
+        encoding: 'utf-8',
+        flag: 'w',
+      },
+    );
+  }
 }
