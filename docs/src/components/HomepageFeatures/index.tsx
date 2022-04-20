@@ -10,40 +10,52 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
-    description: (
-      <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
-      </>
-    ),
-  },
-  {
-    title: 'Focus on What Matters',
+    title: 'DX-Driven',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Jest Preview has a mission: To make front end developers' life easier.
+        It's built with the mindset of <strong>Developer Experience</strong>{' '}
+        first in mind.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Fast',
+    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    description: (
+      <>
+        Write tests in Jest and see the changes reflects in browser in{' '}
+        <strong>a few milliseconds</strong>.
+      </>
+    ),
+  },
+
+  {
+    title: 'Framework-Agnostic',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        You can use Jest Preview with <strong>any testing libraries</strong> and{' '}
+        <strong>frontend frameworks</strong>.
+      </>
+    ),
+  },
+  {
+    title: 'Productivity',
+    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    description: (
+      <>
+        Don't waste time guessing what is your UI looks like. Let's Jest Preview{' '}
+        <strong>visualize</strong> it in a browser for you!
       </>
     ),
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({ title, Svg, description }: FeatureItem) {
   return (
-    <div className={clsx('col col--4')}>
+    <div className={clsx('col col--3')}>
       <div className="text--center">
         <Svg className={styles.featureSvg} role="img" />
       </div>

@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Jest Preview',
   tagline: 'Debug your Jest tests. Effortlessly. 🛠🖼',
-  url: 'https://github.com/nvh95/jest-preview',
+  url: 'https://www.jest-preview.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -23,18 +23,16 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // TODO
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: 'https://github.com/nvh95/jest-preview/edit/main/docs/',
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
-          // TODO
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: 'https://github.com/nvh95/jest-preview/edit/main/docs/',
         },
+        // api: {
+        //   showReadingTime: true,
+        //   editUrl: 'https://github.com/nvh95/jest-preview/edit/main/docs/',
+        // },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -54,11 +52,18 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'getting-started/intro',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Docs',
           },
           { to: '/blog', label: 'Blog', position: 'left' },
+          { to: '/api/core/preview-debug', label: 'API', position: 'left' },
+          {
+            href: 'https://stackblitz.com/edit/jest-preview?file=README.md',
+            label: 'Demo',
+            position: 'left',
+          },
+          { to: '/contributors', label: 'Contributors', position: 'left' },
           {
             href: 'https://github.com/nvh95/jest-preview',
             label: 'GitHub',
@@ -74,7 +79,7 @@ const config = {
             items: [
               {
                 label: 'Tutorial',
-                to: '/docs/intro',
+                to: '/docs/getting-started',
               },
             ],
           },
