@@ -32,7 +32,6 @@ You can try Jest Preview right on the browser without installing or cloning anyt
 describe('App', () => {
   it('should work as expected', () => {
     render(<App />);
-
 +    preview.debug();
   });
 });
@@ -46,7 +45,6 @@ Or:
 describe('App', () => {
   it('should work as expected', () => {
     render(<App />);
-
 +    debug();
   });
 });
