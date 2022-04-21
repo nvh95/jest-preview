@@ -1,9 +1,9 @@
 import { processFile, processFileCRA, processCss } from './transform';
 import { debug } from './preview';
 import { jestPreviewConfigure } from './configure';
-import { enableJestPreview } from './next';
+import { configureNextJest } from './next';
 
-export { jestPreviewConfigure, processCss, processFile, processFileCRA, debug, enableJestPreview };
+export { jestPreviewConfigure, processCss, processFile, processFileCRA, debug, configureNextJest };
 export default {
   debug,
 };

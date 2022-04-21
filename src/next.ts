@@ -1,6 +1,6 @@
 import type { Config } from '@jest/types';
 
-export async function enableJestPreview(
+export async function configureNextJest(
   createFinalJestConfig: () => Promise<Config.InitialOptions>,
 ) {
   const config = await createFinalJestConfig();

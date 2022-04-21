@@ -18,7 +18,7 @@ Install Jest Preview
 npm install --save-dev jest-preview
 ```
 
-Enable Jest Preview inside `jest.config.js`. Note that the Jest config object returned by `enableJestPreview` shouldn't be modified any further.
+Enable Jest Preview inside `jest.config.js`. Note that the Jest config object returned by `configureNextJest` shouldn't be modified any further.
 
 ```diff
   module.exports = {
