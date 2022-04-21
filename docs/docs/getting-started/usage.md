@@ -2,46 +2,63 @@
 sidebar_position: 6
 ---
 
-# Installation
+# Usage
 
-Let's discover **Docusaurus in less than 5 minutes**.
+### 1. Update to `package.json`
 
-## Getting Started
-
-Get started by **creating a new site**.
-
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
-
-### What you'll need
-
-- [Node.js](https://nodejs.org/en/download/) version 14 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
-
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
+```json
+{
+  "scripts": {
+    "jest-preview": "jest-preview"
+  }
+}
 ```
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+Optionally, you can use `npm-run-all` to run jest and `jest-preview` server in parallel
 
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
+```json
+{
+  "scripts": {
+    "test:debug": "npm-run-all -p test jest-preview"
+  },
+  "devDependencies": {
+    "npm-run-all": "latest"
+  }
+}
 ```
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+### 2. Run the `jest-preview` server
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+```bash
+# You can use PORT to customize port, default to 3336
+npm run jest-preview
+# Or
+yarn jest-preview
+pnpm run jest-preview
+```
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+### 3. Preview your html from jest. Following code demo how to use it with [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/)
+
+```javascript
+import preview from 'jest-preview';
+
+describe('App', () => {
+  it('should work as expected', () => {
+    render(<App />);
+
+    userEvent.click(screen.getByTestId('increase'));
+    userEvent.click(screen.getByTestId('increase'));
+
+    // Open http://localhost:3336 to see the preview
+    preview.debug();
+
+    expect(screen.getByTestId('count')).toContainHTML('2');
+  });
+});
+```
+
+Then visit http://localhost:3336 to see the preview
+
+<p align="center">
+  <img alt="Preview your jest test in the browser" src="https://user-images.githubusercontent.com/8603085/161393898-7e283e38-6114-4064-9414-a0ce6d52361d.png" width="600" />
+</p>

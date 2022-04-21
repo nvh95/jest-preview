@@ -24,6 +24,7 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/nvh95/jest-preview/edit/main/docs/',
+          sidebarCollapsed: false,
         },
         blog: {
           showReadingTime: true,
@@ -57,13 +58,14 @@ const config = {
             label: 'Docs',
           },
           { to: '/blog', label: 'Blog', position: 'left' },
-          { to: '/api/core/preview-debug', label: 'API', position: 'left' },
+          { to: '/docs/api/preview-debug', label: 'API', position: 'left' },
           {
             href: 'https://stackblitz.com/edit/jest-preview?file=README.md',
             label: 'Demo',
             position: 'left',
           },
-          { to: '/contributors', label: 'Contributors', position: 'left' },
+          // TODO: To add as a blog
+          // { to: '/contributors', label: 'Contributors', position: 'left' },
           {
             href: 'https://github.com/nvh95/jest-preview',
             label: 'GitHub',

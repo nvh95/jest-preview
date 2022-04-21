@@ -4,44 +4,50 @@ sidebar_position: 1
 
 # Introduction
 
-Let's discover **Docusaurus in less than 5 minutes**.
+## Why Jest Preview
 
-## Getting Started
+When writing tests using Jest, we usually debug by reading the HTML code. Sometimes the HTML is too complex and it's hard to imagine how the UI looks in our head. `jest-preview` initiates a server and serve your HTML in a browser, then you can see your actual UI visually. This way, it helps you debug jest tests faster.
 
-Get started by **creating a new site**.
+`jest-preview` is initially design to work with [jest](https://jestjs.io/) and [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/). However it's framework-agnostic and you can use it with any testing libraries.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+## What does it look like to use Jest Preview
 
-### What you'll need
+<p align="center">
+  <img align="center" src="https://user-images.githubusercontent.com/8603085/162563155-7e18c9ef-4fe3-45f2-9065-7fcea8ddb18e.gif" alt="Jest Preview Demo" />
+</p>
 
-- [Node.js](https://nodejs.org/en/download/) version 14 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+## Online Demo
 
-## Generate a new site
+You can try Jest Preview right on the browser without installing or cloning anything, thanks to [StackBlitz](https://stackblitz.com/):
 
-Generate a new Docusaurus site using the **classic template**.
+<p align="center">
+  <a href="https://stackblitz.com/edit/jest-preview?file=README.md" title="Try Jest Preview Now">Try Jest Preview Online. No downloads needed!</a>. 
+</p>
 
-The classic template will automatically be added to your project after you run the command:
+## How to use `jest-preview` in 2 lines of code
 
-```bash
-npm init docusaurus@latest my-website classic
+```diff
++import preview from 'jest-preview';
+
+describe('App', () => {
+  it('should work as expected', () => {
+    render(<App />);
+
++    preview.debug();
+  });
+});
 ```
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+Or:
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+```diff
++import { debug } from 'jest-preview';
 
-## Start your site
+describe('App', () => {
+  it('should work as expected', () => {
+    render(<App />);
 
-Run the development server:
-
-```bash
-cd my-website
-npm run start
++    debug();
+  });
+});
 ```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.

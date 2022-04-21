@@ -43,7 +43,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Productivity',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    Svg: require('@site/static/img/undraw_docusaurus_productivity.svg').default,
     description: (
       <>
         Don't waste time guessing what is your UI looks like. Let's Jest Preview{' '}
