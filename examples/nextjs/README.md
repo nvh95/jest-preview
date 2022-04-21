@@ -8,7 +8,7 @@ This example demonstrates how to use `jest-preview` with `Next.js`, bootstrapped
 
 ## Install Jest
 
-Install Jest and your favorite testing libraries, if you haven't already done so. Refer to [Next.js's official document](https://nextjs.org/docs/testing). This example uses `react-testing-library`.
+Install Jest and your favorite testing libraries, if you haven't already done so. Refer to [Next.js's official document](https://nextjs.org/docs/testing#jest-and-react-testing-library). This example uses `react-testing-library`.
 
 ## Install & configure Jest Preview
 
