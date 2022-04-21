@@ -1,0 +1,7 @@
+@use 'partials/partial-style'; // Example using @use
+
+header {
+  .imported-sass {
+    color: pink;
+  }
+}

@@ -42,7 +42,7 @@ When writing tests using Jest, we usually debug by reading the HTML code. Someti
   - ✅ [Styled-components](https://styled-components.com/)
   - ✅ [External CSS](#4-optional-configure-external-css)
   - ✅ [CSS Modules](https://github.com/css-modules/css-modules)
-  - 🚧 [Sass](https://sass-lang.com/)
+  - ✅ [Sass](https://sass-lang.com/)
 - 🌄 Support viewing images.
 
 ## How to use `jest-preview` in 2 lines of code
@@ -91,13 +91,15 @@ pnpm install --dev jest-preview
 
 ### 2. Configure jest's transform to transform CSS and files
 
-`jest-preview` comes with pre-configured transformations to intercept CSS and files. This is a recommended way to configure. However, you can configure it yourself using exported transform functions as well. See [Advanced configurations](#advanced-configurations) for more.
+`jest-preview` comes with pre-configured transformations to handle CSS and files. This is a recommended way to configure. However, you can configure it yourself using exported transform functions as well. See [Advanced configurations](#advanced-configurations) for more.
+
+If you use [Sass](https://sass-lang.com/) in your project, make sure [sass](https://www.npmjs.com/package/sass) is already installed. Note that [Node Sass](https://www.npmjs.com/package/node-sass) and [LibSass](https://sass-lang.com/libsass) are [not supported](https://sass-lang.com/blog/libsass-is-deprecated).
 
 Update `jest.config.js`:
 
 ```js
 transform: {
-  "^.+\\.css$": "jest-preview/transforms/css",
+  "^.+\\.(css|scss|sass)$": "jest-preview/transforms/css",
   "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "jest-preview/transforms/file",
 }
 ```
@@ -147,7 +149,8 @@ import { jestPreviewConfigure } from 'jest-preview';
 jestPreviewConfigure({
   externalCss: [
     'demo/global.css',
-    'node_modules/@your-design-system/css/dist/index.min.css',
+    'demo/global.scss', // Sass
+    'node_modules/@your-design-system/css/dist/index.min.css', // css from node_modules
     'node_modules/bootstrap/dist/css/bootstrap.min.css',
   ],
 });

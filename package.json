@@ -1,6 +1,6 @@
 {
   "name": "jest-preview",
-  "version": "0.1.4",
+  "version": "0.1.5-alpha.0",
   "description": "Preview your HTML code while using Jest",
   "keywords": [
     "testing",
@@ -75,6 +75,7 @@
     "prettier": "^2.6.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "sass": "^1.50.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.70.1",
     "rollup-plugin-terser": "^7.0.2",

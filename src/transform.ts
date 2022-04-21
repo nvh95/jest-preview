@@ -1,3 +1,4 @@
+import fs from 'fs';
 import path from 'path';
 import camelcase from 'camelcase';
 
@@ -45,6 +46,9 @@ export function processFileCRA(src: string, filename: string): string {
 export function processCss(src: string, filename: string): string {
   if (filename.endsWith('.module.css')) {
     return processCSSModules(src, filename);
+  }
+  if (filename.endsWith('.scss') || filename.endsWith('.sass')) {
+    return processSass(src, filename);
   }
 
   const relativeFilename = getRelativeFilename(filename);
@@ -113,4 +117,22 @@ postcss(
 });
 
 module.exports = exportedTokens;`;
+}
+
+function processSass(src: string, filename: string): string {
+  let sass;
+
+  try {
+    sass = require('sass');
+  } catch (err) {
+    console.log(err);
+    return `module.exports = ${JSON.stringify(filename)};`;
+  }
+
+  const cssResult = sass.compile(filename).css;
+
+  return `const style = document.createElement('style');
+style.appendChild(document.createTextNode(${JSON.stringify(cssResult)}));
+document.body.appendChild(style);
+module.exports = {}`;
 }
