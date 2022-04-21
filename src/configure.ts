@@ -1,17 +1,17 @@
 import path from 'path';
 import fs from 'fs';
+import { exec } from 'child_process';
 
-const CACHE_FOLDER = './node_modules/.cache/jest-preview-dom';
+import { CACHE_FOLDER } from './constants';
+import { createCacheFolderIfNeeded } from './utils';
 
 interface JestPreviewConfigOptions {
-  externalCss?: string[];
+  externalCss: string[];
   publicFolder?: string;
 }
 
 export async function jestPreviewConfigure(
-  options: JestPreviewConfigOptions = {
-    externalCss: [],
-  },
+  options: JestPreviewConfigOptions = { externalCss: [] },
 ) {
   if (!fs.existsSync('./node_modules/.cache/jest-preview-dom')) {
     fs.mkdirSync('./node_modules/.cache/jest-preview-dom', {
@@ -20,14 +20,37 @@ export async function jestPreviewConfigure(
   }
 
   options.externalCss?.forEach((cssFile) => {
-    const basename = path.basename(cssFile);
     // Avoid name collision
-    // Add `global` to let `jest-preview` server that we want to cache those files
-    const destinationBasename = `cache-${basename}`;
-    const destinationFile = path.join(
-      './node_modules/.cache/jest-preview-dom',
-      destinationBasename,
-    );
+    // Example: src/common/styles.css => cache-src___common___styles.css
+    const delimiter = '___';
+    const destinationBasename = `cache-${cssFile.replace(/\//g, delimiter)}`;
+    const destinationFile = path.join(CACHE_FOLDER, destinationBasename);
+
+    createCacheFolderIfNeeded();
+
+    // If sass file is included, we need to transform it to css
+    if (cssFile.endsWith('.scss') || cssFile.endsWith('.sass')) {
+      const cssDestinationFile = destinationFile.replace(
+        /\.(scss|sass)$/,
+        '.css',
+      );
+
+      // Transform sass to css and save to cache folder
+      // We use exec instead of sass.compile because running sass.compile in jsdom environment cause unexpected behavior
+      // What we encountered is that filename is automatically added `http://localhost` as the prefix
+      // Example: style.scss => http://localhost/style.scss
+      // As a result, sass.compile cannot find the file
+      exec(
+        `./node_modules/.bin/sass ${cssFile} ${cssDestinationFile} --no-source-map`,
+        (err: any) => {
+          if (err) {
+            console.log(err);
+          }
+        },
+      );
+      return;
+    }
+
     // TODO: To move to load file directly instead of cloning them to `.cache`
     // Move together with transform
     // TODO: To cache those files. We cannot cache them by checking if files exists
@@ -43,11 +66,7 @@ export async function jestPreviewConfigure(
   });
 
   if (options.publicFolder) {
-    if (!fs.existsSync(CACHE_FOLDER)) {
-      fs.mkdirSync(CACHE_FOLDER, {
-        recursive: true,
-      });
-    }
+    createCacheFolderIfNeeded();
     fs.writeFileSync(
       path.join(CACHE_FOLDER, 'cache-public.config'),
       options.publicFolder,

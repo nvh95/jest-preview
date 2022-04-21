@@ -1,3 +1,8 @@
+# 0.1.5
+
+- Support non-english characters and responsive design.
+- Support Sass.
+
 # 0.1.4
 
 ## Fixes
@@ -20,6 +25,7 @@
 ## Chores
 
 - Export `debug` as named also.
+- Handle CSS Modules asynchronously.
 
 # 0.1.2
 

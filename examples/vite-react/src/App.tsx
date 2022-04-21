@@ -6,6 +6,7 @@ import logo2 from './assets/images/logo.svg';
 import './App.css';
 import './assets/css/App.css';
 
+import './assets/_scss/style.scss';
 import styles from './style.module.css';
 
 function App() {
@@ -18,7 +19,10 @@ function App() {
         <p>Vite Example</p>
         <StyledText>This text is styled by styled-components</StyledText>
         <p className={styles.green}>This text is styled by CSS Modules</p>
-
+        <p className="global-configured-sass">
+          This text is styled by global configured SASS
+        </p>
+        <p className="imported-sass">This text is styled by imported SASS</p>
         <p>
           <button
             data-testid="increase"

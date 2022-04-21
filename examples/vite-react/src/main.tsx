@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// TODO: Need an option for user to manually input css outside tested components
-import './index.css';
 import App from './App';
+
+import './index.css';
+import './assets/_scss/global-style.scss';
 
 ReactDOM.render(
   <React.StrictMode>
