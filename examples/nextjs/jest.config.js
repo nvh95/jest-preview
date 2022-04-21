@@ -20,5 +20,5 @@ const customJestConfig = {
 };
 
 // NOTE: `enableJestPreview` accepts the final configuration for Jest.
-// Modifying its return value before exporting might break its functionality.
+// Modifying its return value before exporting might break `jest-preview`.
 module.exports = enableJestPreview(createJestConfig(customJestConfig));

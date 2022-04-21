@@ -9,7 +9,7 @@
     "lint": "next lint",
     "test": "jest --watch",
     "jest-preview": "jest-preview",
-    "test:debug": "npm-run-all -p test jest-preview"
+    "test:preview": "npm-run-all -p test jest-preview"
   },
   "dependencies": {
     "next": "12.1.5",
