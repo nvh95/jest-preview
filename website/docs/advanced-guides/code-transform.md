@@ -4,7 +4,7 @@ sidebar_position: 5
 
 # Code transformation
 
-You should use [Pre-configured transformation](#2-configure-jests-transform-to-transform-css-and-files) in most cases. However, if you have existing code transformation, you can use following provided ones as follow:
+You should use [Pre-configured transformation](/docs/getting-started/installation#2-configure-jests-transform-to-transform-css-and-files) in most cases. However, if you have existing code transformation, you can use following provided ones as follow:
 
 - `processCss`: Process CSS files
 - `processFile`: Process files
