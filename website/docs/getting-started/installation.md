@@ -26,7 +26,7 @@ transform: {
 }
 ```
 
-For Create React App users, please use `jest-preview/transforms/fileCRA` instead of `jest-preview/transforms/file`. See more at [examples/create-react-app/README.md](./examples/create-react-app/README.md#installation-and-usage)
+For Create React App users, please use `jest-preview/transforms/fileCRA` instead of `jest-preview/transforms/file`. See more at [Create React App example](/docs/examples/create-react-app)
 
 ### 3. If you use CSS Modules, make sure it doesn't get ignored
 
