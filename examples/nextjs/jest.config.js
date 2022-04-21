@@ -12,11 +12,6 @@ const customJestConfig = {
   moduleDirectories: ['node_modules', '<rootDir>/'],
   testEnvironment: 'jest-environment-jsdom',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-  transform: {
-    '^.+\\.(css|scss|sass)$': 'jest-preview/transforms/css',
-    '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)':
-      'jest-preview/transforms/file',
-  },
 };
 
 // NOTE: `configureNextJest` accepts the final configuration for Jest.
