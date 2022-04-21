@@ -59,6 +59,20 @@ describe('App', () => {
 });
 ```
 
+Or:
+
+```diff
++import { debug } from 'jest-preview';
+
+describe('App', () => {
+  it('should work as expected', () => {
+    render(<App />);
+
++    debug();
+  });
+});
+```
+
 ## Examples
 
 - Use with [Vite](https://vitejs.dev/): [Example with Vite](https://github.com/nvh95/jest-preview/tree/main/examples/vite-react)
@@ -106,7 +120,17 @@ moduleNameMapper: {
 },
 ```
 
-### 4. (Optional) Configure external CSS
+### 4. Clear your jest Cache
+
+Since we are updating our transformation code, make sure you clear your jest cache for new changes to take effect.
+
+```bash
+./node_modules/.bin/jest --clearCache
+# Or usually
+npm run test -- --clearCache
+```
+
+### 5. (Optional) Configure external CSS
 
 Sometimes, there are some CSS files imported outside your current test components (e.g: CSS imported in `src/index.js`, `src/main.tsx`). In this case, you can manually add those CSS files to `jest-preview` by `jestPreviewConfigure`. Notice that they should be path from root of your project.
 
@@ -132,7 +156,7 @@ jestPreviewConfigure({
 });
 ```
 
-### 5. (Optional) Configure public folder
+### 6. (Optional) Configure public folder
 
 You don't need to do anything if your public folder is `public`. However, if it's different, you can configure as following:
 
