@@ -2,7 +2,7 @@
 
 This example demonstrates how to use `jest-preview` with `Next.js`, bootstrapped using `create-next-app`.
 
-⚠️ This example is only meant for Next.js apps using the new [Next.js compiler](https://nextjs.org/docs/advanced-features/compiler) (also called Rust compiler), available from Next.js 12.0.0 onward. If you use Next.js version 11 or below, or opt out of the Next.js compiler, please see the `nextjs-babel` example.
+⚠️ This example is meant for Next.js apps using the new [Next.js compiler](https://nextjs.org/docs/advanced-features/compiler) (also called Rust compiler), available from Next.js 12.0.0 onward. If you use Next.js version 11 or below, or opt out of the Next.js compiler, please see the [nextjs-babel](/examples/nextjs-babel) example.
 
 🚧 Next.js's `<Image />` component isn't working with Jest Preview yet.
 
@@ -18,7 +18,7 @@ Install Jest Preview
 npm install --save-dev jest-preview
 ```
 
-Enable Jest Preview inside `jest.config.js`. Note that `enableJestPreview` is an async function that accept another async function as its parameter. The Jest config object returned by `enableJestPreview` shouldn't be modified any further.
+Enable Jest Preview inside `jest.config.js`. Note that the Jest config object returned by `enableJestPreview` shouldn't be modified any further.
 
 ```diff
   const nextJest = require('next/jest')
@@ -57,9 +57,13 @@ Configure Jest Preview inside `jest.setup.js` (or any setup files) specified in 
 import { jestPreviewConfigure } from 'jest-preview';
 
 jestPreviewConfigure({
-  // An array of relative path from the root of your project
+  // An array of relative paths from the root of your project
   externalCss: [
     'styles/globals.css',
+    // SCSS is also supported
+    // 'demo/globals.scss',
+    // Any CSS from node_modules is fine
+    // 'node_modules/@your-design-system/css/dist/index.min.css',
   ],
 });
 ```

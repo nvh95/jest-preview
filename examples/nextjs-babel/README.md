@@ -18,7 +18,7 @@ Install Jest Preview
 npm install --save-dev jest-preview
 ```
 
-Enable Jest Preview inside `jest.config.js`. Note that `enableJestPreview` is an async function that accept another async function as its parameter. The Jest config object returned by `enableJestPreview` shouldn't be modified any further.
+Enable Jest Preview inside `jest.config.js`. Note that the Jest config object returned by `enableJestPreview` shouldn't be modified any further.
 
 ```diff
   module.exports = {
@@ -67,9 +67,13 @@ Configure Jest Preview inside `jest.setup.js` (or any setup files) specified in 
 import { jestPreviewConfigure } from 'jest-preview';
 
 jestPreviewConfigure({
-  // An array of relative path from the root of your project
+  // An array of relative paths from the root of your project
   externalCss: [
     'styles/globals.css',
+    // SCSS is also supported
+    // 'demo/globals.scss',
+    // Any CSS from node_modules is fine
+    // 'node_modules/@your-design-system/css/dist/index.min.css',
   ],
 });
 ```
