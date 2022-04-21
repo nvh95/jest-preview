@@ -1,5 +1,5 @@
-// jest.config.js
 const nextJest = require('next/jest');
+const { enableJestPreview } = require('jest-preview');
 
 const createJestConfig = nextJest({
   // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
@@ -19,19 +19,6 @@ const customJestConfig = {
   },
 };
 
-// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
-module.exports = async () => {
-  const createFinalJestConfig = createJestConfig(customJestConfig)
-  const config = await createFinalJestConfig();
-
-  // `config` should always be an object, but in case it isn't, to avoid
-  // any TypeError, a type check is included anyway.
-  if (typeof config === 'object') {
-    config.transformIgnorePatterns = config.transformIgnorePatterns.filter(pattern => pattern !== '^.+\\.module\\.(css|sass|scss)$');
-    delete config.moduleNameMapper['^.+\\.module\\.(css|sass|scss)$'];
-    delete config.moduleNameMapper['^.+\\.(css|sass|scss)$'];
-    delete config.moduleNameMapper['^.+\\.(png|jpg|jpeg|gif|webp|avif|ico|bmp|svg)$'];
-  }
-
-  return config;
-};
+// NOTE: `enableJestPreview` accepts the final configuration for Jest.
+// Modifying its return value before exporting might break its functionality.
+module.exports = enableJestPreview(createJestConfig(customJestConfig));
