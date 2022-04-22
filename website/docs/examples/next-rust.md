@@ -2,10 +2,14 @@
 sidebar_position: 4
 ---
 
-# Next with Rust config
+# Next with Next.js compiler (Rust compiler)
 
-TBD
+Available for Next.js version `12.0.0` or above.
 
-Reference: https://nextjs.org/docs/testing#setting-up-jest-with-the-rust-compiler
+## Integrate Jest and Jest Preview to your Next.js app
 
-See the progress here: https://github.com/nvh95/jest-preview/pull/60
+See more at [Next.js Example](https://github.com/nvh95/jest-preview/tree/main/examples/nextjs)
+
+## Caveats
+
+Next's `<Image />` component has yet to work with Jest Preview.

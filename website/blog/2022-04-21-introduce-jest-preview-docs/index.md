@@ -18,7 +18,7 @@ Hello everyone. It's been 17 days from the first version of [Jest Preview](https
 
 We're also working on [Sass](https://sass-lang.com/) and plan to release it in a couple of days.
 
-Jest Preview wants to be a "just work" library, it means users can just run `npm install jest-preview` and use it anyway. However, to view the actual app's UI in a browser, we need to configure it a bit. We did write some instructions in [README.md](https://github.com/nvh95/jest-preview/blob/main/README.md). But with the growing of project complexity and demands of adding new features, we decided to build a dedicated documentation site for [Jest Preview](https://www.npmjs.com/package/jest-preview). We are happy to announce that you can now access the documentation at [www.jest-preview.com](https://www.jest-preview.com).
+Jest Preview wants to be a "just work" library, it means users can just run `npm install --save-dev jest-preview` and use it right away. However, to view the actual app's UI in a browser, we need to configure it a bit. We did write some instructions in [README.md](https://github.com/nvh95/jest-preview/blob/main/README.md). But with the growing of project complexity and demands of adding new features, we decided to build a dedicated documentation site for [Jest Preview](https://www.npmjs.com/package/jest-preview). We are happy to announce that you can now access the documentation at [www.jest-preview.com](https://www.jest-preview.com).
 
 ![Jest Preview Homepage](./jest-preview-homepage.png)
 

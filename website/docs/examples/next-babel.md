@@ -4,8 +4,10 @@ sidebar_position: 3
 
 # Next with Babel config
 
-TBD
+## Integrate Jest and Jest Preview to your Next.js app
 
-Reference: https://nextjs.org/docs/testing#setting-up-jest-with-babel
+See more at [Next.js Babel Example](https://github.com/nvh95/jest-preview/tree/main/examples/nextjs-babel)
 
-See the progress here: https://github.com/nvh95/jest-preview/pull/60
+## Caveats
+
+Next's `<Image />` component has yet to work with Jest Preview.
