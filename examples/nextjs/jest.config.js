@@ -1,5 +1,5 @@
 const nextJest = require('next/jest');
-const { configureNextJest } = require('jest-preview');
+const { configureNextJestPreview } = require('jest-preview');
 
 const createJestConfig = nextJest({
   // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
@@ -14,6 +14,6 @@ const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 };
 
-// NOTE: `configureNextJest` accepts the final configuration for Jest.
+// NOTE: `configureNextJestPreview` accepts the final configuration for Jest.
 // Modifying its return value before exporting might break `jest-preview`.
-module.exports = configureNextJest(createJestConfig(customJestConfig));
+module.exports = configureNextJestPreview(createJestConfig(customJestConfig));

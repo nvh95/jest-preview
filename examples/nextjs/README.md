@@ -18,11 +18,11 @@ Install Jest Preview
 npm install --save-dev jest-preview
 ```
 
-Enable Jest Preview inside `jest.config.js`. Note that the Jest config object returned by `configureNextJest` shouldn't be modified any further.
+Enable Jest Preview inside `jest.config.js`. Note that the Jest config object returned by `configureNextJestPreview` shouldn't be modified any further.
 
 ```diff
   const nextJest = require('next/jest')
-+ const { configureNextJest } = require('jest-preview')
++ const { configureNextJestPreview } = require('jest-preview')
 
   const createJestConfig = nextJest({
     // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
@@ -41,9 +41,9 @@ Enable Jest Preview inside `jest.config.js`. Note that the Jest config object re
 
 - // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
 - module.exports = createJestConfig(customJestConfig)
-+ // NOTE: `configureNextJest` accepts the final configuration for Jest.
++ // NOTE: `configureNextJestPreview` accepts the final configuration for Jest.
 + // Modifying its return value before exporting might break `jest-preview`.
-+ module.exports = configureNextJest(createJestConfig(customJestConfig));
++ module.exports = configureNextJestPreview(createJestConfig(customJestConfig));
 ```
 
 Configure Jest Preview inside `jest.setup.js` (or any setup files) specified in your `setupFilesAfterEnv` config, so Jest Preview knows which global CSS file to load.

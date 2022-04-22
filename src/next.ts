@@ -1,11 +1,11 @@
 import type { Config } from '@jest/types';
 
-export async function configureNextJest(
+export async function configureNextJestPreview(
   createFinalJestConfig: () => Promise<Config.InitialOptions>,
 ) {
   const config = await createFinalJestConfig();
 
-  // Use transform from `jest-preview`
+  // Use transforms from `jest-preview`
   if (config.transform) {
     config.transform['^.+\\.(css|scss|sass)$'] = 'jest-preview/transforms/css';
     config.transform['^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)'] = 'jest-preview/transforms/file';
@@ -16,7 +16,7 @@ export async function configureNextJest(
       (pattern) => pattern !== '^.+\\.module\\.(css|sass|scss)$',
     );
   }
-  // Don't mock Module CSS, normal CSS or images
+  // Don't mock Module CSS/Sass/SCSS, normal CSS/Sass/SCSS, or images
   if (config.moduleNameMapper) {
     delete config.moduleNameMapper['^.+\\.module\\.(css|sass|scss)$'];
     delete config.moduleNameMapper['^.+\\.(css|sass|scss)$'];
