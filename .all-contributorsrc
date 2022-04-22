@@ -62,6 +62,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "thanhsonng",
+      "name": "Thanh Son Nguyen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/28614996?v=4",
+      "profile": "http://linkedin.com/in/thanhsonng",
+      "contributions": [
+        "code",
+        "example"
+      ]
     }
   ],
   "contributorsPerLine": 7,
