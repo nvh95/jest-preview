@@ -1,4 +1,13 @@
+# 0.1.6
+
+## Features
+
+- Add an adapter for [Next.js's Rust compiler for Jest](https://nextjs.org/docs/advanced-features/compiler#jest)
+- Add examples for and [Next Jest Rust Compiler](https://nextjs.org/docs/testing#setting-up-jest-with-the-rust-compiler) and [Next Jest Babel](https://nextjs.org/docs/testing#setting-up-jest-with-babel)
+
 # 0.1.5
+
+## Features
 
 - Support non-english characters and responsive design.
 - Support Sass.
