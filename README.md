@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">
-Jest Preview
+<a href="https://www.jest-preview.com/docs/getting-started/intro" target="_blank" >Jest Preview</a>
 </h1>
 
 <p align="center">
@@ -15,7 +15,7 @@ Debug your Jest tests. Effortlessly. 🛠🖼
 </p>
 
 <p align="center">
-  <a href="https://stackblitz.com/edit/jest-preview?file=README.md" title="Try Jest Preview Now">Try Jest Preview Online</a>. No downloads needed!
+  <a href="https://stackblitz.com/edit/jest-preview?file=README.md" title="Try Jest Preview Now" target="_blank">Try Jest Preview Online</a>. No downloads needed!
 </p>
 
 <!-- prettier-ignore-start -->
@@ -56,7 +56,6 @@ When writing tests using Jest, we usually debug by reading the HTML code. Someti
 describe('App', () => {
   it('should work as expected', () => {
     render(<App />);
-
 +    preview.debug();
   });
 });
@@ -70,7 +69,6 @@ Or:
 describe('App', () => {
   it('should work as expected', () => {
     render(<App />);
-
 +    debug();
   });
 });
