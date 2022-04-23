@@ -3,13 +3,14 @@ slug: sass-support
 title: Support Syntactically Awesome Style Sheets (Sass)
 authors: [ntt261298, nvh95]
 tags: [jest-preview, sass]
+image: /img/sass-support.png
 ---
 
 Another day, another feature added to [Jest Preview](https://www.npmjs.com/package/jest-preview). Today, we're adding support for [Sass](https://sass-lang.com/), thanks to the [awesome work](https://github.com/nvh95/jest-preview/pull/52) from [Truong Nguyen](https://github.com/ntt261298).
 
 Sass is one of the most popular CSS extension language in the ecosystem and is being used widely. From version [0.1.5](https://github.com/nvh95/jest-preview/releases/tag/v0.1.5), style written in Sass will be displayed in Jest Preview Dashboard.
 
-![Jest Preview supports Sass](./jest-supports-sass.png)
+![Jest Preview supports Sass](./jest-preview-supports-sass.png)
 
 You can even add Sass as an external CSS via [jestPreviewConfigure](/docs/api/jestPreviewConfigure). This is usually handy for stylesheet files imported in `src/index.js` or `src/main.js`.
 
