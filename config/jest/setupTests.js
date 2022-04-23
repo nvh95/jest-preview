@@ -2,7 +2,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { jestPreviewConfigure } from '../../dist/index';
 
 jestPreviewConfigure({
-  externalCss: ['demo/global.css'],
+  externalCss: ['demo/global.css', 'demo/assets/_scss/global-style.scss'],
   publicFolder: 'demo/public',
 });
 
