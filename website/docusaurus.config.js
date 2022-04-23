@@ -23,12 +23,12 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/nvh95/jest-preview/edit/main/docs/',
+          editUrl: 'https://github.com/nvh95/jest-preview/edit/main/website/',
           sidebarCollapsed: false,
         },
         blog: {
           showReadingTime: true,
-          editUrl: 'https://github.com/nvh95/jest-preview/edit/main/docs/',
+          editUrl: 'https://github.com/nvh95/jest-preview/edit/main/website/',
         },
         // api: {
         //   showReadingTime: true,

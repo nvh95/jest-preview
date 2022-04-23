@@ -11,5 +11,5 @@ sidebar_position: 2
   - ✅ [Styled-components](https://styled-components.com/)
   - ✅ [External CSS](#4-optional-configure-external-css)
   - ✅ [CSS Modules](https://github.com/css-modules/css-modules)
-  - 🚧 [Sass](https://sass-lang.com/)
+  - ✅ [Sass](https://sass-lang.com/)
 - 🌄 Support viewing images.
