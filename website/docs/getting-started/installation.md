@@ -21,7 +21,7 @@ Update `jest.config.js`:
 
 ```js
 transform: {
-  "^.+\\.css$": "jest-preview/transforms/css",
+  "^.+\\.(css|scss|sass)$": "jest-preview/transforms/css",
   "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "jest-preview/transforms/file",
 }
 ```
