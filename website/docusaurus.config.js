@@ -61,7 +61,7 @@ const config = {
             label: 'Docs',
           },
           { to: '/blog', label: 'Blog', position: 'left' },
-          { to: '/docs/api/preview-debug', label: 'API', position: 'left' },
+          { to: '/docs/api/debug', label: 'API', position: 'left' },
           {
             href: 'https://stackblitz.com/edit/jest-preview?file=README.md',
             label: 'Demo',
