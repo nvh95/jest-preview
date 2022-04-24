@@ -19,11 +19,11 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**Environment (please complete the following information):**
+**Environment (please complete the following information)**
 
 - OS: [e.g. macOS 12.2.1, Windows 11, Ubuntu 22.04]
-- Browser [e.g. chrome, safari]
-- Jest version [e.g. 27.5.1]
+- Browser: [e.g. chrome, safari]
+- Jest version: [e.g. 27.5.1]
 
 **Additional context**
 Add any other context about the problem here.
