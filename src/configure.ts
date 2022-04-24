@@ -4,15 +4,21 @@ import { exec } from 'child_process';
 
 import { CACHE_FOLDER } from './constants';
 import { createCacheFolderIfNeeded } from './utils';
+import { debug } from './preview';
 
 interface JestPreviewConfigOptions {
-  externalCss: string[];
+  externalCss?: string[];
+  autoPreview?: boolean;
   publicFolder?: string;
 }
 
 export async function jestPreviewConfigure(
-  options: JestPreviewConfigOptions = { externalCss: [] },
+  options: JestPreviewConfigOptions = { externalCss: [], autoPreview: true },
 ) {
+  // Always try to auto preview unless user choose not to
+  if (options.autoPreview !== false) {
+    autoPreview();
+  }
   if (!fs.existsSync(CACHE_FOLDER)) {
     fs.mkdirSync(CACHE_FOLDER, {
       recursive: true,
@@ -76,4 +82,25 @@ export async function jestPreviewConfigure(
       },
     );
   }
+}
+
+function autoPreview() {
+  console.log('hello');
+  const originalIt = it;
+  const newIt = function (name, callback, timeout) {
+    // TODO: Can we type correctly?
+    const newCallback: jest.ProvidesCallback = async (...args: any[]) => {
+      try {
+        console.log('callback');
+        // @ts-expect-error: Just need to overwrite `it`
+        return callback(...args);
+      } catch (error) {
+        debug();
+        throw error;
+      }
+    };
+    return originalIt(name, newCallback, timeout);
+  } as jest.It;
+  it = newIt;
+  test = newIt;
 }
