@@ -121,6 +121,10 @@ const config = {
                 label: 'GitHub',
                 href: 'https://github.com/nvh95/jest-preview',
               },
+              {
+                label: 'Discord',
+                href: 'https://discord.gg/X5PyPUfemh',
+              },
             ],
           },
         ],
