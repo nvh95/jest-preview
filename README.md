@@ -78,6 +78,8 @@ describe('App', () => {
 
 - Use with [Vite](https://vitejs.dev/): [Example with Vite](https://github.com/nvh95/jest-preview/tree/main/examples/vite-react)
 - Use with [Create React App](https://create-react-app.dev/): [Example with CRA](https://github.com/nvh95/jest-preview/tree/main/examples/create-react-app)
+- Use with [NextJs Rust Compiler](https://nextjs.org/docs/testing#setting-up-jest-with-the-rust-compiler): [Example with NextJs Rust Compiler](https://github.com/nvh95/jest-preview/tree/main/examples/nextjs)
+- Use with [NextJS Babel](https://nextjs.org/docs/testing#setting-up-jest-with-babel): [Example with CRA](https://github.com/nvh95/jest-preview/tree/main/examples/nextjs-babel)
 
 ## Installation
 
