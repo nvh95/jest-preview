@@ -6,7 +6,7 @@ sidebar_position: 1
 
 ## Why Jest Preview
 
-When writing tests using Jest, we usually debug by reading the HTML code. Sometimes the HTML is too complex and it's hard to imagine how the UI looks in our head. `jest-preview` initiates a server and serve your HTML in a browser, then you can see your actual UI visually. This way, it helps you debug jest tests faster.
+When writing tests using Jest, we usually debug by reading the HTML code. Sometimes the HTML is too complicated and it's hard to imagine how the UI looks in our head. `jest-preview` initiates a server and serve your HTML in a browser, then you can see your actual UI visually. This way, it helps you debug jest tests faster.
 
 `jest-preview` is initially design to work with [jest](https://jestjs.io/) and [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/). However it's framework-agnostic and you can use it with any testing libraries.
 
