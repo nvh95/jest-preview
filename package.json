@@ -28,6 +28,7 @@
   ],
   "scripts": {
     "docs": "cd website && npm run start",
+    "build:docs": "cd website && npm run build",
     "dev": "vite",
     "types": "tsc src/index.ts --declaration --emitDeclarationOnly --jsx react --esModuleInterop --outDir dist",
     "build": "rimraf dist && npm run build:only && npm run types",

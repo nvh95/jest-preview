@@ -32,8 +32,7 @@ Enable Jest Preview inside `jest.config.js`. Note that the Jest config object re
   // Add any custom config to be passed to Jest
   const customJestConfig = {
     // Add more setup options before each test is run
--   // setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-+   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+    setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
     // if using TypeScript with a baseUrl set to the root directory then you need the below for alias' to work
     moduleDirectories: ['node_modules', '<rootDir>/'],
     testEnvironment: 'jest-environment-jsdom',
@@ -68,17 +67,19 @@ jestPreviewConfigure({
 That's it! Now you can use Jest Preview in your test. Say we have `__tests__/index.test.tsx`:
 
 ```tsx
-import { render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react';
 import preview from 'jest-preview';
-import Home from '../pages/index'
-import '@testing-library/jest-dom'
+import Home from '../pages/index';
+import '@testing-library/jest-dom';
 
 it('should show welcome message', () => {
   render(<Home />);
 
   preview.debug();
 
-  expect(screen.getByRole('heading', { name: /welcome to next.js/i })).toBeInTheDocument();
+  expect(
+    screen.getByRole('heading', { name: /welcome to next.js/i }),
+  ).toBeInTheDocument();
 });
 ```
 
