@@ -11,7 +11,7 @@ module.exports = {
   modulePaths: ['<rootDir>/demo'],
   transform: {
     '^.+\\.(ts|js|tsx|jsx)$': '@swc/jest',
-    '^.+\\.css$': '<rootDir>/transforms/css',
+    '^.+\\.(css|scss|sass)$': '<rootDir>/transforms/css',
     '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|json)$)': '<rootDir>/transforms/file',
   },
   transformIgnorePatterns: [
