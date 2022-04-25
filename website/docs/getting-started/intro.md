@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: When writing tests using Jest, we usually debug by reading the HTML code. Sometimes the HTML is too complicated, Jest Preview help you to "see" your tests in a browser.
 ---
 
 # Introduction
