@@ -19,7 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test -- --config=jest.config.js",
+    "test": "node scripts/test.js",
     "test:nc": "npm run test -- --no-cache",
     "eject": "react-scripts eject",
     "jest-preview": "jest-preview",
