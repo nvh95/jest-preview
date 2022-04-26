@@ -22,4 +22,8 @@ export default defineConfig([
     filePath: 'src/preconfigTransform/fileCRA.ts',
     dir: 'transforms',
   }),
+  makeBundle({
+    filePath: 'src/preconfigTransform/babelCRA.ts',
+    dir: 'transforms',
+  }),
 ]);

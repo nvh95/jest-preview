@@ -19,7 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test -- --config=jest.config.js",
     "test:nc": "npm run test -- --no-cache",
     "eject": "react-scripts eject",
     "jest-preview": "jest-preview",
@@ -46,11 +46,5 @@
   "devDependencies": {
     "jest-preview": "file:../..",
     "npm-run-all": "^4.1.5"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.css$": "jest-preview/transforms/css",
-      "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "jest-preview/transforms/fileCRA"
-    }
   }
 }
