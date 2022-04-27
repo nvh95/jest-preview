@@ -7,9 +7,9 @@
 </h1>
 
 <p align="center">
-Debug your Jest tests. Effortlessly. 🛠🖼 
+Debug your Jest tests. Effortlessly. 🛠🖼
 </p>
-  
+
 <p align="center">
   <img align="center" src="https://user-images.githubusercontent.com/8603085/162563155-7e18c9ef-4fe3-45f2-9065-7fcea8ddb18e.gif" alt="Jest Preview Demo" />
 </p>
@@ -76,10 +76,10 @@ describe('App', () => {
 
 ## Examples
 
-- Use with [Vite](https://vitejs.dev/): [Example with Vite](https://github.com/nvh95/jest-preview/tree/main/examples/vite-react)
-- Use with [Create React App](https://create-react-app.dev/): [Example with CRA](https://github.com/nvh95/jest-preview/tree/main/examples/create-react-app)
-- Use with [NextJs Rust Compiler](https://nextjs.org/docs/testing#setting-up-jest-with-the-rust-compiler): [Example with NextJs Rust Compiler](https://github.com/nvh95/jest-preview/tree/main/examples/nextjs)
-- Use with [NextJS Babel](https://nextjs.org/docs/testing#setting-up-jest-with-babel): [Example with CRA](https://github.com/nvh95/jest-preview/tree/main/examples/nextjs-babel)
+- Use with [Vite](https://vitejs.dev/): [Example with Vite](https://www.jest-preview.com/docs/examples/vite-react)
+- Use with [Create React App](https://create-react-app.dev/): [Example with CRA](https://www.jest-preview.com/docs/examples/create-react-app)
+- Use with [NextJs Rust Compiler](https://nextjs.org/docs/testing#setting-up-jest-with-the-rust-compiler): [Example with NextJs Rust Compiler](https://www.jest-preview.com/docs/examples/next-rust)
+- Use with [NextJS Babel](https://nextjs.org/docs/testing#setting-up-jest-with-babel): [Example with CRA](https://www.jest-preview.com/docs/examples/next-babel)
 
 ## Installation
 
@@ -107,7 +107,7 @@ transform: {
 }
 ```
 
-For Create React App users, please use `jest-preview/transforms/fileCRA` instead of `jest-preview/transforms/file`. See more at [examples/create-react-app/README.md](./examples/create-react-app/README.md#installation-and-usage)
+For Create React App users, please use `jest-preview/transforms/fileCRA` instead of `jest-preview/transforms/file`. See more at the [Create React App example](https://www.jest-preview.com/docs/examples/create-react-app)
 
 ### 3. If you use CSS Modules, make sure it doesn't get ignored
 
