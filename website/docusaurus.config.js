@@ -135,6 +135,11 @@ const config = {
         darkTheme: darkCodeTheme,
       },
       image: 'img/social_image.png',
+      algolia: {
+        appId: 'GUSGTGYGR2',
+        apiKey: 'cf3e55e458b395eb8d21c2be25cef7f0',
+        indexName: 'jest-preview',
+      },
     }),
 };
 
