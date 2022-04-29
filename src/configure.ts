@@ -85,22 +85,28 @@ export async function jestPreviewConfigure(
 }
 
 function autoPreview() {
-  console.log('hello');
   const originalIt = it;
-  const newIt = function (name, callback, timeout) {
-    // TODO: Can we type correctly?
-    const newCallback: jest.ProvidesCallback = async (...args: any[]) => {
-      try {
-        console.log('callback');
-        // @ts-expect-error: Just need to overwrite `it`
-        return callback(...args);
-      } catch (error) {
-        debug();
-        throw error;
-      }
-    };
+  const newIt: jest.It = (name, callback, timeout) => {
+    const newCallback = callback
+      ? (((...args: Parameters<jest.ProvidesCallback>) => {
+          try {
+            // @ts-ignore
+            callback(...args);
+          } catch (error) {
+            debug();
+            throw error;
+          }
+        }) as jest.ProvidesCallback)
+      : undefined;
+
     return originalIt(name, newCallback, timeout);
-  } as jest.It;
+  };
+  newIt.each = originalIt.each;
+  newIt.only = originalIt.only;
+  newIt.skip = originalIt.skip;
+  newIt.todo = originalIt.todo;
+  newIt.concurrent = originalIt.concurrent;
+
   it = newIt;
   test = newIt;
 }
