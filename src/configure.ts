@@ -86,8 +86,8 @@ export async function jestPreviewConfigure(
 
 function autoPreview() {
   const originalIt = it;
-  const newIt: jest.It = (name, callback, timeout) => {
-    const newCallback = callback
+  const itWithPreview: jest.It = (name, callback, timeout) => {
+    const callbackWithPreview = callback
       ? (((...args: Parameters<jest.ProvidesCallback>) => {
           try {
             // @ts-ignore
@@ -99,14 +99,14 @@ function autoPreview() {
         }) as jest.ProvidesCallback)
       : undefined;
 
-    return originalIt(name, newCallback, timeout);
+    return originalIt(name, callbackWithPreview, timeout);
   };
-  newIt.each = originalIt.each;
-  newIt.only = originalIt.only;
-  newIt.skip = originalIt.skip;
-  newIt.todo = originalIt.todo;
-  newIt.concurrent = originalIt.concurrent;
+  itWithPreview.each = originalIt.each;
+  itWithPreview.only = originalIt.only;
+  itWithPreview.skip = originalIt.skip;
+  itWithPreview.todo = originalIt.todo;
+  itWithPreview.concurrent = originalIt.concurrent;
 
-  it = newIt;
-  test = newIt;
+  it = itWithPreview;
+  test = itWithPreview;
 }
