@@ -44,7 +44,7 @@
     "server:watch": "nodemon server/previewServer.js",
     "test:only": "NODE_ENV=test jest --watch --no-cache",
     "test:ci": "NODE_ENV=test jest",
-    "clearCache": "rimraf node_modules/.cache/jest-preview-dom && jest --clearCache",
+    "clearCache": "rimraf node_modules/.cache/jest-preview && jest --clearCache",
     "test": "npm-run-all -p server test:only",
     "prettier": "prettier server src --check",
     "prettier:fix": "npm run prettier -- --write",

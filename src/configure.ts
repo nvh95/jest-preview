@@ -13,8 +13,8 @@ interface JestPreviewConfigOptions {
 export async function jestPreviewConfigure(
   options: JestPreviewConfigOptions = { externalCss: [] },
 ) {
-  if (!fs.existsSync('./node_modules/.cache/jest-preview-dom')) {
-    fs.mkdirSync('./node_modules/.cache/jest-preview-dom', {
+  if (!fs.existsSync(CACHE_FOLDER)) {
+    fs.mkdirSync(CACHE_FOLDER, {
       recursive: true,
     });
   }
