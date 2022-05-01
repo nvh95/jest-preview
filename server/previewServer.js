@@ -21,7 +21,7 @@ const port = process.env.PORT || 3336;
 // TODO: Increase port by 1 is not a good strategy, we should check if it's also available
 const wsPort = Number(port) + 1;
 
-const CACHE_DIRECTORY = './node_modules/.cache/jest-preview-dom';
+const CACHE_DIRECTORY = './node_modules/.cache/jest-preview';
 const HTML_BASENAME = 'index.html';
 const HTML_PATH = path.join(CACHE_DIRECTORY, HTML_BASENAME);
 const PUBLIC_CONFIG_BASENAME = 'cache-public.config';
@@ -140,11 +140,11 @@ preview.debug();
   // For now I think it's not very important, but this is the room for improvement in next versions
   let css = '';
   // TODO: Do not need to construct css from files, since we can construct it from memory (client sends css files' location via websocket event)
-  const allFiles = fs.readdirSync('./node_modules/.cache/jest-preview-dom');
+  const allFiles = fs.readdirSync(CACHE_DIRECTORY);
   allFiles.forEach((file) => {
     if (file.endsWith('.css')) {
       css += `\n<style>${fs.readFileSync(
-        `./node_modules/.cache/jest-preview-dom/${path.basename(file)}`,
+        path.join(CACHE_DIRECTORY, path.basename(file)),
         'utf8',
       )}</style>`;
     }

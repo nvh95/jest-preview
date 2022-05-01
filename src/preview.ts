@@ -1,9 +1,11 @@
 import fs from 'fs';
+import path from 'path';
 import { getStyle } from './styled-components';
+import { CACHE_FOLDER } from './constants';
 
 export function debug(element: Element = document.body): void {
-  if (!fs.existsSync('./node_modules/.cache/jest-preview-dom')) {
-    fs.mkdirSync('./node_modules/.cache/jest-preview-dom', {
+  if (!fs.existsSync(CACHE_FOLDER)) {
+    fs.mkdirSync(CACHE_FOLDER, {
       recursive: true,
     });
   }
@@ -12,7 +14,7 @@ export function debug(element: Element = document.body): void {
   if (getStyle) {
     // TODO: We can send this data via websocket instead of writing to disk
     fs.writeFileSync(
-      './node_modules/.cache/jest-preview-dom/jp-styled-components.css',
+      path.join(CACHE_FOLDER, 'jp-styled-components.css'),
       getStyle(),
       {
         encoding: 'utf-8',
@@ -21,12 +23,8 @@ export function debug(element: Element = document.body): void {
     );
   }
 
-  fs.writeFileSync(
-    './node_modules/.cache/jest-preview-dom/index.html',
-    element.outerHTML,
-    {
-      encoding: 'utf-8',
-      flag: 'w',
-    },
-  );
+  fs.writeFileSync(path.join(CACHE_FOLDER, 'index.html'), element.outerHTML, {
+    encoding: 'utf-8',
+    flag: 'w',
+  });
 }
