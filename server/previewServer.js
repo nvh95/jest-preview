@@ -144,7 +144,7 @@ preview.debug();
   allFiles.forEach((file) => {
     if (file.endsWith('.css')) {
       css += `\n<style>${fs.readFileSync(
-        `${CACHE_DIRECTORY}/${path.basename(file)}`,
+        path.join(CACHE_DIRECTORY, path.basename(file)),
         'utf8',
       )}</style>`;
     }
