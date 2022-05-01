@@ -107,6 +107,8 @@ function autoPreview() {
   itWithPreview.todo = originalIt.todo;
   itWithPreview.concurrent = originalIt.concurrent;
 
+  // Overwrite global it/ test
+  // Is there any use cases that `it` and `test` is undefined?
   it = itWithPreview;
   test = itWithPreview;
 }
