@@ -12,20 +12,22 @@ interface JestPreviewConfigOptions {
   publicFolder?: string;
 }
 
-export async function jestPreviewConfigure(
-  options: JestPreviewConfigOptions = { externalCss: [], autoPreview: true },
-) {
-  // Always try to auto preview unless user choose not to
-  if (options.autoPreview !== false) {
-    autoPreview();
+export async function jestPreviewConfigure({
+  externalCss = [],
+  autoPreview = true,
+  publicFolder,
+}: JestPreviewConfigOptions) {
+  if (autoPreview) {
+    autoRunPreview();
   }
+
   if (!fs.existsSync(CACHE_FOLDER)) {
     fs.mkdirSync(CACHE_FOLDER, {
       recursive: true,
     });
   }
 
-  options.externalCss?.forEach((cssFile) => {
+  externalCss?.forEach((cssFile) => {
     // Avoid name collision
     // Example: src/common/styles.css => cache-src___common___styles.css
     const delimiter = '___';
@@ -71,11 +73,11 @@ export async function jestPreviewConfigure(
     // }
   });
 
-  if (options.publicFolder) {
+  if (publicFolder) {
     createCacheFolderIfNeeded();
     fs.writeFileSync(
       path.join(CACHE_FOLDER, 'cache-public.config'),
-      options.publicFolder,
+      publicFolder,
       {
         encoding: 'utf-8',
         flag: 'w',
@@ -84,7 +86,7 @@ export async function jestPreviewConfigure(
   }
 }
 
-function autoPreview() {
+function autoRunPreview() {
   const originalIt = it;
   const itWithPreview: jest.It = (name, callback, timeout) => {
     const callbackWithPreview = callback
