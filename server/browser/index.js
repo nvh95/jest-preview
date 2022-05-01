@@ -25,17 +25,37 @@ function openBrowser(url) {
     (typeof browser !== 'string' || browser === OSX_CHROME);
 
   if (shouldTryOpenChromeWithAppleScript) {
-    try {
-      // Try our best to reuse existing tab
-      // on OS X Google Chrome with AppleScript
-      execSync('ps cax | grep "Google Chrome"');
-      execSync('osascript openChrome.applescript "' + encodeURI(url) + '"', {
-        cwd: __dirname,
-        stdio: 'ignore',
-      });
-      return true;
-    } catch (err) {
-      // Ignore errors.
+    // Will use the first open browser found from list
+    const supportedChromiumBrowsers = [
+      'Google Chrome Canary',
+      'Google Chrome Dev',
+      'Google Chrome Beta',
+      'Google Chrome',
+      'Microsoft Edge',
+      'Brave Browser',
+      'Vivaldi',
+      'Chromium',
+    ];
+
+    for (let chromiumBrowser of supportedChromiumBrowsers) {
+      try {
+        // Try our best to reuse existing tab
+        // on OS X Google Chrome with AppleScript
+        // "ps cax" throws error if "chromiumBrowser" is not opened
+        execSync(`ps cax | grep "${chromiumBrowser}"`);
+        execSync(
+          `osascript openChrome.applescript "${encodeURI(
+            url,
+          )}" "${chromiumBrowser}"`,
+          {
+            cwd: __dirname,
+            stdio: 'ignore',
+          },
+        );
+        return true;
+      } catch (err) {
+        // Ignore errors.
+      }
     }
   }
 
