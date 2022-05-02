@@ -1,3 +1,9 @@
+# 0.2.0
+
+## Features
+
+- Auto preview on fail (TODO: Polish this changelog)
+
 # 0.1.7
 
 ## Fixes
