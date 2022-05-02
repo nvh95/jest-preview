@@ -89,17 +89,32 @@ export async function jestPreviewConfigure({
 function autoRunPreview() {
   const originalIt = it;
   const itWithPreview: jest.It = (name, callback, timeout) => {
-    const callbackWithPreview = callback
-      ? (((...args: Parameters<jest.ProvidesCallback>) => {
-          try {
-            // @ts-ignore
-            callback(...args);
-          } catch (error) {
-            debug();
-            throw error;
-          }
-        }) as jest.ProvidesCallback)
-      : undefined;
+    let callbackWithPreview = undefined as jest.ProvidesCallback | undefined;
+    if (!callback) {
+      callbackWithPreview = undefined;
+    } else if (callback.constructor.name === 'AsyncFunction') {
+      console.log(callback.constructor.name);
+      callbackWithPreview = async function () {
+        try {
+          return await (callback as () => Promise<unknown>)();
+        } catch (error) {
+          debug();
+          throw error;
+        }
+      };
+    } else if (callback.constructor.name === 'Function') {
+      callbackWithPreview = function (
+        ...args: Parameters<jest.ProvidesCallback>
+      ) {
+        try {
+          // @ts-expect-error Just foward the args
+          return callback(...args) as void;
+        } catch (error) {
+          debug();
+          throw error;
+        }
+      };
+    }
 
     return originalIt(name, callbackWithPreview, timeout);
   };
