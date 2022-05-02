@@ -1,3 +1,9 @@
+# 0.1.7
+
+## Fixes
+
+- Fix jest-preview postinstall script can't run on folder with space in name
+
 # 0.1.6
 
 ## Features
