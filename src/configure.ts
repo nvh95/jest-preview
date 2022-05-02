@@ -128,4 +128,5 @@ function autoRunPreview() {
   // Is there any use cases that `it` and `test` is undefined?
   it = itWithPreview;
   test = itWithPreview;
+  // TODO: Patch fit
 }
