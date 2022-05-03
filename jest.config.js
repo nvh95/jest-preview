@@ -21,6 +21,8 @@ module.exports = {
   modulePaths: ['<rootDir>/demo'],
   moduleNameMapper: {
     '^react-native$': 'react-native-web',
+    // Support import ~
+    '^~(.*)': '<rootDir>/node_modules/$1',
   },
   moduleFileExtensions: [
     // Place tsx and ts to beginning as suggestion from Jest team

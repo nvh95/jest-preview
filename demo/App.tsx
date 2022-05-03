@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { css } from '@emotion/react';
 import emotionStyled from '@emotion/styled';
 import { styled as stichesStyled } from '@stitches/react';
+import '~animate.css/animate.css';
 
 import logo2 from './assets/images/logo.svg';
 import './App.css';
@@ -46,6 +47,16 @@ function App() {
         {/* Reference: https://developer.chrome.com/blog/css-in-js/ */}
         {/* https://wicg.github.io/construct-stylesheets/ */}
         <StichesP>Styled by Stiches</StichesP>
+        <p className="load-path-sass">
+          This text is styled by SASS from load paths
+        </p>
+        <p className="animate__animated animate__bounce">
+          An animated element style using @use ~
+        </p>
+        <div className="animated fadeIn">
+          <p>An animated element style using import ~</p>
+          <p>Watch me fade in!</p>
+        </div>
         <p>
           <button
             data-testid="increase"

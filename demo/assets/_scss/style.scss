@@ -1,4 +1,8 @@
 @use 'partials/partial-style'; // Example using @use
+@use 'load-path'; // Example of loadPath config
+
+$use-fadeIn: true;
+@import '~animate-sass/animate'; // Example of import ~
 
 header {
   .imported-sass {

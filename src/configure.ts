@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import { exec } from 'child_process';
 
-import { CACHE_FOLDER } from './constants';
+import { CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG } from './constants';
 import { createCacheFolderIfNeeded } from './utils';
 import { debug } from './preview';
 
@@ -10,6 +10,7 @@ interface JestPreviewConfigOptions {
   externalCss?: string[];
   autoPreview?: boolean;
   publicFolder?: string;
+  sassLoadPaths?: string[];
 }
 
 export async function jestPreviewConfigure(
@@ -17,7 +18,12 @@ export async function jestPreviewConfigure(
     externalCss = [],
     autoPreview = false,
     publicFolder,
-  }: JestPreviewConfigOptions = { externalCss: [], autoPreview: false },
+    sassLoadPaths,
+  }: JestPreviewConfigOptions = {
+    externalCss: [],
+    autoPreview: false,
+    sassLoadPaths: [],
+  },
 ) {
   if (autoPreview) {
     autoRunPreview();
@@ -27,6 +33,19 @@ export async function jestPreviewConfigure(
     fs.mkdirSync(CACHE_FOLDER, {
       recursive: true,
     });
+  }
+
+  let sassLoadFullPaths: string[] = [];
+  // Save sassLoadPaths to cache, so we can use it in the transformer
+  if (sassLoadPaths) {
+    sassLoadFullPaths = sassLoadPaths.map((path) => `${process.cwd()}/${path}`);
+
+    createCacheFolderIfNeeded();
+
+    fs.writeFileSync(
+      path.join(CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG),
+      JSON.stringify(sassLoadFullPaths),
+    );
   }
 
   externalCss?.forEach((cssFile) => {
@@ -45,19 +64,27 @@ export async function jestPreviewConfigure(
         '.css',
       );
 
+      const sassLoadPathsConfig = sassLoadFullPaths.reduce(
+        (currentConfig, nextLoadPath) =>
+          `${currentConfig} --load-path ${nextLoadPath}`,
+        '',
+      );
+
       // Transform sass to css and save to cache folder
       // We use exec instead of sass.compile because running sass.compile in jsdom environment cause unexpected behavior
       // What we encountered is that filename is automatically added `http://localhost` as the prefix
       // Example: style.scss => http://localhost/style.scss
       // As a result, sass.compile cannot find the file
       // TODO: Can we inject css to the `document.head` directly?
+      // TODO: Support import ~ for configured scss
+      // Currently, we cannot find the option to pass `importer` to sass CLI: https://sass-lang.com/documentation/cli/dart-sass#options
       exec(
         `${path.join(
           process.cwd(),
           'node_modules',
           '.bin',
           'sass',
-        )} ${cssFile} ${cssDestinationFile} --no-source-map`,
+        )} ${cssFile} ${cssDestinationFile} --no-source-map ${sassLoadPathsConfig}`,
         (err: any) => {
           if (err) {
             console.log(err);

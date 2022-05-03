@@ -1,6 +1,8 @@
 import path from 'path';
+import { pathToFileURL } from 'url';
 import camelcase from 'camelcase';
 import slash from 'slash';
+import { CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG } from './constants';
 
 function getRelativeFilename(filename: string): string {
   return slash(filename.split(process.cwd())[1]);
@@ -146,7 +148,36 @@ function processSass(src: string, filename: string): TransformedSource {
     };
   }
 
-  const cssResult = sass.compile(filename).css;
+  const sassLoadPathsConfigPath = path.join(
+    CACHE_FOLDER,
+    SASS_LOAD_PATHS_CONFIG,
+  );
+
+  let sassLoadPaths: string[];
+  if (fs.existsSync(sassLoadPathsConfigPath)) {
+    const sassLoadPathsString = fs
+      .readFileSync(path.join(CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG), 'utf8')
+      .trim();
+    sassLoadPaths = JSON.parse(sassLoadPathsString);
+  } else {
+    sassLoadPaths = [];
+  }
+
+  const cssResult = sass.compile(filename, {
+    loadPaths: sassLoadPaths,
+    importers: [
+      {
+        // An importer that redirects relative URLs starting with "~" to `node_modules`
+        // Reference: https://sass-lang.com/documentation/js-api/interfaces/FileImporter
+        findFileUrl(url: string) {
+          if (!url.startsWith('~')) return null;
+          return new URL(
+            path.join(pathToFileURL('node_modules').href, url.substring(1)),
+          );
+        },
+      },
+    ],
+  }).css;
 
   return {
     code: `const style = document.createElement('style');
