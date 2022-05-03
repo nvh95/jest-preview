@@ -1,6 +1,6 @@
 {
   "name": "jest-preview",
-  "version": "0.1.7-alpha.0",
+  "version": "0.2.0",
   "description": "Preview your HTML code while using Jest",
   "keywords": [
     "testing",
@@ -27,7 +27,7 @@
     "transforms"
   ],
   "scripts": {
-    "docs": "cd website && npm run start",
+    "docs": "cd website && npm run start -- --port 3001",
     "build:docs": "cd website && npm run build",
     "dev": "vite",
     "types": "tsc src/index.ts --declaration --emitDeclarationOnly --jsx react --esModuleInterop --outDir dist",
