@@ -89,9 +89,7 @@ export async function jestPreviewConfigure(
 }
 
 // Omit only, skip, todo, concurrent, each. Couldn't use Omit. Just redeclare for simplicity
-interface RawIt {
-  (name: string, fn?: jest.ProvidesCallback, timeout?: number): void;
-}
+type RawIt = (...args: Parameters<jest.It>) => ReturnType<jest.It>;
 
 function patchJestFunction(it: RawIt) {
   const originalIt = it;
