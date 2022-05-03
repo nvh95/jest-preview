@@ -31,10 +31,10 @@ module.exports = {
 };
 ```
 
-Next, install your favorite testing libraries. This example uses `react-testing-library`. Optionally, you can install its companion [`jest-dom`](https://testing-library.com/docs/ecosystem-jest-dom/) package to add some useful matchers to Jest.
+Next, install your favorite testing libraries. This example uses `react-testing-library`, at version 12 specifically ([version 13 wouldn't work](https://stackoverflow.com/questions/71713405/cannot-find-module-react-dom-client-from-node-modules-testing-library-react)). Optionally, you can install its companion [`jest-dom`](https://testing-library.com/docs/ecosystem-jest-dom/) package to add some useful matchers to Jest.
 
 ```bash
-npm install --save-dev @testing-library/react @testing-library/jest-dom
+npm install --save-dev @testing-library/react@12 @testing-library/jest-dom
 ```
 
 ## Install & configure Jest Preview
