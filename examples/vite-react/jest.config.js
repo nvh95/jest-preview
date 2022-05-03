@@ -23,6 +23,8 @@ module.exports = {
     '^react-native$': 'react-native-web',
     // Used to dedupe `styled-component` when run `npm link` in development
     '^styled-components$': '<rootDir>/node_modules/styled-components',
+    // Support import ~
+    '^~(.*)': '<rootDir>/node_modules/$1',
   },
   moduleFileExtensions: [
     // Place tsx and ts to beginning as suggestion from Jest team

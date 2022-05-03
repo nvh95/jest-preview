@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import '~animate.css/animate.css';
 
 import logo2 from './assets/images/logo.svg';
 
@@ -23,6 +24,16 @@ function App() {
           This text is styled by global configured SASS
         </p>
         <p className="imported-sass">This text is styled by imported SASS</p>
+        <p className="load-path-sass">
+          This text is styled by SASS from load paths
+        </p>
+        <p className="animate__animated animate__bounce">
+          An animated element style using @use ~
+        </p>
+        <div className="animated fadeIn">
+          <p>An animated element style using import ~</p>
+          <p>Watch me fade in!</p>
+        </div>
         <p>
           <button
             data-testid="increase"
