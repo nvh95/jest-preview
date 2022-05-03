@@ -85,3 +85,11 @@ jestPreviewConfigure({
   publicFolder: 'static', // No need to configure if `publicFolder` is `public`
 });
 ```
+
+### 5. (Optional- RECOMMENDED) Opt-in to Automatic Mode
+
+**Automatic Mode** let you use [jest-preview](https://www.npmjs.com/package/jest-preview) without manually triggering `preview.debug()`. It previews your code in the browser automatically whenever there is a failed test. It's a experimental feature from v0.2.0 and becomes the default in v0.3.0.
+
+```js
+jestPreviewConfigure({ autoPreview: true });
+```

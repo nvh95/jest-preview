@@ -8,7 +8,7 @@ Preview application's UI when testing with Jest to an external browser. Need to 
 
 :::info
 
-[Automatic Mode](/blog/automatic-mode) is now available and is recommended for general use, instead of manually triggering `preview.debug()`
+[Automatic Mode](/blog/automatic-mode) is now available and is recommended for general use, instead of manually triggering `preview.debug()`.
 :::
 
 ```diff
