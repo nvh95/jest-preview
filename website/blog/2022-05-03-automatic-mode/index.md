@@ -24,4 +24,4 @@ jestPreviewConfigure({ autoPreview: true });
 
 If you have any trouble with Automatic Mode, let us know at [Jest Preview's GitHub issue](https://github.com/nvh95/jest-preview/issues/new?assignees=&labels=&template=bug_report.md&title=)
 
-Did you use Jest Preview Automatic Mode yet, [let's us know](https://twitter.com/intent/tweet?text=I%20used%20Jest%20Preview%20Automatic%20Mode%20and%20it%27s%20awesome!%20%23jestpreview)!
+Did you use Jest Preview Automatic Mode yet, [let us know](https://twitter.com/intent/tweet?text=I%20used%20Jest%20Preview%20Automatic%20Mode%20and%20it%27s%20awesome!%20%23jestpreview)!
