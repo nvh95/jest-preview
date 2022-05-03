@@ -88,46 +88,49 @@ export async function jestPreviewConfigure(
   }
 }
 
-function autoRunPreview() {
+// Omit only, skip, todo, concurrent, each. Couldn't use Omit. Just redeclare for simplicity
+interface RawIt {
+  (name: string, fn?: jest.ProvidesCallback, timeout?: number): void;
+}
+
+function patchJestFunction(it: RawIt) {
   const originalIt = it;
-  const itWithPreview: jest.It = (name, callback, timeout) => {
+  const itWithPreview: RawIt = (name, callback, timeout) => {
     let callbackWithPreview: jest.ProvidesCallback | undefined;
     if (!callback) {
       callbackWithPreview = undefined;
-    } else if (callback.constructor.name === 'AsyncFunction') {
-      callbackWithPreview = async function () {
-        try {
-          return await (callback as () => Promise<unknown>)();
-        } catch (error) {
-          debug();
-          throw error;
-        }
-      };
-    } else if (callback.constructor.name === 'Function') {
-      callbackWithPreview = function (
+    } else {
+      callbackWithPreview = async function (
         ...args: Parameters<jest.ProvidesCallback>
       ) {
         try {
-          // @ts-expect-error Just foward the args
-          return callback(...args) as void;
+          // @ts-expect-error Just forward the args
+          return await callback(...args);
         } catch (error) {
           debug();
           throw error;
         }
       };
     }
-
     return originalIt(name, callbackWithPreview, timeout);
   };
+  return itWithPreview;
+}
+
+function autoRunPreview() {
+  const originalIt = it;
+  let itWithPreview = patchJestFunction(it) as jest.It;
   itWithPreview.each = originalIt.each;
-  itWithPreview.only = originalIt.only;
+  itWithPreview.only = patchJestFunction(originalIt.only) as jest.It;
   itWithPreview.skip = originalIt.skip;
   itWithPreview.todo = originalIt.todo;
-  itWithPreview.concurrent = originalIt.concurrent;
+  itWithPreview.concurrent = patchJestFunction(
+    originalIt.concurrent,
+  ) as jest.It;
 
   // Overwrite global it/ test
   // Is there any use cases that `it` and `test` is undefined?
   it = itWithPreview;
   test = itWithPreview;
-  // TODO: Patch fit
+  fit = itWithPreview.only;
 }
