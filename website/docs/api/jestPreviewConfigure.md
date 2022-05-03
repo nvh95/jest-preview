@@ -39,9 +39,9 @@ jestPreviewConfigure({
   ],
 ```
 
-## publicFolder: string (default: "public")
+## publicFolder: string
 
-Default: `public`.
+Default: `undefined`.
 
 Name of your public folder from the project root.
 

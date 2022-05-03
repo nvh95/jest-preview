@@ -21,7 +21,7 @@ describe('App', () => {
     debug();
 
     // Jest Preview automatically preview failed tests without explicitly calling `debug()`
-    // Try to uncomment the following line to see the count equals to 6
+    // Try to comment out the following line to see the count equals to 6
     userEvent.click(screen.getByTestId('increase'));
 
     expect(screen.getByTestId('count')).toContainHTML('7');

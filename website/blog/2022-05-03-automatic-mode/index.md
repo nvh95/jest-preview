@@ -9,7 +9,7 @@ tags: [jest-preview, developer-experience]
 
 <!-- Draft -->
 
-We are so happy to annouce that we are launching Jest Preview Automatic Mode. In this mode, you don't have to trigger the `preview.debug()` function by yourself. Jest Preview automatically preview the UI of your app whenever Jest tests fail
+We are so happy to annouce that we are launching Jest Preview **Automatic Mode**. In this mode, you don't have to trigger the `preview.debug()` function by yourself. Jest Preview automatically preview the UI of your app whenever Jest tests fail
 
 Insert image
 
@@ -17,11 +17,11 @@ We believe this is the game changer feature of Jest Preview, which boost the FE 
 
 ```js
 jestPreviewConfigure({
-  autoPreview: true, // recheck name
+  autoPreview: true,
 });
 ```
 
-Automatic Mode is in experiement and is an opt-in option. We recommend you to start use it now. Automatic Mode will be default mode in Jest Preview 0.3.0
+**Automatic Mode** is in experiement and is an opt-in option. We recommend you to start use it now. Automatic Mode will be default mode in Jest Preview 0.3.0
 
 If you have any trouble with Automatic Mode, opt out by...
 

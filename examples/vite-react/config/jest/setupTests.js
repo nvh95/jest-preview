@@ -1,8 +1,10 @@
+// @ts-check
 import '@testing-library/jest-dom/extend-expect';
 import { jestPreviewConfigure } from 'jest-preview';
 
 jestPreviewConfigure({
   externalCss: ['src/index.css', 'src/assets/_scss/global-style.scss'],
+  autoPreview: true,
 });
 
 window.matchMedia = (query) => ({

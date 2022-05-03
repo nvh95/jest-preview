@@ -12,11 +12,13 @@ interface JestPreviewConfigOptions {
   publicFolder?: string;
 }
 
-export async function jestPreviewConfigure({
-  externalCss = [],
-  autoPreview = true,
-  publicFolder,
-}: JestPreviewConfigOptions) {
+export async function jestPreviewConfigure(
+  {
+    externalCss = [],
+    autoPreview = false,
+    publicFolder,
+  }: JestPreviewConfigOptions = { externalCss: [], autoPreview: false },
+) {
   if (autoPreview) {
     autoRunPreview();
   }
@@ -89,11 +91,10 @@ export async function jestPreviewConfigure({
 function autoRunPreview() {
   const originalIt = it;
   const itWithPreview: jest.It = (name, callback, timeout) => {
-    let callbackWithPreview = undefined as jest.ProvidesCallback | undefined;
+    let callbackWithPreview: jest.ProvidesCallback | undefined;
     if (!callback) {
       callbackWithPreview = undefined;
     } else if (callback.constructor.name === 'AsyncFunction') {
-      console.log(callback.constructor.name);
       callbackWithPreview = async function () {
         try {
           return await (callback as () => Promise<unknown>)();

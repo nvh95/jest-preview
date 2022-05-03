@@ -2,7 +2,7 @@
 
 ## Features
 
-- Auto preview on fail (TODO: Polish this changelog)
+- Auto preview UI whenever a test fails, you don't have to call `preview.debug()` manually.
 
 # 0.1.7
 
