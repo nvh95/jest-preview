@@ -45,7 +45,7 @@ Enable Jest Preview inside `jest.config.js`. Note that the Jest config object re
 + module.exports = configureNextJestPreview(createJestConfig(customJestConfig));
 ```
 
-Configure Jest Preview inside `jest.setup.js` (or any setup files) specified in your `setupFilesAfterEnv` config, so Jest Preview knows which global CSS file to load.
+Configure Jest Preview inside `jest.setup.js` (or any setup files specified in your `setupFilesAfterEnv` config), so Jest Preview knows which global CSS file to load.
 
 ```js
 import { jestPreviewConfigure } from 'jest-preview';
