@@ -10,8 +10,6 @@ export function debug(element: Element = document.body): void {
     });
   }
 
-  // CSS Modules and sass should append css to head, instead of body
-
   const headChildrenOnly = [...document.head.children].reduce(
     (prev, current) => prev + current.outerHTML,
     '',

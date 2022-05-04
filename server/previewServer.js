@@ -53,7 +53,7 @@ wss.on('connection', function connection(ws) {
   });
 });
 
-const watcher = chokidar.watch([BODY_PATH, HEAD_PATH, PUBLIC_CONFIG_PATH], {
+const watcher = chokidar.watch([BODY_PATH, PUBLIC_CONFIG_PATH], {
   // ignored: ['**/node_modules/**', '**/.git/**'],
   ignoreInitial: true,
   ignorePermissionErrors: true,
@@ -62,7 +62,8 @@ const watcher = chokidar.watch([BODY_PATH, HEAD_PATH, PUBLIC_CONFIG_PATH], {
 
 function handleFileChange(filePath) {
   const basename = path.basename(filePath);
-  if (basename === BODY_BASENAME || basename === HEAD_BASENAME) {
+  // Do not need to watch for HEAD_BASENAME, since we write head.html before body.html
+  if (basename === BODY_BASENAME) {
     wss.clients.forEach((client) => {
       if (client.readyState === 1) {
         client.send(JSON.stringify({ type: 'reload' }));
