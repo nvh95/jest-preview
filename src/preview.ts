@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import { getStyle } from './styled-components';
 import { CACHE_FOLDER } from './constants';
 
 export function debug(element: Element = document.body): void {
