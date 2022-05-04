@@ -35,16 +35,18 @@ export async function jestPreviewConfigure(
     });
   }
 
-  let sassLoadFullPaths: string[] = [];
-  // Save sassLoadPaths to cache, so we can use it in the transformer
+  let sassLoadPathsConfig: string[] = [];
+  // Save sassLoadPathsConfig to cache, so we can use it in the transformer
   if (sassLoadPaths) {
-    sassLoadFullPaths = sassLoadPaths.map((path) => `${process.cwd()}/${path}`);
+    sassLoadPathsConfig = sassLoadPaths.map(
+      (path) => `${process.cwd()}/${path}`,
+    );
 
     createCacheFolderIfNeeded();
 
     fs.writeFileSync(
       path.join(CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG),
-      JSON.stringify(sassLoadFullPaths),
+      JSON.stringify(sassLoadPathsConfig),
     );
   }
 
@@ -64,7 +66,7 @@ export async function jestPreviewConfigure(
         '.css',
       );
 
-      const sassLoadPathsConfig = sassLoadFullPaths.reduce(
+      const sassLoadPathsCLIConfig = sassLoadPathsConfig.reduce(
         (currentConfig, nextLoadPath) =>
           `${currentConfig} --load-path ${nextLoadPath}`,
         '',
@@ -84,7 +86,7 @@ export async function jestPreviewConfigure(
           'node_modules',
           '.bin',
           'sass',
-        )} ${cssFile} ${cssDestinationFile} --no-source-map ${sassLoadPathsConfig}`,
+        )} ${cssFile} ${cssDestinationFile} --no-source-map ${sassLoadPathsCLIConfig}`,
         (err: any) => {
           if (err) {
             console.log(err);

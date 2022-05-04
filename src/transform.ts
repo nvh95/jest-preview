@@ -153,18 +153,18 @@ function processSass(src: string, filename: string): TransformedSource {
     SASS_LOAD_PATHS_CONFIG,
   );
 
-  let sassLoadPaths: string[];
+  let sassLoadPathsConfig: string[];
   if (fs.existsSync(sassLoadPathsConfigPath)) {
     const sassLoadPathsString = fs
       .readFileSync(path.join(CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG), 'utf8')
       .trim();
-    sassLoadPaths = JSON.parse(sassLoadPathsString);
+    sassLoadPathsConfig = JSON.parse(sassLoadPathsString);
   } else {
-    sassLoadPaths = [];
+    sassLoadPathsConfig = [];
   }
 
   const cssResult = sass.compile(filename, {
-    loadPaths: sassLoadPaths,
+    loadPaths: sassLoadPathsConfig,
     importers: [
       {
         // An importer that redirects relative URLs starting with "~" to `node_modules`
