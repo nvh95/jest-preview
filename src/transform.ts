@@ -1,4 +1,3 @@
-import fs from 'fs';
 import path from 'path';
 import camelcase from 'camelcase';
 
@@ -57,7 +56,7 @@ export function processCss(src: string, filename: string): string {
 const link = document.createElement('link');
 link.rel = 'stylesheet';
 link.href = relativeCssPath;
-document.body.appendChild(link);
+document.head.appendChild(link);
 
 module.exports = JSON.stringify(relativeCssPath);`;
 }
@@ -83,7 +82,7 @@ module.exports = JSON.stringify(relativeCssPath);`;
 
 // We can use that if we opt-in to ESM. But it's not common use case right now (2022)
 // So our approach is making CSS Modules a "CSS-in-JS" solution.
-// CSS Modules will be compiled at run time then inject to the document.body
+// CSS Modules will be compiled at run time then inject to the document.head
 // One notable note is that `postcss-modules` is an async postcss plugin
 // We have to use Singleton design pattern to make it works asynchronously.
 function processCSSModules(src: string, filename: string): string {
@@ -113,7 +112,7 @@ postcss(
   const style = document.createElement('style');
   style.type = 'text/css';
   style.appendChild(document.createTextNode(result.css));
-  document.body.appendChild(style);
+  document.head.appendChild(style);
 });
 
 module.exports = exportedTokens;`;
@@ -133,6 +132,6 @@ function processSass(src: string, filename: string): string {
 
   return `const style = document.createElement('style');
 style.appendChild(document.createTextNode(${JSON.stringify(cssResult)}));
-document.body.appendChild(style);
+document.head.appendChild(style);
 module.exports = {}`;
 }
