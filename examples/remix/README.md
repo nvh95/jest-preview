@@ -87,7 +87,7 @@ module.exports = {
 };
 ```
 
-Configure Jest Preview inside `jest.setup.js` (or any setup files specified in your `setupFilesAfterEnv` config), so Jest Preview knows which global CSS file to load.
+Configure Jest Preview inside `jest.setup.js` (or any setup files specified in your `setupFilesAfterEnv` config), so Jest Preview knows which global CSS file to load. You can even set `autoPreview` to `true` so your failed test gets a preview automatically! 🤯
 
 ```js
 import { jestPreviewConfigure } from 'jest-preview';
@@ -97,6 +97,9 @@ jestPreviewConfigure({
   externalCss: [
     'app/styles/global.css',
   ],
+  // (Optional) Enable autoPreview so Jest Preview runs automatically
+  // whenever your test fails, without you having to do anything!
+  // autoPreview: true,
 });
 ```
 
@@ -113,7 +116,7 @@ import '@testing-library/jest-dom' // So we can use toBeInTheDocument assertion
 it('should show welcome message', () => {
   render(<Index />);
 
-  debug();
+  debug(); // Remove this line if you have enabled autoPreview in jest.setup.js
 
   expect(screen.getByRole('heading', { name: /welcome to remix/i })).toBeInTheDocument();
 });

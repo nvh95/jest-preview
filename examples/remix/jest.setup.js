@@ -5,4 +5,7 @@ jestPreviewConfigure({
   externalCss: [
     'app/styles/global.css',
   ],
+  // (Optional) Enable autoPreview so you get previewing for free,
+  // automatically without having to call debug(), whenever your test fails.
+  // autoPreview: true,
 });
