@@ -29,3 +29,5 @@ build
 presets
 transforms
 draft
+
+coverage

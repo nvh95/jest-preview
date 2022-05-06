@@ -22,8 +22,10 @@ const port = process.env.PORT || 3336;
 const wsPort = Number(port) + 1;
 
 const CACHE_DIRECTORY = './node_modules/.cache/jest-preview';
-const HTML_BASENAME = 'index.html';
-const HTML_PATH = path.join(CACHE_DIRECTORY, HTML_BASENAME);
+const HEAD_BASENAME = 'head.html';
+const HEAD_PATH = path.join(CACHE_DIRECTORY, HEAD_BASENAME);
+const BODY_BASENAME = 'body.html';
+const BODY_PATH = path.join(CACHE_DIRECTORY, BODY_BASENAME);
 const PUBLIC_CONFIG_BASENAME = 'cache-public.config';
 const PUBLIC_CONFIG_PATH = path.join(CACHE_DIRECTORY, PUBLIC_CONFIG_BASENAME);
 const FAV_ICON_PATH = './node_modules/jest-preview/server/favicon.ico';
@@ -51,7 +53,7 @@ wss.on('connection', function connection(ws) {
   });
 });
 
-const watcher = chokidar.watch([HTML_PATH, PUBLIC_CONFIG_PATH], {
+const watcher = chokidar.watch([BODY_PATH, PUBLIC_CONFIG_PATH], {
   // ignored: ['**/node_modules/**', '**/.git/**'],
   ignoreInitial: true,
   ignorePermissionErrors: true,
@@ -60,7 +62,8 @@ const watcher = chokidar.watch([HTML_PATH, PUBLIC_CONFIG_PATH], {
 
 function handleFileChange(filePath) {
   const basename = path.basename(filePath);
-  if (basename === HTML_BASENAME) {
+  // Do not need to watch for HEAD_BASENAME, since we write head.html before body.html
+  if (basename === BODY_BASENAME) {
     wss.clients.forEach((client) => {
       if (client.readyState === 1) {
         client.send(JSON.stringify({ type: 'reload' }));
@@ -116,7 +119,7 @@ app.use('/', (req, res) => {
     .readFileSync(path.join(__dirname, './ws-client.js'), 'utf-8')
     .replace(/\$PORT/g, wsPort);
 
-  if (!fs.existsSync(HTML_PATH)) {
+  if (!fs.existsSync(BODY_PATH)) {
     // Make it looks nice
     return res.end(`<!DOCTYPE html>
 <html>
@@ -135,7 +138,8 @@ preview.debug();
 <script>${reloadScriptContent}</script>
 </html>`);
   }
-  const html = fs.readFileSync(HTML_PATH, 'utf8');
+  const head = fs.readFileSync(HEAD_PATH, 'utf8');
+  const body = fs.readFileSync(BODY_PATH, 'utf8');
   // TODO2: How do we preserve the order of importing css file?
   // For now I think it's not very important, but this is the room for improvement in next versions
   let css = '';
@@ -158,9 +162,10 @@ preview.debug();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
 ${css}
+${head}
 </head>
 <body>
-  ${html}
+  ${body}
 </body>
 <script>${reloadScriptContent}</script>
 </html>`;
@@ -170,7 +175,7 @@ ${css}
 const server = http.createServer(app);
 
 server.listen(port, () => {
-  if (fs.existsSync(HTML_PATH)) {
+  if (fs.existsSync(BODY_PATH)) {
     // Remove old preview
     const files = fs.readdirSync(CACHE_DIRECTORY);
     files.forEach((file) => {

@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import { getStyle } from './styled-components';
 import { CACHE_FOLDER } from './constants';
 
 export function debug(element: Element = document.body): void {
@@ -10,21 +9,11 @@ export function debug(element: Element = document.body): void {
     });
   }
 
-  // If user use styled-components
-  if (getStyle) {
-    // TODO: We can send this data via websocket instead of writing to disk
-    fs.writeFileSync(
-      path.join(CACHE_FOLDER, 'jp-styled-components.css'),
-      getStyle(),
-      {
-        encoding: 'utf-8',
-        flag: 'w',
-      },
-    );
-  }
-
-  fs.writeFileSync(path.join(CACHE_FOLDER, 'index.html'), element.outerHTML, {
-    encoding: 'utf-8',
-    flag: 'w',
-  });
+  const headChildrenOnly = [...document.head.children].reduce(
+    (prev, current) => prev + current.outerHTML,
+    '',
+  );
+  fs.writeFileSync(path.join(CACHE_FOLDER, 'head.html'), headChildrenOnly);
+  // Always save head.html to disk before body.html, so we don't need to watch head.html
+  fs.writeFileSync(path.join(CACHE_FOLDER, 'body.html'), element.outerHTML);
 }

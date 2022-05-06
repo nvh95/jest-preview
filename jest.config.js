@@ -4,6 +4,7 @@ module.exports = {
     'demo/**/*.{js,jsx,ts,tsx}',
     '!demo/**/*.d.ts',
     '!demo/mocks/**',
+    // TODO: To report coverage in `src`. They are compiled to `dist` so it's difficult to report coverage directly
   ],
   coveragePathIgnorePatterns: [],
   setupFilesAfterEnv: ['./config/jest/setupTests.js'],
