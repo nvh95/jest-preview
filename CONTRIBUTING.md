@@ -2,14 +2,22 @@
 
 ## Welcome
 
-TODO: Welcome and appreciate contributors. Jest Preview is a community-driven project.
+Welcome to CONTRIBUTING zone. If you are reading this, you are probably want to contribute to Open Source projects. That's great! Contributing to an open source project is a great opportunity to learn, sharpen your skills and help others. Luckily, Jest Preview is a free and open source project and we always wecome new contributors. Its mission is to help front end developers' life easier and more enjoyable, also improve the standard of front end applications by encourgaging them to write more high-quality tests, by providng an ability to view the actual UI in Jest in an external browser like Chrome.
+
+Jest Preview aims to be a community-driven project. So we hope to see your contributions to make Jest Preview a favourite library for front end developers when it comes to testing.
 
 ## What can I contribute?
 
-- Docs
+We appreciated any helps. There are not a thing as small contribution. If you see a typo, send us a PR. If you experience a bug, please open an issue. If you have a suggestion, let us know. Bellow are some ways to contribute to Jest Preview:
+
+- **Submit bugs or issues:**: Software are full of bugs. If you use Jest Preview and find a bug, please open an issue at [Jest Preview's issues](https://github.com/nvh95/jest-preview/issues)
+- **Docs**: We have a documentation site at [www.jest-preview.com](https://www.jest-preview.com/docs/getting-started/intro), (draft) it's very easier to contribute to the documentation by using `Edit this page` feature (insert image)
 - Fix bugs
 - Add new features
+- Grammar: not native English speakers.
 - Answer questions and issues on GitHub and Discord
+
+If not sure what to contribute, Join Discord
 
 ## Claim issue
 

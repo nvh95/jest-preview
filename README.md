@@ -101,7 +101,7 @@ Jest Preview comes with [Pre-configured transformation](https://www.jest-preview
 
 ## Contributing
 
-We can't wait to see your contributions. See more at [CONTRIBUTING.md](/CONTRIBUTING.md)
+We can't wait to see your contributions. See the Contribution Guide at [CONTRIBUTING.md](/CONTRIBUTING.md)
 
 ## Contributors ✨
 
