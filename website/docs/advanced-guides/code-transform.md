@@ -12,7 +12,6 @@ You should use [Pre-configured transformation](/docs/getting-started/installatio
 
 For examples:
 
-````js
 ```javascript
 // config/jest/cssTransform.js
 'use strict';
