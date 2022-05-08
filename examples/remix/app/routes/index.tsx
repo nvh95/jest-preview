@@ -1,4 +1,4 @@
-import remixImg from '../assets/remix.jpg';
+import remixImg from '~/assets/remix.jpg';
 
 export default function Index() {
   return (

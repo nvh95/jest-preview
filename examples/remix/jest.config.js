@@ -5,6 +5,8 @@ module.exports = {
     '!**/node_modules/**',
   ],
   moduleNameMapper: {
+    // Handle absolute imports in Remix
+    '~/(.*)': '<rootDir>/app/$1',
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testPathIgnorePatterns: [
