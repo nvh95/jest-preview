@@ -20,7 +20,7 @@ Debug your Jest tests. Effortlessly. 🛠🖼
 
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
 
@@ -148,6 +148,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/minhmo1620"><img src="https://avatars.githubusercontent.com/u/44143370?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Minh Nguyen </b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=minhmo1620" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/tinhvqbk"><img src="https://avatars.githubusercontent.com/u/26925018?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kyle(Tình Vũ)</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/issues?q=author%3Atinhvqbk" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/makotot"><img src="https://avatars.githubusercontent.com/u/1129027?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Makoto Tateno</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=makotot" title="Documentation">📖</a></td>
   </tr>
 </table>
 
