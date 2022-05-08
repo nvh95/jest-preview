@@ -8,7 +8,7 @@ This example demonstrates how to use `jest-preview` with [`Remix`](https://remix
 
 You have to manually install Jest in your Remix app.
 
-First, install `jest` itself. If you are using `jest` version 28 or later, you must install `jest-environment-jsdom` too ([reference](https://github.com/facebook/jest/blob/585854fca63851a891c5be3e1381c04e341210e1/packages/jest-resolve/src/utils.ts#L116)).
+First, install `jest` itself. If you are using `jest` version 28 or later, you must install `jest-environment-jsdom` too ([reference](https://jestjs.io/docs/upgrading-to-jest28#jsdom)).
 
 ```bash
 npm install --save-dev jest jest-environment-jsdom
