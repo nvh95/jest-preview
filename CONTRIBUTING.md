@@ -70,19 +70,19 @@ Whenever `preview.debug()` is triggered, or whenever a test fails, you will see 
 
 ## How jest-preview works
 
-- See [HOW_JEST_PREVIEW_WORKS.md](./HOW_JEST_PREVIEW_WORKS.md)
+- See [HOW_JEST_PREVIEW_WORKS.md](https://github.com/nvh95/jest-preview/tree/main/HOW_JEST_PREVIEW_WORKS.md)
 
 ## Repository architecture
 
 Following are brief descriptions of the repository architecture:
 
-- [src](/src/): contains most of the code of Jest Preview such as `debug` function, `jestPreviewConfigure`, all Jest Transformations, preconfigured presets, adapters, etc.
-- [server](/server/): contains Jest Preview server code, which is a web server that serves the preview page (Jest Preview Dashboard).
-- [demo](/demo/): contains the demo app. You will work with this app most of the time when developing Jest Preview.
-- [config/jest](/config/jest/): jest configuration files for the demo app.
-- [dist](/dist/): Distribution code, which is bundle and processed by Rollup (previously: Vite Library Mode).
-- [examples](/examples/): contains examples of how to integrate Jest Preview with various libraries and frameworks.
-- [website](/website/): contains code for [www.jest-preview.com](https://www.jest-preview.com/)
+- [src](https://github.com/nvh95/jest-preview/tree/main/src/): contains most of the code of Jest Preview such as `debug` function, `jestPreviewConfigure`, all Jest Transformations, preconfigured presets, adapters, etc.
+- [server](https://github.com/nvh95/jest-preview/tree/main/server/): contains Jest Preview server code, which is a web server that serves the preview page (Jest Preview Dashboard).
+- [demo](https://github.com/nvh95/jest-preview/tree/main/demo/): contains the demo app. You will work with this app most of the time when developing Jest Preview.
+- [config/jest](https://github.com/nvh95/jest-preview/tree/main/config/jest/): jest configuration files for the demo app.
+- [dist](https://github.com/nvh95/jest-preview/tree/main/dist/): Distribution code, which is bundle and processed by Rollup (previously: Vite Library Mode).
+- [examples](https://github.com/nvh95/jest-preview/tree/main/examples/): contains examples of how to integrate Jest Preview with various libraries and frameworks.
+- [website](https://github.com/nvh95/jest-preview/tree/main/website/): contains code for [www.jest-preview.com](https://www.jest-preview.com/)
 
 ## Submit a PR
 
