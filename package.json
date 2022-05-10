@@ -63,6 +63,9 @@
     "ws": "^8.5.0"
   },
   "devDependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@stitches/react": "^1.2.8",
     "@swc/core": "^1.2.154",
     "@swc/jest": "^0.2.20",
     "@testing-library/jest-dom": "^5.16.2",

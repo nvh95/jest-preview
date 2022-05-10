@@ -7,7 +7,7 @@ import { debug } from '../../dist/index';
 describe('App', () => {
   it('should work as expected', () => {
     render(<App />);
-
+    // console.log(document.documentElement.outerHTML);
     userEvent.click(screen.getByTestId('increase'));
     userEvent.click(screen.getByTestId('increase'));
     userEvent.click(screen.getByTestId('increase'));
