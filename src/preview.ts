@@ -13,6 +13,7 @@ export function debug(element: Element = document.body): void {
     (prev, current) => prev + current.outerHTML,
     '',
   );
+  // TODO: Can we just use `document.documentElement.outerHTML` directly. Then, we don't need to save head and body separately.
   fs.writeFileSync(path.join(CACHE_FOLDER, 'head.html'), headChildrenOnly);
   // Always save head.html to disk before body.html, so we don't need to watch head.html
   fs.writeFileSync(path.join(CACHE_FOLDER, 'body.html'), element.outerHTML);
