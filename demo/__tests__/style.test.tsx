@@ -5,6 +5,7 @@ import App from '../App';
 describe('Style', () => {
   it('should render CSS correctly in JSDOM', () => {
     render(<App />);
+    // console.log(document.documentElement.outerHTML);
     // vanilla CSS
     // Global CSS
     // TODO: Global CSS is saved into the `.cache` folder, so we can't assert it directly within the JSDOM
@@ -19,6 +20,11 @@ describe('Style', () => {
     // styled-components
     expect(document.documentElement.outerHTML).toContain(
       '<style data-styled="active" data-styled-version="5.3.5">.dgihId{color:red;}</style>',
+    );
+
+    // emotion
+    expect(document.documentElement.outerHTML).toContain(
+      '<style data-emotion="css" data-s="">.css-2m18qq{color:orange;}</style>',
     );
 
     // CSS Modules
@@ -42,9 +48,7 @@ describe('Style', () => {
     expect(document.documentElement.outerHTML)
       .toContain(`header .imported-sass {
   color: pink;
-}</style><style type="text/css">._cssModule_16r0j_1 {
-  color: green;
-}`);
+}</style>`);
     // import ~
     // TODO: Not implemented yet
     // loadPaths

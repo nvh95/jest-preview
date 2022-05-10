@@ -42,7 +42,9 @@ When writing tests using Jest, we usually debug by reading the HTML code. Someti
 - 🔄 Auto reload browser when execute `preview.debug()`.
 - 💅 Support CSS:
   - ✅ [Direct CSS import](#3-configure-jests-transform-to-intercept-css-and-files)
-  - ✅ [Styled-components](https://styled-components.com/)
+  - ✅ Number of CSS-in-JS libraries, such as:
+    - ✅ [Styled-components](https://styled-components.com/)
+    - ✅ [Emotion](https://emotion.sh/)
   - ✅ [External CSS](#4-optional-configure-external-css)
   - ✅ [CSS Modules](https://github.com/css-modules/css-modules)
   - ✅ [Sass](https://sass-lang.com/)

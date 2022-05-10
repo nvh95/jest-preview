@@ -1,7 +1,7 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import Image from 'next/image';
+import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
   return (
@@ -21,7 +21,18 @@ const Home: NextPage = () => {
           Get started by editing{' '}
           <code className={styles.code}>pages/index.tsx</code>
         </p>
-
+        <p className="styleJsx">
+          Styled by styled-jsx
+          {/* Jest Preview accidentally support styled-jsx partially (without scoping) */}
+          {/* TODO: To make styled-jsx works in Jest */}
+          <style jsx>
+            {`
+              .styleJsx {
+                color: red;
+              }
+            `}
+          </style>
+        </p>
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
             <h2>Documentation &rarr;</h2>
@@ -65,8 +76,10 @@ const Home: NextPage = () => {
           </span>
         </a>
       </footer>
+      {/* This is supposed not to be styled, but it does. Since `.styleJsx` leaks from above */}
+      <p className="styleJsx">Styled by styled-jsx</p>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
