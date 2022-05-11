@@ -50,6 +50,7 @@ export async function jestPreviewConfigure(
       // What we encountered is that filename is automatically added `http://localhost` as the prefix
       // Example: style.scss => http://localhost/style.scss
       // As a result, sass.compile cannot find the file
+      // TODO: Can we inject css to the `document.head` directly?
       exec(
         `./node_modules/.bin/sass ${cssFile} ${cssDestinationFile} --no-source-map`,
         (err: any) => {
@@ -69,6 +70,7 @@ export async function jestPreviewConfigure(
     // That way, we can don't have to copy files to disk
     // Memory is faster than disk anyway!!!!
     // if (!fs.existsSync(destinationFile)) {
+    // TODO: Can we inject css to the `document.head` directly?
     fs.copyFile(cssFile, destinationFile, (err: any) => {
       if (err) throw err;
     });

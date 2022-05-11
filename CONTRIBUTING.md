@@ -1,4 +1,4 @@
-# Contribute to Jest Preview
+# Contributing
 
 ## Welcome
 
