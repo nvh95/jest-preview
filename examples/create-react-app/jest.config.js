@@ -11,7 +11,8 @@ module.exports = {
   testEnvironment: 'jsdom',
   testRunner: 'jest-circus/runner.js',
   transform: {
-    '^.+\\.(js|jsx|mjs|cjs|ts|tsx)$': 'jest-preview/transforms/babelCRA',
+    '^.+\\.(js|jsx|mjs|cjs|ts|tsx)$':
+      'react-scripts/config/jest/babelTransform.js',
     // Update the regex to support css and sass
     '^.+\\.(css|scss|sass)$': 'jest-preview/transforms/css',
     '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)':
