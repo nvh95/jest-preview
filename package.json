@@ -19,12 +19,14 @@
   "author": "nvh95",
   "main": "dist/index.js",
   "bin": {
-    "jest-preview": "./server/previewServer.js"
+    "jest-preview": "./server/previewServer.js",
+    "config-cra": "./cli/configCra.js"
   },
   "files": [
     "dist",
     "server",
-    "transforms"
+    "transforms",
+    "cli"
   ],
   "scripts": {
     "docs": "cd website && npm run start -- --port 3001",

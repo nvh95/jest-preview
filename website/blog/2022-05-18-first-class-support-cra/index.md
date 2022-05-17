@@ -11,7 +11,7 @@ CRA is well known for bootstrapping a React App. It hides the complexity of bund
 
 Option 1: Use codemod:
 
-- Run this CLI `jest-preview config-cra-test`
+- Run this CLI `jest-preview config-cra`
 
 Option 2: Configure manually
 
