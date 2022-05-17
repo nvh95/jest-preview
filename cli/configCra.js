@@ -1,10 +1,13 @@
 #!/usr/bin/env node
+// @ts-check
 // TODO: To revamp the CLI name (currently: config-cra. A proposal: `jest-preview config-cra`)
 const path = require('path');
 const fs = require('fs');
 // Append current node_modules to the module search path, so require('react-scripts') can work.
 module.paths.push(path.resolve(process.cwd(), './node_modules'));
 
+// Create `jest.config.js`
+// @ts-expect-error This is meant to run where react-scripts is installed
 const createJestConfig = require('react-scripts/scripts/utils/createJestConfig.js');
 const jestConfig = createJestConfig(
   (filePath) => path.posix.join('<rootDir>', filePath),
@@ -28,6 +31,7 @@ const jestConfigFileContent = `module.exports = ${JSON.stringify(
   2,
 )}\n`;
 fs.writeFileSync('jest.config.js', jestConfigFileContent);
+console.log(`Added jest.config.js to the project.`);
 
 // Try to prettier `jest.config.js`
 const execSync = require('child_process').execSync;
@@ -36,3 +40,28 @@ try {
 } catch (error) {
   // Just ignore if user doesn't have prettier installed
 }
+
+// Create `scripts/test.js`
+// https://github.com/facebook/create-react-app/blob/f99167c014a728ec856bda14f87181d90b050813/packages/react-scripts/scripts/eject.js#L158-L162
+
+const testFile = path.resolve(
+  process.cwd(),
+  './node_modules/react-scripts/scripts/test.js',
+);
+let content = fs.readFileSync(testFile, 'utf8');
+
+content =
+  content
+    // Remove dead code from .js files on eject
+    .replace(
+      /\/\/ @remove-on-eject-begin([\s\S]*?)\/\/ @remove-on-eject-end/gm,
+      '',
+    )
+    // Require `env` direct from `react-scripts`
+    .replace(
+      `require('../config/env');`,
+      `require('react-scripts/config/env');`,
+    )
+    .trim() + '\n';
+console.log(`Added scripts/test.js to the project.`);
+fs.writeFileSync(path.resolve(process.cwd(), 'scripts/test.js'), content);
