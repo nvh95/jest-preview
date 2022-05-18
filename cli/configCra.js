@@ -65,3 +65,12 @@ content =
     .trim() + '\n';
 console.log(`Added scripts/test.js to the project.`);
 fs.writeFileSync(path.resolve(process.cwd(), 'scripts/test.js'), content);
+
+// Update `package.json`
+const packageJson = require(path.resolve(process.cwd(), 'package.json'));
+packageJson.scripts.test = 'node scripts/test.js';
+fs.writeFileSync(
+  path.resolve(process.cwd(), 'package.json'),
+  JSON.stringify(packageJson, null, 2) + '\n',
+);
+console.log(`Update test script in package.json.`);
