@@ -24,7 +24,7 @@
     "eject": "react-scripts eject",
     "jest-preview": "jest-preview",
     "test:debug": "npm-run-all -p test jest-preview",
-    "config-cra": "config-cra"
+    "config-cra": "jest-preview config-cra"
   },
   "eslintConfig": {
     "extends": [
