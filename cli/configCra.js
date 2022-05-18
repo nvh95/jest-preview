@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 // @ts-check
-// TODO: To revamp the CLI name (currently: config-cra. A proposal: `jest-preview config-cra`)
 const path = require('path');
 const fs = require('fs');
 // Append current node_modules to the module search path, so require('react-scripts') can work.
@@ -10,7 +9,7 @@ module.paths.push(path.resolve(process.cwd(), './node_modules'));
 // @ts-expect-error This is meant to run where react-scripts is installed
 const createJestConfig = require('react-scripts/scripts/utils/createJestConfig.js');
 const jestConfig = createJestConfig(
-  (filePath) => path.posix.join('<rootDir>', filePath),
+  (/** @type {string} */ filePath) => path.posix.join('<rootDir>', filePath),
   null,
   true,
 );
@@ -22,7 +21,8 @@ jestConfig.transform = {
     'jest-preview/transforms/fileCRA',
 };
 jestConfig.transformIgnorePatterns = jestConfig.transformIgnorePatterns.filter(
-  (pattern) => pattern !== '^.+\\.module\\.(css|sass|scss)$',
+  (/** @type {string} */ pattern) =>
+    pattern !== '^.+\\.module\\.(css|sass|scss)$',
 );
 delete jestConfig.moduleNameMapper['^.+\\.module\\.(css|sass|scss)$'];
 const jestConfigFileContent = `module.exports = ${JSON.stringify(

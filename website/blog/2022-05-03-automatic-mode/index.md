@@ -17,7 +17,7 @@ We believe this is the game changer feature of Jest Preview, which boost the Fro
 jestPreviewConfigure({ autoPreview: true });
 ```
 
-**Automatic Mode** is in experiement and currently is an opt-in option. We recommend you to start use it now. Automatic Mode expect to be the default mode in Jest Preview 0.3.0.
+**Automatic Mode** is in experiment and currently is an opt-in option. We recommend you to start use it now. Automatic Mode expect to be the default mode in Jest Preview 0.3.x.
 
 If you have any trouble with Automatic Mode, let us know at [Jest Preview's GitHub issue](https://github.com/nvh95/jest-preview/issues/new?assignees=&labels=&template=bug_report.md&title=)
 

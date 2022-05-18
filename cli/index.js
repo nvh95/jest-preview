@@ -5,12 +5,10 @@ program
   .command('config-cra')
   .description('Integrate Jest Preview with CRA.')
   .action(() => {
-    // TODO: Execute function instead of require-ing
     require('./configCra');
   });
 
-program.action(() => {
-  // TODO: Execute function instead of require-ing
+program.description('Start Jest Preview server.').action(() => {
   require('./server/previewServer');
 });
 
