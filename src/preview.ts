@@ -9,7 +9,7 @@ export function debug(element: Element = document.body): void {
     });
   }
 
-  const headChildrenOnly = [...document.head.children].reduce(
+  const headChildrenOnly = Array.from(document.head.children).reduce(
     (prev, current) => prev + current.outerHTML,
     '',
   );
