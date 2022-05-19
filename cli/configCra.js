@@ -70,6 +70,9 @@ try {
       )
       .trim() + '\n';
   console.log(`Added scripts/test.js to the project.`);
+  if (!fs.existsSync('scripts')) {
+    fs.mkdirSync('scripts');
+  }
   fs.writeFileSync(path.resolve(process.cwd(), 'scripts/test.js'), content);
 
   // Update `package.json`
@@ -122,5 +125,5 @@ jestPreviewConfigure({
 }
 
 console.log(
-  'To continue, run `npm run jest-preview` to open Jest Preview server, then `npm run test` to run Jest. It will preview any failed test on your browser.',
+  '\nTo continue, run `npm run jest-preview` to open Jest Preview server, then `npm run test` to run Jest. It will preview any failed test in your browser.',
 );
