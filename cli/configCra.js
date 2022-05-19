@@ -120,3 +120,7 @@ jestPreviewConfigure({
 } catch (error) {
   console.error(error);
 }
+
+console.log(
+  'To continue, run `npm run jest-preview` to open Jest Preview server, then `npm run test` to run Jest. It will preview any failed test on your browser.',
+);
