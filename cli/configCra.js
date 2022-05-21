@@ -79,7 +79,7 @@ try {
   }
   fs.writeFileSync(path.resolve(process.cwd(), 'scripts/test.js'), content);
 
-  // Update `package.json`
+  // 3. Update `package.json`
   const packageJson = require(path.resolve(process.cwd(), 'package.json'));
   packageJson.scripts.test = 'node scripts/test.js';
   if (!packageJson.scripts['jest-preview']) {
@@ -94,7 +94,7 @@ try {
   console.error(error);
 }
 
-// 3. Configure Jest Preview using jestPreviewConfigure in `src/setupTests.ts` or `src/setupTests.js`
+// 4. Configure Jest Preview using jestPreviewConfigure in `src/setupTests.ts` or `src/setupTests.js`
 /**
  * @param {string} filePath
  * @param {string} content
