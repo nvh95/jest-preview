@@ -14,7 +14,7 @@ This example demonstrates how to use `jest-preview` with `create-react-app`. See
 
 ## Installation and Usage
 
-Please refer to [Installation](../../README.md#installation) and [Usage](../../README.md#installation).
+Please refer to [Installation](/docs/getting-started/installation) and [Usage](/docs/getting-started/usage).
 Except for step 2 and 3 of installation: **Configure jest's transform to transform CSS and files** and **If you use CSS Modules, make sure it doesn't get ignored**, you just need to run
 
 ```bash
