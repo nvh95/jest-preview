@@ -26,10 +26,7 @@ try {
       (/** @type {string} */ pattern) =>
         pattern !== '^.+\\.module\\.(css|sass|scss)$',
     );
-  try {
-    // Try to do since we are deleting nested properties
-    delete jestConfig.moduleNameMapper['^.+\\.module\\.(css|sass|scss)$'];
-  } catch (error) {}
+  delete jestConfig.moduleNameMapper['^.+\\.module\\.(css|sass|scss)$'];
 
   const jestConfigFileContent = `module.exports = ${JSON.stringify(
     jestConfig,
