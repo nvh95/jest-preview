@@ -28,6 +28,7 @@ Debug your Jest tests. Effortlessly. 🛠🖼
 [![npm](https://img.shields.io/npm/dt/jest-preview)](https://www.npmjs.com/package/jest-preview)
 
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)
+[![Best of JS](https://img.shields.io/endpoint?url=https://bestofjs-serverless.now.sh/api/project-badge?fullName=nvh95%2Fjest-preview%26since=daily)](https://bestofjs.org/projects/jest-preview)
 [![Discord](https://img.shields.io/discord/967456149735637002?logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/X5PyPUfemh)
 
 ## Why **jest-preview**
