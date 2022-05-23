@@ -1,3 +1,12 @@
+# 0.2.1
+
+## Features
+
+- First class support for Create React App
+- Support more CSS-in-JS libraries such as [emotion](https://emotion.sh/)
+- Add tests
+- Add docs
+
 # 0.2.0
 
 ## Features
