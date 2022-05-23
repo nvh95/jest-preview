@@ -28,7 +28,7 @@ const BODY_BASENAME = 'body.html';
 const BODY_PATH = path.join(CACHE_DIRECTORY, BODY_BASENAME);
 const PUBLIC_CONFIG_BASENAME = 'cache-public.config';
 const PUBLIC_CONFIG_PATH = path.join(CACHE_DIRECTORY, PUBLIC_CONFIG_BASENAME);
-const FAV_ICON_PATH = './node_modules/jest-preview/server/favicon.ico';
+const FAV_ICON_PATH = './node_modules/jest-preview/cli/server/favicon.ico';
 
 // Always set default public folder to `public` if not specified
 let publicFolder = 'public';

@@ -77,7 +77,7 @@ Whenever `preview.debug()` is triggered, or whenever a test fails, you will see 
 Following are brief descriptions of the repository architecture:
 
 - [src](https://github.com/nvh95/jest-preview/tree/main/src/): contains most of the code of Jest Preview such as `debug` function, `jestPreviewConfigure`, all Jest Transformations, pre-configured presets, adapters, etc.
-- [server](https://github.com/nvh95/jest-preview/tree/main/server/): contains Jest Preview server code, which is a web server that serves the preview page (Jest Preview Dashboard).
+- [cli/server](https://github.com/nvh95/jest-preview/tree/main/cli/server): contains Jest Preview server code, which is a web server that serves the preview page (Jest Preview Dashboard).
 - [demo](https://github.com/nvh95/jest-preview/tree/main/demo/): contains the demo app. You will work with this app most of the time when developing Jest Preview.
 - [config/jest](https://github.com/nvh95/jest-preview/tree/main/config/jest/): jest configuration files for the demo app.
 - [dist](https://github.com/nvh95/jest-preview/tree/main/dist/): Distribution code, which is bundled and processed by Rollup (previously: Vite Library Mode).

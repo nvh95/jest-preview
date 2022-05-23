@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ReactComponent as Logo } from './logo.svg';
 import logo from './logo.svg';
 import logo2 from './assets/images/logo.svg';
+import styles from './style.module.css';
 
 import './App.css';
 import './assets/css/App.css';
@@ -15,6 +16,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <img src={logo2} className="logo2" alt="logo2" />
         <p>Create React App example</p>
+        <p className={styles.textOrange}>Styled by CSS Modules</p>
         <button
           data-testid="increase"
           type="button"

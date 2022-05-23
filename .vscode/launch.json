@@ -9,7 +9,7 @@
       "request": "launch",
       "name": "Debug Preview Server",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/server/previewServer.js",
+      "program": "${workspaceFolder}/cli/index.js",
       "outFiles": ["${workspaceFolder}/**/*.js"]
     }
   ]
