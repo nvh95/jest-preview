@@ -1,0 +1,38 @@
+{
+  "name": "vite-jest",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.prod.json && vite build",
+    "preview": "vite preview",
+    "jest-preview": "jest-preview",
+    "test": "NODE_ENV=test jest --watch",
+    "test:nc": "npm run test -- --no-cache",
+    "test:debug": "npm-run-all -p test jest-preview"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.5"
+  },
+  "devDependencies": {
+    "@swc/core": "^1.2.154",
+    "@swc/jest": "^0.2.20",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.4",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/react": "^17.0.33",
+    "@types/react-dom": "^17.0.10",
+    "@vitejs/plugin-react": "^1.0.7",
+    "jest": "^28.1.0",
+    "jest-environment-jsdom": "^28.1.0",
+    "jest-preview": "file:../..",
+    "jest-watch-typeahead": "^1.0.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.6.0",
+    "sass": "^1.50.0",
+    "typescript": "^4.5.4",
+    "vite": "^2.8.0"
+  }
+}
