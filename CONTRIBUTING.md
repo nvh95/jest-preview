@@ -10,7 +10,7 @@ Jest Preview aims to be a community-driven project. So we hope to see your contr
 
 We appreciated any help. There is not a thing as a small contribution. If you see a typo, send us a PR. If you experience a bug, please open an issue. If you have a suggestion, let us know. Below are some ways you can contribute to Jest Preview:
 
-- **Submit bugs or issues:**: Software is full of bugs. Jest Preview is no exception. If you use Jest Preview and find a bug, please open an issue at [Jest Preview's issues](https://github.com/nvh95/jest-preview/issues)
+- **Submit bugs or issues**: Software is full of bugs. Jest Preview is no exception. If you use Jest Preview and find a bug, please open an issue at [Jest Preview's issues](https://github.com/nvh95/jest-preview/issues)
 - **Docs**: We have a documentation site at [www.jest-preview.com](https://www.jest-preview.com/docs/getting-started/intro), it's very easier to contribute to the documentation by using `Edit this page` button at the bottom of each page. If you see a typo, an unclear page or incorrect grammar, please send us a PR.
 - **Fix bugs**: We are tracking bugs at [Issues](https://github.com/nvh95/jest-preview/issues). Please [claim an issue](#claim-issues) then open a PR to fix a bug.
 - **Add new features**: Do you use Jest Preview for your projects and find out Jest Preview is missing a feature? Please open an issue to discuss it. And it's great if you can help to implement that feature.
@@ -23,7 +23,7 @@ If not sure what to contribute, but you still want to contribute something, let 
 There are some labels worth looking at for a new contributor:
 
 - [good first issue](https://github.com/nvh95/jest-preview/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22): Some issues to help you get your feet wet with Jest Preview
-- [help wanted](https://github.com/nvh95/jest-preview/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22): if you have specific knowledge in one domain, working on these issues can make your expertise shine.
+- [help wanted](https://github.com/nvh95/jest-preview/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22): If you have specific knowledge in one domain, working on these issues can make your expertise shine.
 
 If you want to work on any of these issues, just drop a message such as "I'd like to work on this". Depending on the difficulty of the issue, it can take a few days or a week to implement the feature/ bug fix. It's great if you can send a PR within seven days. If you need more time on a specific issue, please let us know. After that, we can delegate the issue to someone else if you are not available.
 
@@ -57,7 +57,7 @@ Run jest tests and Jest Preview server simultaneously:
 npm run test
 ```
 
-Open chrome at http://localhost:3336 to see the preview
+Open chrome at <http://localhost:3336> to see the preview
 
 However, it's recommended to run jest tests and Jest Preview server separately:
 
