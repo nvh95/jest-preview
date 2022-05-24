@@ -122,6 +122,7 @@ postcss(
 )
 .process(cssSrc, { from: ${JSON.stringify(filename)} })
 .then((result) => {
+  // TODO: Jest 24 (jest-environment-jsdom@24) not work. To investigate
   const style = document.createElement('style');
   style.type = 'text/css';
   style.appendChild(document.createTextNode(result.css));
