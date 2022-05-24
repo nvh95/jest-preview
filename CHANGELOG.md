@@ -1,3 +1,9 @@
+# 0.2.2
+
+## Features
+
+- Support Jest 28
+
 # 0.2.1
 
 ## Features

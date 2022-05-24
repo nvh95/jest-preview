@@ -5,12 +5,18 @@ function getRelativeFilename(filename: string): string {
   return filename.split(process.cwd())[1];
 }
 
-export function processFile(src: string, filename: string): string {
+type TransformedSource = {
+  code: string;
+};
+export function processFile(src: string, filename: string): TransformedSource {
   const relativeFilename = getRelativeFilename(filename);
-  return `module.exports = ${JSON.stringify(relativeFilename)};`;
+  return { code: `module.exports = ${JSON.stringify(relativeFilename)};` };
 }
 
-export function processFileCRA(src: string, filename: string): string {
+export function processFileCRA(
+  src: string,
+  filename: string,
+): TransformedSource {
   // /Users/your-name/your-project/src/assets/image.png => /src/assets/image.png
   const relativeFilename = JSON.stringify(getRelativeFilename(filename));
 
@@ -21,7 +27,8 @@ export function processFileCRA(src: string, filename: string): string {
       pascalCase: true,
     });
     const componentName = `Svg${pascalCaseFilename}`;
-    return `const React = require('react');
+    return {
+      code: `const React = require('react');
     module.exports = {
       __esModule: true,
       default: ${relativeFilename},
@@ -36,13 +43,16 @@ export function processFileCRA(src: string, filename: string): string {
           })
         };
       }),
-    };`;
+    };`,
+    };
   }
 
-  return `module.exports = ${relativeFilename};`;
+  return {
+    code: `module.exports = ${relativeFilename};`,
+  };
 }
 
-export function processCss(src: string, filename: string): string {
+export function processCss(src: string, filename: string): TransformedSource {
   if (filename.endsWith('.module.css')) {
     return processCSSModules(src, filename);
   }
@@ -52,13 +62,15 @@ export function processCss(src: string, filename: string): string {
 
   const relativeFilename = getRelativeFilename(filename);
   // Transform to a javascript module that load a <link rel="stylesheet"> tag to the page.
-  return `const relativeCssPath = "${relativeFilename}";
+  return {
+    code: `const relativeCssPath = "${relativeFilename}";
 const link = document.createElement('link');
 link.rel = 'stylesheet';
 link.href = relativeCssPath;
 document.head.appendChild(link);
 
-module.exports = JSON.stringify(relativeCssPath);`;
+module.exports = JSON.stringify(relativeCssPath);`,
+  };
 }
 
 // TODO: MEDIUM PRIORITY To research about getCacheKey
@@ -85,8 +97,9 @@ module.exports = JSON.stringify(relativeCssPath);`;
 // CSS Modules will be compiled at run time then inject to the document.head
 // One notable note is that `postcss-modules` is an async postcss plugin
 // We have to use Singleton design pattern to make it works asynchronously.
-function processCSSModules(src: string, filename: string): string {
-  return `const postcss = require('postcss');
+function processCSSModules(src: string, filename: string): TransformedSource {
+  return {
+    code: `const postcss = require('postcss');
 const PostcssModulesPlugin = require('postcss-modules');
 const cssSrc = ${JSON.stringify(src)};
 
@@ -109,29 +122,35 @@ postcss(
 )
 .process(cssSrc, { from: ${JSON.stringify(filename)} })
 .then((result) => {
+  // TODO: Jest 24 (jest-environment-jsdom@24) not work. To investigate
   const style = document.createElement('style');
   style.type = 'text/css';
   style.appendChild(document.createTextNode(result.css));
   document.head.appendChild(style);
 });
 
-module.exports = exportedTokens;`;
+module.exports = exportedTokens;`,
+  };
 }
 
-function processSass(src: string, filename: string): string {
+function processSass(src: string, filename: string): TransformedSource {
   let sass;
 
   try {
     sass = require('sass');
   } catch (err) {
     console.log(err);
-    return `module.exports = ${JSON.stringify(filename)};`;
+    return {
+      code: `module.exports = ${JSON.stringify(filename)};`,
+    };
   }
 
   const cssResult = sass.compile(filename).css;
 
-  return `const style = document.createElement('style');
+  return {
+    code: `const style = document.createElement('style');
 style.appendChild(document.createTextNode(${JSON.stringify(cssResult)}));
 document.head.appendChild(style);
-module.exports = {}`;
+module.exports = {}`,
+  };
 }
