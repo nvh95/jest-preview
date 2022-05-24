@@ -4,6 +4,10 @@
 
 - Support Jest 28
 
+## Chores
+
+- Add Jest 28 example
+
 # 0.2.1
 
 ## Features
