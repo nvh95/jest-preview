@@ -1,3 +1,13 @@
+# 0.2.3
+
+## Fixes
+
+- Make relative filenames consistent between Operating systems.
+
+## Chores
+
+- Add cross-env to run on Windows
+
 # 0.2.2
 
 ## Features
