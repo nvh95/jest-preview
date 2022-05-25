@@ -3,6 +3,7 @@
 ## Fixes
 
 - Make relative filenames consistent between Operating systems.
+- Fix sass on Windows.
 
 ## Chores
 

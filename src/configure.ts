@@ -52,7 +52,12 @@ export async function jestPreviewConfigure(
       // As a result, sass.compile cannot find the file
       // TODO: Can we inject css to the `document.head` directly?
       exec(
-        `./node_modules/.bin/sass ${cssFile} ${cssDestinationFile} --no-source-map`,
+        `${path.join(
+          process.cwd(),
+          'node_modules',
+          '.bin',
+          'sass',
+        )} ${cssFile} ${cssDestinationFile} --no-source-map`,
         (err: any) => {
           if (err) {
             console.log(err);
