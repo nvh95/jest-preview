@@ -1,8 +1,9 @@
 import path from 'path';
 import camelcase from 'camelcase';
+import slash from 'slash';
 
 function getRelativeFilename(filename: string): string {
-  return filename.split(process.cwd())[1];
+  return slash(filename.split(process.cwd())[1]);
 }
 
 type TransformedSource = {
