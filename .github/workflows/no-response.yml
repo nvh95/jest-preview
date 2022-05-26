@@ -1,3 +1,5 @@
+# Literally copy from https://github.com/remix-run/remix/blob/889893e9482dcd3edc936e88204a6c3314c45c78/.github/workflows/no-response.yml
+#  Thank you, remix-run/remix
 name: 🥺 No Response
 
 on:
