@@ -39,6 +39,20 @@ jestPreviewConfigure({
   ],
 ```
 
+## sassLoadPaths: string[]
+
+Default: `[]`
+
+Paths in which to look for stylesheets loaded by rules like `@use` and `@import` in sass files should be configured via `sassLoadPaths` option. They should be path from root of your project. For example:
+
+```js
+jestPreviewConfigure({
+  // Configure Sass load paths
+  sassLoadPaths: [
+    'demo/assets/_scss/loadPathsExample',
+  ],
+```
+
 ## publicFolder: string
 
 Default: `undefined`.
