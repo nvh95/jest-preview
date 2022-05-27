@@ -1,3 +1,4 @@
+import fs from 'fs';
 import path from 'path';
 import { pathToFileURL } from 'url';
 import camelcase from 'camelcase';
