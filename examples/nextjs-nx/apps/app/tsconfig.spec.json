@@ -7,7 +7,7 @@
     "jsx": "react"
   },
   "include": [
-    "jest.config.ts",
+    "jest.config.js",
     "**/*.test.ts",
     "**/*.spec.ts",
     "**/*.test.tsx",
