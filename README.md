@@ -138,6 +138,10 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
+## Star history
+
+[![Star History Chart](https://api.star-history.com/svg?repos=nvh95/jest-preview&type=Date)](https://star-history.com/#nvh95/jest-preview&Date)
+
 ## License
 
 ![This is open source software](https://user-images.githubusercontent.com/8603085/161439058-98faea42-c6e6-46f4-9ce6-218fad5f3b9a.gif)
