@@ -1,3 +1,9 @@
+# 0.2.4
+
+## Fixes
+
+- Sass enhancement
+
 # 0.2.3
 
 ## Fixes
