@@ -57,6 +57,9 @@ export function processCss(src: string, filename: string): TransformedSource {
   if (filename.endsWith('.module.css')) {
     return processCSSModules(src, filename);
   }
+  if (filename.endsWith('.css')) {
+    return processPostCSS(src, filename);
+  }
   if (filename.endsWith('.scss') || filename.endsWith('.sass')) {
     return processSass(src, filename);
   }
@@ -132,6 +135,21 @@ postcss(
 
 module.exports = exportedTokens;`,
   };
+}
+
+function processPostCSS(src: string, filename: string): TransformedSource {
+  return {code: `
+const postcss = require("postcss");
+const cssSrc = ${JSON.stringify(src)};
+postcss([require("tailwindcss")(), require("autoprefixer")()])
+  .process(cssSrc, { from: ${JSON.stringify(filename)} })
+  .then((result) => {
+    const style = document.createElement("style");
+    style.type = "text/css";
+    style.appendChild(document.createTextNode(result.css.replace(/\\\\/g, '')));
+    document.head.appendChild(style);
+  });
+`}
 }
 
 function processSass(src: string, filename: string): TransformedSource {

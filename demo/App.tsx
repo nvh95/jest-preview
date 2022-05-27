@@ -28,6 +28,7 @@ function App() {
           This text is styled by global configured SASS
         </p>
         <p className="imported-sass">This text is styled by imported SASS</p>
+        <p className={"text-red-500"}>This text is styled by Tailwind CSS</p>
         <button
           css={css`
             padding: 32px;
