@@ -147,3 +147,11 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 ![This is open source software](https://user-images.githubusercontent.com/8603085/161439058-98faea42-c6e6-46f4-9ce6-218fad5f3b9a.gif)
 
 MIT
+
+## Sponsors
+
+### Bronze Sponsor 🥉
+
+<a href="https://webuild.community/" target="_blank">
+  <img src="https://github.com/webuild-community.png" width="94" height="94" />
+</a>
