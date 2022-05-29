@@ -6,7 +6,8 @@ import '@testing-library/jest-dom';
 import { jestPreviewConfigure } from 'jest-preview';
 
 jestPreviewConfigure({
-  externalCss: ['src/index.css'],
+  externalCss: ['src/index.css', 'src/assets/_scss/global-style.scss'],
+  sassLoadPaths: ['src/assets/_scss/loadPathsExample'],
 });
 
 window.matchMedia = (query) => ({

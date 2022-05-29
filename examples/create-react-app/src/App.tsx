@@ -6,6 +6,7 @@ import styles from './style.module.css';
 
 import './App.css';
 import './assets/css/App.css';
+import './assets/_scss/style.scss';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -17,6 +18,17 @@ function App() {
         <img src={logo2} className="logo2" alt="logo2" />
         <p>Create React App example</p>
         <p className={styles.textOrange}>Styled by CSS Modules</p>
+        <p className="global-configured-sass">
+          This text is styled by global configured SASS
+        </p>
+        <p className="imported-sass">This text is styled by imported SASS</p>
+        <p className="load-path-sass">
+          This text is styled by SASS from load paths
+        </p>
+        <div className="animated fadeIn">
+          <p>An animated element style using @import ~</p>
+          <p>Watch me fade in!</p>
+        </div>
         <button
           data-testid="increase"
           type="button"
