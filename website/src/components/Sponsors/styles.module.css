@@ -1,0 +1,29 @@
+.wrapper {
+  padding-bottom: 32px;
+}
+
+.sponsorsHeading {
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.description {
+  font-size: 1rem;
+  text-align: center;
+  padding: 0 16px 20px;
+}
+
+.bronzeHeading {
+  display: flex;
+  justify-content: center;
+}
+
+.sponsorWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.bronzeSponsor {
+  text-align: center;
+}
