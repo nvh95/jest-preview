@@ -147,3 +147,15 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 ![This is open source software](https://user-images.githubusercontent.com/8603085/161439058-98faea42-c6e6-46f4-9ce6-218fad5f3b9a.gif)
 
 MIT
+
+## Sponsors
+
+If you like the project and want us continue to develop it, please support us via [Open Collective](https://opencollective.com/jest-preview), starting from **$1**.
+
+Bronze Sponsor 🥉 and Silver Sponsor 🥈 on [Open Collective](https://opencollective.com/jest-preview) will have your logo on **README.md** and [www.jest-preview.com](www.jest-preview.com), for the Gold Sponsor 🥇 and Diamond Sponsor 💎, please contact [the author](https://twitter.com/hung_dev).
+
+### Bronze Sponsor 🥉
+
+<a href="https://webuild.community/">
+  <img src="https://user-images.githubusercontent.com/8603085/170883918-8b9f111d-f3c6-4647-9cc1-de56dd98ea60.png" width="94" height="94" />
+</a>
