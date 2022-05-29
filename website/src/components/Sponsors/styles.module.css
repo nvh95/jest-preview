@@ -27,3 +27,10 @@
 .bronzeSponsor {
   text-align: center;
 }
+
+.wantLogo {
+  font-size: 1rem;
+  text-align: center;
+  padding: 16px 16px 20px;
+  font-style: italic;
+}

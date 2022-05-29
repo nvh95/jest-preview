@@ -34,6 +34,17 @@ export default function Sponsors() {
           />
         </a>
       </div>
+      <div className={styles.wantLogo}>
+        Want your logo here? Learn more at{' '}
+        <a
+          href="https://github.com/nvh95/jest-preview#sponsors"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Sponsors
+        </a>
+        .
+      </div>
     </div>
   );
 }
