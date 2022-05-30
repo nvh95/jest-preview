@@ -150,7 +150,7 @@ MIT
 
 ## Sponsors
 
-If you like the project and want us continue to develop it, please support us via [Open Collective](https://opencollective.com/jest-preview), starting from **$1**.
+If you like the project and want us continue to develop it, please sponsor us via [Open Collective](https://opencollective.com/jest-preview), starting from **$1**.
 
 Bronze Sponsor 🥉 and Silver Sponsor 🥈 on [Open Collective](https://opencollective.com/jest-preview) will have your logo on **README.md** and [www.jest-preview.com](www.jest-preview.com), for the Gold Sponsor 🥇 and Diamond Sponsor 💎, please contact [the author](https://twitter.com/hung_dev).
 
