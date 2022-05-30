@@ -30,26 +30,6 @@ const PUBLIC_CONFIG_BASENAME = 'cache-public.config';
 const PUBLIC_CONFIG_PATH = path.join(CACHE_DIRECTORY, PUBLIC_CONFIG_BASENAME);
 const FAV_ICON_PATH = './node_modules/jest-preview/cli/server/favicon.ico';
 
-const updateNotifier = require('update-notifier');
-const chalk = require('chalk'); // Already installed in `update-notifier`
-
-// Checks for available update
-const notifier = updateNotifier({
-  pkg: require('../../package.json'),
-  updateCheckInterval: 0, // How often to check for updates
-  shouldNotifyInNpmScript: true, // Allows notification to be shown when running as an npm script
-  distTag: 'latest' // Can be use to notify user about pre-relase version
-})
-
-notifier.notify({
-  defer: true, // Try not to annoy user by showing the notification after the process has exited
-  message:[
-      `${chalk.blue('{packageName}')} has an update available: ${chalk.gray('{currentVersion}')} → ${chalk.green('{latestVersion}')}`,
-      `Please run ${chalk.cyan('`{updateCommand}`')} to update.`,
-      chalk.dim(`If you don\'t want to receive this notification, please set \`optOut\` property in \n\`${notifier.config.path}\` to true\nor running jest-preview with \`--no-update-notifier\` flag.`),
-  ].join('\n')
-});
-
 // Always set default public folder to `public` if not specified
 let publicFolder = 'public';
 
