@@ -51,6 +51,10 @@ export async function jestPreviewConfigure(
   }
 
   externalCss?.forEach((cssFile) => {
+    // TODO: To add a yellow warning here
+    // `chalk` is installed in https://github.com/nvh95/jest-preview/pull/129, so we can merge that PR first
+    // Link to migration guide (haven't written yet)
+    // https://github.com/nvh95/jest-preview/issues/124
     // Avoid name collision
     // Example: src/common/styles.css => cache-src___common___styles.css
     const delimiter = '___';
