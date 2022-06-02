@@ -57,6 +57,7 @@ function Feature({ title, Svg, description }: FeatureItem) {
   return (
     <div className={clsx('col col--3')}>
       <div className="text--center">
+        {/* TODO: Why SVG looks different in Figma??? */}
         <Svg className={styles.featureSvg} role="img" />
       </div>
       <div className="text--center padding-horiz--md">
