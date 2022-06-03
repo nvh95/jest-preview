@@ -56,6 +56,9 @@ export function processFileCRA(
   };
 }
 
+// TODO: We need to re-architect the CSS transform as follow
+// pre-processor (sass, stylus, less) => process(??) => post-processor (css modules, tailwindcss)
+// Reference to https://github.com/vitejs/vite/blob/c29613013ca1c6d9c77b97e2253ed1f07e40a544/packages/vite/src/node/plugins/css.ts#L652-L673
 export function processCss(src: string, filename: string): TransformedSource {
   if (filename.endsWith('.module.css')) {
     return processCSSModules(src, filename);
