@@ -122,6 +122,16 @@ postcss(
     getJSON: (cssFileName, json, outputFileName) => {
       exportedTokens.set(json);
     },
+    // Use custom scoped name to prevent different hash between windows and linux
+    // Because new line characters can be different between windows and linux: https://stackoverflow.com/a/1761086
+    // Original hash function: https://github.com/madyankin/postcss-modules/blob/master/src/generateScopedName.js#L6
+    generateScopedName: function (name, filename, css) {
+      const path = require("path");
+      const i = css.indexOf("." + name);
+      const line = css.substr(0, i).split(/[\\r\\n]/).length;
+      const file = path.basename(filename, ".css");
+      return "_" + file + "_" + line + "_" + name;
+    },
   }),
 )
 .process(cssSrc, { from: ${JSON.stringify(filename)} })
