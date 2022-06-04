@@ -59,22 +59,15 @@ Sometimes, there are some CSS files imported outside your current test component
 ```js
   // jest.config.js
   {
-    setupFilesAfterEnv: ["./config/jest/setupTests.js"],
+    setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   }
 ```
 
 ```js
-// ./config/jest/setupTests.js
-import { jestPreviewConfigure } from 'jest-preview';
-
-// Should be path from root of your project
-jestPreviewConfigure({
-  externalCss: [
-    'demo/global.css',
-    'node_modules/@your-design-system/css/dist/index.min.css',
-    'node_modules/bootstrap/dist/css/bootstrap.min.css',
-  ],
-});
+// src/setupTests.js
+import './global.css';
+import '@your-design-system/css/dist/index.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 ```
 
 ### 5. (Optional) Configure public folder

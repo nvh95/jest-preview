@@ -13,13 +13,10 @@ There are a few reasons that you might not see CSS on the Jest Preview Dashboard
 - You might have some CSS files that are not imported to your current testing component (i.e: `src/index.jsx`, `src/main.jsx`). You can configure external CSS using `jestPreviewConfigure`. See more at [**Installation**](/docs/getting-started/installation#4-optional-configure-external-css).
 
 ```js
-jestPreviewConfigure({
-  externalCss: [
-    'demo/global.css',
-    'node_modules/@your-design-system/css/dist/index.min.css',
-    'node_modules/bootstrap/dist/css/bootstrap.min.css',
-  ],
-});
+// src/setupTests.js
+import './global.css';
+import '@your-design-system/css/dist/index.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 ```
 
 - Your CSS strategy is not supported by Jest Preview yet. Please see [**Features**](/docs/getting-started/features) for supported CSS strategies. Feel free to [Request a new feature](https://github.com/nvh95/jest-preview/issues/new?assignees=&labels=&template=feature_request.md&title=) if you want Jest Preview supports your use case.

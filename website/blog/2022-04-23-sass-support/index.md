@@ -12,20 +12,13 @@ Sass is one of the most popular CSS extension language in the ecosystem and is b
 
 ![Jest Preview supports Sass](./jest-preview-supports-sass.png)
 
-You can even add Sass as an external CSS via [jestPreviewConfigure](/docs/api/jestPreviewConfigure). This is usually handy for stylesheet files imported in `src/index.js` or `src/main.js`.
+You can even add Sass as an external CSS directly in your setup test file. This is usually handy for stylesheet files imported in `src/index.js` or `src/main.js`.
 
 ```js
 // setupTests.js
 import { jestPreviewConfigure } from 'jest-preview';
-
-// Should be path from root of your project
-jestPreviewConfigure({
-  // Configure external CSS
-  externalCss: [
-    'demo/global.scss',
-    'node_modules/@your-design-system/css/dist/index.min.scss', // scss from node_modules
-  ],
-});
+import './global.scss';
+import '@your-design-system/css/dist/index.min.scss';
 ```
 
 For now, Jest Preview only supports Dart Sass, since [LibSass and Node Sass are deprecated](https://sass-lang.com/blog/libsass-is-deprecated). One caveat is that Jest Preview doesn't support [load path](https://sass-lang.com/documentation/cli/dart-sass#load-path) yet. We will add it to the next version.

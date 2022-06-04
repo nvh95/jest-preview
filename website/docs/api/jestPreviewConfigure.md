@@ -5,39 +5,25 @@ sidebar_position: 2
 # jestPreviewConfigure()
 
 ```js
-// ./config/jest/setupTests.js
+// src/setupTests.js
 import { jestPreviewConfigure } from 'jest-preview';
+// Configure external CSS
+import './global.css';
+import './global.scss';
+import '@your-design-system/css/dist/index.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-// Should be path from root of your project
 jestPreviewConfigure({
-  // Configure external CSS
-  externalCss: [
-    'demo/global.css',
-    'demo/global.scss', // Sass
-    'node_modules/@your-design-system/css/dist/index.min.css', // css from node_modules
-    'node_modules/bootstrap/dist/css/bootstrap.min.css',
-  ],
   // Configure public folder if your public folder is not "public"
   publicFolder: 'your-public-folder-name',
 });
 ```
 
-## externalCss: string[]
+## externalCss: string[] (Deprecated)
 
-Default: `[]`
+This option is deprecated. Please do not use. Instead, import the CSS directly. See the instruction at [Deprecate CSS](/)
 
-CSS files outside your Jest rendered app (e.g: CSS from `src/index.js`, `main.jsx`) should be configured via `externalCss` option. They should be path from root of your project. For example:
-
-```js
-jestPreviewConfigure({
-  // Configure external CSS
-  externalCss: [
-    'demo/global.css',
-    'demo/global.scss', // Sass
-    'node_modules/@your-design-system/css/dist/index.min.css', // css from node_modules
-    'node_modules/bootstrap/dist/css/bootstrap.min.css',
-  ],
-```
+<!-- (TODO: Add a new blog post to guide people to migrate) -->
 
 ## sassLoadPaths: string[]
 
@@ -48,9 +34,8 @@ Paths in which to look for stylesheets loaded by rules like `@use` and `@import`
 ```js
 jestPreviewConfigure({
   // Configure Sass load paths
-  sassLoadPaths: [
-    'demo/assets/_scss/loadPathsExample',
-  ],
+  sassLoadPaths: ['demo/assets/_scss/loadPathsExample'],
+});
 ```
 
 ## publicFolder: string
