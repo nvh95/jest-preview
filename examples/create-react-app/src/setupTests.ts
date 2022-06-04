@@ -4,9 +4,10 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 import { jestPreviewConfigure } from 'jest-preview';
+import './index.css';
+import './assets/_scss/global-style.scss';
 
 jestPreviewConfigure({
-  externalCss: ['src/index.css', 'src/assets/_scss/global-style.scss'],
   sassLoadPaths: ['src/assets/_scss/loadPathsExample'],
 });
 
