@@ -122,14 +122,14 @@ postcss(
     getJSON: (cssFileName, json, outputFileName) => {
       exportedTokens.set(json);
     },
-    // Use custom scoped name to prevent different hash between windows and linux
-    // Because new line characters can be different between windows and linux: https://stackoverflow.com/a/1761086
+    // Use custom scoped name to prevent different hash between operating systems
+    // Because new line characters can be different between operating systems. Reference: https://stackoverflow.com/a/10805198
     // Original hash function: https://github.com/madyankin/postcss-modules/blob/master/src/generateScopedName.js#L6
     generateScopedName: function (name, filename, css) {
       const stringHash = require('string-hash');
       const i = css.indexOf('.' + name);
-      const line = css.substr(0, i).split(/[\\r\\n]/).length;
-      const removedNewLineCharactersCss = css.replace(/[\\r\\n]/g, '');
+      const line = css.substr(0, i).split(/[\\r\\n|\\n|\\r]/).length;
+      const removedNewLineCharactersCss = css.replace(/(\\r\\n|\\n|\\r)/g, '');
       const hash = stringHash(removedNewLineCharactersCss).toString(36).substr(0, 5);
       return '_' + name + '_' + hash + '_' + line;
     },

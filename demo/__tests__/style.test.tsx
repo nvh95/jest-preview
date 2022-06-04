@@ -31,11 +31,11 @@ describe('Style', () => {
     // Global
     // TODO: not implemented yet
     // Import
-    expect(document.documentElement.outerHTML)
-      .toContain(`<style type=\"text/css\">._cssModule_1gc0y_1 {
-  color: green;
-}
-</style>`);
+    expect(
+      document.documentElement.outerHTML.replace(/\r\n|\n|\r/g, ''),
+    ).toContain(
+      `<style type=\"text/css\">._cssModule_1gc0y_1 {  color: green;}</style>`,
+    );
 
     // Sass
     // Global
