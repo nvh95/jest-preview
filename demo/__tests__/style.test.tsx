@@ -32,7 +32,7 @@ describe('Style', () => {
     // TODO: not implemented yet
     // Import
     expect(document.documentElement.outerHTML)
-      .toContain(`<style type=\"text/css\">._style.module_1_cssModule {
+      .toContain(`<style type=\"text/css\">._cssModule_1gc0y_1 {
   color: green;
 }
 </style>`);

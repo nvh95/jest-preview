@@ -126,11 +126,12 @@ postcss(
     // Because new line characters can be different between windows and linux: https://stackoverflow.com/a/1761086
     // Original hash function: https://github.com/madyankin/postcss-modules/blob/master/src/generateScopedName.js#L6
     generateScopedName: function (name, filename, css) {
-      const path = require("path");
-      const i = css.indexOf("." + name);
+      const stringHash = require('string-hash');
+      const i = css.indexOf('.' + name);
       const line = css.substr(0, i).split(/[\\r\\n]/).length;
-      const file = path.basename(filename, ".css");
-      return "_" + file + "_" + line + "_" + name;
+      const removedNewLineCharactersCss = css.replace(/[\\r\\n]/g, '');
+      const hash = stringHash(removedNewLineCharactersCss).toString(36).substr(0, 5);
+      return '_' + name + '_' + hash + '_' + line;
     },
   }),
 )
