@@ -56,7 +56,10 @@ export async function jestPreviewConfigure(
     // https://github.com/nvh95/jest-preview/issues/124
     // Avoid name collision
     // Example: src/common/styles.css => cache-src___common___styles.css
-    console.log('externalCss is deprecated');
+    console.log(
+      'externalCss is deprecated. Please import css files directly in your setup file.',
+    );
+    console.log('See the instruction to migrate here: TODO');
     const delimiter = '___';
     const destinationBasename = `cache-${cssFile.replace(/\//g, delimiter)}`;
     const destinationFile = path.join(CACHE_FOLDER, destinationBasename);
