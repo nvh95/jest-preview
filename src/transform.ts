@@ -124,7 +124,7 @@ postcss(
     },
     // Use custom scoped name to prevent different hash between operating systems
     // Because new line characters can be different between operating systems. Reference: https://stackoverflow.com/a/10805198
-    // Original hash function: https://github.com/madyankin/postcss-modules/blob/master/src/generateScopedName.js#L6
+    // Original hash function: https://github.com/madyankin/postcss-modules/blob/7d5965d4df201ef301421a5e35805d1b47f3c914/src/generateScopedName.js#L6
     generateScopedName: function (name, filename, css) {
       const stringHash = require('string-hash');
       const i = css.indexOf('.' + name);
