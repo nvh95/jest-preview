@@ -129,6 +129,8 @@ postcss(
       const stringHash = require('string-hash');
       const i = css.indexOf('.' + name);
       const line = css.substr(0, i).split(/[\\r\\n|\\n|\\r]/).length;
+      // This is not how the real app work, might be an issue if we try to make the snapshot interactive
+      // https://github.com/nvh95/jest-preview/issues/84#issuecomment-1146578932
       const removedNewLineCharactersCss = css.replace(/(\\r\\n|\\n|\\r)/g, '');
       const hash = stringHash(removedNewLineCharactersCss).toString(36).substr(0, 5);
       return '_' + name + '_' + hash + '_' + line;
