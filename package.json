@@ -46,7 +46,7 @@
     "test:ci": "cross-env NODE_ENV=test jest",
     "clearCache": "rimraf node_modules/.cache/jest-preview && jest --clearCache",
     "test": "npm-run-all -p server test:dev",
-    "prettier": "prettier server src --check",
+    "prettier": "prettier cli src --check",
     "prettier:fix": "npm run prettier -- --write",
     "sort": "npx sort-package-json",
     "postinstall": "bash -c \"[[ '$INIT_CWD' == '$PWD' ]] && echo Inside Jest Preview. Do not clear Cache. || jest --clearCache || echo\"",
@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "camelcase": "^6.3.0",
-    "chalk": "^5.0.1",
+    "chalk": "^4.1.2",
     "chokidar": "^3.5.3",
     "commander": "^9.2.0",
     "connect": "^3.7.0",
