@@ -103,6 +103,14 @@ Jest Preview comes with [Pre-configured transformation](https://www.jest-preview
 - Multiple preview.
 - [You name it](https://github.com/nvh95/jest-preview/labels/feature_request).
 
+## Support
+
+Please [file an issue](https://github.com/nvh95/jest-preview/issues), or [add a new discussion](https://github.com/nvh95/jest-preview/discussions) if you encounter any issues.
+
+You can also mention [@JestPreview](https://twitter.com/JestPreview) or [@hung_dev](https://twitter.com/hung_dev) on twitter if you want to have some more discussions or suggestions.
+
+We also have a Discord server: [![Discord](https://img.shields.io/discord/967456149735637002?logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/X5PyPUfemh)
+
 ## Contributing
 
 We can't wait to see your contributions. See the Contribution Guide at [CONTRIBUTING.md](/CONTRIBUTING.md)
