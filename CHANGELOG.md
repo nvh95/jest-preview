@@ -1,5 +1,9 @@
 # 0.2.4
 
+## Features
+
+- Notify user when there is a new "latest" version
+
 ## Fixes
 
 - Sass enhancement
