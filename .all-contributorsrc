@@ -109,6 +109,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "huynhducduy",
+      "name": "Huynh Duc Duy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12293622?v=4",
+      "profile": "https://huynhducduy.me",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
