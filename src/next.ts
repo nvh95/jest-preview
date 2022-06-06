@@ -8,7 +8,8 @@ export async function configureNextJestPreview(
   // Use transforms from `jest-preview`
   if (config.transform) {
     config.transform['^.+\\.(css|scss|sass)$'] = 'jest-preview/transforms/css';
-    config.transform['^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)'] = 'jest-preview/transforms/file';
+    config.transform['^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)'] =
+      'jest-preview/transforms/file';
   }
   // Don't ignore Module CSS/Sass/SCSS
   if (config.transformIgnorePatterns) {
