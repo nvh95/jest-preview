@@ -7,6 +7,9 @@ import { createCacheFolderIfNeeded } from './utils';
 import { debug } from './preview';
 
 interface JestPreviewConfigOptions {
+  /**
+   * @deprecated externalCss should not be use. Import the css files directly instead. Read more at www.jest-preview.com/blog/deprecate-externalCss
+   */
   externalCss?: string[];
   autoPreview?: boolean;
   publicFolder?: string;
