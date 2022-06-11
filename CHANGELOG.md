@@ -3,10 +3,15 @@
 ## Features
 
 - Notify user when there is a new "latest" version
+- Deprecate `externalCss` (gradually)
 
 ## Fixes
 
 - Sass enhancement
+
+## Chores
+
+- Improve docs and message in Jest Preview Dashboard
 
 # 0.2.3
 
