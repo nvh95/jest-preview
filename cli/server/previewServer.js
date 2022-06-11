@@ -135,11 +135,15 @@ Please add following lines to your test: <br /> <br />
   import { debug } from 'jest-preview';
   <br />
   <br />
+  // Inside your tests
+  <br />
   debug();
   </code>
 </div>
-<br /><br />
+<br />
 Then rerun your tests.
+<br />
+See an example in the <a href="https://www.jest-preview.com/docs/getting-started/usage#3-preview-your-html-from-jest-following-code-demo-how-to-use-it-with-react-testing-library" target="_blank" rel="noopener noreferrer">documentation</a>
 </body>
 <script>${reloadScriptContent}</script>
 </html>`);
