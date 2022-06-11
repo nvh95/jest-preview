@@ -21,9 +21,7 @@ jestPreviewConfigure({
 
 ## externalCss: string[] (Deprecated)
 
-This option is deprecated. Please do not use. Instead, import the CSS directly. See the instruction at [Deprecate CSS](/)
-
-<!-- (TODO: Add a new blog post to guide people to migrate) -->
+This option is deprecated. Please do not use it. Instead, import the CSS directly. See the instruction at [Deprecate CSS](/blog/deprecate-externalCss)
 
 ## sassLoadPaths: string[]
 

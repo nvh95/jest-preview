@@ -8,7 +8,7 @@ import { debug } from './preview';
 
 interface JestPreviewConfigOptions {
   /**
-   * @deprecated externalCss should not be use. Import the css files directly instead. Read more at www.jest-preview.com/blog/deprecate-externalCss
+   * @deprecated externalCss should not be used and will be removed in 0.4.0. Import the css files directly instead. Read more at www.jest-preview.com/blog/deprecate-externalCss
    */
   externalCss?: string[];
   autoPreview?: boolean;
