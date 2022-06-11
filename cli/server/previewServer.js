@@ -129,11 +129,17 @@ app.use('/', (req, res) => {
 </head>
 <body>
 No preview found.<br/>
-Please run: <br /> <br />
-<code>
-preview.debug();
-</code>
+Please add following lines to your test: <br /> <br />
+<div style="background-color: grey;width: fit-content;padding: 8px;">
+  <code>
+  import { debug } from 'jest-preview';
+  <br />
+  <br />
+  debug();
+  </code>
+</div>
 <br /><br />
+Then rerun your tests.
 </body>
 <script>${reloadScriptContent}</script>
 </html>`);

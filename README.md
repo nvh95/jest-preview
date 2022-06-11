@@ -78,6 +78,8 @@ describe('App', () => {
 });
 ```
 
+You also need to start the Jest Preview Server by running the CLI `jest-preview`. Please continue to read [Usage](https://www.jest-preview.com/docs/getting-started/usage) for the details instructions.
+
 ## Examples
 
 - Use with [Vite](https://vitejs.dev/): [Example with Vite](https://www.jest-preview.com/docs/examples/vite-react)
