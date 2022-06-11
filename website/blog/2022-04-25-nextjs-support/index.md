@@ -51,11 +51,11 @@ and configure external CSS files if there are any.
 
 ```js
 import { jestPreviewConfigure } from 'jest-preview';
-// An array of relative paths from the root of your project
+// Global CSS is supported
 import 'styles/globals.css';
 // SCSS is also supported
 import 'demo/globals.scss';
-// Any CSS from node_modules is fine
+// Any CSS from dependencies is fine
 import '@your-design-system/css/dist/index.min.css';
 ```
 
