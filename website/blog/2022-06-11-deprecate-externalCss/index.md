@@ -3,11 +3,10 @@ slug: deprecate-externalCss
 title: Deprecate externalCss option
 authors: [nvh95]
 tags: [jest-preview, backward-compatible, css]
-# TODO: To add new social image
-# image: /img/first-class-support-cra.jpg
+image: /img/deprecate-externalCss.jpg
 ---
 
-Previous Jest Preview provides a way to configure external CSS via `externalCss` option in `jestPreviewConfigure` function. However, we realized that we can actually import the css DIRECTLY in the setup test file (usually `setupFilesAfterEnv` file) instead. This way, we can use the same logic to process external CSS as well as CSS in your components.
+Previous Jest Preview provides a way to configure external CSS via `externalCss` option in `jestPreviewConfigure` function. However, we realized that we can actually import the css **DIRECTLY** in the setup test file (usually `setupFilesAfterEnv` in Jest config) instead. This way, we can use the same logic to process external CSS as well as CSS in your components.
 
 **What you need to do is as follow:**
 
