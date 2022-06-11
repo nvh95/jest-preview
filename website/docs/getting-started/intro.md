@@ -50,3 +50,5 @@ describe('App', () => {
   });
 });
 ```
+
+You also need to start the Jest Preview Server by running the CLI `jest-preview`. Please continue to read [Usage](/docs/getting-started/usage) for the details instructions.
