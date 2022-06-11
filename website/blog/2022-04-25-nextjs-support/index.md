@@ -51,16 +51,12 @@ and configure external CSS files if there are any.
 
 ```js
 import { jestPreviewConfigure } from 'jest-preview';
-
-jestPreviewConfigure({
-  // An array of relative paths from the root of your project
-  externalCss: [
-    'styles/globals.css',
-    // SCSS is also supported
-    'demo/globals.scss',
-    // Any CSS from node_modules is fine
-    'node_modules/@your-design-system/css/dist/index.min.css',
-  ],
+// Global CSS is supported
+import 'styles/globals.css';
+// SCSS is also supported
+import 'demo/globals.scss';
+// Any CSS from dependencies is fine
+import '@your-design-system/css/dist/index.min.css';
 ```
 
 For details, please refer to [Installation guide](/docs/getting-started/installation). You can also see the **full example** at [Nextjs with Rust compiler](https://github.com/nvh95/jest-preview/tree/main/examples/nextjs)

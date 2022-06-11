@@ -7,7 +7,7 @@ module.exports = {
     // TODO: To report coverage in `src`. They are compiled to `dist` so it's difficult to report coverage directly
   ],
   coveragePathIgnorePatterns: [],
-  setupFilesAfterEnv: ['./config/jest/setupTests.js'],
+  setupFilesAfterEnv: ['<rootDir>/demo/setupTests.js'],
   testEnvironment: 'jsdom',
   modulePaths: ['<rootDir>/demo'],
   transform: {

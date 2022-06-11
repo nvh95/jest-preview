@@ -104,12 +104,12 @@ function injectToFileIfExisted(filePath, content) {
 
 try {
   const configToInject = `import { jestPreviewConfigure } from 'jest-preview'
+// TODO: To add your global css here
+import './index.css';
 
 jestPreviewConfigure({
   // Opt-in to automatic mode to preview failed test case.
   autoPreview: true,
-  // TODO: To add your global css here
-  externalCss: ['src/index.css'],
 })
 `;
   injectToFileIfExisted(

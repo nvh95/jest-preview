@@ -1,8 +1,6 @@
 import { jestPreviewConfigure } from 'jest-preview';
+import './styles/globals.css';
 
 jestPreviewConfigure({
-  // An array of relative path from the root of your project
-  externalCss: [
-    'styles/globals.css',
-  ],
+  autoPreview: true,
 });

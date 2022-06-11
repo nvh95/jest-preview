@@ -1,12 +1,15 @@
 import path from 'path';
 import fs from 'fs';
 import { exec } from 'child_process';
-
+import chalk from 'chalk';
 import { CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG } from './constants';
 import { createCacheFolderIfNeeded } from './utils';
 import { debug } from './preview';
 
 interface JestPreviewConfigOptions {
+  /**
+   * @deprecated externalCss should not be used and will be removed in 0.4.0. Import the css files directly instead. Read more at www.jest-preview.com/blog/deprecate-externalCss
+   */
   externalCss?: string[];
   autoPreview?: boolean;
   publicFolder?: string;
@@ -15,12 +18,11 @@ interface JestPreviewConfigOptions {
 
 export async function jestPreviewConfigure(
   {
-    externalCss = [],
+    externalCss,
     autoPreview = false,
     publicFolder,
     sassLoadPaths,
   }: JestPreviewConfigOptions = {
-    externalCss: [],
     autoPreview: false,
     sassLoadPaths: [],
   },
@@ -53,6 +55,12 @@ export async function jestPreviewConfigure(
   externalCss?.forEach((cssFile) => {
     // Avoid name collision
     // Example: src/common/styles.css => cache-src___common___styles.css
+    console.log(
+      chalk.yellow(
+        'externalCss is deprecated. Please import css files directly in your setup file.',
+        'See the migration guide at www.jest-preview.com/blog/deprecate-externalCss',
+      ),
+    );
     const delimiter = '___';
     const destinationBasename = `cache-${cssFile.replace(/\//g, delimiter)}`;
     const destinationFile = path.join(CACHE_FOLDER, destinationBasename);

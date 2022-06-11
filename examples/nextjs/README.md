@@ -49,17 +49,12 @@ Configure Jest Preview inside `jest.setup.js` (or any setup files) specified in 
 
 ```js
 import { jestPreviewConfigure } from 'jest-preview';
+import 'styles/globals.css';
+// SCSS is also supported
+import 'demo/globals.scss',
+// Any CSS from node_modules is fine
+import '@your-design-system/css/dist/index.min.css',
 
-jestPreviewConfigure({
-  // An array of relative paths from the root of your project
-  externalCss: [
-    'styles/globals.css',
-    // SCSS is also supported
-    // 'demo/globals.scss',
-    // Any CSS from node_modules is fine
-    // 'node_modules/@your-design-system/css/dist/index.min.css',
-  ],
-});
 ```
 
 ## Done

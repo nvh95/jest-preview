@@ -1,8 +1,9 @@
 import '@testing-library/jest-dom/extend-expect';
-import { jestPreviewConfigure } from '../../dist/index';
+import { jestPreviewConfigure } from '../dist/index';
+import './global.css';
+import './assets/_scss/global-style.scss';
 
 jestPreviewConfigure({
-  externalCss: ['demo/global.css', 'demo/assets/_scss/global-style.scss'],
   publicFolder: 'demo/public',
   autoPreview: true,
   sassLoadPaths: ['demo/assets/_scss/loadPathsExample'],

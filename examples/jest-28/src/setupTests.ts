@@ -1,9 +1,10 @@
 // @ts-check
 import '@testing-library/jest-dom/extend-expect';
 import { jestPreviewConfigure } from 'jest-preview';
+import './index.css';
+import './assets/_scss/global-style.scss';
 
 jestPreviewConfigure({
-  externalCss: ['src/index.css', 'src/assets/_scss/global-style.scss'],
   autoPreview: true,
 });
 
