@@ -54,13 +54,13 @@ moduleNameMapper: {
 
 ### 4. (Optional) Configure external CSS
 
-Sometimes, there are some CSS files imported outside your current test components (e.g: CSS imported in `src/index.js`, `src/main.tsx`). In this case, you can manually add those CSS files to `jest-preview` by `jestPreviewConfigure`. Notice that they should be path from root of your project.
+Sometimes, there are some CSS files imported outside your current test components (e.g: CSS imported in `src/index.js`, `src/main.tsx`). In this case, you can manually add those CSS files to jest setup file.
 
 ```js
-  // jest.config.js
-  {
-    setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
-  }
+// jest.config.js
+{
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
+}
 ```
 
 ```js
@@ -74,9 +74,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 You don't need to do anything if your public folder is `public`. However, if it's different, you can configure as following:
 
-<!-- To add Common public directories as msw does
- when we have a dedicated docs site. https://mswjs.io/docs/getting-started/integrate/browser#where-is-my-public-directory -->
-
 ```js
 // ./config/jest/setupTests.js
 import { jestPreviewConfigure } from 'jest-preview';
@@ -86,6 +83,16 @@ jestPreviewConfigure({
   publicFolder: 'static', // No need to configure if `publicFolder` is `public`
 });
 ```
+
+Below you can find a list of public directories which have different names than `public`:
+
+<!-- Thanks msw for the idea https://github.com/mswjs/mswjs.io/blob/9f62d45a3740789cc4308ae1475027598541a007/docs/snippets/public-dir.mdx -->
+
+| Project name                         | Public directory |
+| ------------------------------------ | ---------------- |
+| [GatsbyJS](https://www.gatsbyjs.org) | `static`         |
+| [Angular](https://angular.io/)       | `src`            |
+| [Preact](https://preactjs.com)       | `src/static`     |
 
 ### 5. (Optional- RECOMMENDED) Opt-in to Automatic Mode
 
