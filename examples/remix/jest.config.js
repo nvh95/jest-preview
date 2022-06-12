@@ -16,13 +16,12 @@ module.exports = {
   ],
   testEnvironment: 'jsdom',
   transform: {
-    // Use babel-jest to transpile tests
+    // Use @swc/jest to transpile tests
     // https://jestjs.io/docs/configuration#transform-objectstring-pathtotransformer--pathtotransformer-object
-    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
+    '^.+\\.(js|jsx|ts|tsx)$': '@swc/jest',
     '^.+\\.(css|scss|sass)$': 'jest-preview/transforms/css',
-    '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)': 'jest-preview/transforms/file',
+    '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)':
+      'jest-preview/transforms/file',
   },
-  transformIgnorePatterns: [
-    '/node_modules/',
-  ],
+  transformIgnorePatterns: ['/node_modules/'],
 };
