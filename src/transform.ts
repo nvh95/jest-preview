@@ -186,6 +186,10 @@ function processSass(src: string, filename: string): TransformedSource {
         findFileUrl(url: string) {
           if (!url.startsWith('~')) return null;
           return new URL(
+            // TODO: Search in node_modules by require.resolve (monorepo)
+            // E.g: input: ~animate-sass/animate
+            // output: file:/Users/yourname/oss/jest-preview/node_modules/animate-sass/animate
+            // => require.resolve('animate-sass') + animate
             path.join(pathToFileURL('node_modules').href, url.substring(1)),
           );
         },
