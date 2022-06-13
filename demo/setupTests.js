@@ -1,4 +1,3 @@
-import '../../demo/global.css';
 import '@testing-library/jest-dom/extend-expect';
 import { jestPreviewConfigure } from '../dist/index';
 import './global.css';

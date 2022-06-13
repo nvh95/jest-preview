@@ -14,6 +14,12 @@ function isPreProcessor(filename: string): boolean {
   return filename.endsWith('.scss') || filename.endsWith('.sass');
 }
 
+function isTailwindCSS(cssSource: string) {
+  // TailwindCSS Syntax: https://tailwindcss.com/docs/functions-and-directives
+  const tailwindCSSSyntax = ['@tailwind', '@apply', 'theme(', 'screen('];
+  return tailwindCSSSyntax.some((syntax) => cssSource.includes(syntax));
+}
+
 function getRelativeFilename(filename: string): string {
   return slash(filename.split(process.cwd())[1]);
 }
@@ -74,7 +80,7 @@ export function processCss(src: string, filename: string): TransformedSource {
   const isPreProcessorFile = isPreProcessor(filename);
 
   // Pure CSS
-  if (!isModule && !isPreProcessorFile) {
+  if (!isModule && !isPreProcessorFile && !isTailwindCSS(cssSrc)) {
     const relativeFilename = getRelativeFilename(filename);
     // Transform to a javascript module that load a <link rel="stylesheet"> tag to the page.
     return {
@@ -93,9 +99,15 @@ export function processCss(src: string, filename: string): TransformedSource {
     cssSrc = processSass(filename);
   }
 
-  // Post-processor (css modules, TailwindCSS)
+  // Post-processor
+  // CSS modules
   if (isModule) {
     return processCSSModules(cssSrc, filename);
+  }
+
+  // TailwindCSS
+  if (isTailwindCSS(cssSrc)) {
+    return processTailwindCSS(cssSrc, filename);
   }
 
   return {
@@ -146,7 +158,7 @@ class Token {
 
 const exportedTokens = new Token();
 
-postcss(
+postcss([
   PostcssModulesPlugin({
     getJSON: (cssFileName, json, outputFileName) => {
       exportedTokens.set(json);
@@ -165,7 +177,10 @@ postcss(
       return '_' + name + '_' + hash + '_' + line;
     },
   }),
-)
+  // Do people use TailwindCSS inside CSS Modules?
+  // require("tailwindcss")(), 
+  // require("autoprefixer")(),
+])
 .process(cssSrc, { from: ${JSON.stringify(filename)} })
 .then((result) => {
   // TODO: Jest 24 (jest-environment-jsdom@24) not work. To investigate
@@ -180,6 +195,10 @@ module.exports = exportedTokens;`,
 }
 
 function processTailwindCSS(src: string, filename: string): TransformedSource {
+  // TODO: Consider to use postcss-load-config to load config.
+  // However, this is an async plugin and it probably not work in JSDOM environment
+  // TODO: For now, we support the default TailwindCSS configure.
+  // For more customization, we need to find a way to load `tailwind.config.js` and `postcss.config.js`
   return {
     code: `
 const postcss = require("postcss");
