@@ -2,8 +2,14 @@
 // @ts-check
 const path = require('path');
 const fs = require('fs');
-// Append current node_modules to the module search path, so require('react-scripts') can work.
-module.paths.push(path.resolve(process.cwd(), './node_modules'));
+// @ts-expect-error No typing for this package yet
+// TODO: Send them PR to add types
+const findNodeModules = require('find-node-modules');
+const cwdNodeModules = findNodeModules({ relative: false });
+// Append recursively node_modules to the module search path,
+// so require('react-scripts') / require.resolve('react-scripts') can work.
+// Otherwise, module.paths is the paths of the CLI, not the target app
+module.paths.push(...cwdNodeModules);
 
 // 1. Create `jest.config.js`
 try {
@@ -51,10 +57,7 @@ try {
 // https://github.com/facebook/create-react-app/blob/f99167c014a728ec856bda14f87181d90b050813/packages/react-scripts/scripts/eject.js#L158-L162
 
 try {
-  const testFile = path.resolve(
-    process.cwd(),
-    './node_modules/react-scripts/scripts/test.js',
-  );
+  const testFile = require.resolve('react-scripts/scripts/test.js');
   let content = fs.readFileSync(testFile, 'utf8');
 
   content =
