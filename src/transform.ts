@@ -5,6 +5,15 @@ import camelcase from 'camelcase';
 import slash from 'slash';
 import { CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG } from './constants';
 
+// https://github.com/vitejs/vite/blob/c29613013ca1c6d9c77b97e2253ed1f07e40a544/packages/vite/src/node/plugins/css.ts#L97-L98
+const cssLangs = `\\.(css|less|sass|scss|styl|stylus|pcss|postcss)($|\\?)`;
+const cssModuleRE = new RegExp(`\\.module${cssLangs}`);
+
+// TODO: Add less, styl, stylus...
+function isPreProcessor(filename: string): boolean {
+  return filename.endsWith('.scss') || filename.endsWith('.sass');
+}
+
 function getRelativeFilename(filename: string): string {
   return slash(filename.split(process.cwd())[1]);
 }
@@ -60,23 +69,40 @@ export function processFileCRA(
 // pre-processor (sass, stylus, less) => process(??) => post-processor (css modules, tailwindcss)
 // Reference to https://github.com/vitejs/vite/blob/c29613013ca1c6d9c77b97e2253ed1f07e40a544/packages/vite/src/node/plugins/css.ts#L652-L673
 export function processCss(src: string, filename: string): TransformedSource {
-  if (filename.endsWith('.module.css')) {
-    return processCSSModules(src, filename);
-  }
-  if (filename.endsWith('.scss') || filename.endsWith('.sass')) {
-    return processSass(src, filename);
+  let cssSrc = src;
+  const isModule = cssModuleRE.test(filename);
+  const isPreProcessorFile = isPreProcessor(filename);
+
+  // Pure CSS
+  if (!isModule && !isPreProcessorFile) {
+    const relativeFilename = getRelativeFilename(filename);
+    // Transform to a javascript module that load a <link rel="stylesheet"> tag to the page.
+    return {
+      code: `const relativeCssPath = "${relativeFilename}";
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = relativeCssPath;
+  document.head.appendChild(link);
+  
+  module.exports = JSON.stringify(relativeCssPath);`,
+    };
   }
 
-  const relativeFilename = getRelativeFilename(filename);
-  // Transform to a javascript module that load a <link rel="stylesheet"> tag to the page.
+  // Pre-processor (sass, stylus, less)
+  if (isPreProcessor(filename)) {
+    cssSrc = processSass(filename);
+  }
+
+  // Post-processor (css modules, TailwindCSS)
+  if (isModule) {
+    return processCSSModules(cssSrc, filename);
+  }
+
   return {
-    code: `const relativeCssPath = "${relativeFilename}";
-const link = document.createElement('link');
-link.rel = 'stylesheet';
-link.href = relativeCssPath;
-document.head.appendChild(link);
-
-module.exports = JSON.stringify(relativeCssPath);`,
+    code: `const style = document.createElement('style');
+  style.appendChild(document.createTextNode(${JSON.stringify(cssSrc)}));
+  document.head.appendChild(style);
+  module.exports = {}`,
   };
 }
 
@@ -153,16 +179,14 @@ module.exports = exportedTokens;`,
   };
 }
 
-function processSass(src: string, filename: string): TransformedSource {
+function processSass(filename: string): string {
   let sass;
 
   try {
     sass = require('sass');
   } catch (err) {
     console.log(err);
-    return {
-      code: `module.exports = ${JSON.stringify(filename)};`,
-    };
+    throw new Error('Sass not found. Please install sass and try again.');
   }
 
   const sassLoadPathsConfigPath = path.join(
@@ -200,10 +224,5 @@ function processSass(src: string, filename: string): TransformedSource {
     ],
   }).css;
 
-  return {
-    code: `const style = document.createElement('style');
-style.appendChild(document.createTextNode(${JSON.stringify(cssResult)}));
-document.head.appendChild(style);
-module.exports = {}`,
-  };
+  return cssResult;
 }
