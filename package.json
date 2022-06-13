@@ -58,6 +58,7 @@
     "chokidar": "^3.5.3",
     "commander": "^9.2.0",
     "connect": "^3.7.0",
+    "find-node-modules": "^2.1.3",
     "open": "^8.4.0",
     "postcss": "^8.4.12",
     "postcss-modules": "^4.3.1",

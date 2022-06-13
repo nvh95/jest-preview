@@ -16,7 +16,7 @@ interface JestPreviewConfigOptions {
   sassLoadPaths?: string[];
 }
 
-export async function jestPreviewConfigure(
+export function jestPreviewConfigure(
   {
     externalCss,
     autoPreview = false,
