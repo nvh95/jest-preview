@@ -4,14 +4,14 @@ import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+  Svg: string;
   description: JSX.Element;
 };
 
 const FeatureList: FeatureItem[] = [
   {
     title: 'DX-Driven',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    Svg: '/img/dx.svg',
     description: (
       <>
         Jest Preview has a mission: To make front end developers' life easier.
@@ -22,7 +22,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Fast',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    Svg: '/img/fast.svg',
     description: (
       <>
         Write tests in Jest and see the changes reflects in browser in{' '}
@@ -33,7 +33,7 @@ const FeatureList: FeatureItem[] = [
 
   {
     title: 'Framework-Agnostic',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    Svg: '/img/agnostic.svg',
     description: (
       <>
         You can use Jest Preview with <strong>any testing libraries</strong> and{' '}
@@ -43,7 +43,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Productivity',
-    Svg: require('@site/static/img/undraw_docusaurus_productivity.svg').default,
+    Svg: '/img/productivity.svg',
     description: (
       <>
         Don't waste time guessing what is your UI looks like. Let's Jest Preview{' '}
@@ -57,7 +57,7 @@ function Feature({ title, Svg, description }: FeatureItem) {
   return (
     <div className={clsx('col col--3')}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+        <img className={styles.featureSvg} src={Svg} alt="" />
       </div>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>
