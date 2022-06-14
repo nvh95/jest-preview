@@ -26,7 +26,7 @@ Debug your Jest tests. Effortlessly. 🛠🖼
 
 [![npm](https://img.shields.io/npm/v/jest-preview)](https://www.npmjs.com/package/jest-preview)
 [![npm](https://img.shields.io/npm/dt/jest-preview)](https://www.npmjs.com/package/jest-preview)
-[![Mentioned in Awesome Jest](https://awesome.re/mentioned-badge.svg)](https://github.com/jest-community/awesome-jest)
+[![Mentioned in Awesome Jest](https://awesome.re/mentioned-badge.svg)](https://github.com/jest-community/awesome-jest#debug)
 
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)
 [![Best of JS](https://img.shields.io/endpoint?url=https://bestofjs-serverless.now.sh/api/project-badge?fullName=nvh95%2Fjest-preview%26since=weekly)](https://bestofjs.org/projects/jest-preview)
