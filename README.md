@@ -1,5 +1,6 @@
 <p align="center">
- <img align="center" alt="Jest Preview Logo" src="https://user-images.githubusercontent.com/8603085/161993303-e904a087-78a1-4abd-bb8d-3ef2cc6db442.svg" width="250"/>
+ <!-- <img align="center" alt="Jest Preview Logo" src="https://user-images.githubusercontent.com/8603085/161993303-e904a087-78a1-4abd-bb8d-3ef2cc6db442.svg" width="250"/> -->
+ <img align="center" alt="Jest Preview Logo" src="https://user-images.githubusercontent.com/8603085/174032846-b20ebf58-d80a-4372-bbbe-742ae1620258.png"/>
 </p>
 
 <h1 align="center">
