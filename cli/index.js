@@ -8,6 +8,13 @@ program
     require('./configCra');
   });
 
+program
+  .command('clear-cache')
+  .description('Clear Jest and Jest Preview cache.')
+  .action(() => {
+    require('./clearCache');
+  });
+
 program.description('Start Jest Preview server.').action(() => {
   require('./server/previewServer');
 });
