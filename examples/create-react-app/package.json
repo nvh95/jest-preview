@@ -24,7 +24,9 @@
     "eject": "react-scripts eject",
     "jest-preview": "jest-preview",
     "test:debug": "npm-run-all -p test jest-preview",
-    "config-cra": "jest-preview config-cra"
+    "config-cra": "jest-preview config-cra",
+    "reinstall": "npm uninstall jest-preview && npm install ../.. --save-dev",
+    "v-install": "npm install --registry http://0.0.0.0:4873/"
   },
   "eslintConfig": {
     "extends": [
