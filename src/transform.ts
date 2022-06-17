@@ -5,6 +5,21 @@ import camelcase from 'camelcase';
 import slash from 'slash';
 import { CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG } from './constants';
 
+// https://github.com/vitejs/vite/blob/c29613013ca1c6d9c77b97e2253ed1f07e40a544/packages/vite/src/node/plugins/css.ts#L97-L98
+const cssLangs = `\\.(css|less|sass|scss|styl|stylus|pcss|postcss)($|\\?)`;
+const cssModuleRE = new RegExp(`\\.module${cssLangs}`);
+
+// TODO: Add less, styl, stylus...
+function isPreProcessor(filename: string): boolean {
+  return filename.endsWith('.scss') || filename.endsWith('.sass');
+}
+
+function isTailwindCSS(cssSource: string) {
+  // TailwindCSS Syntax: https://tailwindcss.com/docs/functions-and-directives
+  const tailwindCSSSyntax = ['@tailwind', '@apply', 'theme(', 'screen('];
+  return tailwindCSSSyntax.some((syntax) => cssSource.includes(syntax));
+}
+
 function getRelativeFilename(filename: string): string {
   return slash(filename.split(process.cwd())[1]);
 }
@@ -56,24 +71,50 @@ export function processFileCRA(
   };
 }
 
+// TODO: We need to re-architect the CSS transform as follow
+// pre-processor (sass, stylus, less) => process(??) => post-processor (css modules, tailwindcss)
+// Reference to https://github.com/vitejs/vite/blob/c29613013ca1c6d9c77b97e2253ed1f07e40a544/packages/vite/src/node/plugins/css.ts#L652-L673
 export function processCss(src: string, filename: string): TransformedSource {
-  if (filename.endsWith('.module.css')) {
-    return processCSSModules(src, filename);
-  }
-  if (filename.endsWith('.scss') || filename.endsWith('.sass')) {
-    return processSass(src, filename);
+  let cssSrc = src;
+  const isModule = cssModuleRE.test(filename);
+  const isPreProcessorFile = isPreProcessor(filename);
+
+  // Pure CSS
+  if (!isModule && !isPreProcessorFile && !isTailwindCSS(cssSrc)) {
+    const relativeFilename = getRelativeFilename(filename);
+    // Transform to a javascript module that load a <link rel="stylesheet"> tag to the page.
+    return {
+      code: `const relativeCssPath = "${relativeFilename}";
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = relativeCssPath;
+  document.head.appendChild(link);
+  
+  module.exports = JSON.stringify(relativeCssPath);`,
+    };
   }
 
-  const relativeFilename = getRelativeFilename(filename);
-  // Transform to a javascript module that load a <link rel="stylesheet"> tag to the page.
+  // Pre-processor (sass, stylus, less)
+  if (isPreProcessor(filename)) {
+    cssSrc = processSass(filename);
+  }
+
+  // Post-processor
+  // CSS modules
+  if (isModule) {
+    return processCSSModules(cssSrc, filename);
+  }
+
+  // TailwindCSS
+  if (isTailwindCSS(cssSrc)) {
+    return processTailwindCSS(cssSrc, filename);
+  }
+
   return {
-    code: `const relativeCssPath = "${relativeFilename}";
-const link = document.createElement('link');
-link.rel = 'stylesheet';
-link.href = relativeCssPath;
-document.head.appendChild(link);
-
-module.exports = JSON.stringify(relativeCssPath);`,
+    code: `const style = document.createElement('style');
+  style.appendChild(document.createTextNode(${JSON.stringify(cssSrc)}));
+  document.head.appendChild(style);
+  module.exports = {}`,
   };
 }
 
@@ -117,7 +158,7 @@ class Token {
 
 const exportedTokens = new Token();
 
-postcss(
+postcss([
   PostcssModulesPlugin({
     getJSON: (cssFileName, json, outputFileName) => {
       exportedTokens.set(json);
@@ -136,7 +177,10 @@ postcss(
       return '_' + name + '_' + hash + '_' + line;
     },
   }),
-)
+  // Do people use TailwindCSS inside CSS Modules?
+  // require("tailwindcss")(), 
+  // require("autoprefixer")(),
+])
 .process(cssSrc, { from: ${JSON.stringify(filename)} })
 .then((result) => {
   // TODO: Jest 24 (jest-environment-jsdom@24) not work. To investigate
@@ -150,16 +194,35 @@ module.exports = exportedTokens;`,
   };
 }
 
-function processSass(src: string, filename: string): TransformedSource {
+function processTailwindCSS(src: string, filename: string): TransformedSource {
+  // TODO: Consider to use postcss-load-config to load config.
+  // However, this is an async plugin and it probably not work in JSDOM environment
+  // TODO: For now, we support the default TailwindCSS configure.
+  // For more customization, we need to find a way to load `tailwind.config.js` and `postcss.config.js`
+  return {
+    code: `
+const postcss = require("postcss");
+const cssSrc = ${JSON.stringify(src)};
+postcss([require("tailwindcss")(), require("autoprefixer")()])
+  .process(cssSrc, { from: ${JSON.stringify(filename)} })
+  .then((result) => {
+    const style = document.createElement("style");
+    style.type = "text/css";
+    style.appendChild(document.createTextNode(result.css.replace(/\\\\/g, '')));
+    document.head.appendChild(style);
+  });
+`,
+  };
+}
+
+function processSass(filename: string): string {
   let sass;
 
   try {
     sass = require('sass');
   } catch (err) {
     console.log(err);
-    return {
-      code: `module.exports = ${JSON.stringify(filename)};`,
-    };
+    throw new Error('Sass not found. Please install sass and try again.');
   }
 
   const sassLoadPathsConfigPath = path.join(
@@ -197,10 +260,5 @@ function processSass(src: string, filename: string): TransformedSource {
     ],
   }).css;
 
-  return {
-    code: `const style = document.createElement('style');
-style.appendChild(document.createTextNode(${JSON.stringify(cssResult)}));
-document.head.appendChild(style);
-module.exports = {}`,
-  };
+  return cssResult;
 }

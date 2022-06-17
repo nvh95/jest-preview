@@ -1,3 +1,12 @@
+# 0.2.5
+
+## Features
+
+- Re-architect CSS Code Transformation (Pre-process => Post-process)
+- Support SCSS Modules
+- Support basic TailwindCSS
+- Improve config-cra on monorepo
+
 # 0.2.4
 
 ## Features
