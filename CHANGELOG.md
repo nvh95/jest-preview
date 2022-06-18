@@ -6,6 +6,11 @@
 - Support SCSS Modules
 - Support basic TailwindCSS
 - Improve config-cra on monorepo
+- Add a new CLI: `jest-preview clear-cache`
+
+## Fixes
+
+- Try catch more strict in `postinstall`
 
 # 0.2.4
 
