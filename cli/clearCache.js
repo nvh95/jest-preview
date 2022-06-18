@@ -22,8 +22,11 @@ function clearJestCache() {
 }
 
 function clearJestPreviewCache() {
-  fs.rmSync(CACHE_DIRECTORY, { recursive: true });
-  console.log('Cleared Jest Preview cache...');
+  if (fs.existsSync(CACHE_DIRECTORY)) {
+    // fs.rmSync needs node >= 14
+    fs.rmSync(CACHE_DIRECTORY, { recursive: true });
+    console.log('Cleared Jest Preview cache...');
+  }
 }
 
 try {
