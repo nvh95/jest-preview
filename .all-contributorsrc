@@ -136,6 +136,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "cainull",
+      "name": "LunduoCai",
+      "avatar_url": "https://avatars.githubusercontent.com/u/45328460?v=4",
+      "profile": "https://github.com/cainull",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
