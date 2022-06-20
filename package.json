@@ -10,13 +10,16 @@
     "debug",
     "preview jest"
   ],
-  "homepage": "https://github.com/nvh95/jest-preview",
+  "homepage": "https://www.jest-preview.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nvh95/jest-preview.git"
   },
   "license": "MIT",
-  "author": "nvh95",
+  "author": {
+    "name": "Hung Viet Nguyen",
+    "url": "https://github.com/nvh95"
+  },
   "main": "dist/index.js",
   "bin": {
     "jest-preview": "./cli/index.js"
