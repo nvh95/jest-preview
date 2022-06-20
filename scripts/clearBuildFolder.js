@@ -8,8 +8,10 @@ if (fs.existsSync(DISTRIBUTION_DIRECTORY)) {
   const files = fs.readdirSync(DISTRIBUTION_DIRECTORY);
   files.forEach((file) => {
     if (
-      file === 'tsconfig.types.tsbuildinfo' ||
-      file.endsWith('.d.ts') ||
+      // Only cache tsconfig.types.tsbuildinfo and .d.ts files in non-latest versions
+      (process.env.BUILD_TAG !== 'prod' &&
+        (file === 'tsconfig.types.tsbuildinfo' || file.endsWith('.d.ts'))) ||
+      // Always keep .npmignore
       file === '.npmignore'
     ) {
       // Cache types files
