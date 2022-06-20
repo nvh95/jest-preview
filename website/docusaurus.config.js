@@ -40,6 +40,9 @@ const config = {
         gtag: {
           trackingID: 'G-PLWSH8YMX7',
         },
+        googleAnalytics: {
+          trackingID: 'UA-116900824-3',
+        },
       }),
     ],
   ],
