@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom/extend-expect';
-// import { jestPreviewConfigure } from '../../dist/index';
+import { jestPreviewConfigure } from 'jest-preview';
 
-// jestPreviewConfigure({
-//   externalCss: ['demo/global.css'],
-// });
+jestPreviewConfigure({
+  autoPreview: true,
+});
 
 window.matchMedia = (query) => ({
   matches: false,

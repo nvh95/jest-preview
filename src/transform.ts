@@ -28,15 +28,6 @@ type TransformedSource = {
   code: string;
 };
 export function processFile(src: string, filename: string): TransformedSource {
-  // We can `console.log(process.env)`, but not `console.log(process.env.DEBUG)`
-  // The reason might be `process.env.XXXXX` get replaced somewhere by Jest
-  // console.log('process.env.DEBUG', process.env.DEBUG);
-  // console.log('process.env', process.env);
-  // The end goal is find a way to print the debug message only when develop
-  // The following console.log is not worked yet.
-  if (process.env.DEBUG) {
-    console.log(`processFile ${filename}`);
-  }
   const relativeFilename = getRelativeFilename(filename);
   return { code: `module.exports = ${JSON.stringify(relativeFilename)};` };
 }
