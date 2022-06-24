@@ -1,0 +1,14 @@
+{
+  "name": "e2e-testing-for-docs",
+  "version": "0.0.1",
+  "description": "e2e testing for JestPreview Docs website",
+  "main": "index.js",
+  "scripts": {
+    "cypress-test": "cypress open"
+  },
+  "author": "huyenuet",
+  "license": "MIT",
+  "devDependencies": {
+    "cypress": "^10.2.0"
+  }
+}
