@@ -21,7 +21,7 @@ Debug your Jest tests. Effortlessly. 🛠🖼
 
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-16-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
 
@@ -146,6 +146,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/cainull"><img src="https://avatars.githubusercontent.com/u/45328460?v=4?s=100" width="100px;" alt=""/><br /><sub><b>LunduoCai</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/issues?q=author%3Acainull" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/huyenuet"><img src="https://avatars.githubusercontent.com/u/31855858?v=4?s=100" width="100px;" alt=""/><br /><sub><b>huyenuet</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=huyenuet" title="Tests">⚠️</a></td>
   </tr>
 </table>
 
