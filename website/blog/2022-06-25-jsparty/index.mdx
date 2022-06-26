@@ -33,24 +33,24 @@ I had a chance to talk with [Nick Nisi](https://twitter.com/nicknisi) about [Jes
 
 <br />
 
-**Nick Nisi**: So I am here with Hung. Hung, how are you doing?
+**Nick Nisi:** So I am here with Hung. Hung, how are you doing?
 
-**nvh95**: I'm doing great. How are you doing?
+**nvh95:** I'm doing great. How are you doing?
 
-**Nick Nisi**: I'm doing fantastic. So we're both back from React Summit,but actually you weren't at React Summit. You attended online.
+**Nick Nisi:** I'm doing fantastic. So we're both back from React Summit,but actually you weren't at React Summit. You attended online.
 I didn't know that when I was at the conference because one of the really cool things that they had in person was kind of a tweet wall where they were showing tweets about the conference up on a screen right next to the speakers.
 And I saw your name up there a couple of times, and then I recognized your name from the site too, talking about the Open Source Awards.
 And so I just thought you were there, and I kind of reached out to you on Twitter but then found out that you were attending online.
 
 So yeah, I want to ask you how was the online experience?
 
-**nvh95**: Yes. At the end of May that I surprisingly received an email from the React Summit team.
+**nvh95:** Yes. At the end of May that I surprisingly received an email from the React Summit team.
 They informed me that my project get nominated in [The Most Exciting Use of Technology](https://osawards.com/react/#nominees) category in the React Open Source Awards, and they invited me to the [React Summit](https://reactsummit.com/). I think it's not real but turns out it is. Unfortunately, I haven't got the visa to fly to the Netherlands in time, so I attended the conference virtually.
 
 Even though I didn't get the chance to join the conference in-person, I learned a lot and I made a lot of new friends.
 It's a very exciting and interesting experience for me.
 
-**Nick Nisi**: Awesome. Yeah, that's really cool. And that's how we got connected.
+**Nick Nisi:** Awesome. Yeah, that's really cool. And that's how we got connected.
 It did work out well, and I really appreciated kind of multiple ways to attend the conference.
 If you can't or if you're not comfortable attending in person, you can attend online.
 And yeah, that was really nice because you still get a lot of that experience and being able to connect with people.
@@ -58,11 +58,11 @@ So let's talk about your project.
 You did mention that it was nominated for [The Most Exciting Use of Technology](https://osawards.com/react/#nominees) category in the Open Source Awards.
 What's your project called?
 
-**nvh95**: It's Jest Preview.
+**nvh95:** It's Jest Preview.
 
-**Nick Nisi**: From that name, I can get an idea that it's kind of around testing and around Jest specifically, but what does it do?
+**Nick Nisi:** From that name, I can get an idea that it's kind of around testing and around Jest specifically, but what does it do?
 
-**nvh95**: Yeah, Jest Preview is a library that boosts the productivity of front engineer by at least **300%**.
+**nvh95:** Yeah, Jest Preview is a library that boosts the productivity of front engineer by at least **300%**.
 And when you write an e2e test, you can see the UI.
 Like [cypress](https://cypress.io), you have a dashboard you can see step by step. But when you write unit tests and integration tests, you do not know how the UI looks like.
 If you use [React Testing library](https://testing-library.com/docs/react-testing-library/intro), you have some tools like `screen.debug()`, but the output is a loooong HTML in the terminal, and it's painful to read and debug. It bugs me for years.
@@ -81,32 +81,32 @@ Now you can see the loading spinner before you can write the test code to click 
 So it's going to save you time.
 It makes your life easier and improves the quality of web application in general by encouraging you to write more tests.
 
-**Nick Nisi**: Yeah, so I can just immediately just looking at the docs for this, (fantastic docs by the way), but just looking at this, I can immediately see that it's useful and I just kind of want to walk through what I'm seeing right in the introduction in kind of a little repeating GIF to give an idea of what it's doing and how easy it is to set up.
+**Nick Nisi:** Yeah, so I can just immediately just looking at the docs for this, (fantastic docs by the way), but just looking at this, I can immediately see that it's useful and I just kind of want to walk through what I'm seeing right in the introduction in kind of a little repeating GIF to give an idea of what it's doing and how easy it is to set up.
 So you mentioned what I do right now with my Jest tests, which it works, but it's still very hard.
 I just do the `screen.debug()` and I look at the markup that gets printed to the terminal.
 Not the easiest thing, but it does give mean idea, usually it's like: oh, my suspense wrapper is still waiting right there. So that does help me a little bit.
 But looking at this, it looks like what you do is you just `import preview from 'jest-preview'`, and then I could change my `screen.debug()` to `preview.debug()`. And that's pretty much it right alongside also running Jest Preview.
 
-**nvh95**: Yeah. But in recent version, I released a feature **Automatic Mode**. You don't even need to `import preview from 'jest-preview'`.
+**nvh95:** Yeah. But in recent version, I released a feature **Automatic Mode**. You don't even need to `import preview from 'jest-preview'`.
 
-**Nick Nisi**: Really?
+**Nick Nisi:** Really?
 
-**nvh95**: Yes, it automatically previews **if your test fails**. You don't have to do anything else, just run the `jest-preview` CLI and whenever your test fails, it's going to preview the app into your browser automatically.
+**nvh95:** Yes, it automatically previews **if your test fails**. You don't have to do anything else, just run the `jest-preview` CLI and whenever your test fails, it's going to preview the app into your browser automatically.
 It's not amazing. You don't have to call `debug()` anymore.
 
-**Nick Nisi**: Okay, that is incredible.
+**Nick Nisi:** Okay, that is incredible.
 That makes it so much easier because you don't have to do any modifications to your test.
 
-**nvh95**: Yeah, you just have to install `jest-preview` and configure it a little bit.
+**nvh95:** Yeah, you just have to install `jest-preview` and configure it a little bit.
 
-**Nick Nisi**: Okay, so you config it and then do you basically run `just-preview` instead of just to run your test?
+**Nick Nisi:** Okay, so you config it and then do you basically run `just-preview` instead of just to run your test?
 
-**nvh95**: No, actually, that you have to run two commands.
+**nvh95:** No, actually, that you have to run two commands.
 The first one is your test command, for example: `jest --watch`. The second command is `jest-preview`.
 That command initiates a node server that serves Jest Preview Dashboard.
 And that dashboard will preview your UI in Jest. So, yeah, basically you have to run two commands.
 
-**Nick Nisi**: That is incredible because it just makes it so much easier and you don't even have to modify the test.
+**Nick Nisi:** That is incredible because it just makes it so much easier and you don't even have to modify the test.
 I'm thinking to myself like could I test this out without getting buy in from the rest of my team and just use it kind of on my own locally to get started.
 And it seems like I could if I just could install it globally and then set up a config file and then start running it.
 And so when it's running, it's opening up a browser.
@@ -114,7 +114,7 @@ And in your example here, you're like finding an element in the component like a
 **You can see exactly what it's doing in the browser**.
 And so it gives you that kind of visual debugging experience that is very much lacking from writing component tests with Jest.
 
-**nvh95**: Actually in the documentation. There is some best practice I haven't had time to write how to use it properly.
+**nvh95:** Actually in the documentation. There is some best practice I haven't had time to write how to use it properly.
 I can think of two use cases you would like to use jest preview.
 
 The first one is you **debug an existing test** when you just plug the debug command whenever you want so you can see the exact UI in the browser.
@@ -125,19 +125,19 @@ And it's very fast for you to write a test.
 Before jest preview, for example, I write tests for the whole new feature.
 It takes me **20 hours**, but now it's just taking me **5 hours**.
 
-**Nick Nisi**: Wow. So it's a big productivity booster for you.
+**Nick Nisi:** Wow. So it's a big productivity booster for you.
 
-**nvh95**: And you can imagine for a company with thousands of engineers, if they can save that amount of time, **how much money** we can save?
+**nvh95:** And you can imagine for a company with thousands of engineers, if they can save that amount of time, **how much money** we can save?
 
-**Nick Nisi**: Yeah, that is amazing.
+**Nick Nisi:** Yeah, that is amazing.
 Now I want to ask a little bit about the underlying tech that it's using.
 Did I hear you say that it's using Cypress to power that experience?
 
-**nvh95**: No.
+**nvh95:** No.
 
-**Nick Nisi**: No? what's it using?
+**Nick Nisi:** No? what's it using?
 
-**nvh95**: The implementation is dead simple. It's just one line of code.
+**nvh95:** The implementation is dead simple. It's just one line of code.
 The idea is very simple: when we run the test in Node because in the Node environment there is no DOM.
 So we have to use some kind of JSDOM, like [jsdom](https://www.npmjs.com/package/jsdom) or [happy-dom](https://www.npmjs.com/package/happy-dom) or something like that.
 So we can have access to `window`, `document`. Even though it's not a real DOM, but it's pretty close to the real one.
@@ -146,17 +146,17 @@ And the DOM has a property [outerHTML](https://developer.mozilla.org/en-US/docs/
 I just do a very simple thing like `console.log(document.body.outerHTML)` and I save it to a file on a disk. Then I make a node server to serve the file. And whenever the file changes, the web page automatically reloads by a WebSocket connection.
 It's very simple. Just one line code.
 
-**Nick Nisi**: Yeah. Okay. I was thinking it was something like [Playwright](https://playwright.dev) or something like that, kind of driving the browser, but that is much simpler.
+**Nick Nisi:** Yeah. Okay. I was thinking it was something like [Playwright](https://playwright.dev) or something like that, kind of driving the browser, but that is much simpler.
 
-**nvh95**: Super simple.
+**nvh95:** Super simple.
 
-**Nick Nisi**: Yeah, I like that.
+**Nick Nisi:** Yeah, I like that.
 
-**nvh95**: I invite you to read the source code on [my GitHub](https://github.com/nvh95/jest-preview). It's very simple. It's not some kind of crazy technical thing. It's just a few lines of code.
+**nvh95:** I invite you to read the source code on [my GitHub](https://github.com/nvh95/jest-preview). It's very simple. It's not some kind of crazy technical thing. It's just a few lines of code.
 
-**Nick Nisi**: Okay, awesome.
+**Nick Nisi:** Okay, awesome.
 
-**nvh95**: The most difficult thing when I work with Jest Preview is related to the CSS.
+**nvh95:** The most difficult thing when I work with Jest Preview is related to the CSS.
 Because if we just bring the HTML to the browser, it's very easy.
 But to support CSS, it takes about 90% of my time working with Jest Preview, because there are a lot of CSS strategies and standards to write them.
 Like vanilla CSS.
@@ -166,12 +166,12 @@ Some use CSS-in-JS, like styled-component, [Emotion](https://emotion.sh), [Stich
 Proceeding each one is very different to each other.
 So I spent a lot of time writing Jest code transformations to transform the CSS, so you can display the style in the Jest Preview Dashboard.
 
-**Nick Nisi**: Nice.
+**Nick Nisi:** Nice.
 
-**nvh95**: If you have ever configured Jest from scratch before, you see: whenever we hit the CSS file, [we just return the string](https://github.com/facebook/create-react-app/blob/801fec286e77e32f451316775d66ed34025c4825/packages/react-scripts/config/jest/cssTransform.js#L16) in the Jest Code Transformation.
+**nvh95:** If you have ever configured Jest from scratch before, you see: whenever we hit the CSS file, [we just return the string](https://github.com/facebook/create-react-app/blob/801fec286e77e32f451316775d66ed34025c4825/packages/react-scripts/config/jest/cssTransform.js#L16) in the Jest Code Transformation.
 But if I want to make the preview looks the exact same way as it's on production, you have to write a custom CSS code transformation. And it's the hardest part when working with Jest Preview.
 
-**Nick Nisi**: Yeah, I can imagine.
+**Nick Nisi:** Yeah, I can imagine.
 That was one thing I was going to ask about, was how that works.
 So that's really cool.
 So, yeah, definitely check out Just Preview.
@@ -179,12 +179,12 @@ We'll have a link in [the show notes](https://changelog.com/jsparty/231).
 We'll also have a link to [your Twitter](https://twitter.com/hung_dev), and people can reach out to you if they have any questions or want to learn more.
 Is there anything else that you want to drop or plug in here?
 
-**nvh95**: Yeah. I'm happy to support anyone.
+**nvh95:** Yeah. I'm happy to support anyone.
 If you have any questions or you have any trouble integrating Jest Preview into your application, just simply hit me on [Twitter](https://twitter.com/hung_dev).
 
-**Nick Nisi**: Excellent.
+**Nick Nisi:** Excellent.
 Well, thank you so much for coming on. Again, check out [Jest Preview](https://github.com/nvh95/jest-preview/).
 It was the nominee for [The Most Exciting Use of technology](https://osawards.com/react/#nominees) in the React Open Source Awards, and I cannot wait to try it out and learn more.
 So I appreciate it and thanks for stopping by.
 
-**nvh95**: Yes, thank you very much, Nick.
+**nvh95:** Yes, thank you very much, Nick.
