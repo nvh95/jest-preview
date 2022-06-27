@@ -32,10 +32,14 @@ describe('Tests for Jest Preview', () => {
     cy.contains('Getting Started')
   })
   
-  it('Check Demo link is correct and Demo page is present', () => {
-    cy.contains('Demo').invoke('removeAttr', 'target').click()
-    cy.url()
-      .should('include', 'stackblitz.com/edit/jest-preview')
-    cy.contains('Jest Preview')
+  it('Check Demo link is correct and Demo page can be loaded', () => {
+    cy.contains('Demo').should('have.attr', 'href', 'https://stackblitz.com/edit/jest-preview?file=README.md')
+    cy.contains('Demo').then(($a) => {
+      // pull off the fully qualified href from the <a>
+      const url = $a.prop('href')
+    
+      // make a cy.request to it
+      cy.request(url).its('body').should('include', 'Jest Preview')
+    })
   })
 })
