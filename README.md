@@ -48,7 +48,7 @@ When writing tests using Jest, we usually debug by reading the HTML code. Someti
   - ✅ Number of CSS-in-JS libraries, such as:
     - ✅ [Styled-components](https://styled-components.com/)
     - ✅ [Emotion](https://emotion.sh/)
-  - ✅ [External CSS](#4-optional-configure-external-css)
+  - ✅ [Global CSS](#4-optional-configure-global-css)
   - ✅ [CSS Modules](https://github.com/css-modules/css-modules)
   - ✅ [Sass](https://sass-lang.com/)
 - 🌄 Support viewing images.

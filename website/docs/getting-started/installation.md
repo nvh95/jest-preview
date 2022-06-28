@@ -52,7 +52,7 @@ moduleNameMapper: {
 },
 ```
 
-### 4. (Optional) Configure external CSS
+### 4. (Optional) Configure global CSS
 
 Sometimes, there are some CSS files imported outside your current test components (e.g: CSS imported in `src/index.js`, `src/main.tsx`). In this case, you can manually add those CSS files to jest setup file.
 

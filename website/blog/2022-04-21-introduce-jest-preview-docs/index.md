@@ -12,7 +12,7 @@ Hello everyone. It's been 17 days from the first version of [Jest Preview](https
 - 💅 Support CSS:
   - ✅ [Direct CSS import](#3-configure-jests-transform-to-intercept-css-and-files)
   - ✅ [Styled-components](https://styled-components.com/)
-  - ✅ [External CSS](#4-optional-configure-external-css)
+  - ✅ [Global CSS](#4-optional-configure-global-css)
   - ✅ [CSS Modules](https://github.com/css-modules/css-modules)
 - 🌄 Support viewing images.
 
