@@ -241,6 +241,9 @@ function processSass(filename: string): string {
   }
 
   let cssResult;
+
+  // An importer that redirects relative URLs starting with "~" to `node_modules`
+  // Reference: https://sass-lang.com/documentation/js-api/interfaces/FileImporter
   const tildeImporter = (url: string) => {
     if (!url.startsWith('~')) return null;
     return new URL(
@@ -257,8 +260,6 @@ function processSass(filename: string): string {
       loadPaths: sassLoadPathsConfig,
       importers: [
         {
-          // An importer that redirects relative URLs starting with "~" to `node_modules`
-          // Reference: https://sass-lang.com/documentation/js-api/interfaces/FileImporter
           findFileUrl(url: string) {
             return tildeImporter(url);
           },
