@@ -12,9 +12,9 @@ fs.readdir(path.join(__dirname, rootExamples), (err, directories) => {
     const docsPath = path.join(__dirname, `${webDocs}/${dir}.md`);
 
     await fs.readFile(readmePath, 'utf-8', (err, data) => {
-      const fileWithFixedLinks = data.replaceAll('../../README.md', 'README.md');
-
-      console.log(fileWithFixedLinks);
+      const fileWithFixedLinks = data
+        .replaceAll('../../README.md#installation', '../getting-started/installation.md')
+        .replaceAll('../../README.md#usage', '../getting-started/usage.md');
 
       fs.writeFile(docsPath, fileWithFixedLinks, 'utf-8', (err, data) => {
         if (err) {
