@@ -266,7 +266,10 @@ function processSass(filename: string): string {
         },
       ],
     }).css;
-  } else if (sass.renderSync) {
+  }
+  // Because sass.compile is only introduced since sass version 1.45.0
+  // For older versions, we have to use the legacy API: renderSync
+  else if (sass.renderSync) {
     cssResult = sass
       .renderSync({
         file: filename,
