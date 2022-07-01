@@ -8,6 +8,8 @@ image: /img/automatic-mode.png
 
 We are so happy to annouce that we are launching Jest Preview **Automatic Mode**. In this mode, you don't have to trigger the `preview.debug()` function by yourself. Jest Preview **AUTOMATICALLY** preview the UI of your app **WHENEVER a Jest test fails**.
 
+<!--truncate-->
+
 ![Jest Preview Automatic Mode](https://user-images.githubusercontent.com/8603085/166488340-45cae3bf-42e6-4e29-8031-df923c3ace83.gif)
 
 We believe this is the game changer feature of Jest Preview, which boost the Front end productivity dramatically on writing new tests and debugging existing tests. You don't have to move the `preview.debug()` around by yourself anymore. All you need to do is just one line of code:

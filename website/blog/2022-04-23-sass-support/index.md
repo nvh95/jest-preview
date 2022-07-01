@@ -10,6 +10,8 @@ Another day, another feature added to [Jest Preview](https://www.npmjs.com/packa
 
 Sass is one of the most popular CSS extension language in the ecosystem and is being used widely. From version [0.1.5](https://github.com/nvh95/jest-preview/releases/tag/v0.1.5), style written in Sass will be displayed in Jest Preview Dashboard.
 
+<!--truncate-->
+
 ![Jest Preview supports Sass](./jest-preview-supports-sass.png)
 
 You can even add Sass as an external CSS directly in your setup test file. This is usually handy for stylesheet files imported in `src/index.js` or `src/main.js`.

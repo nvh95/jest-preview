@@ -29,6 +29,8 @@ const config = {
         blog: {
           showReadingTime: true,
           editUrl: 'https://github.com/nvh95/jest-preview/edit/main/website/',
+          blogSidebarTitle: 'All posts',
+          blogSidebarCount: 'ALL',
         },
         // api: {
         //   showReadingTime: true,
@@ -72,6 +74,11 @@ const config = {
           },
           // TODO: To add as a blog
           // { to: '/contributors', label: 'Contributors', position: 'left' },
+          {
+            href: 'https://forms.gle/PJFH5oEzi7gsb7Ac6',
+            label: 'Feedback',
+            position: 'right',
+          },
           {
             href: 'https://github.com/nvh95/jest-preview',
             label: 'GitHub',

@@ -7,6 +7,8 @@ tags: [jest-preview]
 
 Hello everyone. It's been 17 days from the first version of [Jest Preview](https://www.npmjs.com/package/jest-preview). We have worked hard to make Jest Preview a great library to support frontend engineers writing and debugging tests in Jest. We completed the implementation to support:
 
+<!--truncate-->
+
 - 👀 Preview your actual app's HTML in a browser in milliseconds.
 - 🔄 Auto reload browser when execute `preview.debug()`.
 - 💅 Support CSS:
