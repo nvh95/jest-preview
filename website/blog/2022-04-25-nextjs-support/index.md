@@ -16,6 +16,8 @@ image: /img/nextjs-support.png
 
 We want [Jest Preview](https://jest-preview.com) to have the best DX for all frontend developers. Besides, [Next.js](https://nextjs.org) is a wonderful and extremely popular React framework that is powered by [Vercel](https://vercel.com). So we are providing a first-class support for Next.js by offering an adapter to integrate Jest Preview to Next.js effortlessly, [thanks to great work](https://github.com/nvh95/jest-preview/pull/64) from [thanhsonng](https://github.com/thanhsonng). If you use Next.js version 12.0.0 onwards, you can just use `configureNextJestPreview` to configure Jest seamlessly:
 
+<!--truncate-->
+
 ```diff
   const nextJest = require('next/jest')
 + const { configureNextJestPreview } = require('jest-preview')
