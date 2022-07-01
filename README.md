@@ -88,6 +88,10 @@ You also need to start the Jest Preview Server by running the CLI `jest-preview`
 - Use with [NextJs Rust Compiler](https://nextjs.org/docs/testing#setting-up-jest-with-the-rust-compiler): [Example with NextJs Rust Compiler](https://www.jest-preview.com/docs/examples/next-rust)
 - Use with [NextJS Babel](https://nextjs.org/docs/testing#setting-up-jest-with-babel): [Example with CRA](https://www.jest-preview.com/docs/examples/next-babel)
 
+## Feedback
+
+Your feedback is very important to us. Please help `jest-preview` becomes a better software by submitting a feedback [here](https://forms.gle/PJFH5oEzi7gsb7Ac6).
+
 ## Installation
 
 See the [Installation Guide](https://www.jest-preview.com/docs/getting-started/installation) on Jest Preview official website.
