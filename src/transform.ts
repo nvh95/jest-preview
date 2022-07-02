@@ -27,17 +27,28 @@ function getRelativeFilename(filename: string): string {
 type TransformedSource = {
   code: string;
 };
+
 export function processFile(src: string, filename: string): TransformedSource {
   const relativeFilename = getRelativeFilename(filename);
-  return { code: `module.exports = ${JSON.stringify(relativeFilename)};` };
+  return {
+    code: `module.exports = {
+      __esModule: true,
+      default: ${JSON.stringify(relativeFilename)},
+    };`,
+  };
 }
 
+// TODO: I think we can merge this with processFile
+// Still keep processFileCRA for backward compatible reason
+// To support https://github.com/jpkleemans/vite-svg-loader and https://github.com/pd4d10/vite-plugin-svgr (already supported) as well
 export function processFileCRA(
   src: string,
   filename: string,
 ): TransformedSource {
   // /Users/your-name/your-project/src/assets/image.png => /src/assets/image.png
-  const relativeFilename = JSON.stringify(getRelativeFilename(filename));
+  const relativeFilenameStringified = JSON.stringify(
+    getRelativeFilename(filename),
+  );
 
   if (filename.match(/\.svg$/)) {
     // Based on how SVGR generates a component name:
@@ -47,10 +58,11 @@ export function processFileCRA(
     });
     const componentName = `Svg${pascalCaseFilename}`;
     return {
+      // TODO: To render actual SVG to the snapshot
       code: `const React = require('react');
     module.exports = {
       __esModule: true,
-      default: ${relativeFilename},
+      default: ${relativeFilenameStringified},
       ReactComponent: React.forwardRef(function ${componentName}(props, ref) {
         return {
           $$typeof: Symbol.for('react.element'),
@@ -58,7 +70,7 @@ export function processFileCRA(
           ref: ref,
           key: null,
           props: Object.assign({}, props, {
-            children: ${relativeFilename}
+            children: ${relativeFilenameStringified}
           })
         };
       }),
@@ -67,7 +79,10 @@ export function processFileCRA(
   }
 
   return {
-    code: `module.exports = ${relativeFilename};`,
+    code: `module.exports = {
+      __esModule: true,
+      default: ${relativeFilenameStringified},
+    };`,
   };
 }
 
@@ -282,7 +297,9 @@ function processSass(filename: string): string {
       })
       .css.toString();
   } else {
-    throw new Error('Cannot compile sass to css: No compile method is available.');
+    throw new Error(
+      'Cannot compile sass to css: No compile method is available.',
+    );
   }
 
   return cssResult;
