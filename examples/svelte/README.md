@@ -1,6 +1,6 @@
 # Use with Svelte
 
-This example demonstrates how to use `jest-preview` with [`Svelte`](https://svelte.dev) and [`Svelte Testing Library`](https://testing-library.com/docs/svelte-testing-library/intro/)
+This example demonstrates how to use `jest-preview` with [**Svelte**](https://svelte.dev) and [**Svelte Testing Library**](https://testing-library.com/docs/svelte-testing-library/intro/)
 
 ## Install Jest
 
@@ -18,11 +18,12 @@ Install Jest Preview
 npm install --save-dev jest-preview
 ```
 
-Configure code transforms as follow:
+[Configure code transforms](https://www.jest-preview.com/docs/getting-started/installation#2-configure-jests-transform-to-transform-css-and-files) as follow:
 
 ```js
 // jest.config.js
 transform: {
+  // ...
   "^.+\\.(css|scss|sass)$": "jest-preview/transforms/css",
   "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "jest-preview/transforms/file",
 }

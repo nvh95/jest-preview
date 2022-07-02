@@ -83,10 +83,11 @@ You also need to start the Jest Preview Server by running the CLI `jest-preview`
 
 ## Examples
 
-- Use with [Vite](https://vitejs.dev/): [Example with Vite](https://www.jest-preview.com/docs/examples/vite-react)
-- Use with [Create React App](https://create-react-app.dev/): [Example with CRA](https://www.jest-preview.com/docs/examples/create-react-app)
-- Use with [NextJs Rust Compiler](https://nextjs.org/docs/testing#setting-up-jest-with-the-rust-compiler): [Example with NextJs Rust Compiler](https://www.jest-preview.com/docs/examples/next-rust)
-- Use with [NextJS Babel](https://nextjs.org/docs/testing#setting-up-jest-with-babel): [Example with CRA](https://www.jest-preview.com/docs/examples/next-babel)
+- Use with [Vite React](https://vitejs.dev/): https://www.jest-preview.com/docs/examples/vite-react
+- Use with [Create React App](https://create-react-app.dev/): https://www.jest-preview.com/docs/examples/create-react-app
+- Use with [NextJs Rust Compiler](https://nextjs.org/docs/testing#setting-up-jest-with-the-rust-compiler): https://www.jest-preview.com/docs/examples/next-rust
+- Use with [NextJS Babel](https://nextjs.org/docs/testing#setting-up-jest-with-babel): https://www.jest-preview.com/docs/examples/next-babel
+- Use with [Svelte](https://svelte.dev): https://www.jest-preview.com/docs/examples/svelte
 
 ## Feedback
 
