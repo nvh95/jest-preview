@@ -1,3 +1,10 @@
+# 0.2.6
+
+## Fixes
+
+- Support old version of Sass
+- Fix do not show image if use with `ts-jest`
+
 # 0.2.5
 
 ## Features
