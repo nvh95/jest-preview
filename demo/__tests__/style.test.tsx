@@ -53,13 +53,5 @@ describe('Style', () => {
     // TODO: Not implemented yet
     // loadPaths
     // TODO: Not implemented yet
-
-    // Can see images
-    expect(document.documentElement.outerHTML).toContain(
-      `<img src="/logo.svg" class="App-logo" alt="logo">`,
-    );
-    expect(document.documentElement.outerHTML).toContain(
-      `<img src="/demo/assets/images/logo.svg" class="logo2" alt="logo2">`,
-    );
   });
 });

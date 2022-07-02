@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { ReactComponent as Logo } from './logo.svg';
 import logo from './logo.svg';
 import logo2 from './assets/images/logo.svg';
+// @ts-expect-error Ignore ts error for importing .ico file
+import staticReact from './assets/images/favicon.ico';
+
 import styles from './style.module.css';
 
 import './App.css';
@@ -15,7 +18,10 @@ function App() {
       <header className="App-header">
         <Logo className="svg-component" />
         <img src={logo} className="App-logo" alt="logo" />
-        <img src={logo2} className="logo2" alt="logo2" />
+        <div>
+          <img src={logo2} className="logo2" alt="logo2" />
+          <img src={staticReact} alt="static react" />
+        </div>
         <p>Create React App example</p>
         <p className={styles.textOrange}>Styled by CSS Modules</p>
         <p className="global-configured-sass">

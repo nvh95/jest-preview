@@ -1,11 +1,13 @@
 <script lang="ts">
   import Counter from './lib/Counter.svelte';
+  import jestPreviewIco from './favicon.ico';
   let counterComponent
 </script>
 
 <main>
   <div class="logo-wrapper">
-    <img src="./images/logo.svg" alt="Svelte">
+    <img src="./images/logo.svg" alt="Svelte logo">
+    <img src={jestPreviewIco} alt="Jest Preview logo">
   </div>
   <button on:click={() => counterComponent.increment()} >Increment with another button</button>
   <Counter bind:this = {counterComponent}/>
