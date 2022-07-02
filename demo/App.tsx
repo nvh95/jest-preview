@@ -41,7 +41,7 @@ function App() {
             font-size: 24px;
             border-radius: 4px;
             &:hover {
-              color: white;
+              color: blue;
             }
           `}
         >

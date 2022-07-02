@@ -240,25 +240,50 @@ function processSass(filename: string): string {
     sassLoadPathsConfig = [];
   }
 
-  const cssResult = sass.compile(filename, {
-    loadPaths: sassLoadPathsConfig,
-    importers: [
-      {
-        // An importer that redirects relative URLs starting with "~" to `node_modules`
-        // Reference: https://sass-lang.com/documentation/js-api/interfaces/FileImporter
-        findFileUrl(url: string) {
-          if (!url.startsWith('~')) return null;
-          return new URL(
-            // TODO: Search in node_modules by require.resolve (monorepo)
-            // E.g: input: ~animate-sass/animate
-            // output: file:/Users/yourname/oss/jest-preview/node_modules/animate-sass/animate
-            // => require.resolve('animate-sass') + animate
-            path.join(pathToFileURL('node_modules').href, url.substring(1)),
-          );
+  let cssResult;
+
+  // An importer that redirects relative URLs starting with "~" to `node_modules`
+  // Reference: https://sass-lang.com/documentation/js-api/interfaces/FileImporter
+  const tildeImporter = (url: string) => {
+    if (!url.startsWith('~')) return null;
+    return new URL(
+      // TODO: Search in node_modules by require.resolve (monorepo)
+      // E.g: input: ~animate-sass/animate
+      // output: file:/Users/yourname/oss/jest-preview/node_modules/animate-sass/animate
+      // => require.resolve('animate-sass') + animate
+      path.join(pathToFileURL('node_modules').href, url.substring(1)),
+    );
+  };
+
+  if (sass.compile) {
+    cssResult = sass.compile(filename, {
+      loadPaths: sassLoadPathsConfig,
+      importers: [
+        {
+          findFileUrl(url: string) {
+            return tildeImporter(url);
+          },
         },
-      },
-    ],
-  }).css;
+      ],
+    }).css;
+  }
+  // Because sass.compile is only introduced since sass version 1.45.0
+  // For older versions, we have to use the legacy API: renderSync
+  else if (sass.renderSync) {
+    cssResult = sass
+      .renderSync({
+        file: filename,
+        includePaths: sassLoadPathsConfig,
+        importer: [
+          function (url: string) {
+            return tildeImporter(url);
+          },
+        ],
+      })
+      .css.toString();
+  } else {
+    throw new Error('Cannot compile sass to css: No compile method is available.');
+  }
 
   return cssResult;
 }
