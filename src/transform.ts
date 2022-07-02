@@ -281,6 +281,8 @@ function processSass(filename: string): string {
         ],
       })
       .css.toString();
+  } else {
+    throw new Error('Cannot compile sass to css: No compile method is available.');
   }
 
   return cssResult;
