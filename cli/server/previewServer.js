@@ -1,10 +1,4 @@
 #!/usr/bin/env node
-// We can move this file to globalSetup, globalTeardown
-// Reference:
-// - https://jestjs.io/docs/puppeteer
-// - https://jestjs.io/docs/configuration#globalsetup-string
-// No, we can't. Since jest will terminate the express server after test finish running
-
 const http = require('http');
 const path = require('path');
 const fs = require('fs');
@@ -22,10 +16,8 @@ const port = process.env.PORT || 3336;
 const wsPort = Number(port) + 1;
 
 const CACHE_DIRECTORY = './node_modules/.cache/jest-preview';
-const HEAD_BASENAME = 'head.html';
-const HEAD_PATH = path.join(CACHE_DIRECTORY, HEAD_BASENAME);
-const BODY_BASENAME = 'body.html';
-const BODY_PATH = path.join(CACHE_DIRECTORY, BODY_BASENAME);
+const INDEX_BASENAME = 'index.html';
+const INDEX_PATH = path.join(CACHE_DIRECTORY, INDEX_BASENAME);
 const PUBLIC_CONFIG_BASENAME = 'cache-public.config';
 const PUBLIC_CONFIG_PATH = path.join(CACHE_DIRECTORY, PUBLIC_CONFIG_BASENAME);
 const FAV_ICON_PATH = './node_modules/jest-preview/cli/server/favicon.ico';
@@ -53,7 +45,7 @@ wss.on('connection', function connection(ws) {
   });
 });
 
-const watcher = chokidar.watch([BODY_PATH, PUBLIC_CONFIG_PATH], {
+const watcher = chokidar.watch([INDEX_PATH, PUBLIC_CONFIG_PATH], {
   // ignored: ['**/node_modules/**', '**/.git/**'],
   ignoreInitial: true,
   ignorePermissionErrors: true,
@@ -62,8 +54,8 @@ const watcher = chokidar.watch([BODY_PATH, PUBLIC_CONFIG_PATH], {
 
 function handleFileChange(filePath) {
   const basename = path.basename(filePath);
-  // Do not need to watch for HEAD_BASENAME, since we write head.html before body.html
-  if (basename === BODY_BASENAME) {
+  // TODO: Check if this is the root cause for issue on linux
+  if (basename === INDEX_BASENAME) {
     wss.clients.forEach((client) => {
       if (client.readyState === 1) {
         client.send(JSON.stringify({ type: 'reload' }));
@@ -80,6 +72,25 @@ watcher
   .on('change', handleFileChange)
   .on('add', handleFileChange)
   .on('unlink', handleFileChange);
+
+/**
+ *
+ * @param {string} string
+ * @param {string} word
+ * @param {string} injectWord
+ * @returns string
+ */
+
+function injectToString(string, word, injectWord) {
+  const breakPosition = string.indexOf(word) + word.length;
+  return (
+    string.slice(0, breakPosition) + injectWord + string.slice(breakPosition)
+  );
+}
+
+function injectToHead(html, content) {
+  return injectToString(html, '<head>', content);
+}
 
 app.use((req, res, next) => {
   // Learn from https://github.com/vitejs/vite/blob/2b7dad1ea1d78d7977e0569fcca4c585b4014e85/packages/vite/src/node/server/middlewares/static.ts#L38
@@ -119,7 +130,7 @@ app.use('/', (req, res) => {
     .readFileSync(path.join(__dirname, './ws-client.js'), 'utf-8')
     .replace(/\$PORT/g, wsPort);
 
-  if (!fs.existsSync(BODY_PATH)) {
+  if (!fs.existsSync(INDEX_PATH)) {
     // Make it looks nice
     return res.end(`<!DOCTYPE html>
 <html>
@@ -148,44 +159,22 @@ See an example in the <a href="https://www.jest-preview.com/docs/getting-started
 <script>${reloadScriptContent}</script>
 </html>`);
   }
-  const head = fs.readFileSync(HEAD_PATH, 'utf8');
-  const body = fs.readFileSync(BODY_PATH, 'utf8');
-  // TODO2: How do we preserve the order of importing css file?
-  // For now I think it's not very important, but this is the room for improvement in next versions
-  let css = '';
-  // TODO: Do not need to construct css from files, since we can construct it from memory (client sends css files' location via websocket event)
-  const allFiles = fs.readdirSync(CACHE_DIRECTORY);
-  allFiles.forEach((file) => {
-    if (file.endsWith('.css')) {
-      css += `\n<style>${fs.readFileSync(
-        path.join(CACHE_DIRECTORY, path.basename(file)),
-        'utf8',
-      )}</style>`;
-    }
-  });
-
-  const htmlContent = `<!DOCTYPE html>
-<html>
-<head>
-  <link rel="shortcut icon" href="${FAV_ICON_PATH}">
+  let indexHtml = fs.readFileSync(INDEX_PATH, 'utf8');
+  indexHtml += `<script>${reloadScriptContent}</script>`;
+  indexHtml = injectToHead(
+    indexHtml,
+    `<link rel="shortcut icon" href="${FAV_ICON_PATH}">
   <title>Jest Preview Dashboard</title>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
-${css}
-${head}
-</head>
-<body>
-  ${body}
-</body>
-<script>${reloadScriptContent}</script>
-</html>`;
-  res.end(htmlContent);
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">`,
+  );
+  res.end(indexHtml);
 });
 
 const server = http.createServer(app);
 
 server.listen(port, () => {
-  if (fs.existsSync(BODY_PATH)) {
+  if (fs.existsSync(INDEX_PATH)) {
     // Remove old preview
     const files = fs.readdirSync(CACHE_DIRECTORY);
     files.forEach((file) => {
