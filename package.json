@@ -15,6 +15,10 @@
     "type": "git",
     "url": "git+https://github.com/nvh95/jest-preview.git"
   },
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/jest-preview"
+  },
   "license": "MIT",
   "author": {
     "name": "Hung Viet Nguyen",
