@@ -3,7 +3,7 @@ describe('Tests for Jest Preview', () => {
     cy.visit('https://www.jest-preview.com/');
     cy.contains('h1', 'Jest Preview');
 
-    // Check CTA Get Started should directed users to Docs page
+    // Check CTA Get Started should direct users to Docs page
     cy.get('.button').click();
     cy.url().should('contain', 'docs/getting-started/intro');
     cy.contains('h1', 'Introduction');
@@ -23,7 +23,7 @@ describe('Tests for Jest Preview', () => {
     cy.url().should('contain', '/api');
     cy.contains('Getting Started');
 
-    // Check Demo link is correct and Demo page can be loaded
+    // Check Demo link is correct
     cy.contains('Demo').should(
       'have.attr',
       'href',
