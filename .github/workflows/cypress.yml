@@ -1,0 +1,15 @@
+name: End-to-end tests
+on:
+  schedule:
+    # Runs at 10h and 22h everyday
+    - cron: '0 10,22 * * *'
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run Cypress
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: docs-e2e-testing
