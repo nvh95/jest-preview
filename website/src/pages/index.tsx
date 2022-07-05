@@ -6,6 +6,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Sponsors from '@site/src/components/Sponsors';
+import Carbon from '../components/Carbon';
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -39,6 +40,10 @@ export default function Home(): JSX.Element {
         <HomepageFeatures />
         <Sponsors />
       </main>
+      <Carbon
+        querySelector=".footer__links div:last-child"
+        customStyle="min-height: 100px; margin: -20px 0;"
+      />
     </Layout>
   );
 }
