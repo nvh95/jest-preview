@@ -34,7 +34,7 @@
     "cli"
   ],
   "scripts": {
-    "docs": "cd website && npm run start -- --port 3001",
+    "docs": "cd website && npm run start",
     "build:docs": "cd website && npm run build",
     "dev": "vite",
     "types": "tsc src/index.ts --declaration --emitDeclarationOnly --jsx react --esModuleInterop --outDir dist",
