@@ -9,6 +9,21 @@ description: When writing tests using Jest, we usually debug by reading the HTML
 
 Jest Preview is an open source project to provide developer the ability to view and debug their tests live with the Browser preview feature. It's incredibly simple to install and use! You can go straight to [Installation](https://www.jest-preview.com/docs/getting-started/installation) guide or check [Why Jest Preview](https://www.jest-preview.com/docs/getting-started/why-jest-preview) to see the benefits of using our library.
 
+## Features
+
+- 👀 Preview your actual app's HTML in a browser in milliseconds.
+- 🔄 Auto reload browser when execute `preview.debug()`.
+- 💅 Support CSS:
+  - ✅ [Direct CSS import](#3-configure-jests-transform-to-intercept-css-and-files)
+  - ✅ Number of CSS-in-JS libraries, such as:
+    - ✅ [Styled-components](https://styled-components.com/)
+    - ✅ [Emotion](https://emotion.sh/)
+  - ✅ [Global CSS](/docs/getting-started/installation#4-optional-configure-global-css)
+  - ✅ [CSS Modules](https://github.com/css-modules/css-modules)
+  - ✅ [Sass](https://sass-lang.com/)
+- 🌄 Support viewing images.
+- 🧑‍💻 Our contributors work hard to add more features and support ⚙️
+
 ## Online Demo
 
 Want to try the library before installing it? We got you covered! Check out [StackBlitz Demo App](https://stackblitz.com/edit/jest-preview?embed=1&file=package.json) or try it right here 😉
