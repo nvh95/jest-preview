@@ -5,27 +5,21 @@ description: When writing tests using Jest, we usually debug by reading the HTML
 
 # Introduction
 
-## Why Jest Preview
+## Welcome to Jest Preview
 
-When writing tests using Jest, we usually debug by reading the HTML code. Sometimes, the HTML is too complicated to visualize the UI in our head. `jest-preview` initiates a server and serve your HTML in a browser, then you can see your actual UI visually, which helps you debug jest tests faster.
-
-`jest-preview` is initially designed to work with [jest](https://jestjs.io/) and [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/). The package is framework-agnostic, and you can use it with any testing libraries.
+Jest Preview is an open source project to provide developer the ability to view and debug their tests live with the Browser preview feature. It's incredibly simple to install and use! You can go straight to [Installation](https://www.jest-preview.com/docs/getting-started/installation) guide or check [Why Jest Preview](https://www.jest-preview.com/docs/getting-started/why-jest-preview) to see the benefits of using our library.
 
 ## Online Demo
 
-You can try Jest Preview right on the browser without installing or cloning anything, thanks to [StackBlitz](https://stackblitz.com/):
+Want to try the library before installing it? We got you covered! Check out [StackBlitz Demo App](https://stackblitz.com/edit/jest-preview?embed=1&file=package.json) or try it right here 😉
 
-<p align="center">
-  <a href="https://stackblitz.com/edit/jest-preview?file=README.md" title="Try Jest Preview Now">Try Jest Preview Online. No downloads needed!</a>. 
-</p>
+<iframe height="600px" width="100%" src="https://stackblitz.com/edit/jest-preview?embed=1&file=package.json"></iframe>
 
-## What does it look like to use Jest Preview
-
-<p align="center">
-  <img align="center" src="https://user-images.githubusercontent.com/8603085/162563155-7e18c9ef-4fe3-45f2-9065-7fcea8ddb18e.gif" alt="Jest Preview Demo" />
-</p>
+`jest-preview` is initially designed to work with [jest](https://jestjs.io/) and [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/). The package is framework-agnostic, and you can use it with any testing libraries.
 
 ## How to use `jest-preview` in 2 lines of code
+
+Start the Jest Preview Server by running the CLI command `jest-preview`. 
 
 ```diff
 +import preview from 'jest-preview';
@@ -51,4 +45,6 @@ describe('App', () => {
 });
 ```
 
-You also need to start the Jest Preview Server by running the CLI `jest-preview`. Please continue to read [Usage](/docs/getting-started/usage) for the details instructions.
+**It's that simple!**
+
+Please continue to read [Usage](/docs/getting-started/usage) for the details instructions.
