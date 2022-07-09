@@ -2,7 +2,7 @@
 
 ## Chores
 
-- Write `index.html`, instead of `body.html` and `head.html` separately
+- Write `index.html` to disk, instead of `body.html` and `head.html` separately
 
 # 0.2.6
 
