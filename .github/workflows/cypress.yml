@@ -1,6 +1,5 @@
 name: End-to-end tests
 on:
-  push:
   schedule:
     # Runs at 10h and 22h everyday
     - cron: '0 10,22 * * *'
