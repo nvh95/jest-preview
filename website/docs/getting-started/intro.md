@@ -39,11 +39,8 @@ Want to try the library before installing it? We got you covered! Check out [Sta
 <iframe id="iframe" height="600px" width="100%" style={{marginBottom: "24px" }} src="https://stackblitz.com/edit/jest-preview?embed=1&ctl=1"></iframe>
 
 :::tip Framework agnostic
-
 **Jest Preview** is initially designed to work with [jest](https://jestjs.io/) and [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/). The package is framework-agnostic, and you can use it with **any** testing library.
-
 :::
-
 
 ## How to use Jest Preview with only 2 lines of code
 
