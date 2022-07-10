@@ -3,6 +3,7 @@ import path from 'path';
 import { pathToFileURL } from 'url';
 import camelcase from 'camelcase';
 import slash from 'slash';
+import { transform } from '@svgr/core';
 import { CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG } from './constants';
 
 // https://github.com/vitejs/vite/blob/c29613013ca1c6d9c77b97e2253ed1f07e40a544/packages/vite/src/node/plugins/css.ts#L97-L98
@@ -42,24 +43,24 @@ export function processFile(src: string, filename: string): TransformedSource {
       pascalCase: true,
     });
     const componentName = `Svg${pascalCaseFilename}`;
+
+    // svgComponent will be something like:
+    // import * as React from "react";
+    // const SvgLogo = props => <svg xmlns="http://www.w3.org/2000/svg" ... </svg>;
+    // export default SvgLogo;
+    // => We have to find a way to transpile the above form to something readable by the main component
+    // This task is probably solved by babel/core but cannot find the code for this logic
+    // Maybe we can reference the vite plugin https://github.com/pd4d10/vite-plugin-svgr/blob/main/src/index.ts
+    const svgComponent = transform.sync(src, { icon: true }, { componentName });
+
     return {
       // TODO: To render actual SVG to the snapshot
-      code: `const React = require('react');
-    module.exports = {
-      __esModule: true,
-      default: ${relativeFilenameStringified},
-      ReactComponent: React.forwardRef(function ${componentName}(props, ref) {
-        return {
-          $$typeof: Symbol.for('react.element'),
-          type: 'svg',
-          ref: ref,
-          key: null,
-          props: Object.assign({}, props, {
-            children: ${relativeFilenameStringified}
-          })
-        };
-      }),
-    };`,
+      code: `const React = require('react');    
+      module.exports = {
+        __esModule: true,
+        default: ${relativeFilenameStringified},
+        ReactComponent: ${svgComponent}
+      };`,
     };
   }
 
