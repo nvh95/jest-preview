@@ -29,22 +29,6 @@ type TransformedSource = {
 };
 
 export function processFile(src: string, filename: string): TransformedSource {
-  const relativeFilename = getRelativeFilename(filename);
-  return {
-    code: `module.exports = {
-      __esModule: true,
-      default: ${JSON.stringify(relativeFilename)},
-    };`,
-  };
-}
-
-// TODO: I think we can merge this with processFile
-// Still keep processFileCRA for backward compatible reason
-// To support https://github.com/jpkleemans/vite-svg-loader and https://github.com/pd4d10/vite-plugin-svgr (already supported) as well
-export function processFileCRA(
-  src: string,
-  filename: string,
-): TransformedSource {
   // /Users/your-name/your-project/src/assets/image.png => /src/assets/image.png
   const relativeFilenameStringified = JSON.stringify(
     getRelativeFilename(filename),
@@ -84,6 +68,15 @@ export function processFileCRA(
       default: ${relativeFilenameStringified},
     };`,
   };
+}
+
+// We keep processFileCRA for backward compatible reason
+// TODO: To support https://github.com/jpkleemans/vite-svg-loader and https://github.com/pd4d10/vite-plugin-svgr (already supported) as well
+export function processFileCRA(
+  src: string,
+  filename: string,
+): TransformedSource {
+  return processFile(src, filename);
 }
 
 // TODO: We need to re-architect the CSS transform as follow
