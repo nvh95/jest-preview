@@ -5,16 +5,21 @@ description: When writing tests using Jest, we usually debug by reading the HTML
 
 # Introduction
 
-## Welcome to Jest Preview
+## Meet Jest Preview
 
-Jest Preview is an open source project to provide developer the ability to view and debug their tests live with the Browser preview feature. It's incredibly simple to install and use!
+We are sure you are tired of debugging integration UI tests and reading a whole lot of cryptic HTML output. It's incredibly tough to visualize the DOM structure and see what went wrong and why. We are sure because we were there. That's why we have created Jest Preview!
 
-You can go straight to [Installation](https://www.jest-preview.com/docs/getting-started/installation) guide or check [Why Jest Preview](https://www.jest-preview.com/docs/getting-started/why-jest-preview) to see the benefits of using our library. 
+Jest Preview is an open-source library to make your life easier. See your test output directly in the browser as you would normally see the app you are working on. Write test and watch rendered output changes accordingly. Jest Preview lets you concentrate on tests in the "real world" rather than deciphering HTML code. Sounds interesting? Sure it does! Give it a try 😉
 
 👇 continue reading to know more and try Jest Preview in action
 
+:::info
+You can go straight to [Installation](https://www.jest-preview.com/docs/getting-started/installation) guide or check [Why Jest Preview](https://www.jest-preview.com/docs/getting-started/why-jest-preview) to see the benefits of using our library. 
+:::
+
 ## Features
 
+- 🐣 It's incredibly simple to install and use!
 - 👀 Preview your actual app's HTML in a browser in milliseconds.
 - 🔄 Auto reload browser when execute `preview.debug()`.
 - 💅 Support CSS:
