@@ -34,6 +34,7 @@ export function processFile(src: string, filename: string): TransformedSource {
     getRelativeFilename(filename),
   );
 
+  // TODO: To support https://github.com/jpkleemans/vite-svg-loader and https://github.com/pd4d10/vite-plugin-svgr (already supported) as well
   if (filename.match(/\.svg$/)) {
     // Based on how SVGR generates a component name:
     // https://github.com/smooth-code/svgr/blob/01b194cf967347d43d4cbe6b434404731b87cf27/packages/core/src/state.js#L6
@@ -71,7 +72,6 @@ export function processFile(src: string, filename: string): TransformedSource {
 }
 
 // We keep processFileCRA for backward compatible reason
-// TODO: To support https://github.com/jpkleemans/vite-svg-loader and https://github.com/pd4d10/vite-plugin-svgr (already supported) as well
 export function processFileCRA(
   src: string,
   filename: string,
