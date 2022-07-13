@@ -25,7 +25,7 @@ try {
       'react-scripts/config/jest/babelTransform.js',
     '^.+\\.(css|scss|sass)$': 'jest-preview/transforms/css',
     '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)':
-      'jest-preview/transforms/fileCRA',
+      'jest-preview/transforms/file',
   };
   jestConfig.transformIgnorePatterns =
     jestConfig.transformIgnorePatterns.filter(

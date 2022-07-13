@@ -30,8 +30,6 @@ transform: {
 }
 ```
 
-For Create React App users, please use `jest-preview/transforms/fileCRA` instead of `jest-preview/transforms/file`. See more at [Create React App example](/docs/examples/create-react-app).
-
 For Next.js users with Rust-based compiler, please use [configureNextJestPreview](/docs/api/configureNextJestPreview) to config Jest. See more at [Next.js example](https://github.com/nvh95/jest-preview/tree/main/examples/nextjs).
 
 ### 3. If you use CSS Modules, make sure it doesn't get ignored

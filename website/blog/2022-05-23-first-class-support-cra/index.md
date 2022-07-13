@@ -48,7 +48,7 @@ module.exports = {
       'react-scripts/config/jest/babelTransform.js',
     '^.+\\.(css|scss|sass)$': 'jest-preview/transforms/css',
     '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)':
-      'jest-preview/transforms/fileCRA',
+      'jest-preview/transforms/file',
   },
   transformIgnorePatterns: [
     '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$',
