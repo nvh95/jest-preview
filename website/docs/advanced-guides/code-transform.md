@@ -8,7 +8,6 @@ You should use [Pre-configured transformation](/docs/getting-started/installatio
 
 - `processCss`: Process CSS files
 - `processFile`: Process files
-- `processFileCRA`: Process files for Create React App
 
 For examples:
 
@@ -23,18 +22,17 @@ module.exports = {
     return processCss(src, filename);
   },
 };
-````
+```
 
 ```javascript
 // config/jest/fileTransform.js
 'use strict';
 
 const { processFile } = require('jest-preview');
-// Use processFileCRA for Create React App
 
 module.exports = {
   process(src, filename) {
-    return processFile(src, filename); // Use processFileCRA for Create React App
+    return processFile(src, filename);
   },
 };
 ```

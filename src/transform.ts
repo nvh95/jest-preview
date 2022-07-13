@@ -29,27 +29,12 @@ type TransformedSource = {
 };
 
 export function processFile(src: string, filename: string): TransformedSource {
-  const relativeFilename = getRelativeFilename(filename);
-  return {
-    code: `module.exports = {
-      __esModule: true,
-      default: ${JSON.stringify(relativeFilename)},
-    };`,
-  };
-}
-
-// TODO: I think we can merge this with processFile
-// Still keep processFileCRA for backward compatible reason
-// To support https://github.com/jpkleemans/vite-svg-loader and https://github.com/pd4d10/vite-plugin-svgr (already supported) as well
-export function processFileCRA(
-  src: string,
-  filename: string,
-): TransformedSource {
   // /Users/your-name/your-project/src/assets/image.png => /src/assets/image.png
   const relativeFilenameStringified = JSON.stringify(
     getRelativeFilename(filename),
   );
 
+  // TODO: To support https://github.com/jpkleemans/vite-svg-loader and https://github.com/pd4d10/vite-plugin-svgr (already supported) as well
   if (filename.match(/\.svg$/)) {
     // Based on how SVGR generates a component name:
     // https://github.com/smooth-code/svgr/blob/01b194cf967347d43d4cbe6b434404731b87cf27/packages/core/src/state.js#L6
@@ -84,6 +69,14 @@ export function processFileCRA(
       default: ${relativeFilenameStringified},
     };`,
   };
+}
+
+// We keep processFileCRA for backward compatible reason
+export function processFileCRA(
+  src: string,
+  filename: string,
+): TransformedSource {
+  return processFile(src, filename);
 }
 
 // TODO: We need to re-architect the CSS transform as follow

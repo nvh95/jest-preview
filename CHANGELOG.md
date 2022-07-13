@@ -1,3 +1,9 @@
+# 0.2.8
+
+## Chores
+
+- Merge `file` and `fileCRA` transformations
+
 # 0.2.7
 
 ## Chores
