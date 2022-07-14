@@ -14,9 +14,9 @@ We appreciated any help. There is not a thing as a small contribution. If you se
 - **Docs**: We have a documentation site at [www.jest-preview.com](https://www.jest-preview.com/docs/getting-started/intro), it's very easier to contribute to the documentation by using `Edit this page` button at the bottom of each page. If you see a typo, an unclear page or incorrect grammar, please send us a PR.
 - **Fix bugs**: We are tracking bugs at [Issues](https://github.com/nvh95/jest-preview/issues). Please [claim an issue](#claim-issues) then open a PR to fix a bug.
 - **Add new features**: Do you use Jest Preview for your projects and find out Jest Preview is missing a feature? Please open an issue to discuss it. And it's great if you can help to implement that feature.
-- **Answer questions and issues on GitHub and Discord**: [GitHub issues](https://github.com/nvh95/jest-preview/issues) and [Discord](https://discord.gg/X5PyPUfemh)
+- **Answer questions and issues on GitHub and Discord**: [GitHub issues](https://github.com/nvh95/jest-preview/issues) and [Discord](https://discord.gg/z4DRBmk7vx)
 
-If not sure what to contribute, but you still want to contribute something, let us know in [Discord](https://discord.gg/X5PyPUfemh) (channel #contributors)
+If not sure what to contribute, but you still want to contribute something, let us know in [Discord](https://discord.gg/z4DRBmk7vx) (channel #contributors)
 
 ## Claim issues
 

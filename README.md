@@ -31,7 +31,7 @@ Debug your Jest tests. Effortlessly. 🛠🖼
 
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)
 [![Best of JS](https://img.shields.io/endpoint?url=https://bestofjs-serverless.now.sh/api/project-badge?fullName=nvh95%2Fjest-preview%26since=weekly)](https://bestofjs.org/projects/jest-preview)
-[![Discord](https://img.shields.io/discord/967456149735637002?logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/X5PyPUfemh)
+[![Discord](https://img.shields.io/discord/967456149735637002?logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/z4DRBmk7vx)
 
 ## Why **jest-preview**
 
@@ -117,7 +117,7 @@ Please [file an issue](https://github.com/nvh95/jest-preview/issues), or [add a 
 
 You can also mention [@JestPreview](https://twitter.com/JestPreview) or [@hung_dev](https://twitter.com/hung_dev) on twitter if you want to have some more discussions or suggestions.
 
-We also have a Discord server: [![Discord](https://img.shields.io/discord/967456149735637002?logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/X5PyPUfemh)
+We also have a Discord server: [![Discord](https://img.shields.io/discord/967456149735637002?logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/z4DRBmk7vx)
 
 ## Contributing
 
