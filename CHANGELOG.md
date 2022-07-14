@@ -1,14 +1,9 @@
-# 0.2.8
-
-## Chores
-
-- Merge `file` and `fileCRA` transformations
-
 # 0.2.7
 
 ## Chores
 
 - Write `index.html` to disk, instead of `body.html` and `head.html` separately
+- Merge `file` and `fileCRA` transformations
 
 # 0.2.6
 

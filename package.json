@@ -1,6 +1,6 @@
 {
   "name": "jest-preview",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Preview your Jest tests in a browser",
   "keywords": [
     "testing",
