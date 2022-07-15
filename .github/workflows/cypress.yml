@@ -1,8 +1,9 @@
 name: End-to-end tests
 on:
   schedule:
-    # Runs at 10h and 22h everyday
-    - cron: '0 10,22 * * *'
+    # Runs at 10h everyday
+    - cron: '0 10 * * *'
+  workflow_dispatch:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
@@ -13,5 +14,6 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           working-directory: docs-e2e-testing
+          record: true
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
