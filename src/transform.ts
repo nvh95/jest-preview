@@ -44,24 +44,62 @@ export function processFile(src: string, filename: string): TransformedSource {
     });
     const componentName = `Svg${pascalCaseFilename}`;
 
-    // svgComponent will be something like:
-    // import * as React from "react";
-    // const SvgLogo = props => <svg xmlns="http://www.w3.org/2000/svg" ... </svg>;
-    // export default SvgLogo;
-    // => We have to find a way to transpile the above form to something readable by the main component
-    // This task is probably solved by babel/core but cannot find the code for this logic
-    // Maybe we can reference the vite plugin https://github.com/pd4d10/vite-plugin-svgr/blob/main/src/index.ts
-    const svgComponent = transform.sync(src, { icon: true }, { componentName });
+    try {
+      const svgComponent = transform.sync(
+        src,
+        {
+          // Do not insert `import * as React from "react";`
+          jsxRuntime: 'automatic',
+        },
+        { componentName },
+      );
+      // We need to transpile jsx to vanilla jsx so Jest can understand
+      // @babel/core is bundled with jest
+      // I guess @babel/plugin-transform-react-jsx is installed by default? TODO: To validate this assumption
+      // TODO: Do we have any other option to transpile jsx to vanilla jsx?
+      // vite-plugin-svgr uses esbuild https://github.com/pd4d10/vite-plugin-svgr/blob/main/src/index.ts
+      // How about add esbuild as dependency then use esbuild to transpile jsx to vanilla jsx?
+      const babel = require('@babel/core');
+      const result = babel.transformSync(svgComponent, {
+        plugins: ['@babel/plugin-transform-react-jsx'],
+      });
 
-    return {
-      // TODO: To render actual SVG to the snapshot
-      code: `const React = require('react');    
+      // TODO: This is workaround to remove "export default". We might comeback to find a better solution
+      const componentCodeWithoutExport = result.code
+        .split('\n')
+        .slice(0, -1) // Remove the last line
+        .join('\n');
+      return {
+        // TODO: To render actual SVG to the snapshot
+        code: `const React = require('react')
+        ${componentCodeWithoutExport}
+        module.exports = {
+          __esModule: true,
+          default: ${relativeFilenameStringified},
+          ReactComponent: ${componentName}
+        };`,
+      };
+    } catch (error) {
+      // In case of there is any error, fallback to a span with filename
+      return {
+        code: `const React = require('react');
       module.exports = {
         __esModule: true,
         default: ${relativeFilenameStringified},
-        ReactComponent: ${svgComponent}
+        ReactComponent: React.forwardRef(function ${componentName}(props, ref) {
+          return {
+            $$typeof: Symbol.for('react.element'),
+            type: 'span',
+            ref: ref,
+            key: null,
+            props: Object.assign({}, props, {
+              children: ${relativeFilenameStringified}
+            })
+          };
+        }),
       };`,
-    };
+      };
+    }
   }
 
   return {
