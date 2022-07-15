@@ -19,8 +19,9 @@ describe('Style', () => {
 
     // styled-components
     expect(document.documentElement.outerHTML).toContain(
-      '<style data-styled="active" data-styled-version="5.3.5">.dgihId{color:red;}</style>',
+      '<style data-styled="active" data-styled-version="5.3.5">',
     );
+    expect(document.documentElement.outerHTML).toContain('.dgihId{color:red;}');
 
     // emotion
     expect(document.documentElement.outerHTML).toContain(
