@@ -7,6 +7,7 @@ import { styled as stichesStyled } from '@stitches/react';
 import '~animate.css/animate.css';
 
 import logo2 from './assets/images/logo.svg';
+import { ReactComponent as SvgVite } from './assets/images/vite.svg';
 import './App.css';
 import './assets/css/App.css';
 import './assets/_scss/style.scss';
@@ -18,7 +19,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src="/logo.svg" className="App-logo" alt="logo" />
+        <LogoWrapper>
+          <img src="/logo.svg" className="App-logo" alt="logo" height={100} />
+          <SvgVite height={100} />
+        </LogoWrapper>
         <img src={logo2} className="logo2" alt="logo2" />
         <p>Hello Vite + React!</p>
         <p className={scssModule}>Styled by SCSS Modules</p>
@@ -100,6 +104,12 @@ function App() {
 
 const StyledText = styled.p`
   color: red;
+`;
+
+const LogoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  width: 500px;
 `;
 
 const EmotionP = emotionStyled.p`
