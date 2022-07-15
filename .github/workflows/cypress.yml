@@ -13,3 +13,5 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           working-directory: docs-e2e-testing
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
