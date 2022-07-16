@@ -15,9 +15,11 @@ const port = process.env.PORT || 3336;
 // TODO: Increase port by 1 is not a good strategy, we should check if it's also available
 const wsPort = Number(port) + 1;
 
+let indexFilePath = '';
+
 const CACHE_DIRECTORY = './node_modules/.cache/jest-preview';
-const INDEX_BASENAME = 'index.html';
-const INDEX_PATH = path.join(CACHE_DIRECTORY, INDEX_BASENAME);
+const INDEX_FILE_NAME = 'index-file-name';
+const INDEX_FILE_NAME_PATH = path.join(CACHE_DIRECTORY, INDEX_FILE_NAME);
 const PUBLIC_CONFIG_BASENAME = 'cache-public.config';
 const PUBLIC_CONFIG_PATH = path.join(CACHE_DIRECTORY, PUBLIC_CONFIG_BASENAME);
 const FAV_ICON_PATH = './node_modules/jest-preview/cli/server/favicon.ico';
@@ -44,34 +46,6 @@ wss.on('connection', function connection(ws) {
     }
   });
 });
-
-const watcher = chokidar.watch([INDEX_PATH, PUBLIC_CONFIG_PATH], {
-  // ignored: ['**/node_modules/**', '**/.git/**'],
-  ignoreInitial: true,
-  ignorePermissionErrors: true,
-  disableGlobbing: true,
-});
-
-function handleFileChange(filePath) {
-  const basename = path.basename(filePath);
-  // TODO: Check if this is the root cause for issue on linux
-  if (basename === INDEX_BASENAME) {
-    wss.clients.forEach((client) => {
-      if (client.readyState === 1) {
-        client.send(JSON.stringify({ type: 'reload' }));
-      }
-    });
-  }
-
-  if (basename === PUBLIC_CONFIG_BASENAME) {
-    publicFolder = fs.readFileSync(PUBLIC_CONFIG_PATH, 'utf8').trim();
-  }
-}
-
-watcher
-  .on('change', handleFileChange)
-  .on('add', handleFileChange)
-  .on('unlink', handleFileChange);
 
 /**
  *
@@ -130,7 +104,7 @@ app.use('/', (req, res) => {
     .readFileSync(path.join(__dirname, './ws-client.js'), 'utf-8')
     .replace(/\$PORT/g, wsPort);
 
-  if (!fs.existsSync(INDEX_PATH)) {
+  if (!fs.existsSync(indexFilePath)) {
     // Make it looks nice
     return res.end(`<!DOCTYPE html>
 <html>
@@ -159,7 +133,7 @@ See an example in the <a href="https://www.jest-preview.com/docs/getting-started
 <script>${reloadScriptContent}</script>
 </html>`);
   }
-  let indexHtml = fs.readFileSync(INDEX_PATH, 'utf8');
+  let indexHtml = fs.readFileSync(indexFilePath, 'utf8');
   indexHtml += `<script>${reloadScriptContent}</script>`;
   indexHtml = injectToHead(
     indexHtml,
@@ -174,15 +148,50 @@ See an example in the <a href="https://www.jest-preview.com/docs/getting-started
 const server = http.createServer(app);
 
 server.listen(port, () => {
-  if (fs.existsSync(INDEX_PATH)) {
-    // Remove old preview
+  // Remove old preview
+  if (fs.existsSync(CACHE_DIRECTORY)) {
     const files = fs.readdirSync(CACHE_DIRECTORY);
     files.forEach((file) => {
       if (!file.startsWith('cache-')) {
         fs.unlinkSync(path.join(CACHE_DIRECTORY, file));
       }
     });
+  } else {
+    fs.mkdirSync(CACHE_DIRECTORY, {
+      recursive: true,
+    });
   }
+
+  const indexFileName = `index.${Date.now()}.html`;
+  indexFilePath = path.join(CACHE_DIRECTORY, indexFileName);
+  fs.writeFileSync(INDEX_FILE_NAME_PATH, indexFileName);
+
+  const watcher = chokidar.watch([indexFilePath, PUBLIC_CONFIG_PATH], {
+    // ignored: ['**/node_modules/**', '**/.git/**'],
+    ignoreInitial: true,
+    ignorePermissionErrors: true,
+    disableGlobbing: true,
+  });
+
+  function handleFileChange(filePath) {
+    const basename = path.basename(filePath);
+    if (basename === indexFileName) {
+      wss.clients.forEach((client) => {
+        if (client.readyState === 1) {
+          client.send(JSON.stringify({ type: 'reload' }));
+        }
+      });
+    }
+
+    if (basename === PUBLIC_CONFIG_BASENAME) {
+      publicFolder = fs.readFileSync(PUBLIC_CONFIG_PATH, 'utf8').trim();
+    }
+  }
+
+  watcher
+    .on('change', handleFileChange)
+    .on('add', handleFileChange)
+    .on('unlink', handleFileChange);
 
   console.log(`Jest Preview Server listening on port ${port}`);
   openBrowser(`http://localhost:${port}`);
