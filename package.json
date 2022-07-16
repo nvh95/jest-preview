@@ -62,7 +62,6 @@
   "dependencies": {
     "camelcase": "^6.3.0",
     "chalk": "^4.1.2",
-    "chokidar": "^3.5.3",
     "commander": "^9.2.0",
     "connect": "^3.7.0",
     "find-node-modules": "^2.1.3",
@@ -70,8 +69,7 @@
     "sirv": "^2.0.2",
     "slash": "^3.0.0",
     "string-hash": "^1.1.3",
-    "update-notifier": "^5.1.0",
-    "ws": "^8.5.0"
+    "update-notifier": "^5.1.0"
   },
   "devDependencies": {
     "@emotion/react": "^11.9.0",
