@@ -163,6 +163,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "srosato",
+      "name": "Steven Rosato",
+      "avatar_url": "https://avatars.githubusercontent.com/u/650192?v=4",
+      "profile": "http://majisti.com",
+      "contributions": [
+        "example"
+      ]
     }
   ],
   "contributorsPerLine": 7,
