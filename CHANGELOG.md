@@ -1,3 +1,9 @@
+# 0.2.8
+
+## Fixes
+
+- Fix bug Jest Preview Dashboard does not reload on Linux systems.
+
 # 0.2.7
 
 ## Chores
