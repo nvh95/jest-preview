@@ -18,8 +18,11 @@ const wsPort = Number(port) + 1;
 let indexFilePath = '';
 
 const CACHE_DIRECTORY = './node_modules/.cache/jest-preview';
-const INDEX_FILE_NAME = 'index-file-name';
-const INDEX_FILE_NAME_PATH = path.join(CACHE_DIRECTORY, INDEX_FILE_NAME);
+const ROOT_HTML_NAME_CONFIG = 'root-html-name-config';
+const ROOT_HTML_NAME_CONFIG_PATH = path.join(
+  CACHE_DIRECTORY,
+  ROOT_HTML_NAME_CONFIG,
+);
 const PUBLIC_CONFIG_BASENAME = 'cache-public.config';
 const PUBLIC_CONFIG_PATH = path.join(CACHE_DIRECTORY, PUBLIC_CONFIG_BASENAME);
 const FAV_ICON_PATH = './node_modules/jest-preview/cli/server/favicon.ico';
@@ -162,9 +165,13 @@ server.listen(port, () => {
     });
   }
 
+  // Generate new index filename each time server starts
+  // So we prevent unlinking and then rewriting a file with a similar name
+  // Which may cause chodikar unable to listen file changes after that
+  // Reference: https://github.com/paulmillr/chokidar/issues/35, https://github.com/paulmillr/chokidar/issues/972
   const indexFileName = `index.${Date.now()}.html`;
   indexFilePath = path.join(CACHE_DIRECTORY, indexFileName);
-  fs.writeFileSync(INDEX_FILE_NAME_PATH, indexFileName);
+  fs.writeFileSync(ROOT_HTML_NAME_CONFIG_PATH, indexFileName);
 
   const watcher = chokidar.watch([indexFilePath, PUBLIC_CONFIG_PATH], {
     // ignored: ['**/node_modules/**', '**/.git/**'],
