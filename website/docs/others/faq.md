@@ -24,4 +24,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 ## I couldn't use Automatic Mode
 
-Automatic Mode is in experiemental phase. If you are experiencing any issues when using Automatic Mode, please let us know at [Jest Preview's GitHub issue](https://github.com/nvh95/jest-preview/issues/new?assignees=&labels=&template=bug_report.md&title=). We appreciate your feedback and it would be super helpful for us to have a reproducible repository.
+Automatic Mode is in the experimental phase. If you are experiencing any issues when using Automatic Mode, please let us know at [Jest Preview's GitHub issue](https://github.com/nvh95/jest-preview/issues/new?assignees=&labels=&template=bug_report.md&title=). We appreciate your feedback and it would be super helpful for us to have a reproducible repository.
+
+## The preview does not reload automatically
+
+This is likely that you are using a Linux system. Please update [jest-preview](https://www.npmjs.com/package/jest-preview) to the newest version (`>= 0.2.8`) to get the problem fixed. If it still persists, please help to [report a bug](https://github.com/nvh95/jest-preview/issues/new?assignees=&labels=bug&template=bug_report.md&title=) with a minimum reproduction.
