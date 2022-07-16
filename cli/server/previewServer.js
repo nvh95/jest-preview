@@ -29,6 +29,48 @@ if (fs.existsSync(PUBLIC_CONFIG_PATH)) {
   publicFolder = fs.readFileSync(PUBLIC_CONFIG_PATH, 'utf8').trim();
 }
 
+if (fs.existsSync(INDEX_PATH)) {
+  // Remove old preview
+  const files = fs.readdirSync(CACHE_DIRECTORY);
+  files.forEach((file) => {
+    if (!file.startsWith('cache-')) {
+      fs.unlinkSync(path.join(CACHE_DIRECTORY, file));
+    }
+  });
+} else {
+  fs.mkdirSync(CACHE_DIRECTORY, {
+    recursive: true,
+  });
+}
+
+let defaultIndexHtml = `<!DOCTYPE html>
+<html>
+<head>
+  <link rel="shortcut icon" href="${FAV_ICON_PATH}">
+  <title>Jest Preview Dashboard</title>
+</head>
+<body>
+No preview found.<br/>
+Please add following lines to your test: <br /> <br />
+<div style="background-color: grey;width: fit-content;padding: 8px;">
+  <code>
+  import { debug } from 'jest-preview';
+  <br />
+  <br />
+  // Inside your tests
+  <br />
+  debug();
+  </code>
+</div>
+<br />
+Then rerun your tests.
+<br />
+See an example in the <a href="https://www.jest-preview.com/docs/getting-started/usage#3-preview-your-html-from-jest-following-code-demo-how-to-use-it-with-react-testing-library" target="_blank" rel="noopener noreferrer">documentation</a>
+</body>
+</html>`;
+
+fs.writeFileSync(INDEX_PATH, defaultIndexHtml);
+
 const wss = new WebSocketServer({ port: wsPort });
 
 wss.on('connection', function connection(ws) {
@@ -129,37 +171,7 @@ app.use('/', (req, res) => {
   const reloadScriptContent = fs
     .readFileSync(path.join(__dirname, './ws-client.js'), 'utf-8')
     .replace(/\$PORT/g, wsPort);
-
-  if (!fs.existsSync(INDEX_PATH)) {
-    // Make it looks nice
-    return res.end(`<!DOCTYPE html>
-<html>
-<head>
-  <link rel="shortcut icon" href="${FAV_ICON_PATH}">
-  <title>Jest Preview Dashboard</title>
-</head>
-<body>
-No preview found.<br/>
-Please add following lines to your test: <br /> <br />
-<div style="background-color: grey;width: fit-content;padding: 8px;">
-  <code>
-  import { debug } from 'jest-preview';
-  <br />
-  <br />
-  // Inside your tests
-  <br />
-  debug();
-  </code>
-</div>
-<br />
-Then rerun your tests.
-<br />
-See an example in the <a href="https://www.jest-preview.com/docs/getting-started/usage#3-preview-your-html-from-jest-following-code-demo-how-to-use-it-with-react-testing-library" target="_blank" rel="noopener noreferrer">documentation</a>
-</body>
-<script>${reloadScriptContent}</script>
-</html>`);
-  }
-  let indexHtml = fs.readFileSync(INDEX_PATH, 'utf8');
+  let indexHtml = fs.readFileSync(INDEX_PATH, 'utf-8');
   indexHtml += `<script>${reloadScriptContent}</script>`;
   indexHtml = injectToHead(
     indexHtml,
@@ -174,16 +186,6 @@ See an example in the <a href="https://www.jest-preview.com/docs/getting-started
 const server = http.createServer(app);
 
 server.listen(port, () => {
-  if (fs.existsSync(INDEX_PATH)) {
-    // Remove old preview
-    const files = fs.readdirSync(CACHE_DIRECTORY);
-    files.forEach((file) => {
-      if (!file.startsWith('cache-')) {
-        fs.unlinkSync(path.join(CACHE_DIRECTORY, file));
-      }
-    });
-  }
-
   console.log(`Jest Preview Server listening on port ${port}`);
   openBrowser(`http://localhost:${port}`);
 });
