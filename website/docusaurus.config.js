@@ -135,6 +135,9 @@ const config = {
                 label: 'Discord',
                 href: 'https://discord.gg/z4DRBmk7vx',
               },
+              {
+                html: `<a href="https://www.netlify.com"> <img src="https://www.netlify.com/v3/img/components/netlify-color-bg.svg" alt="Deploys by Netlify" /> </a>`,
+              },
             ],
           },
         ],
