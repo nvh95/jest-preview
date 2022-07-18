@@ -190,6 +190,16 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "skirianov",
+      "name": "Sergii Kirianov",
+      "avatar_url": "https://avatars.githubusercontent.com/u/74229951?v=4",
+      "profile": "https://github.com/skirianov",
+      "contributions": [
+        "doc",
+        "content"
+      ]
     }
   ],
   "contributorsPerLine": 7,

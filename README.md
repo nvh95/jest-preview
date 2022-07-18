@@ -21,7 +21,7 @@ Debug your Jest tests. Effortlessly. 🛠🖼
 
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-20-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-21-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
 
@@ -156,6 +156,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="http://majisti.com"><img src="https://avatars.githubusercontent.com/u/650192?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Steven Rosato</b></sub></a><br /><a href="#example-srosato" title="Examples">💡</a></td>
     <td align="center"><a href="https://github.com/nhducit"><img src="https://avatars.githubusercontent.com/u/4246176?v=4?s=100" width="100px;" alt=""/><br /><sub><b>nhducit</b></sub></a><br /><a href="#ideas-nhducit" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://github.com/benoitgrasset-alma"><img src="https://avatars.githubusercontent.com/u/104012464?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Benoit GRASSET</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/issues?q=author%3Abenoitgrasset-alma" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/skirianov"><img src="https://avatars.githubusercontent.com/u/74229951?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sergii Kirianov</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=skirianov" title="Documentation">📖</a> <a href="#content-skirianov" title="Content">🖋</a></td>
   </tr>
 </table>
 
