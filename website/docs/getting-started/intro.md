@@ -14,7 +14,7 @@ Jest Preview is an open-source library to make your life easier. See your test o
 👇 continue reading to know more and try Jest Preview in action
 
 :::info
-You can go straight to [Installation](https://www.jest-preview.com/docs/getting-started/installation) guide or check [Why Jest Preview](https://www.jest-preview.com/docs/getting-started/why-jest-preview) to see the benefits of using our library. 
+You can go straight to [Installation](https://www.jest-preview.com/docs/getting-started/installation) guide or check [Why Jest Preview](https://www.jest-preview.com/docs/getting-started/why-jest-preview) to see the benefits of using our library.
 :::
 
 ## Features
@@ -34,12 +34,12 @@ You can go straight to [Installation](https://www.jest-preview.com/docs/getting-
 - 🧑‍💻 Our contributors work hard to add more features and provide support ⚙️
 
 :::info
-Would like to contribute? Great! We appreciate it a lot! Check our [Contributing](/docs/others/contributing) section 🙏 
+Would like to contribute? Great! We appreciate it a lot! Check our [Contributing](/docs/others/contributing) section 🙏
 :::
 
 ## Online Demo
 
-Want to try the library before installing it? We got you covered! Check out [StackBlitz Demo App](https://stackblitz.com/edit/jest-preview?embed=1&file=package.json) or try it right here 😉
+Want to try the library before installing it? We got you covered! Check out [StackBlitz Demo App](https://stackblitz.com/edit/jest-preview?embed=1&file=README.md) or try it right here 😉
 
 <iframe id="iframe" height="600px" width="100%" style={{marginBottom: "24px" }} src="https://stackblitz.com/edit/jest-preview?embed=1&ctl=1"></iframe>
 
@@ -49,7 +49,7 @@ Want to try the library before installing it? We got you covered! Check out [Sta
 
 ## How to use Jest Preview with only 2 lines of code
 
-Start the Jest Preview Server by running the CLI command `jest-preview`. 
+Start the Jest Preview Server by running the CLI command `jest-preview`. To make it look even better, follow the [Installation](https://www.jest-preview.com/docs/getting-started/installation) guide
 
 ```diff
 +import preview from 'jest-preview';
@@ -74,6 +74,6 @@ describe('App', () => {
   });
 });
 ```
+
 :::tip It's that simple! 😱
 :::
-
