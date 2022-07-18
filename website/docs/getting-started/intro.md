@@ -14,7 +14,7 @@ Jest Preview is an open-source library to make your life easier. See your test o
 👇 continue reading to know more and try Jest Preview in action
 
 :::info
-You can go straight to [Installation](https://www.jest-preview.com/docs/getting-started/installation) guide or check [Why Jest Preview](https://www.jest-preview.com/docs/getting-started/why-jest-preview) to see the benefits of using our library.
+You can go straight to [Installation](https://www.jest-preview.com/docs/getting-started/installation) guide to install it locally on your machine.
 :::
 
 ## Features
