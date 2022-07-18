@@ -19,7 +19,7 @@ import '@your-design-system/css/dist/index.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 ```
 
-- Your CSS strategy is not supported by Jest Preview yet. Please see [**Features**](/docs/getting-started/features) for supported CSS strategies. Feel free to [Request a new feature](https://github.com/nvh95/jest-preview/issues/new?assignees=&labels=&template=feature_request.md&title=) if you want Jest Preview supports your use case.
+- Your CSS strategy is not supported by Jest Preview yet. Please see [**Features**](/docs/getting-started/intro#features) for supported CSS strategies. Feel free to [Request a new feature](https://github.com/nvh95/jest-preview/issues/new?assignees=&labels=&template=feature_request.md&title=) if you want Jest Preview supports your use case.
 - It might be a bug from Jest Preview. Let us know at [Bug Report](https://github.com/nvh95/jest-preview/issues/new?assignees=&labels=&template=bug_report.md&title=).
 
 ## I couldn't use Automatic Mode
