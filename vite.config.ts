@@ -1,5 +1,6 @@
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
+import svgr from 'vite-plugin-svgr';
 
 const path = require('path');
 
@@ -22,7 +23,7 @@ export default defineConfig(({ mode }) => {
   envWithProcessPrefix['process.env.NODE_ENV'] = `'${mode}'`;
 
   return {
-    plugins: [react()],
+    plugins: [react(), svgr()],
     // If `envWithProcessPrefix` is an empty object, `process.env` will be undefined and the app cannot be loaded
     // Caveat: Cannot access `process.env` in build mode, always use `process.env.VARIABLE_NAME`
     define: envWithProcessPrefix,
