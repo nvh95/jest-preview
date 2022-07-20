@@ -85,6 +85,11 @@ const config = {
             position: 'right',
           },
           {
+            href: 'https://www.npmjs.com/package/jest-preview',
+            label: 'npm',
+            position: 'right',
+          },
+          {
             href: 'https://discord.gg/z4DRBmk7vx',
             label: 'Discord',
             position: 'right',
@@ -101,6 +106,10 @@ const config = {
                 label: 'Tutorial',
                 to: '/docs/getting-started/intro',
               },
+              {
+                label: 'Blog',
+                to: '/blog',
+              },
             ],
           },
           {
@@ -116,7 +125,15 @@ const config = {
               // },
               {
                 label: 'Twitter',
+                href: 'https://twitter.com/JestPreview',
+              },
+              {
+                label: `Hung's Twitter`,
                 href: 'https://twitter.com/hung_dev',
+              },
+              {
+                label: 'Discord',
+                href: 'https://discord.gg/z4DRBmk7vx',
               },
             ],
           },
@@ -124,17 +141,10 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
                 label: 'GitHub',
                 href: 'https://github.com/nvh95/jest-preview',
               },
-              {
-                label: 'Discord',
-                href: 'https://discord.gg/z4DRBmk7vx',
-              },
+
               {
                 html: `<a href="https://www.netlify.com"> <img src="https://www.netlify.com/v3/img/components/netlify-color-bg.svg" alt="Deploys by Netlify" /> </a>`,
               },
