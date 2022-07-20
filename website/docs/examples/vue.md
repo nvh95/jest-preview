@@ -1,9 +1,7 @@
-# Vue 3 + Vite + Jest Preview
+---
+sidebar_position: 6
+---
 
-## Installation and Usage
+# Vue
 
-Please refer to [Installation](../getting-started/installation.md) and [Usage](../getting-started/usage.md).
-
-## Caveats
-
-Currently, the [Scoped CSS](https://vuejs.org/api/sfc-css-features.html#scoped-css) is not supported yet. We are working to support soon in the future release.
+See more at [Vue Example](https://github.com/nvh95/jest-preview/tree/main/examples/vue)

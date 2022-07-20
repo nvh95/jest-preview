@@ -1,11 +1,13 @@
-# Use with Vite
+---
+sidebar_position: 1
+---
 
-This example demonstrates how to use `jest-preview` with `vite`.
+# Vite React
 
 ## Setup jest with vite
 
 If you haven't set up jest with vite yet, you can see how to do it at [Setup Jest with Vite](https://hung.dev/jest-vite) ([repo](https://github.com/nvh95/jest-with-vite)).
 
-## Installation and Usage
+## Integrating Jest Preview to Vite React Project
 
-Please refer to [Installation](../getting-started/installation.md) and [Usage](../getting-started/usage.md).
+See more at [Vite React Example](https://github.com/nvh95/jest-preview/tree/main/examples/vite-react)
