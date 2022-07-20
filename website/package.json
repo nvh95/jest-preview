@@ -5,7 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start --no-open --port 3001",
-    "build": "node scripts/contributing.js && docusaurus build",
+    "build": "node scripts/contributing.js && node scripts/syncExampleDocs.js && docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",

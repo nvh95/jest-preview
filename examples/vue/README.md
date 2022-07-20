@@ -1,8 +1,10 @@
-# Vue 3 + Vite + Jest Preview
+# Vue
+
+See the full example at <https://github.com/nvh95/jest-preview/tree/main/examples/vue>
 
 ## Installation and Usage
 
-Please refer to [Installation](../../README.md#installation) and [Usage](../../README.md#usage).
+Please refer to [Installation](https://www.jest-preview.com/docs/getting-started/installation/) and [Usage](https://www.jest-preview.com/docs/getting-started/usage/).
 
 ## Caveats
 
