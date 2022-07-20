@@ -1,27 +1,27 @@
+// @ts-check
 const fs = require('fs');
 const path = require('path');
 
-const rootExamples = '../../examples';
-const webDocs = '../docs/examples';
+const rootExamples = path.join(process.cwd(), '../examples');
+const webDocs = path.join(process.cwd(), './docs/examples');
 
-fs.readdir(path.join(__dirname, rootExamples), (err, directories) => {
-  const onlyDirectories = directories.filter(dirName => dirName !== '.gitignore');
+const directories = fs.readdirSync(rootExamples);
+const onlyDirectories = directories.filter((dirName) =>
+  fs.lstatSync(path.join(rootExamples, dirName)).isDirectory(),
+);
 
-  onlyDirectories.forEach(async dir => {
-    const readmePath = path.join(__dirname, `${rootExamples}/${dir}/README.md`);
-    const docsPath = path.join(__dirname, `${webDocs}/${dir}.md`);
+onlyDirectories.forEach(async (dir) => {
+  const readmePath = `${rootExamples}/${dir}/README.md`;
+  const docsPath = `${webDocs}/${dir}.md`;
 
-    await fs.readFile(readmePath, 'utf-8', (err, data) => {
-      const fileWithFixedLinks = data
-        .replaceAll('../../README.md#installation', '../getting-started/installation.md')
-        .replaceAll('../../README.md#usage', '../getting-started/usage.md');
-
-      fs.writeFile(docsPath, fileWithFixedLinks, 'utf-8', (err, data) => {
-        if (err) {
-          throw err
-        }
-      })
-    })
-  });
+  if (fs.existsSync(docsPath)) {
+    fs.appendFile(
+      docsPath,
+      fs.readFileSync(readmePath, 'utf8'),
+      function (err) {
+        if (err) throw err;
+        console.log(`Appended to ${docsPath}`);
+      },
+    );
+  }
 });
-
