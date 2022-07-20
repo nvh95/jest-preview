@@ -1,4 +1,4 @@
-# Next.js (with Rust compiler)
+# Next.js with Rust compiler
 
 This example demonstrates how to use `jest-preview` with `Next.js`, bootstrapped using `create-next-app`.
 
