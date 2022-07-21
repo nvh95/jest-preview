@@ -1,32 +1,32 @@
-#!/usr/bin/env node
-const { program } = require('commander');
+import { program } from 'commander';
+
+import updateNotifier from 'update-notifier';
+import chalk from 'chalk';
 
 program
   .command('config-cra')
   .description('Integrate Jest Preview with CRA.')
   .action(() => {
-    require('./configCra');
+    import('./configCra');
   });
 
 program
   .command('clear-cache')
   .description('Clear Jest and Jest Preview cache.')
   .action(() => {
-    require('./clearCache');
+    import('./clearCache');
   });
 
 program.description('Start Jest Preview server.').action(() => {
-  require('./server/previewServer');
+  import('./server/previewServer');
 });
 
 program.parse(process.argv);
 
 // Checks for available update and notify user
-const updateNotifier = require('update-notifier');
-const chalk = require('chalk');
-
 const notifier = updateNotifier({
-  pkg: require('../../package.json'),
+  // Built output is at /cli so the relative path is ../package.json
+  pkg: require('../package.json'),
   updateCheckInterval: 0, // How often to check for updates
   shouldNotifyInNpmScript: true, // Allows notification to be shown when running as an npm script
   distTag: 'latest', // Can be use to notify user about pre-relase version

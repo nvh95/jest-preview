@@ -1,11 +1,9 @@
-#!/usr/bin/env node
-
 // Credit to https://github.com/bpierre/create-react-app/blob/967db643fc9f85e1f8c84fff4708307c5f006e4f/packages/react-dev-utils/openBrowser.js
-const execSync = require('child_process').execSync;
-const open = require('open');
+import { execSync } from 'child_process';
+import open from 'open';
 var OSX_CHROME = 'google chrome';
 
-function openBrowser(url) {
+function openBrowser(url: string) {
   // Attempt to honor this environment variable.
   // It is specific to the operating system.
   // See https://github.com/sindresorhus/opn#app for documentation.
@@ -70,7 +68,7 @@ function openBrowser(url) {
   // Fallback to opn
   // (It will always open new tab)
   try {
-    var options = { app: browser };
+    var options = { app: { name: browser as string } };
     open(url, options).catch(() => {}); // Prevent `unhandledRejection` error.
     return true;
   } catch (err) {
@@ -78,4 +76,4 @@ function openBrowser(url) {
   }
 }
 
-module.exports = { openBrowser };
+export { openBrowser };
