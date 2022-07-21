@@ -20,7 +20,11 @@ const INDEX_BASENAME = 'index.html';
 const INDEX_PATH = path.join(CACHE_DIRECTORY, INDEX_BASENAME);
 const PUBLIC_CONFIG_BASENAME = 'cache-public.config';
 const PUBLIC_CONFIG_PATH = path.join(CACHE_DIRECTORY, PUBLIC_CONFIG_BASENAME);
-const FAV_ICON_PATH = './node_modules/jest-preview/cli/server/favicon.ico';
+let FAV_ICON_PATH = './node_modules/jest-preview/cli/server/favicon.ico';
+if (!fs.existsSync(FAV_ICON_PATH)) {
+  // For dev purpose only
+  FAV_ICON_PATH = './cli/server/favicon.ico';
+}
 
 // Always set default public folder to `public` if not specified
 let publicFolder = 'public';
