@@ -26,7 +26,7 @@ const updateNotifier = require('update-notifier');
 const chalk = require('chalk');
 
 const notifier = updateNotifier({
-  pkg: require('../package.json'),
+  pkg: require('../../package.json'),
   updateCheckInterval: 0, // How often to check for updates
   shouldNotifyInNpmScript: true, // Allows notification to be shown when running as an npm script
   distTag: 'latest', // Can be use to notify user about pre-relase version
