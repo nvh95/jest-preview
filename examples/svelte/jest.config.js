@@ -1,3 +1,5 @@
+/** @type {import('@jest/types').Config.InitialOptions} */
+
 export default {
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   transform: {

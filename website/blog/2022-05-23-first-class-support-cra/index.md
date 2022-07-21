@@ -33,6 +33,8 @@ Option 2: Configure manually
   <summary>Click to expand!</summary>
 
 ```js
+/** @type {import('@jest/types').Config.InitialOptions} */
+
 module.exports = {
   roots: ['<rootDir>/src'],
   collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!src/**/*.d.ts'],
