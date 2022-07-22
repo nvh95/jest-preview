@@ -35,12 +35,15 @@ if (fs.existsSync(PUBLIC_CONFIG_PATH)) {
 
 if (fs.existsSync(INDEX_PATH)) {
   // Remove old preview
-  const files = fs.readdirSync(CACHE_DIRECTORY);
-  files.forEach((file) => {
-    if (!file.startsWith('cache-')) {
-      fs.unlinkSync(path.join(CACHE_DIRECTORY, file));
-    }
-  });
+  // const files = fs.readdirSync(CACHE_DIRECTORY);
+  // files.forEach((file) => {
+  //   if (!file.startsWith('cache-')) {
+  //     fs.rmSync(path.join(CACHE_DIRECTORY, file), {
+  //       recursive: true,
+  //       force: true,
+  //     });
+  //   }
+  // });
 } else {
   fs.mkdirSync(CACHE_DIRECTORY, {
     recursive: true,
@@ -70,6 +73,9 @@ Please add following lines to your test: <br /> <br />
 Then rerun your tests.
 <br />
 See an example in the <a href="https://www.jest-preview.com/docs/getting-started/usage#3-preview-your-html-from-jest-following-code-demo-how-to-use-it-with-react-testing-library" target="_blank" rel="noopener noreferrer">documentation</a>
+<br />
+<br />
+You can also see all snapshot at <a href="/preview" >/preview</a>
 </body>
 </html>`;
 
@@ -139,39 +145,90 @@ function injectToHead(html, content) {
 }
 
 app.use((req, res, next) => {
-  // Learn from https://github.com/vitejs/vite/blob/2b7dad1ea1d78d7977e0569fcca4c585b4014e85/packages/vite/src/node/server/middlewares/static.ts#L38
-  const serve = sirv('.', {
-    dev: true,
-    etag: true,
-  });
   // Do not serve index
-  if (req.url === '/') {
+  if (req.url === '/' || req.url === '/preview' || req.url === '/preview/') {
     return next();
+  }
+
+  if (req.url === '/favicon.ico') {
+    req.url = FAV_ICON_PATH;
+  }
+
+  // TODO: Move to /preview and /failed folder
+  // Check if there is a debug folder
+  const debugFolder = path.join(CACHE_DIRECTORY, req.url);
+  if (fs.existsSync(debugFolder)) {
+    let indexHtml = fs.readFileSync(
+      path.join(CACHE_DIRECTORY, req.url, 'index.html'),
+      'utf-8',
+    );
+    indexHtml = injectToHead(
+      indexHtml,
+      `<link rel="shortcut icon" href="${FAV_ICON_PATH}">
+  <title>Jest Preview Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">`,
+    );
+    res.end(indexHtml);
+    return;
   }
 
   // Check if req.url is existed, if not, look up in public directory
   const filePath = path.join('.', req.url);
   if (!fs.existsSync(filePath)) {
-    const newPath = path.join(publicFolder, req.url);
-    if (fs.existsSync(newPath)) {
-      req.url = newPath;
-    } else {
-      // Cannot find the file, warns user about it
-      // Likely user has old Jest cached code transformations.
-      // Or just a bug in their source code
-      console.log('[WARN] File not found: ', req.url);
-      console.log(`[WARN] Please check if ${req.url} is existed.`);
-      console.log(
-        `[WARN] If it is existed, likely you forget to setup the code transformation, or you haven't flushed the old cache yet. Try to run "./node_modules/.bin/jest --clearCache" to clear the cache.\n`,
-      );
-      // TODO: To send those warning to browser as an overlay/ toast, the idea is similar to https://www.npmjs.com/package/vite-plugin-checker
-      // TODO: Known issue: in development, we can't find `favicon.ico` yet. So it will yell in the Preview Server logs
-    }
+    const serve = sirv(publicFolder, {
+      dev: true,
+      etag: true,
+    });
+    serve(req, res, next);
+    // const newPath = path.join(publicFolder, req.url);
+    // if (fs.existsSync(newPath)) {
+    //   req.url = newPath;
+    // } else {
+    //   // Cannot find the file, warns user about it
+    //   // Likely user has old Jest cached code transformations.
+    //   // Or just a bug in their source code
+    //   console.log('[WARN] File not found: ', req.url);
+    //   console.log(`[WARN] Please check if ${req.url} is existed.`);
+    //   console.log(
+    //     `[WARN] If it is existed, likely you forget to setup the code transformation, or you haven't flushed the old cache yet. Try to run "./node_modules/.bin/jest --clearCache" to clear the cache.\n`,
+    //   );
+    //   // TODO: To send those warning to browser as an overlay/ toast, the idea is similar to https://www.npmjs.com/package/vite-plugin-checker
+    //   // TODO: Known issue: in development, we can't find `favicon.ico` yet. So it will yell in the Preview Server logs
+    // }
+  } else {
+    // Learn from https://github.com/vitejs/vite/blob/2b7dad1ea1d78d7977e0569fcca4c585b4014e85/packages/vite/src/node/server/middlewares/static.ts#L38
+    const serve = sirv('.', {
+      dev: true,
+      etag: true,
+    });
+    serve(req, res, next);
   }
-  serve(req, res, next);
+});
+
+app.use('/preview', (req, res) => {
+  if (!fs.existsSync(path.join(CACHE_DIRECTORY, 'preview'))) {
+    res.end('No preview available');
+    return;
+  }
+  const directories = fs.readdirSync(path.join(CACHE_DIRECTORY, 'preview'));
+  const onlyDirectories = directories.filter((dirName) =>
+    fs.lstatSync(path.join(CACHE_DIRECTORY, 'preview', dirName)).isDirectory(),
+  );
+  console.log(onlyDirectories);
+  let html = '';
+  onlyDirectories.forEach((dir) => {
+    const content = fs.readFileSync(
+      path.join(CACHE_DIRECTORY, 'preview', dir, 'info.txt'),
+      'utf-8',
+    );
+    html += `<a href="/preview/${dir}">${content}</a><br/>`;
+  });
+  res.end(html);
 });
 
 app.use('/', (req, res) => {
+  console.log(req.url);
   const reloadScriptContent = fs
     .readFileSync(path.join(__dirname, './ws-client.js'), 'utf-8')
     .replace(/\$PORT/g, wsPort);
@@ -184,6 +241,8 @@ app.use('/', (req, res) => {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">`,
   );
+  // TODO: Inject /preview and /failed
+  // TODO: Add clear cache button
   res.end(indexHtml);
 });
 
