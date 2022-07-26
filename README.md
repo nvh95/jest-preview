@@ -188,3 +188,6 @@ Bronze Sponsor 🥉 and Silver Sponsor 🥈 on [Open Collective](https://opencol
 <a href="https://webuild.community/">
   <img src="https://user-images.githubusercontent.com/8603085/170883918-8b9f111d-f3c6-4647-9cc1-de56dd98ea60.png" width="94" height="94" />
 </a>
+<a href="https://www.deploysentinel.com/">
+  <img src="https://github.com/DeploySentinel.png" width="94" height="94" />
+</a>
