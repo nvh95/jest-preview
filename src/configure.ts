@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import { exec } from 'child_process';
 import chalk from 'chalk';
-import { CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG } from './constants';
+import { CACHE_FOLDER, DELIMITER, SASS_LOAD_PATHS_CONFIG } from './constants';
 import { createCacheFolderIfNeeded } from './utils';
 import { debug } from './preview';
 
@@ -61,8 +61,7 @@ export function jestPreviewConfigure(
         'See the migration guide at www.jest-preview.com/blog/deprecate-externalCss',
       ),
     );
-    const delimiter = '___';
-    const destinationBasename = `cache-${cssFile.replace(/\//g, delimiter)}`;
+    const destinationBasename = `cache-${cssFile.replace(/\//g, DELIMITER)}`;
     const destinationFile = path.join(CACHE_FOLDER, destinationBasename);
 
     createCacheFolderIfNeeded();
