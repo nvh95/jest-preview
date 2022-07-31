@@ -1,6 +1,5 @@
 import path from 'path';
 import fs from 'fs';
-import { exec } from 'child_process';
 import chalk from 'chalk';
 import { CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG } from './constants';
 import { createCacheFolderIfNeeded } from './utils';
@@ -53,70 +52,13 @@ export function jestPreviewConfigure(
   }
 
   externalCss?.forEach((cssFile) => {
-    // Avoid name collision
-    // Example: src/common/styles.css => cache-src___common___styles.css
     console.log(
-      chalk.yellow(
-        'externalCss is deprecated. Please import css files directly in your setup file.',
+      chalk.red(
+        'externalCss is deprecated and has no effects.\n',
+        'Please import css files directly in your setup file.\n',
         'See the migration guide at www.jest-preview.com/blog/deprecate-externalCss',
       ),
     );
-    const delimiter = '___';
-    const destinationBasename = `cache-${cssFile.replace(/\//g, delimiter)}`;
-    const destinationFile = path.join(CACHE_FOLDER, destinationBasename);
-
-    createCacheFolderIfNeeded();
-
-    // If sass file is included, we need to transform it to css
-    if (cssFile.endsWith('.scss') || cssFile.endsWith('.sass')) {
-      const cssDestinationFile = destinationFile.replace(
-        /\.(scss|sass)$/,
-        '.css',
-      );
-
-      const sassLoadPathsCLIConfig = sassLoadPathsConfig.reduce(
-        (currentConfig, nextLoadPath) =>
-          `${currentConfig} --load-path ${nextLoadPath}`,
-        '',
-      );
-
-      // Transform sass to css and save to cache folder
-      // We use exec instead of sass.compile because running sass.compile in jsdom environment cause unexpected behavior
-      // What we encountered is that filename is automatically added `http://localhost` as the prefix
-      // Example: style.scss => http://localhost/style.scss
-      // As a result, sass.compile cannot find the file
-      // TODO: Can we inject css to the `document.head` directly?
-      // TODO: Support import ~ for configured scss
-      // Currently, we cannot find the option to pass `importer` to sass CLI: https://sass-lang.com/documentation/cli/dart-sass#options
-      exec(
-        `${path.join(
-          process.cwd(),
-          'node_modules',
-          '.bin',
-          'sass',
-        )} ${cssFile} ${cssDestinationFile} --no-source-map ${sassLoadPathsCLIConfig}`,
-        (err: any) => {
-          if (err) {
-            console.log(err);
-          }
-        },
-      );
-      return;
-    }
-
-    // TODO: To move to load file directly instead of cloning them to `.cache`
-    // Move together with transform
-    // TODO: To cache those files. We cannot cache them by checking if files exists
-    // Since content of the files might changes and it won't be copied over
-    // Can we send a websocket event to preview server and let server remember location of the files in the memory?
-    // That way, we can don't have to copy files to disk
-    // Memory is faster than disk anyway!!!!
-    // if (!fs.existsSync(destinationFile)) {
-    // TODO: Can we inject css to the `document.head` directly?
-    fs.copyFile(cssFile, destinationFile, (err: any) => {
-      if (err) throw err;
-    });
-    // }
   });
 
   if (publicFolder) {
