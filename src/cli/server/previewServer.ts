@@ -1,14 +1,13 @@
-#!/usr/bin/env node
-const http = require('http');
-const path = require('path');
-const fs = require('fs');
-const connect = require('connect');
-const sirv = require('sirv');
-const app = connect();
-const chokidar = require('chokidar');
-const { openBrowser } = require('./browser');
-const { WebSocketServer } = require('ws');
+import http from 'http';
+import path from 'path';
+import fs from 'fs';
+import connect from 'connect';
+import sirv from 'sirv';
+import chokidar from 'chokidar';
+import { WebSocketServer } from 'ws';
+import { openBrowser } from './browser';
 
+const app = connect();
 const port = process.env.PORT || 3336;
 // TODO: Can we reuse `port`, I think Vite they can do that
 // https://github.com/vitejs/vite/blob/50a876537cc7b934ec5c1d11171b5ce02e3891a8/packages/vite/src/node/server/ws.ts#L97
@@ -74,7 +73,7 @@ fs.writeFileSync(INDEX_PATH, defaultIndexHtml);
 const wss = new WebSocketServer({ port: wsPort });
 
 wss.on('connection', function connection(ws) {
-  ws.on('message', function message(data) {
+  ws.on('message', function message(data: string) {
     console.log('received: %s', data);
     try {
       const dataJSON = JSON.parse(data);
@@ -94,7 +93,7 @@ const watcher = chokidar.watch([INDEX_PATH, PUBLIC_CONFIG_PATH], {
   disableGlobbing: true,
 });
 
-function handleFileChange(filePath) {
+function handleFileChange(filePath: string) {
   const basename = path.basename(filePath);
   // TODO: Check if this is the root cause for issue on linux
   if (basename === INDEX_BASENAME) {
@@ -115,22 +114,14 @@ watcher
   .on('add', handleFileChange)
   .on('unlink', handleFileChange);
 
-/**
- *
- * @param {string} string
- * @param {string} word
- * @param {string} injectWord
- * @returns string
- */
-
-function injectToString(string, word, injectWord) {
+function injectToString(string: string, word: string, injectWord: string) {
   const breakPosition = string.indexOf(word) + word.length;
   return (
     string.slice(0, breakPosition) + injectWord + string.slice(breakPosition)
   );
 }
 
-function injectToHead(html, content) {
+function injectToHead(html: string, content: string) {
   return injectToString(html, '<head>', content);
 }
 
@@ -146,9 +137,9 @@ app.use((req, res, next) => {
   }
 
   // Check if req.url is existed, if not, look up in public directory
-  const filePath = path.join('.', req.url);
+  const filePath = path.join('.', req.url as string);
   if (!fs.existsSync(filePath)) {
-    const newPath = path.join(publicFolder, req.url);
+    const newPath = path.join(publicFolder, req.url as string);
     if (fs.existsSync(newPath)) {
       req.url = newPath;
     } else {
@@ -170,7 +161,7 @@ app.use((req, res, next) => {
 app.use('/', (req, res) => {
   const reloadScriptContent = fs
     .readFileSync(path.join(__dirname, './ws-client.js'), 'utf-8')
-    .replace(/\$PORT/g, wsPort);
+    .replace(/\$PORT/g, `${wsPort}`);
   let indexHtml = fs.readFileSync(INDEX_PATH, 'utf-8');
   indexHtml += `<script>${reloadScriptContent}</script>`;
   indexHtml = injectToHead(
