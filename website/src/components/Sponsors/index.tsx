@@ -33,6 +33,16 @@ export default function Sponsors() {
             height="94"
           />
         </a>
+        <a
+          className={styles.bronzeSponsor}
+          href="https://www.deploysentinel.com/"
+        >
+          <img
+            src="https://github.com/DeploySentinel.png"
+            width="94"
+            height="94"
+          />
+        </a>
       </div>
       <div className={styles.wantLogo}>
         Want your company logo appear here? Read more at{' '}
