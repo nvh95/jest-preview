@@ -31,30 +31,30 @@ If you want to work on any of these issues, just drop a message such as "I'd lik
 
 Jest Preview repository has some npm scripts to help you develop efficiently.
 
-- `npm install`: install all dependencies
-- `npm run build:watch`: build `jest-preview` and rebuild it when changes are made
-- `npm run types`: emit types, usually only need to run only once
-- `npm run server`: start Jest Preview Server
-- `npm run test:dev`: run Jest at `/demo/__tests__/App.test.tsx` (you will work with this file most of the time)
+- `pnpm install`: install all dependencies
+- `pnpm run build:watch`: build `jest-preview` and rebuild it when changes are made
+- `pnpm run types`: emit types, usually only need to run only once
+- `pnpm run server`: start Jest Preview Server
+- `pnpm run test:dev`: run Jest at `/demo/__tests__/App.test.tsx` (you will work with this file most of the time)
 
 ## Run locally
 
 Install dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 Run the real demo app:
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 Run jest tests and Jest Preview server simultaneously:
 
 ```bash
-npm run test
+pnpm run test
 ```
 
 Open chrome at <http://localhost:3336> to see the preview
@@ -62,8 +62,8 @@ Open chrome at <http://localhost:3336> to see the preview
 However, it's recommended to run jest tests and Jest Preview server separately:
 
 ```bash
-npm run server # Run jest-preview server
-npm run test:dev # Run jest
+pnpm run server # Run jest-preview server
+pnpm run test:dev # Run jest
 ```
 
 Whenever `preview.debug()` is triggered, or whenever a test fails, you will see the changes reflected on the browser immediately.
