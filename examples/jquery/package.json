@@ -1,0 +1,25 @@
+{
+  "name": "jquery",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "serve src",
+    "jest-preview": "jest-preview",
+    "test": "NODE_ENV=test jest --watch",
+    "test:nc": "npm run test -- --no-cache",
+    "test:debug": "npm-run-all -p test jest-preview"
+  },
+  "dependencies": {
+    "jquery": "^3.6.0"
+  },
+  "devDependencies": {
+    "@swc/core": "^1.2.154",
+    "@swc/jest": "^0.2.20",
+    "jest": "^27.5.1",
+    "jest-preview": "file:../..",
+    "jest-watch-typeahead": "^1.0.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.6.0",
+    "serve": "^14.0.1"
+  }
+}
