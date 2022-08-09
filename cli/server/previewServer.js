@@ -34,16 +34,9 @@ if (fs.existsSync(PUBLIC_CONFIG_PATH)) {
 }
 
 if (fs.existsSync(INDEX_PATH)) {
+  // TODO: Add floating button to always be able to navigate to /preview + Do not need to remove snapshots under /preview (and /failed)
   // Remove old preview
-  // const files = fs.readdirSync(CACHE_DIRECTORY);
-  // files.forEach((file) => {
-  //   if (!file.startsWith('cache-')) {
-  //     fs.rmSync(path.join(CACHE_DIRECTORY, file), {
-  //       recursive: true,
-  //       force: true,
-  //     });
-  //   }
-  // });
+  fs.rmSync(INDEX_PATH);
 } else {
   fs.mkdirSync(CACHE_DIRECTORY, {
     recursive: true,
@@ -75,7 +68,7 @@ Then rerun your tests.
 See an example in the <a href="https://www.jest-preview.com/docs/getting-started/usage#3-preview-your-html-from-jest-following-code-demo-how-to-use-it-with-react-testing-library" target="_blank" rel="noopener noreferrer">documentation</a>
 <br />
 <br />
-You can also see all snapshot at <a href="/preview" >/preview</a>
+You can also see all snapshots at <a href="/preview" >/preview</a>
 </body>
 </html>`;
 
@@ -215,7 +208,6 @@ app.use('/preview', (req, res) => {
   const onlyDirectories = directories.filter((dirName) =>
     fs.lstatSync(path.join(CACHE_DIRECTORY, 'preview', dirName)).isDirectory(),
   );
-  console.log(onlyDirectories);
   let html = '';
   onlyDirectories.forEach((dir) => {
     const content = fs.readFileSync(
@@ -224,11 +216,36 @@ app.use('/preview', (req, res) => {
     );
     html += `<a href="/preview/${dir}">${content}</a><br/>`;
   });
+  if (onlyDirectories.length === 0) {
+    html = 'No previews available';
+  }
   res.end(html);
 });
 
+app.use('/delete-preview', (req, res) => {
+  // TODO: Consider to use POST. However, I think it doesn't matter
+  const previewFolder = path.join(CACHE_DIRECTORY, 'preview');
+  // TODO: To retrieve file name
+  let deletedFiles = [];
+  const files = fs.readdirSync(previewFolder);
+  files.forEach((file) => {
+    const fileToDelete = path.join(previewFolder, file);
+    if (fs.existsSync(fileToDelete)) {
+      fs.rmSync(fileToDelete, {
+        recursive: true,
+        force: true,
+      });
+      deletedFiles.push(fileToDelete);
+    }
+  });
+  if (deletedFiles.length) {
+    res.end(`${deletedFiles.length} file(s) deleted`);
+  } else {
+    res.end('No file deleted');
+  }
+});
+
 app.use('/', (req, res) => {
-  console.log(req.url);
   const reloadScriptContent = fs
     .readFileSync(path.join(__dirname, './ws-client.js'), 'utf-8')
     .replace(/\$PORT/g, wsPort);
