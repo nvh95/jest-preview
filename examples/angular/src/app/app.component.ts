@@ -1,46 +1,89 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
+import { CounterComponent } from './counter.component';
 
 @Component({
-  selector: "app-root",
+  selector: 'app-root',
   standalone: true,
+  imports: [CounterComponent],
+  styleUrls: ['../styles/css/app.css', '../styles/scss/style.scss'],
   template: `
-    <!--The content below is only a placeholder and can be replaced.-->
-    <div style="text-align:center" class="content">
-      <h1>Welcome to {{ title }}!</h1>
-      <span style="display: block">{{ title }} app is running!</span>
-      <img
-        width="300"
-        alt="Angular Logo"
-        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
-      />
+    <style>
+      .App {
+        text-align: center;
+      }
+
+      .App-logo {
+        height: 40vmin;
+        pointer-events: none;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .App-logo {
+          animation: App-logo-spin infinite 20s linear;
+        }
+      }
+
+      .App-header {
+        background-color: #282c34;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: calc(10px + 2vmin);
+        color: white;
+      }
+
+      .App-link {
+        color: #61dafb;
+      }
+
+      @keyframes App-logo-spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
+    <div class="App">
+      <header class="App-header">
+        <img src="/assets/logo.svg" class="App-logo" alt="logo" />
+        <img [src]="logo2" class="logo2" alt="logo2" />
+        <p>Angular CLI Example</p>
+        <p class="global-configured-sass">
+          This text is styled by global configured SASS
+        </p>
+        <p class="imported-sass">This text is styled by imported SASS</p>
+        <p>
+          <app-counter></app-counter>
+        </p>
+        <p>Edit <code>app.component.ts</code> and save to test HMR updates.</p>
+        <p>
+          <a
+            class="App-link"
+            href="https://angular.io/start"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn Angular
+          </a>
+          |
+          <a
+            class="App-link"
+            href="https://angular.io/docs"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Angular docs
+          </a>
+        </p>
+      </header>
     </div>
-    <h2>Here are some links to help you start:</h2>
-    <ul>
-      <li>
-        <h2>
-          <a target="_blank" rel="noopener" href="https://angular.io/tutorial"
-            >Tour of Heroes</a
-          >
-        </h2>
-      </li>
-      <li>
-        <h2>
-          <a target="_blank" rel="noopener" href="https://angular.io/cli"
-            >CLI Documentation</a
-          >
-        </h2>
-      </li>
-      <li>
-        <h2>
-          <a target="_blank" rel="noopener" href="https://blog.angular.io/"
-            >Angular blog</a
-          >
-        </h2>
-      </li>
-    </ul>
   `,
-  styles: [],
 })
 export class AppComponent {
-  title = "angular-jest-preview";
+  logo2 = '/assets/images/logo.svg';
 }

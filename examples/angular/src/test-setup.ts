@@ -1,11 +1,16 @@
-import * as fs from "fs";
-import "zone.js/plugins/zone-error";
+import '@testing-library/jest-dom';
+import { jestPreviewConfigure } from 'jest-preview';
+import 'zone.js/plugins/zone-error';
 
-const globalStyles = fs
-  .readFileSync("./src/styles.css", {
-    encoding: "utf-8",
-  })
-  .toString();
-const styleElement = document.createElement("style");
-styleElement.innerHTML = globalStyles;
-document.head.appendChild(styleElement);
+// Global styles loaded by the app
+import './styles/index.css';
+import './styles/scss/global-style.scss';
+
+// Styles loaded from external files
+import './styles/css/app.css';
+import './styles/scss/style.scss';
+
+jestPreviewConfigure({
+  autoPreview: true,
+  publicFolder: 'src',
+});

@@ -27,7 +27,10 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.css"],
+            "styles": [
+              "src/styles/index.css",
+              "src/styles/scss/global-style.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -70,7 +73,8 @@
               "browserTarget": "angular-jest-preview:build:production"
             },
             "development": {
-              "browserTarget": "angular-jest-preview:build:development"
+              "browserTarget": "angular-jest-preview:build:development",
+              "hmr": true
             }
           },
           "defaultConfiguration": "development"

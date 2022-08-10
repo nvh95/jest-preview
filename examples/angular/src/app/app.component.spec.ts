@@ -1,24 +1,24 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { By } from "@angular/platform-browser";
-import preview from "jest-preview";
+import { render, screen } from '@testing-library/angular';
+import userEvent from '@testing-library/user-event';
+import preview from 'jest-preview';
+import { AppComponent } from './app.component';
 
-import { AppComponent } from "./app.component";
+describe('App', () => {
+  it('should work as expected', async () => {
+    const user = userEvent.setup();
+    await render(AppComponent);
 
-describe(AppComponent.name, () => {
-  beforeEach(() => {
-    fixture = TestBed.createComponent(AppComponent);
-    fixture.autoDetectChanges();
-  });
+    await user.click(screen.getByTestId('increase'));
+    await user.click(screen.getByTestId('increase'));
+    await user.click(screen.getByTestId('increase'));
+    await user.click(screen.getByTestId('increase'));
+    await user.click(screen.getByTestId('increase'));
+    await user.click(screen.getByTestId('increase'));
 
-  let fixture: ComponentFixture<AppComponent>;
-
-  it("should render title", () => {
     // Open http://localhost:3336 to see preview
     // Require to run `jest-preview` server before
     preview.debug();
 
-    const title = fixture.debugElement.query(By.css(".content span"))
-      .nativeElement as HTMLElement;
-    expect(title.textContent).toContain("angular-jest-preview app is running!");
+    expect(screen.getByTestId('count')).toContainHTML('6');
   });
 });

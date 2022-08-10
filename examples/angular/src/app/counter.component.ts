@@ -1,15 +1,20 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
-  selector: "app-counter",
+  selector: 'app-counter',
   standalone: true,
   template: `
+    <style>
+      button {
+        font-size: calc(10px + 2vmin);
+      }
+    </style>
+
     <button data-testid="increase" type="button" (click)="onClick()">
       count is:
       <div data-testid="count">{{ count }}</div>
     </button>
   `,
-  styles: [],
 })
 export class CounterComponent {
   count = 0;

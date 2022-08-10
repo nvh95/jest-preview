@@ -7,7 +7,7 @@
     "build": "tsc -p tsconfig.prod.json && vite build",
     "preview": "vite preview",
     "jest-preview": "jest-preview",
-    "test": "NODE_ENV=test jest --watch",
+    "test": "jest --watch",
     "test:nc": "npm run test -- --no-cache",
     "test:debug": "npm-run-all -p test jest-preview"
   },
