@@ -92,7 +92,7 @@ Below you can find a list of public directories which have different names than 
 | [Angular](https://angular.io/)       | `src`            |
 | [Preact](https://preactjs.com)       | `src/static`     |
 
-### 5. (Optional- RECOMMENDED) Opt-in to Automatic Mode
+### 6. (Optional- RECOMMENDED) Opt-in to Automatic Mode
 
 **Automatic Mode** let you use [jest-preview](https://www.npmjs.com/package/jest-preview) without manually triggering `preview.debug()`. It previews your code in the browser automatically whenever there is a failed test. It's a experimental feature from v0.2.0 and becomes the default in v0.3.0.
 
