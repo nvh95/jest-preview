@@ -10,7 +10,7 @@ There are a few reasons that you might not see CSS on the Jest Preview Dashboard
 
 - Jest Preview generally uses [Code Transformation](https://jestjs.io/docs/code-transformation) to process CSS. You might forget to configure the `transform` in your Jest's config. Please see [**Installation**](/docs/getting-started/installation) for more. If you are using [Create React App](https://create-react-app.dev/), you might want to visit [CRA Example](/docs/examples/create-react-app). If you are using [Next.js](https://nextjs.org/), you might want to visit [Next.js example](https://www.jest-preview.com/docs/examples/nextjs).
 - If you already configure CSS transform, there is a very high chance that Jest is caching your CSS files. Please [**delete Jest's cache**](https://jestjs.io/docs/cli#--clearcache) by running `jest --clearCache`.
-- You might have some CSS files that are not imported to your current testing component (i.e: `src/index.jsx`, `src/main.jsx`). You can configure global CSS using `jestPreviewConfigure`. See more at [**Installation**](/docs/getting-started/installation#4-optional-configure-global-css).
+- You might have some CSS files that are not imported to your current testing component (i.e: `src/index.jsx`, `src/main.jsx`). You can configure global CSS by importing it in `setupTests.js`. See more at [**Installation**](/docs/getting-started/installation#4-optional-configure-global-css).
 
 ```js
 // src/setupTests.js
