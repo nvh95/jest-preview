@@ -202,6 +202,15 @@
         "content",
         "code"
       ]
+    },
+    {
+      "login": "iicdii",
+      "name": "Kim, Harim",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4951716?v=4",
+      "profile": "https://harimkim.netlify.app/",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
