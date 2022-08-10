@@ -3,13 +3,14 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-counter',
   standalone: true,
-  template: `
-    <style>
+  styles: [
+    `
       button {
         font-size: calc(10px + 2vmin);
       }
-    </style>
-
+    `,
+  ],
+  template: `
     <button data-testid="increase" type="button" (click)="onClick()">
       count is:
       <div data-testid="count">{{ count }}</div>
