@@ -1,23 +1,39 @@
-# Angular Jest Preview
+# Angular CLI
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.1.
+## Integrating Jest Preview to Angular CLI
 
-## Development server
+This example demonstrates how to use `jest-preview` with the Angular CLI. See the full source code at [Angular CLI Example on GitHub](https://github.com/nvh95/jest-preview/tree/main/examples/angular)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Setup Jest with Angular CLI
 
-## Code scaffolding
+Use an [`@angular-builders/jest`](https://www.npmjs.com/package/@angular-builders/jest) builder for the `test` architect target of your application project.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Either use Jest projects or add the `src` directory of your application project to the `roots` option of your Jest configuration, for example:
 
-## Build
+```js
+module.exports =
+  /** @type {import('@jest/types').Config.InitialOptions} */
+  {
+    roots: ['<rootDir>/src'],
+  };
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Installation and Usage
 
-## Running unit tests
+Please refer to [Installation](/docs/getting-started/installation) and [Usage](/docs/getting-started/usage).
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+In step 4 of installation, **Configure global CSS**, add import statements matching the global stylesheets loaded by he `styles` option of your application's `build` architect target, for example:
 
-## Further help
+```typescript
+import './styles.css';
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+In step 5 of installation, **Configure public folder**, set the `publicFolder` option for `jestPreviewConfigure` to your application project's `src` directory, for example:
+
+```typescript
+import { jestPreviewConfigure } from 'jest-preview';
+
+jestPreviewConfigure({
+  publicFolder: 'src',
+});
+```
