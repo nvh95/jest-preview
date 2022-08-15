@@ -220,6 +220,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "MikeShi42",
+      "name": "Mike Shi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2781687?v=4",
+      "profile": "https://deploysentinel.com",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,

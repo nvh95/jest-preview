@@ -21,7 +21,7 @@ Debug your Jest tests. Effortlessly. 🛠🖼
 
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-23-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-24-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
 
@@ -161,6 +161,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://harimkim.netlify.app/"><img src="https://avatars.githubusercontent.com/u/4951716?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kim, Harim</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=iicdii" title="Documentation">📖</a></td>
     <td align="center"><a href="https://dev.to/layzee"><img src="https://avatars.githubusercontent.com/u/6364586?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Lars Gyrup Brink Nielsen</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=LayZeeDK" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://deploysentinel.com"><img src="https://avatars.githubusercontent.com/u/2781687?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mike Shi</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=MikeShi42" title="Documentation">📖</a></td>
   </tr>
 </table>
 
