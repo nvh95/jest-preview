@@ -86,7 +86,7 @@ You also need to start the Jest Preview Server by running the CLI `jest-preview`
 - Use with [Vite React](https://vitejs.dev/): https://www.jest-preview.com/docs/examples/vite-react
 - Use with [Create React App](https://create-react-app.dev/): https://www.jest-preview.com/docs/examples/create-react-app
 - Use with [Next.js Rust Compiler](https://nextjs.org/docs/testing#setting-up-jest-with-the-rust-compiler): https://www.jest-preview.com/docs/examples/next-rust
-- Use with [Next.js Babel](https://nextjs.org/docs/testing#setting-up-jest-with-babel): https://www.jest-preview.com/docs/examples/next-babel
+- Use with [Next.js Babel](https://nextjs.org/docs/testing#setting-up-jest-with-babel): https://www.jest-preview.com/docs/examples/nextjs-babel
 - Use with [Svelte](https://svelte.dev): https://www.jest-preview.com/docs/examples/svelte
 
 ## Feedback
