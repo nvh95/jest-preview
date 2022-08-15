@@ -2,7 +2,7 @@
 
 This example demonstrates how to use `jest-preview` with `Next.js`, bootstrapped using `create-next-app`.
 
-⚠️ This example is meant for Next.js apps using the new [Next.js compiler](https://nextjs.org/docs/advanced-features/compiler) (also called Rust compiler), available from Next.js 12.0.0 onward. If you use Next.js version 11 or below, or opt-out of the Next.js compiler, please see the [nextjs-babel](https://www.jest-preview.com/docs/examples/next-babel) example.
+⚠️ This example is meant for Next.js apps using the new [Next.js compiler](https://nextjs.org/docs/advanced-features/compiler) (also called Rust compiler), available from Next.js 12.0.0 onward. If you use Next.js version 11 or below, or opt-out of the Next.js compiler, please see the [nextjs-babel](https://www.jest-preview.com/docs/examples/nextjs-babel) example.
 
 🚧 Next.js's `<Image />` component isn't working with Jest Preview yet.
 
