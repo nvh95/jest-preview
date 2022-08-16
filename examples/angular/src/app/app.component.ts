@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
-import { CounterComponent } from './counter.component';
+import { CounterComponent } from './counter/counter.component';
+
+export const styleUrls = [
+  '../styles/css/app.css',
+  '../styles/scss/style.scss',
+  './app.component.css',
+];
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [CounterComponent],
-  styleUrls: [
-    '../styles/css/app.css',
-    '../styles/scss/style.scss',
-    './app.component.css',
-  ],
+  styleUrls: [...styleUrls],
   template: `
     <div class="App">
       <header class="App-header">

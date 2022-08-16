@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 import preview from 'jest-preview';
-import { AppComponent } from './app.component';
+import { AppComponent, styleUrls } from './app.component';
+styleUrls.forEach((styleUrl) => import(styleUrl));
 
 describe('App', () => {
   it('should work as expected', async () => {
