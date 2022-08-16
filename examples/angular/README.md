@@ -37,3 +37,117 @@ jestPreviewConfigure({
   publicFolder: 'src',
 });
 ```
+
+### Component styles
+
+Jest Preview does not currently have support for compiling Angular component styles (tracked in [#237](https://github.com/nvh95/jest-preview/issues/237)). As a workaround, use external stylesheets for your components and add equivalent import statements to your test files, for example by exporting `styleUrls` and reusing them in your component test:
+
+```typescript
+// counter.component.ts
+import { Component } from '@angular/core';
+
+export const styleUrls = ['./counter.component.css']; // 👈
+
+@Component({
+  selector: 'app-counter',
+  standalone: true,
+  styleUrls: [...styleUrls],
+  template: `
+    <button data-testid="increase" type="button" (click)="onClick()">
+      count is:
+      <div data-testid="count">{{ count }}</div>
+    </button>
+  `,
+})
+export class CounterComponent {
+  count = 0;
+
+  onClick(): void {
+    this.count += 1;
+  }
+}
+```
+
+```typescript
+// counter.component.spec.ts
+import { render, screen } from '@testing-library/angular';
+import userEvent from '@testing-library/user-event';
+import preview from 'jest-preview';
+import { CounterComponent, styleUrls } from './counter.component'; // 👈
+styleUrls.forEach((styleUrl) => import(styleUrl)); // 👈
+
+describe(CounterComponent.name, () => {
+  it('should work as expected', async () => {
+    const user = userEvent.setup();
+    await render(CounterComponent);
+
+    await user.click(screen.getByTestId('increase'));
+    await user.click(screen.getByTestId('increase'));
+    await user.click(screen.getByTestId('increase'));
+    await user.click(screen.getByTestId('increase'));
+    await user.click(screen.getByTestId('increase'));
+    await user.click(screen.getByTestId('increase'));
+
+    // Open http://localhost:3336 to see preview
+    // Require to run `jest-preview` server before
+    preview.debug();
+
+    expect(screen.getByTestId('count')).toContainHTML('6');
+  });
+});
+```
+
+or add equivalent import statements to your component test:
+
+```typescript
+// counter.component.ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-counter',
+  standalone: true,
+  styleUrls: ['./counter.component.css'], // 👈
+  template: `
+    <button data-testid="increase" type="button" (click)="onClick()">
+      count is:
+      <div data-testid="count">{{ count }}</div>
+    </button>
+  `,
+})
+export class CounterComponent {
+  count = 0;
+
+  onClick(): void {
+    this.count += 1;
+  }
+}
+```
+
+```typescript
+// counter.component.spec.ts
+import { render, screen } from '@testing-library/angular';
+import userEvent from '@testing-library/user-event';
+import preview from 'jest-preview';
+import { CounterComponent } from './counter.component';
+import './counter.component.css'; // 👈
+
+describe(CounterComponent.name, () => {
+  it('should work as expected', async () => {
+    const user = userEvent.setup();
+    await render(CounterComponent);
+
+    await user.click(screen.getByTestId('increase'));
+    await user.click(screen.getByTestId('increase'));
+    await user.click(screen.getByTestId('increase'));
+    await user.click(screen.getByTestId('increase'));
+    await user.click(screen.getByTestId('increase'));
+    await user.click(screen.getByTestId('increase'));
+
+    // Open http://localhost:3336 to see preview
+    // Require to run `jest-preview` server before
+    preview.debug();
+
+    expect(screen.getByTestId('count')).toContainHTML('6');
+  });
+});
+```
