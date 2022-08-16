@@ -160,7 +160,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://harimkim.netlify.app/"><img src="https://avatars.githubusercontent.com/u/4951716?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kim, Harim</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=iicdii" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://dev.to/layzee"><img src="https://avatars.githubusercontent.com/u/6364586?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Lars Gyrup Brink Nielsen</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=LayZeeDK" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://dev.to/layzee"><img src="https://avatars.githubusercontent.com/u/6364586?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Lars Gyrup Brink Nielsen</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=LayZeeDK" title="Documentation">📖</a> <a href="#example-LayZeeDK" title="Examples">💡</a></td>
     <td align="center"><a href="https://deploysentinel.com"><img src="https://avatars.githubusercontent.com/u/2781687?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mike Shi</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=MikeShi42" title="Documentation">📖</a></td>
   </tr>
 </table>
