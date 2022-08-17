@@ -17,7 +17,14 @@ export const styleUrls = [
       <header class="App-header">
         <img src="/assets/logo.svg" class="App-logo" alt="logo" />
         <img [src]="logo2" class="logo2" alt="logo2" />
-        <p>Angular CLI Example</p>
+        <p>
+          <a
+            href="https://github.com/nvh95/jest-preview/tree/main/examples/angular"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Angular CLI Example</a
+          >
+        </p>
         <p class="global-configured-sass">
           This text is styled by global configured SASS
         </p>
