@@ -11,10 +11,15 @@ describe('Style', () => {
     // TODO: Global CSS is saved into the `.cache` folder, so we can't assert it directly within the JSDOM
     // Imported CSS
     expect(document.documentElement.outerHTML).toContain(
-      '<link rel="stylesheet" href="/demo/App.css">',
+      `.App {
+  text-align: center;
+}`,
     );
     expect(document.documentElement.outerHTML).toContain(
-      '<link rel="stylesheet" href="/demo/assets/css/App.css">',
+      `.logo2 {
+  max-width: 300px;
+  background: yellow;
+}`,
     );
 
     // styled-components
@@ -34,9 +39,7 @@ describe('Style', () => {
     // Import
     expect(
       document.documentElement.outerHTML.replace(/\r\n|\n|\r/g, ''),
-    ).toContain(
-      `<style type=\"text/css\">._cssModule_1gc0y_1 {  color: green;}</style>`,
-    );
+    ).toContain(`._cssModule_1gc0y_1 {  color: green;}`);
 
     // Sass
     // Global
@@ -49,7 +52,7 @@ describe('Style', () => {
     expect(document.documentElement.outerHTML)
       .toContain(`header .imported-sass {
   color: pink;
-}</style>`);
+}`);
     // import ~
     // TODO: Not implemented yet
     // loadPaths
