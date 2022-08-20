@@ -277,7 +277,8 @@ function processPostCss(
   });`,
   ]);
   // TODO: What happens if we do not pass `utf-8`?
-  const stderr = result.stderr.toString('utf-8').trim();
+  const stderr = result.stderr?.toString('utf-8').trim();
+  console.log('result.stderr', result.stderr);
   if (stderr) console.error(stderr);
   if (result.error) throw result.error;
   const output = parsePostCssExternalOutput(result.stdout.toString());
