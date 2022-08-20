@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+const { spawnSync } = require('child_process');
 import { pathToFileURL } from 'url';
 import camelcase from 'camelcase';
 import slash from 'slash';
@@ -15,11 +16,34 @@ function isPreProcessor(filename: string): boolean {
   return filename.endsWith('.scss') || filename.endsWith('.sass');
 }
 
+function havePostCss() {
+  const result = spawnSync('node', [
+    '-e',
+    `const postcssrc = require('postcss-load-config');
+  
+    postcssrc().then(({ plugins, options }) => {
+      console.log(true)
+    })
+    .catch(error=>{
+      if (!/No PostCSS Config found/.test(error.message)) {
+        throw new Error("Failed to load PostCSS config", error)
+      }
+      console.log(false)
+    });`,
+  ]);
+  const stderr = result.stderr.toString('utf-8').trim();
+  if (stderr) console.error(stderr);
+  if (result.error) throw result.error;
+  return result.stdout.toString().trim() === 'true';
+}
+
 function isTailwindCSS(cssSource: string) {
   // TailwindCSS Syntax: https://tailwindcss.com/docs/functions-and-directives
   const tailwindCSSSyntax = ['@tailwind', '@apply', 'theme(', 'screen('];
   return tailwindCSSSyntax.some((syntax) => cssSource.includes(syntax));
 }
+
+function loadPostCssConfig(filename: string) {}
 
 function getRelativeFilename(filename: string): string {
   return slash(filename.split(process.cwd())[1]);
@@ -127,7 +151,7 @@ export function processCss(src: string, filename: string): TransformedSource {
   const isPreProcessorFile = isPreProcessor(filename);
 
   // Pure CSS
-  if (!isModule && !isPreProcessorFile && !isTailwindCSS(cssSrc)) {
+  if (!isModule && !isPreProcessorFile && !havePostCss()) {
     const relativeFilename = getRelativeFilename(filename);
     // Transform to a javascript module that load a <link rel="stylesheet"> tag to the page.
     return {
@@ -146,15 +170,11 @@ export function processCss(src: string, filename: string): TransformedSource {
     cssSrc = processSass(filename);
   }
 
-  // Post-processor
-  // CSS modules
-  if (isModule) {
-    return processCSSModules(cssSrc, filename);
-  }
-
-  // TailwindCSS
-  if (isTailwindCSS(cssSrc)) {
-    return processTailwindCSS(cssSrc, filename);
+  // Process using postcss.config.js (and its variants)
+  if (havePostCss()) {
+    return processPostCss(cssSrc, filename, {
+      isModule,
+    });
   }
 
   return {
@@ -241,24 +261,90 @@ module.exports = exportedTokens;`,
   };
 }
 
-function processTailwindCSS(src: string, filename: string): TransformedSource {
+function processPostCss(
+  src: string,
+  filename: string,
+  options: { isModule: boolean } = { isModule: false },
+): TransformedSource {
   // TODO: Consider to use postcss-load-config to load config.
   // However, this is an async plugin and it probably not work in JSDOM environment
   // TODO: For now, we support the default TailwindCSS configure.
   // For more customization, we need to find a way to load `tailwind.config.js` and `postcss.config.js`
+  const { spawnSync } = require('child_process');
+
+  // TODO: SO SLOWWWWW. How can we speedup this?
+  // It currently takes about 0.35 seconds to process one CSS file with PostCSS
+  // - getCacheKey
+  // - cache result of `postcssrc()`
+  // - somehow speedup `spawnSync`?
+  console.time(`postcss ${getRelativeFilename(filename)}`);
+  const result = spawnSync('node', [
+    '-e',
+    `const postcss = require('postcss');
+  const postcssrc = require('postcss-load-config');
+  const { readFileSync } = require('fs');
+  const isModule = ${options.isModule}
+  const cssSrc = ${JSON.stringify(src)};
+
+  class Token {
+    set(json) {
+      Object.keys(json).forEach((key) => {
+        this[key] = json[key];
+      });
+    }
+  }
+  
+  const exportedTokens = new Token();
+
+  // TODO: We have to re-execute "postcssrc()" every CSS file.
+  // Can we do better? Singleton?
+  postcssrc().then(({ plugins, options }) => {
+    // TODO: If "isModule" is true, append config for "postcss-modules"
+    if (isModule) {
+      plugins.push(
+        require('postcss-modules')({
+          getJSON: (cssFileName, json, outputFileName) => {
+            console.log('getJson')
+            exportedTokens.set(json);
+          },
+          // Use custom scoped name to prevent different hash between operating systems
+          // Because new line characters can be different between operating systems. Reference: https://stackoverflow.com/a/10805198
+          // Original hash function: https://github.com/madyankin/postcss-modules/blob/7d5965d4df201ef301421a5e35805d1b47f3c914/src/generateScopedName.js#L6
+          generateScopedName: function (name, filename, css) {
+            const stringHash = require('string-hash');
+            const i = css.indexOf('.' + name);
+            const line = css.substr(0, i).split(/[\\r\\n|\\n|\\r]/).length;
+            // This is not how the real app work, might be an issue if we try to make the snapshot interactive
+            // https://github.com/nvh95/jest-preview/issues/84#issuecomment-1146578932
+            const removedNewLineCharactersCss = css.replace(/(\\r\\n|\\n|\\r)/g, '');
+            const hash = stringHash(removedNewLineCharactersCss).toString(36).substr(0, 5);
+            return '_' + name + '_' + hash + '_' + line;
+          },
+        }),
+      )
+    }
+    postcss(plugins)
+      .process(cssSrc, { from: ${JSON.stringify(filename)} })
+      .then((result) => {
+        console.log(result.css);
+      console.log('end')
+      }
+      );
+  });`,
+  ]);
+  console.timeEnd(`postcss ${getRelativeFilename(filename)}`);
+  // TODO: What happens if we do not pass `utf-8`?
+  const stderr = result.stderr.toString('utf-8').trim();
+  if (stderr) console.error(stderr);
+  if (result.error) throw result.error;
+  const cssContent = result.stdout.toString().trim();
   return {
-    code: `
-const postcss = require("postcss");
-const cssSrc = ${JSON.stringify(src)};
-postcss([require("tailwindcss")(), require("autoprefixer")()])
-  .process(cssSrc, { from: ${JSON.stringify(filename)} })
-  .then((result) => {
-    const style = document.createElement("style");
-    style.type = "text/css";
-    style.appendChild(document.createTextNode(result.css.replace(/\\\\/g, '')));
-    document.head.appendChild(style);
-  });
-`,
+    code: `const style = document.createElement("style");
+style.type = "text/css";
+const styleContent = ${JSON.stringify(cssContent)};
+style.appendChild(document.createTextNode(styleContent.replace(/\\\\/g, '')));
+document.head.appendChild(style);
+module.exports = {}`,
   };
 }
 
