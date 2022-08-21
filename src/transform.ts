@@ -1,11 +1,13 @@
 import fs from 'fs';
 import path from 'path';
-const { spawnSync } = require('child_process');
+import crypto from 'crypto';
+import { spawnSync } from 'child_process';
 import { pathToFileURL } from 'url';
 import camelcase from 'camelcase';
 import slash from 'slash';
 import { transform } from '@svgr/core';
 import { CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG } from './constants';
+import { createCacheFolderIfNeeded } from './utils';
 
 // https://github.com/vitejs/vite/blob/c29613013ca1c6d9c77b97e2253ed1f07e40a544/packages/vite/src/node/plugins/css.ts#L97-L98
 const cssLangs = `\\.(css|less|sass|scss|styl|stylus|pcss|postcss)($|\\?)`;
@@ -220,6 +222,16 @@ function parsePostCssExternalOutput(output: string) {
   return result;
 }
 
+function createTempFile(content: string) {
+  createCacheFolderIfNeeded();
+  const tempFileName = path.join(
+    CACHE_FOLDER,
+    crypto.randomBytes(16).toString('hex'),
+  );
+  fs.writeFileSync(tempFileName, content);
+  return tempFileName;
+}
+
 function processPostCss(
   src: string,
   filename: string,
@@ -231,11 +243,7 @@ function processPostCss(
   // - cache result of `postcssrc()` => very hard, since each css file, it must read the config again
   // - somehow speedup `spawnSync`?
   // - Do not execute postcssrc() twice
-
-  const { spawnSync } = require('child_process');
-  const result = spawnSync('node', [
-    '-e',
-    `const postcss = require('postcss');
+  const processPostCssFileContent = `const postcss = require('postcss');
   const postcssrc = require('postcss-load-config');
   const { readFileSync } = require('fs');
   const isModule = ${options.isModule}
@@ -274,11 +282,14 @@ function processPostCss(
         console.log('css|||', result.css);
         console.log('---')
       });
-  });`,
-  ]);
+  });`;
+  const tempFileName = createTempFile(processPostCssFileContent);
+  const result = spawnSync('node', [tempFileName]);
+  fs.unlink(tempFileName, (error) => {
+    if (error) throw error;
+  });
   // TODO: What happens if we do not pass `utf-8`?
   const stderr = result.stderr?.toString('utf-8').trim();
-  console.log('result.stderr', result.stderr);
   if (stderr) console.error(stderr);
   if (result.error) throw result.error;
   const output = parsePostCssExternalOutput(result.stdout.toString());
