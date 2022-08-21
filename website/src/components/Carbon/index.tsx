@@ -17,7 +17,7 @@ export default function Carbon({
       const s = document.createElement('script');
       s.id = '_carbonads_js';
       s.src = `//cdn.carbonads.com/carbon.js?serve=${code}&placement=${placement}`;
-      // Add a container bellow h1 to avoid layout shift
+      // Add a container below h1 to avoid layout shift
       const mountContainer = document.createElement('div');
       mountContainer.setAttribute('style', customStyle);
       insertAfter(targetElement, mountContainer);
