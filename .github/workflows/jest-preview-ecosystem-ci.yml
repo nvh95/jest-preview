@@ -1,4 +1,4 @@
-name: Test
+name: Jest Preview Ecosystem CI
 
 on:
   pull_request:
