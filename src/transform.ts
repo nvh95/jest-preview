@@ -177,7 +177,7 @@ export function processCss(src: string, filename: string): TransformedSource {
     cssSrc = processSass(filename);
   }
 
-  // Process using postcss.config.js (and its variants)
+  // Process PostCSS (postcss.config.js can be present or not)
   if (usePostCssExplicitly || haveTailwindCss || isModule) {
     console.timeEnd(`Processing ${relativeFilename}`);
     return processPostCss(cssSrc, filename, {
@@ -205,6 +205,8 @@ export function processCss(src: string, filename: string): TransformedSource {
 //   const baseCacheKey = cacheKeyFunction(src, filename, ...rest);
 //   return crypto.createHash('md5').update(baseCacheKey).digest('hex');
 // }
+// August 22, 2022: Actually, we can take css/file transform content into account for getCacheKey.
+// So, each time they change, the cache will be invalidated
 
 // We cannot create async transformer if we are using CommonJS
 // ( Reference: https://github.com/facebook/jest/issues/11081#issuecomment-791259034
@@ -215,6 +217,15 @@ export function processCss(src: string, filename: string): TransformedSource {
 // https://jestjs.io/docs/code-transformation#writing-custom-transformers
 // As can be seen, only process or processAsync is mandatory to implement)
 
+// Convert from
+//cssModulesExportedTokens||| {"scssModule":"_scssModule_ujx1w_1"}
+// ---
+// css||| ._scssModule_ujx1w_1 {
+//   color: #ff0000;
+// }
+// ---
+// To this
+// {"scssModule":"_scssModule_ujx1w_1", "css":"._scssModule_ujx1w_1 { color: #ff0000 }"}
 function parsePostCssExternalOutput(output: string) {
   const lines = output.trim().split('---');
   const result = {
@@ -224,6 +235,7 @@ function parsePostCssExternalOutput(output: string) {
   for (const line of lines) {
     const [key, value] = line.trim().split('|||');
     if (key === 'cssModulesExportedTokens') {
+      console.log(output);
       result.cssModulesExportedTokens = value;
     }
     if (key === 'css') {
@@ -324,6 +336,7 @@ postcss(plugins)
 });`;
   }
   const tempFileName = createTempFile(processPostCssFileContent);
+  // We have to write this file to disk since Windows cannot process the command with long arguments
   const result = spawnSync('node', [tempFileName]);
   fs.unlink(tempFileName, (error) => {
     if (error) throw error;
