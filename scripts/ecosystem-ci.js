@@ -28,11 +28,19 @@ const examplesToRunCIs = [
 
 // BEGIN-WORKAROUND
 // TODO: Fix me
-// Remove 'postcss.config.js' to workaround to make sure examples do not inherit postcss.config.js
+// Remove 'postcss.config.js' and tailwind.config.js to workaround to make sure examples do not inherit postcss.config.js
 // We will address this at https://github.com/nvh95/jest-preview/issues/183
 const postcssConfigPath = path.join(__dirname, '..', 'postcss.config.js');
 if (fs.existsSync(postcssConfigPath)) {
   fs.unlink(postcssConfigPath, (error) => {
+    if (error) {
+      console.log(error);
+    }
+  });
+}
+const tailwindConfigPath = path.join(__dirname, '..', 'tailwind.config.js');
+if (fs.existsSync(tailwindConfigPath)) {
+  fs.unlink(tailwindConfigPath, (error) => {
     if (error) {
       console.log(error);
     }

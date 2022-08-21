@@ -147,9 +147,18 @@ export function processCss(src: string, filename: string): TransformedSource {
   let cssSrc = src;
   const isModule = cssModuleRE.test(filename);
   const isPreProcessorFile = isPreProcessor(filename);
-  const usePostCss = havePostCss();
+  const haveTailwindCss =
+    fs.existsSync(path.join(process.cwd(), 'tailwind.config.js')) ||
+    fs.existsSync(path.join(process.cwd(), 'tailwind.config.cjs'));
+  const usePostCssExplicitly = havePostCss();
+
   // Pure CSS
-  if (!isModule && !isPreProcessorFile && !usePostCss) {
+  if (
+    !isModule &&
+    !isPreProcessorFile &&
+    !usePostCssExplicitly &&
+    !haveTailwindCss
+  ) {
     // Transform to a javascript module that load a <link rel="stylesheet"> tag to the page.
     console.timeEnd(`Processing ${relativeFilename}`);
     return {
@@ -164,15 +173,17 @@ export function processCss(src: string, filename: string): TransformedSource {
   }
 
   // Pre-processor (sass, stylus, less)
-  if (isPreProcessor(filename)) {
+  if (isPreProcessorFile) {
     cssSrc = processSass(filename);
   }
 
   // Process using postcss.config.js (and its variants)
-  if (usePostCss) {
+  if (usePostCssExplicitly || haveTailwindCss || isModule) {
     console.timeEnd(`Processing ${relativeFilename}`);
     return processPostCss(cssSrc, filename, {
+      useConfigFile: usePostCssExplicitly,
       isModule,
+      haveTailwindCss,
     });
   }
 
@@ -235,7 +246,11 @@ function createTempFile(content: string) {
 function processPostCss(
   src: string,
   filename: string,
-  options: { isModule: boolean } = { isModule: false },
+  options: {
+    useConfigFile: boolean;
+    isModule: boolean;
+    haveTailwindCss: boolean;
+  } = { useConfigFile: true, isModule: false, haveTailwindCss: false },
 ): TransformedSource {
   // TODO: SO SLOWWWWW. How can we speedup this?
   // It currently takes about 0.35 seconds to process one CSS file with PostCSS
@@ -243,9 +258,27 @@ function processPostCss(
   // - cache result of `postcssrc()` => very hard, since each css file, it must read the config again
   // - somehow speedup `spawnSync`?
   // - Do not execute postcssrc() twice
-  const processPostCssFileContent = `const postcss = require('postcss');
+  const cssModulesPluginsContent = `require('postcss-modules')({
+    getJSON: (cssFileName, json, outputFileName) => {
+      console.log('cssModulesExportedTokens|||', JSON.stringify(json));
+      console.log('---')
+    },
+    // Use custom scoped name to prevent different hash between operating systems
+    // Because new line characters can be different between operating systems. Reference: https://stackoverflow.com/a/10805198
+    // Original hash function: https://github.com/madyankin/postcss-modules/blob/7d5965d4df201ef301421a5e35805d1b47f3c914/src/generateScopedName.js#L6
+    generateScopedName: function (name, filename, css) {
+      const stringHash = require('string-hash');
+      const i = css.indexOf('.' + name);
+      const line = css.substr(0, i).split(/[\\r\\n|\\n|\\r]/).length;
+      // This is not how the real app work, might be an issue if we try to make the snapshot interactive
+      // https://github.com/nvh95/jest-preview/issues/84#issuecomment-1146578932
+      const removedNewLineCharactersCss = css.replace(/(\\r\\n|\\n|\\r)/g, '');
+      const hash = stringHash(removedNewLineCharactersCss).toString(36).substr(0, 5);
+      return '_' + name + '_' + hash + '_' + line;
+    },
+  })`;
+  let processPostCssFileContent = `const postcss = require('postcss');
   const postcssrc = require('postcss-load-config');
-  const { readFileSync } = require('fs');
   const isModule = ${options.isModule}
   const cssSrc = ${JSON.stringify(src)};
   
@@ -255,25 +288,7 @@ function processPostCss(
     // TODO: If "isModule" is true, append config for "postcss-modules"
     if (isModule) {
       plugins.push(
-        require('postcss-modules')({
-          getJSON: (cssFileName, json, outputFileName) => {
-            console.log('cssModulesExportedTokens|||', JSON.stringify(json));
-            console.log('---')
-          },
-          // Use custom scoped name to prevent different hash between operating systems
-          // Because new line characters can be different between operating systems. Reference: https://stackoverflow.com/a/10805198
-          // Original hash function: https://github.com/madyankin/postcss-modules/blob/7d5965d4df201ef301421a5e35805d1b47f3c914/src/generateScopedName.js#L6
-          generateScopedName: function (name, filename, css) {
-            const stringHash = require('string-hash');
-            const i = css.indexOf('.' + name);
-            const line = css.substr(0, i).split(/[\\r\\n|\\n|\\r]/).length;
-            // This is not how the real app work, might be an issue if we try to make the snapshot interactive
-            // https://github.com/nvh95/jest-preview/issues/84#issuecomment-1146578932
-            const removedNewLineCharactersCss = css.replace(/(\\r\\n|\\n|\\r)/g, '');
-            const hash = stringHash(removedNewLineCharactersCss).toString(36).substr(0, 5);
-            return '_' + name + '_' + hash + '_' + line;
-          },
-        }),
+        ${cssModulesPluginsContent},
       )
     }
     postcss(plugins)
@@ -283,6 +298,31 @@ function processPostCss(
         console.log('---')
       });
   });`;
+
+  if (!options.useConfigFile) {
+    processPostCssFileContent = `const postcss = require('postcss');
+const isModule = ${options.isModule};
+const haveTailwindCss = ${options.haveTailwindCss};
+const cssSrc = ${JSON.stringify(src)};
+
+let plugins = [];
+if (isModule) {
+  plugins.push(
+    ${cssModulesPluginsContent},
+  )
+}
+if (haveTailwindCss) {
+  // tailwindCss auto resolve config
+  // https://github.com/tailwindlabs/tailwindcss/blob/cef02e2dc395ed5b5d31b72183cf7504b3bd76c1/src/util/resolveConfigPath.js#L45-L52
+  plugins.push(require("tailwindcss")())
+}
+postcss(plugins)
+.process(cssSrc, { from: ${JSON.stringify(filename)} })
+.then((result) => {
+  console.log('css|||', result.css);
+  console.log('---')
+});`;
+  }
   const tempFileName = createTempFile(processPostCssFileContent);
   const result = spawnSync('node', [tempFileName]);
   fs.unlink(tempFileName, (error) => {
