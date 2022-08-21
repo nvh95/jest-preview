@@ -60,7 +60,9 @@ examplesToRunCIs.forEach((example) => {
 
   if (result.status) {
     console.error(
-      `[jest-preview-ecosystem-ci] FAILED: ${result?.stderr?.toString() || ''}`,
+      `[jest-preview-ecosystem-ci] [${example}] FAILED: ${
+        result?.stderr?.toString() || ''
+      }`,
       result.error,
     );
     // Notify CI that this failed

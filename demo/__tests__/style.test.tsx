@@ -2,12 +2,8 @@ import { render } from '@testing-library/react';
 
 import App from '../App';
 
-function normalize(str: string) {
-  return str.replace(/\r\n|\n|\r/g, '\n');
-}
-
 function getDocumentHTML() {
-  return normalize(document.documentElement.outerHTML);
+  return document.documentElement.outerHTML.replace(/\r\n|\n|\r/g, '\n');
 }
 
 describe('Style', () => {
