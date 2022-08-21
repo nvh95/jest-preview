@@ -17,7 +17,14 @@ if (!process.env.CI) {
 const exampleDirectory = path.join(__dirname, '..', 'examples');
 
 // Pick some important examples to run. Running all of them takes too long.
-const examplesToRunCIs = ['create-react-app', 'vite-react', 'angular'];
+const examplesToRunCIs = [
+  'create-react-app',
+  'vite-react',
+  'angular',
+  'svelte',
+  'vue',
+  'nextjs',
+];
 
 // BEGIN-WORKAROUND
 // TODO: Fix me

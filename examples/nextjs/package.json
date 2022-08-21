@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --watch",
+    "test:ci": "jest",
     "jest-preview": "jest-preview",
     "test:preview": "npm-run-all -p test jest-preview"
   },
