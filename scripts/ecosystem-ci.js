@@ -50,9 +50,17 @@ examplesToRunCIs.forEach((example) => {
     console.error(error);
     throw error;
   }
-  const testSpawn = spawn('pnpm', ['run', 'test:ci'], {
-    stdio: 'inherit',
-  });
+
+  // TODO: Use `pnpm` directly
+  // Currently, if we use `pnpm` directly, there will be an error "Error: spawn pnpm ENOENT"
+  // https://github.com/nvh95/jest-preview/runs/7938196802?check_suite_focus=true
+  const testSpawn = spawn(
+    /^win/.test(process.platform) ? 'npm.cmd' : 'npm',
+    ['run', 'test:ci'],
+    {
+      stdio: 'inherit',
+    },
+  );
 
   testSpawn.on('exit', (code, signal) => {
     if (code) {
