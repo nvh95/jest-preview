@@ -20,7 +20,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "node scripts/test.js",
-    "test:ci": "CI=true npm run test",
+    "test:ci": "npm run test",
     "test:nc": "npm run test -- --no-cache",
     "eject": "react-scripts eject",
     "jest-preview": "jest-preview",
