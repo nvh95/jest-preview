@@ -50,7 +50,7 @@ examplesToRunCIs.forEach((example) => {
     console.error(error);
     throw error;
   }
-  const testSpawn = spawn('npm', ['run', 'test:ci'], {
+  const testSpawn = spawn('pnpm', ['run', 'test:ci'], {
     stdio: 'inherit',
   });
 
