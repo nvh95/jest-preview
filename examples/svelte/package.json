@@ -8,6 +8,7 @@
     "serve": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "test": "jest --watch",
+    "test:ci": "jest",
     "test:nc": "npm run test -- --no-cache",
     "jest-preview": "jest-preview"
   },

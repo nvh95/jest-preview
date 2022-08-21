@@ -7,7 +7,8 @@
     "build": "tsc -p tsconfig.prod.json && vite build",
     "preview": "vite preview",
     "jest-preview": "jest-preview",
-    "test": "NODE_ENV=test jest --watch",
+    "test": "cross-env NODE_ENV=test jest --watch",
+    "test:ci": "cross-env NODE_ENV=test jest",
     "test:nc": "npm run test -- --no-cache",
     "test:debug": "npm-run-all -p test jest-preview"
   },
@@ -27,6 +28,7 @@
     "@vitejs/plugin-react": "^1.0.7",
     "animate-sass": "^0.8.2",
     "animate.css": "^4.1.1",
+    "cross-env": "^7.0.3",
     "jest": "^27.5.1",
     "jest-preview": "file:../..",
     "jest-watch-typeahead": "^1.0.0",
