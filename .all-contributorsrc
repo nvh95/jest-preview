@@ -230,6 +230,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "vkrol",
+      "name": "Veniamin Krol",
+      "avatar_url": "https://avatars.githubusercontent.com/u/153412?v=4",
+      "profile": "http://vkrol.dev",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
