@@ -40,27 +40,22 @@ if (fs.existsSync(postcssConfigPath)) {
 }
 // END-WORKAROUND
 
+// On Windows, we need to `pnpm.cmd`
+const pnpmCommand = /^win/.test(process.platform) ? 'pnpm.cmd' : 'pnpm';
 // Run CI for each example
 examplesToRunCIs.forEach((example) => {
   process.chdir(path.join(exampleDirectory, example));
   console.log(process.cwd());
   try {
-    spawnSync('pnpm', ['install']);
+    spawnSync(pnpmCommand, ['install']);
   } catch (error) {
     console.error(error);
     throw error;
   }
 
-  // TODO: Use `pnpm` directly
-  // Currently, if we use `pnpm` directly, there will be an error "Error: spawn pnpm ENOENT"
-  // https://github.com/nvh95/jest-preview/runs/7938196802?check_suite_focus=true
-  const testSpawn = spawn(
-    /^win/.test(process.platform) ? 'npm.cmd' : 'npm',
-    ['run', 'test:ci'],
-    {
-      stdio: 'inherit',
-    },
-  );
+  const testSpawn = spawn(pnpmCommand, ['run', 'test:ci'], {
+    stdio: 'inherit',
+  });
 
   testSpawn.on('exit', (code, signal) => {
     if (code) {
