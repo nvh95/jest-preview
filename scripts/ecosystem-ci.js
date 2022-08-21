@@ -53,17 +53,17 @@ examplesToRunCIs.forEach((example) => {
     throw error;
   }
 
-  const testSpawn = spawn(pnpmCommand, ['run', 'test:ci'], {
+  // Run each test synchronously. We can try to run it asynchronously to speedup but Jest encounter some issues when doing so
+  const result = spawnSync(pnpmCommand, ['run', 'test:ci'], {
     stdio: 'inherit',
   });
 
-  testSpawn.on('exit', (code, signal) => {
-    if (code) {
-      console.error(`[jest-preview-ecosystem-ci] FAILED: ${example}`, code);
-      // Notify CI that this failed
-      process.exit(code);
-    } else if (signal) {
-      console.error('Child was killed with signal', signal);
-    }
-  });
+  if (result.status) {
+    console.error(
+      `[jest-preview-ecosystem-ci] FAILED: ${result?.stderr?.toString() || ''}`,
+      result.error,
+    );
+    // Notify CI that this failed
+    process.exit(result.status);
+  }
 });
