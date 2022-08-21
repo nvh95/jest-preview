@@ -45,10 +45,9 @@ examplesToRunCIs.forEach((example) => {
   process.chdir(path.join(exampleDirectory, example));
   console.log(process.cwd());
   try {
-    spawnSync('pnpm', ['install'], {
-      stdio: 'inherit',
-    });
+    spawnSync('pnpm', ['install']);
   } catch (error) {
+    console.error(error);
     throw error;
   }
   const testSpawn = spawn('npm', ['run', 'test:ci'], {
@@ -57,7 +56,7 @@ examplesToRunCIs.forEach((example) => {
 
   testSpawn.on('exit', (code, signal) => {
     if (code) {
-      console.error('Child exited with code', code);
+      console.error(`[jest-preview-ecosystem-ci] FAILED: ${example}`, code);
       // Notify CI that this failed
       process.exit(code);
     } else if (signal) {
