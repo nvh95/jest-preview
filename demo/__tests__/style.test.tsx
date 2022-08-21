@@ -2,6 +2,14 @@ import { render } from '@testing-library/react';
 
 import App from '../App';
 
+function normalize(str: string) {
+  return str.replace(/\r\n|\n|\r/g, '\n');
+}
+
+function getDocumentHTML() {
+  return normalize(document.documentElement.outerHTML);
+}
+
 describe('Style', () => {
   it('should render CSS correctly in JSDOM', () => {
     render(<App />);
@@ -10,12 +18,12 @@ describe('Style', () => {
     // Global CSS
     // TODO: Global CSS is saved into the `.cache` folder, so we can't assert it directly within the JSDOM
     // Imported CSS
-    expect(document.documentElement.outerHTML).toContain(
+    expect(getDocumentHTML()).toContain(
       `.App {
   text-align: center;
 }`,
     );
-    expect(document.documentElement.outerHTML).toContain(
+    expect(getDocumentHTML()).toContain(
       `.logo2 {
   max-width: 300px;
   background: yellow;
@@ -23,13 +31,13 @@ describe('Style', () => {
     );
 
     // styled-components
-    expect(document.documentElement.outerHTML).toContain(
+    expect(getDocumentHTML()).toContain(
       '<style data-styled="active" data-styled-version="5.3.5">',
     );
-    expect(document.documentElement.outerHTML).toContain('.dgihId{color:red;}');
+    expect(getDocumentHTML()).toContain('.dgihId{color:red;}');
 
     // emotion
-    expect(document.documentElement.outerHTML).toContain(
+    expect(getDocumentHTML()).toContain(
       '<style data-emotion="css" data-s="">.css-2m18qq{color:orange;}</style>',
     );
 
@@ -37,20 +45,20 @@ describe('Style', () => {
     // Global
     // TODO: not implemented yet
     // Import
-    expect(
-      document.documentElement.outerHTML.replace(/\r\n|\n|\r/g, ''),
-    ).toContain(`._cssModule_1gc0y_1 {  color: green;}`);
+    expect(getDocumentHTML()).toContain(
+      `._cssModule_1gc0y_1 {
+  color: green;
+}`,
+    );
 
     // Sass
     // Global
     // TODO: Global SCSS is saved into the `.cache` folder, not in the JSDOM, need to find a way to test it
     // Import
-    expect(document.documentElement.outerHTML)
-      .toContain(`header .imported-sass {
+    expect(getDocumentHTML()).toContain(`header .imported-sass {
   text-transform: uppercase;
 }`);
-    expect(document.documentElement.outerHTML)
-      .toContain(`header .imported-sass {
+    expect(getDocumentHTML()).toContain(`header .imported-sass {
   color: pink;
 }`);
     // import ~
