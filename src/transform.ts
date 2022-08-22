@@ -122,6 +122,13 @@ export function processFileCRA(
 // pre-processor (sass, stylus, less) => process(??) => post-processor (css modules, tailwindcss)
 // Reference to https://github.com/vitejs/vite/blob/c29613013ca1c6d9c77b97e2253ed1f07e40a544/packages/vite/src/node/plugins/css.ts#L652-L673
 export function processCss(src: string, filename: string): TransformedSource {
+  // TODO: Do not process CSS in a CI environment
+  // However, snapshot tests can be affected
+  // We can add a flag for users to toggle this feature (default to false to speed up CI of general users)
+  // Something like this:
+  // // transform: {
+  //   '^.+\\.(css|scss|sass)$': ['<rootDir>/transforms/css', { transformCssInCI: false }],
+  // },
   let cssSrc = src;
   const isModule = cssModuleRE.test(filename);
   const isPreProcessorFile = isPreProcessor(filename);
