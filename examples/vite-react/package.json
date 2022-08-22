@@ -28,13 +28,16 @@
     "@vitejs/plugin-react": "^1.0.7",
     "animate-sass": "^0.8.2",
     "animate.css": "^4.1.1",
+    "autoprefixer": "^10.4.8",
     "cross-env": "^7.0.3",
     "jest": "^27.5.1",
     "jest-preview": "file:../..",
     "jest-watch-typeahead": "^1.0.0",
     "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.16",
     "prettier": "^2.6.0",
     "sass": "^1.50.0",
+    "tailwindcss": "^3.1.8",
     "typescript": "^4.5.4",
     "vite": "^2.8.0"
   }
