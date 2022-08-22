@@ -1,3 +1,15 @@
+# 0.3.0
+
+## Features
+
+- Support viewing SVG when importing as a component in React
+- Use PostCSS configure to transform CSS
+- Convert to `pnpm`
+
+## Chores
+
+- Convert cypress tests to typescript
+
 # 0.2.8
 
 ## Fixes
