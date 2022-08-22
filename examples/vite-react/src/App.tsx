@@ -27,6 +27,7 @@ function App() {
         <p className="load-path-sass">
           This text is styled by SASS from load paths
         </p>
+        <p className="text-xanh">TailwindCSS - Green</p>
         <p className="animate__animated animate__bounce">
           An animated element style using @use ~
         </p>

@@ -1,10 +1,13 @@
 import fs from 'fs';
 import path from 'path';
+import crypto from 'crypto';
+import { spawnSync } from 'child_process';
 import { pathToFileURL } from 'url';
 import camelcase from 'camelcase';
 import slash from 'slash';
 import { transform } from '@svgr/core';
 import { CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG } from './constants';
+import { createCacheFolderIfNeeded } from './utils';
 
 // https://github.com/vitejs/vite/blob/c29613013ca1c6d9c77b97e2253ed1f07e40a544/packages/vite/src/node/plugins/css.ts#L97-L98
 const cssLangs = `\\.(css|less|sass|scss|styl|stylus|pcss|postcss)($|\\?)`;
@@ -15,10 +18,27 @@ function isPreProcessor(filename: string): boolean {
   return filename.endsWith('.scss') || filename.endsWith('.sass');
 }
 
-function isTailwindCSS(cssSource: string) {
-  // TailwindCSS Syntax: https://tailwindcss.com/docs/functions-and-directives
-  const tailwindCSSSyntax = ['@tailwind', '@apply', 'theme(', 'screen('];
-  return tailwindCSSSyntax.some((syntax) => cssSource.includes(syntax));
+function havePostCss() {
+  // TODO: Since we executing postcssrc() twice, the overall speed is slow
+  // We can try to process the PostCSS here to reduce the number of executions
+  const result = spawnSync('node', [
+    '-e',
+    `const postcssrc = require('postcss-load-config');
+  
+    postcssrc().then(({ plugins, options }) => {
+      console.log(true)
+    })
+    .catch(error=>{
+      if (!/No PostCSS Config found/.test(error.message)) {
+        throw new Error("Failed to load PostCSS config", error)
+      }
+      console.log(false)
+    });`,
+  ]);
+  const stderr = result.stderr.toString('utf-8').trim();
+  if (stderr) console.error(stderr);
+  if (result.error) throw result.error;
+  return result.stdout.toString().trim() === 'true';
 }
 
 function getRelativeFilename(filename: string): string {
@@ -122,14 +142,25 @@ export function processFileCRA(
 // pre-processor (sass, stylus, less) => process(??) => post-processor (css modules, tailwindcss)
 // Reference to https://github.com/vitejs/vite/blob/c29613013ca1c6d9c77b97e2253ed1f07e40a544/packages/vite/src/node/plugins/css.ts#L652-L673
 export function processCss(src: string, filename: string): TransformedSource {
+  const relativeFilename = getRelativeFilename(filename);
+  console.time(`Processing ${relativeFilename}`);
   let cssSrc = src;
   const isModule = cssModuleRE.test(filename);
   const isPreProcessorFile = isPreProcessor(filename);
+  const haveTailwindCss =
+    fs.existsSync(path.join(process.cwd(), 'tailwind.config.js')) ||
+    fs.existsSync(path.join(process.cwd(), 'tailwind.config.cjs'));
+  const usePostCssExplicitly = havePostCss();
 
   // Pure CSS
-  if (!isModule && !isPreProcessorFile && !isTailwindCSS(cssSrc)) {
-    const relativeFilename = getRelativeFilename(filename);
+  if (
+    !isModule &&
+    !isPreProcessorFile &&
+    !usePostCssExplicitly &&
+    !haveTailwindCss
+  ) {
     // Transform to a javascript module that load a <link rel="stylesheet"> tag to the page.
+    console.timeEnd(`Processing ${relativeFilename}`);
     return {
       code: `const relativeCssPath = "${relativeFilename}";
   const link = document.createElement('link');
@@ -142,21 +173,21 @@ export function processCss(src: string, filename: string): TransformedSource {
   }
 
   // Pre-processor (sass, stylus, less)
-  if (isPreProcessor(filename)) {
+  if (isPreProcessorFile) {
     cssSrc = processSass(filename);
   }
 
-  // Post-processor
-  // CSS modules
-  if (isModule) {
-    return processCSSModules(cssSrc, filename);
+  // Process PostCSS (postcss.config.js can be present or not)
+  if (usePostCssExplicitly || haveTailwindCss || isModule) {
+    console.timeEnd(`Processing ${relativeFilename}`);
+    return processPostCss(cssSrc, filename, {
+      useConfigFile: usePostCssExplicitly,
+      isModule,
+      haveTailwindCss,
+    });
   }
 
-  // TailwindCSS
-  if (isTailwindCSS(cssSrc)) {
-    return processTailwindCSS(cssSrc, filename);
-  }
-
+  console.timeEnd(`Processing ${relativeFilename}`);
   return {
     code: `const style = document.createElement('style');
   style.appendChild(document.createTextNode(${JSON.stringify(cssSrc)}));
@@ -174,6 +205,8 @@ export function processCss(src: string, filename: string): TransformedSource {
 //   const baseCacheKey = cacheKeyFunction(src, filename, ...rest);
 //   return crypto.createHash('md5').update(baseCacheKey).digest('hex');
 // }
+// August 22, 2022: Actually, we can take css/file transform content into account for getCacheKey.
+// So, each time they change, the cache will be invalidated
 
 // We cannot create async transformer if we are using CommonJS
 // ( Reference: https://github.com/facebook/jest/issues/11081#issuecomment-791259034
@@ -184,31 +217,63 @@ export function processCss(src: string, filename: string): TransformedSource {
 // https://jestjs.io/docs/code-transformation#writing-custom-transformers
 // As can be seen, only process or processAsync is mandatory to implement)
 
-// We can use that if we opt-in to ESM. But it's not common use case right now (2022)
-// So our approach is making CSS Modules a "CSS-in-JS" solution.
-// CSS Modules will be compiled at run time then inject to the document.head
-// One notable note is that `postcss-modules` is an async postcss plugin
-// We have to use Singleton design pattern to make it works asynchronously.
-function processCSSModules(src: string, filename: string): TransformedSource {
-  return {
-    code: `const postcss = require('postcss');
-const PostcssModulesPlugin = require('postcss-modules');
-const cssSrc = ${JSON.stringify(src)};
-
-class Token {
-  set(json) {
-    Object.keys(json).forEach((key) => {
-      this[key] = json[key];
-    });
+// Convert from
+//cssModulesExportedTokens||| {"scssModule":"_scssModule_ujx1w_1"}
+// ---
+// css||| ._scssModule_ujx1w_1 {
+//   color: #ff0000;
+// }
+// ---
+// To this
+// { "cssModulesExportedTokens": { "scssModule":"_scssModule_ujx1w_1"}, "css":"._scssModule_ujx1w_1 { color: #ff0000 }"}
+function parsePostCssExternalOutput(output: string) {
+  const lines = output.trim().split('---');
+  const result = {
+    cssModulesExportedTokens: '',
+    css: '',
+  };
+  for (const line of lines) {
+    const [key, value] = line.trim().split('|||');
+    if (key === 'cssModulesExportedTokens') {
+      console.log(output);
+      result.cssModulesExportedTokens = value;
+    }
+    if (key === 'css') {
+      result.css = value;
+    }
   }
+  return result;
 }
 
-const exportedTokens = new Token();
+function createTempFile(content: string) {
+  createCacheFolderIfNeeded();
+  const tempFileName = path.join(
+    CACHE_FOLDER,
+    crypto.randomBytes(16).toString('hex'),
+  );
+  fs.writeFileSync(tempFileName, content);
+  return tempFileName;
+}
 
-postcss([
-  PostcssModulesPlugin({
+function processPostCss(
+  src: string,
+  filename: string,
+  options: {
+    useConfigFile: boolean;
+    isModule: boolean;
+    haveTailwindCss: boolean;
+  } = { useConfigFile: true, isModule: false, haveTailwindCss: false },
+): TransformedSource {
+  // TODO: SO SLOWWWWW. How can we speedup this?
+  // It currently takes about 0.35 seconds to process one CSS file with PostCSS
+  // - getCacheKey
+  // - cache result of `postcssrc()` => very hard, since each css file, it must read the config again
+  // - somehow speedup `spawnSync`?
+  // - Do not execute postcssrc() twice
+  const cssModulesPluginsContent = `require('postcss-modules')({
     getJSON: (cssFileName, json, outputFileName) => {
-      exportedTokens.set(json);
+      console.log('cssModulesExportedTokens|||', JSON.stringify(json));
+      console.log('---')
     },
     // Use custom scoped name to prevent different hash between operating systems
     // Because new line characters can be different between operating systems. Reference: https://stackoverflow.com/a/10805198
@@ -223,42 +288,71 @@ postcss([
       const hash = stringHash(removedNewLineCharactersCss).toString(36).substr(0, 5);
       return '_' + name + '_' + hash + '_' + line;
     },
-  }),
-  // Do people use TailwindCSS inside CSS Modules?
-  // require("tailwindcss")(), 
-  // require("autoprefixer")(),
-])
+  })`;
+  let processPostCssFileContent = `const postcss = require('postcss');
+  const postcssrc = require('postcss-load-config');
+  const isModule = ${options.isModule}
+  const cssSrc = ${JSON.stringify(src)};
+  
+  // TODO: We have to re-execute "postcssrc()" every CSS file.
+  // Can we do better? Singleton?
+  postcssrc().then(({ plugins, options }) => {
+    // TODO: If "isModule" is true, append config for "postcss-modules"
+    if (isModule) {
+      plugins.push(
+        ${cssModulesPluginsContent},
+      )
+    }
+    postcss(plugins)
+      .process(cssSrc, { ...options, from: ${JSON.stringify(filename)} })
+      .then((result) => {
+        console.log('css|||', result.css);
+        console.log('---')
+      });
+  });`;
+
+  if (!options.useConfigFile) {
+    processPostCssFileContent = `const postcss = require('postcss');
+const isModule = ${options.isModule};
+const haveTailwindCss = ${options.haveTailwindCss};
+const cssSrc = ${JSON.stringify(src)};
+
+let plugins = [];
+if (isModule) {
+  plugins.push(
+    ${cssModulesPluginsContent},
+  )
+}
+if (haveTailwindCss) {
+  // tailwindCss auto resolve config
+  // https://github.com/tailwindlabs/tailwindcss/blob/cef02e2dc395ed5b5d31b72183cf7504b3bd76c1/src/util/resolveConfigPath.js#L45-L52
+  plugins.push(require("tailwindcss")())
+}
+postcss(plugins)
 .process(cssSrc, { from: ${JSON.stringify(filename)} })
 .then((result) => {
-  // TODO: Jest 24 (jest-environment-jsdom@24) not work. To investigate
-  const style = document.createElement('style');
-  style.type = 'text/css';
-  style.appendChild(document.createTextNode(result.css));
-  document.head.appendChild(style);
-});
-
-module.exports = exportedTokens;`,
-  };
-}
-
-function processTailwindCSS(src: string, filename: string): TransformedSource {
-  // TODO: Consider to use postcss-load-config to load config.
-  // However, this is an async plugin and it probably not work in JSDOM environment
-  // TODO: For now, we support the default TailwindCSS configure.
-  // For more customization, we need to find a way to load `tailwind.config.js` and `postcss.config.js`
-  return {
-    code: `
-const postcss = require("postcss");
-const cssSrc = ${JSON.stringify(src)};
-postcss([require("tailwindcss")(), require("autoprefixer")()])
-  .process(cssSrc, { from: ${JSON.stringify(filename)} })
-  .then((result) => {
-    const style = document.createElement("style");
-    style.type = "text/css";
-    style.appendChild(document.createTextNode(result.css.replace(/\\\\/g, '')));
-    document.head.appendChild(style);
+  console.log('css|||', result.css);
+  console.log('---')
+});`;
+  }
+  const tempFileName = createTempFile(processPostCssFileContent);
+  // We have to write this file to disk since Windows cannot process the command with long arguments
+  const result = spawnSync('node', [tempFileName]);
+  fs.unlink(tempFileName, (error) => {
+    if (error) throw error;
   });
-`,
+  // TODO: What happens if we do not pass `utf-8`?
+  const stderr = result.stderr?.toString('utf-8').trim();
+  if (stderr) console.error(stderr);
+  if (result.error) throw result.error;
+  const output = parsePostCssExternalOutput(result.stdout.toString());
+  return {
+    code: `const style = document.createElement("style");
+style.type = "text/css";
+const styleContent = ${JSON.stringify(output.css)};
+style.appendChild(document.createTextNode(styleContent.replace(/\\\\/g, '')));
+document.head.appendChild(style);
+module.exports = ${output.cssModulesExportedTokens || '{}'}`,
   };
 }
 

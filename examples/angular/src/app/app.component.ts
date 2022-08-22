@@ -29,6 +29,7 @@ export const styleUrls = [
           This text is styled by global configured SASS
         </p>
         <p class="imported-sass">This text is styled by imported SASS</p>
+        <p class="text-xanh">TailwindCSS Green</p>
         <p>
           <app-counter></app-counter>
         </p>
