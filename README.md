@@ -21,7 +21,7 @@ Debug your Jest tests. Effortlessly. 🛠🖼
 
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-26-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-27-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
 
@@ -164,6 +164,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://deploysentinel.com"><img src="https://avatars.githubusercontent.com/u/2781687?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mike Shi</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=MikeShi42" title="Documentation">📖</a></td>
     <td align="center"><a href="http://vkrol.dev"><img src="https://avatars.githubusercontent.com/u/153412?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Veniamin Krol</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=vkrol" title="Documentation">📖</a></td>
     <td align="center"><a href="https://bandism.net/"><img src="https://avatars.githubusercontent.com/u/22633385?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ikko Ashimine</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=eltociear" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/SpadarShut"><img src="https://avatars.githubusercontent.com/u/738710?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Pavel Shut</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/issues?q=author%3ASpadarShut" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
