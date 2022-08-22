@@ -42,7 +42,7 @@ describe('Style', () => {
     // TODO: not implemented yet
     // Import
     expect(getDocumentHTML()).toContain(
-      `._cssModule_1gc0y_1 {
+      `._cssModule_1a0qn_1 {
   color: green;
 }`,
     );
