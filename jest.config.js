@@ -1,7 +1,7 @@
 /** @type {import('@jest/types').Config.InitialOptions} */
 
 module.exports = {
-  roots: ['<rootDir>/demo'],
+  roots: ['<rootDir>/demo', '<rootDir>/src'],
   collectCoverageFrom: [
     'demo/**/*.{js,jsx,ts,tsx}',
     '!demo/**/*.d.ts',
