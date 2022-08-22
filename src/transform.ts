@@ -225,7 +225,7 @@ export function processCss(src: string, filename: string): TransformedSource {
 // }
 // ---
 // To this
-// {"scssModule":"_scssModule_ujx1w_1", "css":"._scssModule_ujx1w_1 { color: #ff0000 }"}
+// { "cssModulesExportedTokens": { "scssModule":"_scssModule_ujx1w_1"}, "css":"._scssModule_ujx1w_1 { color: #ff0000 }"}
 function parsePostCssExternalOutput(output: string) {
   const lines = output.trim().split('---');
   const result = {
