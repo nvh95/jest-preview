@@ -297,7 +297,7 @@ function processPostCss(
   // TODO: We have to re-execute "postcssrc()" every CSS file.
   // Can we do better? Singleton?
   postcssrc().then(({ plugins, options }) => {
-    // TODO: If "isModule" is true, append config for "postcss-modules"
+    plugins.unshift(require('postcss-import')())
     if (isModule) {
       plugins.push(
         ${cssModulesPluginsContent},
@@ -319,6 +319,7 @@ const cssSrc = ${JSON.stringify(src)};
 
 let plugins = [];
 if (isModule) {
+  plugins.unshift(require('postcss-import')())
   plugins.push(
     ${cssModulesPluginsContent},
   )
