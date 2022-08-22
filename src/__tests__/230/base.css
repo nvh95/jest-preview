@@ -1,0 +1,7 @@
+@tailwind base;
+
+@layer base {
+  #id {
+    @apply flex min-h-screen flex-col;
+  }
+}
