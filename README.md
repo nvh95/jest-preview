@@ -1,6 +1,8 @@
 <p align="center">
  <!-- <img align="center" alt="Jest Preview Logo" src="https://user-images.githubusercontent.com/8603085/161993303-e904a087-78a1-4abd-bb8d-3ef2cc6db442.svg" width="250"/> -->
- <img align="center" alt="Jest Preview Logo" src="https://user-images.githubusercontent.com/8603085/174035788-32d93169-f2d8-4076-a189-a1fd6ac615eb.png" />
+ <a href="https://www.jest-preview.com/docs/getting-started/intro" target="_blank" >
+  <img align="center" alt="Jest Preview Logo" src="https://user-images.githubusercontent.com/8603085/174035788-32d93169-f2d8-4076-a189-a1fd6ac615eb.png" />
+ </a>
 </p>
 
 <h1 align="center">
@@ -35,14 +37,21 @@ Debug your Jest tests. Effortlessly. 🛠🖼
 
 ## Why **jest-preview**
 
-When writing tests using Jest, we usually debug by reading the HTML code. Sometimes, the HTML is too complicated to visualize the UI in our head. `jest-preview` initiates a server and serve your HTML in a browser, then you can see your actual UI visually, which helps you debug jest tests faster.
+When writing tests using Jest, we usually debug by reading the HTML code. Sometimes, the HTML is too complicated to visualize the UI in our head. `jest-preview` previews your Jest tests right in a browser, then you can see your actual UI visually, which helps you write and debug Jest tests faster.
 
-`jest-preview` is initially designed to work with [jest](https://jestjs.io/) and [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/). The package is framework-agnostic, and you can use it with any testing libraries.
+`jest-preview` is initially designed to work with [Jest](https://jestjs.io/) and [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/). The package is framework-agnostic, and you can use it with any frontend frameworks and testing libraries. For examples:
+
+- [Vite React](https://www.jest-preview.com/docs/examples/vite-react)
+- [Create React App](https://www.jest-preview.com/docs/examples/create-react-app)
+- [Nextjs](https://www.jest-preview.com/docs/examples/nextjs)
+- [Svelte](https://www.jest-preview.com/docs/examples/svelte)
+- [Angular](https://www.jest-preview.com/docs/examples/angular)
+- [Vue](https://www.jest-preview.com/docs/examples/vue)
 
 ## Features
 
 - 👀 Preview your actual app's HTML in a browser in milliseconds.
-- 🔄 Auto reload browser when execute `preview.debug()`.
+- 🔄 Auto reload browser when executing `preview.`debug()`.
 - 💅 Support CSS:
   - ✅ [Direct CSS import](#3-configure-jests-transform-to-intercept-css-and-files)
   - ✅ Number of CSS-in-JS libraries, such as:
@@ -81,17 +90,9 @@ describe('App', () => {
 
 You also need to start the Jest Preview Server by running the CLI `jest-preview`. Please continue to read [Usage](https://www.jest-preview.com/docs/getting-started/usage) for the details instructions.
 
-## Examples
-
-- Use with [Vite React](https://vitejs.dev/): https://www.jest-preview.com/docs/examples/vite-react
-- Use with [Create React App](https://create-react-app.dev/): https://www.jest-preview.com/docs/examples/create-react-app
-- Use with [Next.js Rust Compiler](https://nextjs.org/docs/testing#setting-up-jest-with-the-rust-compiler): https://www.jest-preview.com/docs/examples/next-rust
-- Use with [Next.js Babel](https://nextjs.org/docs/testing#setting-up-jest-with-babel): https://www.jest-preview.com/docs/examples/nextjs-babel
-- Use with [Svelte](https://svelte.dev): https://www.jest-preview.com/docs/examples/svelte
-
 ## Feedback
 
-Your feedback is very important to us. Please help `jest-preview` becomes a better software by submitting a feedback [here](https://forms.gle/PJFH5oEzi7gsb7Ac6).
+Your feedback is very important to us. Please help `jest-preview` becomes a better software by submitting feedback [here](https://forms.gle/PJFH5oEzi7gsb7Ac6).
 
 ## Installation
 
@@ -108,14 +109,14 @@ Jest Preview comes with [Pre-configured transformation](https://www.jest-preview
 ## Upcoming features
 
 - Support more `css-in-js` libraries.
-- Multiple preview.
+- Multiple previews.
 - [You name it](https://github.com/nvh95/jest-preview/labels/feature_request).
 
 ## Support
 
 Please [file an issue](https://github.com/nvh95/jest-preview/issues), or [add a new discussion](https://github.com/nvh95/jest-preview/discussions) if you encounter any issues.
 
-You can also mention [@JestPreview](https://twitter.com/JestPreview) or [@hung_dev](https://twitter.com/hung_dev) on twitter if you want to have some more discussions or suggestions.
+You can also mention [@JestPreview](https://twitter.com/JestPreview) or [@hung_dev](https://twitter.com/hung_dev) on Twitter if you want to have some more discussions or suggestions.
 
 We also have a Discord server: [![Discord](https://img.shields.io/discord/967456149735637002?logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/z4DRBmk7vx)
 
@@ -173,7 +174,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind are welcome!
 
 ## Star history
 
@@ -187,9 +188,19 @@ MIT
 
 ## Sponsors
 
-If you like the project and want us continue to develop it, please sponsor us via [Open Collective](https://opencollective.com/jest-preview), starting from **$1**.
+Your financial support helps the project alive and in a development mode. Make an impact by sponsoring us **$1** via [Open Collective](https://opencollective.com/jest-preview).
 
-Bronze Sponsor 🥉 and Silver Sponsor 🥈 on [Open Collective](https://opencollective.com/jest-preview) will have your logo on **README.md** and [www.jest-preview.com](www.jest-preview.com), for the Gold Sponsor 🥇 and Diamond Sponsor 💎, please contact [the author](https://twitter.com/hung_dev).
+- Bronze Sponsor 🥉:
+  - Your company's logo/ profile picture on **README.md** and [www.jest-preview.com](https://www.jest-preview.com)
+- Silver Sponsor 🥈:
+  - All of these above
+  - Your requests will be prioritized.
+- Gold Sponsor 🥇:
+  - All of these above
+  - Let's discuss your benefits for this tier, please contact [the author](https://twitter.com/hung_dev)
+- Diamond Sponsor 💎:
+  - All of these above
+  - Let's discuss your benefits for this tier, please contact [the author](https://twitter.com/hung_dev)
 
 ### Bronze Sponsor 🥉
 

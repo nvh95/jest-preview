@@ -19,7 +19,7 @@ sidebar_position: 6
 }
 ```
 
-Optionally, you can use `npm-run-all` to run jest and `jest-preview` server in parallel
+Optionally, you can use `npm-run-all` to run Jest and `jest-preview` server in parallel
 
 ```json
 {
