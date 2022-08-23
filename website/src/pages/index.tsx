@@ -22,6 +22,14 @@ function HomepageHeader() {
           >
             Get Started
           </Link>
+          <a
+            href="https://stackblitz.com/edit/jest-preview?embed=1&file=README.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="button button--info button--lg"
+          >
+            Try now
+          </a>
         </div>
       </div>
     </header>

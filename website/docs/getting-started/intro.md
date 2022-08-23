@@ -41,6 +41,8 @@ Would like to contribute? Great! We appreciate it a lot! Check our [Contributing
 
 Want to try the library before installing it? We got you covered! Check out [StackBlitz Demo App](https://stackblitz.com/edit/jest-preview?embed=1&file=README.md) or try it right here 😉
 
+[![](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/jest-preview?embed=1&file=README.md)
+
 <iframe id="iframe" height="600px" width="100%" style={{marginBottom: "24px" }} src="https://stackblitz.com/edit/jest-preview?embed=1&ctl=1"></iframe>
 
 :::tip Framework agnostic
