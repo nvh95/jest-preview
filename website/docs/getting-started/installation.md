@@ -52,7 +52,7 @@ moduleNameMapper: {
 
 ### 4. (Optional) Configure global CSS
 
-Sometimes, there are some CSS files imported outside your current test components (e.g: CSS imported in `src/index.js`, `src/main.tsx`). In this case, you can manually add those CSS files to jest setup file.
+Sometimes, there are some CSS files imported outside your current test components (e.g: CSS imported in `src/index.js`, `src/main.tsx`). In this case, you can manually add those CSS files to Jest setup file.
 
 ```js
 // jest.config.js
@@ -70,7 +70,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 ### 5. (Optional) Configure public folder
 
-You don't need to do anything if your public folder is `public`. However, if it's different, you can configure as following:
+You don't need to do anything if your public folder is `public`. However, if it's different, you can configure it as following:
 
 ```js
 // ./config/jest/setupTests.js
@@ -94,7 +94,7 @@ Below you can find a list of public directories which have different names than 
 
 ### 6. (Optional- RECOMMENDED) Opt-in to Automatic Mode
 
-**Automatic Mode** let you use [jest-preview](https://www.npmjs.com/package/jest-preview) without manually triggering `preview.debug()`. It previews your code in the browser automatically whenever there is a failed test. It's a experimental feature from v0.2.0 and becomes the default in v0.3.0.
+**Automatic Mode** let you use [jest-preview](https://www.npmjs.com/package/jest-preview) without manually triggering `preview.debug()`. It previews your code in the browser automatically whenever there is a failed test.
 
 ```js
 jestPreviewConfigure({ autoPreview: true });

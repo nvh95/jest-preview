@@ -1,4 +1,4 @@
-# Use with Svelte
+# Svelte
 
 This example demonstrates how to use `jest-preview` with [**Svelte**](https://svelte.dev) and [**Svelte Testing Library**](https://testing-library.com/docs/svelte-testing-library/intro/)
 

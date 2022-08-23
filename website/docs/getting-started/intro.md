@@ -21,7 +21,7 @@ You can go straight to [Installation](https://www.jest-preview.com/docs/getting-
 
 - 🐣 It's incredibly simple to install and use!
 - 👀 Preview your actual app's HTML in a browser in milliseconds.
-- 🔄 Auto reload browser when execute `preview.debug()`.
+- 🔄 Auto reload browser when executing `preview.debug()`.
 - 💅 Support CSS:
   - ✅ [Direct CSS import](#3-configure-jests-transform-to-intercept-css-and-files)
   - ✅ Number of CSS-in-JS libraries, such as:

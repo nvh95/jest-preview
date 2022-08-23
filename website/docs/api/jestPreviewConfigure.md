@@ -54,8 +54,8 @@ You don't have to configure this by yourself if your public folder is `public`. 
 
 ## autoPreview: boolean
 
-Default: `false` (`true` in `v0.3.0`)
+Default: `false`
 
 Automatically preview the UI in the external browser when the test fails. You don't need to invoke `preview.debug()` by yourself anymore.
 
-Set to `false` if you experience any error or just want to opt-out.
+Set to `false` if you experience any error or just want to opt out.
