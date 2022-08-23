@@ -1,3 +1,9 @@
+# 0.3.1
+
+## Features
+
+- Inline `@import` statement
+
 # 0.3.0
 
 ## Features
