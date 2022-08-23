@@ -18,7 +18,7 @@ Debug your Jest tests. Effortlessly. 🛠🖼
 </p>
 
 <p align="center">
-  <a href="https://stackblitz.com/edit/jest-preview?file=README.md" title="Try Jest Preview Now" target="_blank">Try Jest Preview Online</a>. No downloads needed!
+  <a href="https://stackblitz.com/edit/jest-preview?file=src%2FApp.test.tsx,README.md" title="Try Jest Preview Now" target="_blank">Try Jest Preview Online</a>. No downloads needed!
 </p>
 
 <!-- prettier-ignore-start -->

@@ -68,7 +68,7 @@ const config = {
           { to: '/blog', label: 'Blog', position: 'left' },
           { to: '/docs/api/debug', label: 'API', position: 'left' },
           {
-            href: 'https://stackblitz.com/edit/jest-preview?file=README.md',
+            href: 'https://stackblitz.com/edit/jest-preview?file=src%2FApp.test.tsx,README.md',
             label: 'Demo',
             position: 'left',
           },

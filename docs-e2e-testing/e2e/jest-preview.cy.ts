@@ -31,7 +31,7 @@ describe('Tests for Jest Preview', () => {
     cy.contains('Demo').should(
       'have.attr',
       'href',
-      'https://stackblitz.com/edit/jest-preview?file=README.md',
+      'https://stackblitz.com/edit/jest-preview?file=src%2FApp.test.tsx,README.md',
     );
   });
 });

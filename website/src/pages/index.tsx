@@ -23,7 +23,7 @@ function HomepageHeader() {
             Get Started
           </Link>
           <a
-            href="https://stackblitz.com/edit/jest-preview?file=README.md"
+            href="https://stackblitz.com/edit/jest-preview?file=src%2FApp.test.tsx,README.md"
             target="_blank"
             rel="noopener noreferrer"
             className="button button--info button--lg"
