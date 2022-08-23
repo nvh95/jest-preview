@@ -4,7 +4,7 @@ describe('Tests for Jest Preview', () => {
     cy.contains('h1', 'Jest Preview');
 
     // Check CTA Get Started should direct users to Docs page
-    cy.get('.button').click();
+    cy.contains('Get Started').click();
     cy.url().should('contain', 'docs/getting-started/intro');
     cy.contains('h1', 'Introduction');
 
@@ -12,6 +12,10 @@ describe('Tests for Jest Preview', () => {
     cy.contains('Docs').click();
     cy.url().should('contain', 'docs/getting-started/intro');
     cy.contains('h1', 'Introduction');
+
+    // Check contributing page should have content
+    cy.contains('Contributing').click();
+    cy.contains('Welcome');
 
     // Check Blog page is present
     cy.contains('Blog').click();
