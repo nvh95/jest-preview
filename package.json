@@ -49,7 +49,7 @@
     "preview": "vite preview",
     "server": "node cli/index.js",
     "server:watch": "nodemon cli/index.js",
-    "test:dev": "cross-env NODE_ENV=test jest --watch --no-cache App",
+    "test:dev": "jest --clearCache && cross-env NODE_ENV=test jest --watch App",
     "test:dev:cache": "cross-env NODE_ENV=test jest --watch App",
     "test:ci": "cross-env NODE_ENV=test jest",
     "clearCache": "node cli/clearCache.js",
