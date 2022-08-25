@@ -15,6 +15,7 @@ specifiers:
   '@testing-library/user-event': ^13.5.0
   '@types/connect': ^3.4.35
   '@types/jest': '27'
+  '@types/less': ^3.0.3
   '@types/node': ^18.6.3
   '@types/react': ^17.0.33
   '@types/react-dom': ^17.0.10
@@ -93,6 +94,7 @@ devDependencies:
   '@testing-library/user-event': 13.5.0_gwcpuyfvwbszhlmedmugzivgzu
   '@types/connect': 3.4.35
   '@types/jest': 27.5.2
+  '@types/less': 3.0.3
   '@types/node': 18.6.3
   '@types/react': 17.0.48
   '@types/react-dom': 17.0.17
@@ -1440,6 +1442,10 @@ packages:
     dependencies:
       '@types/node': 18.6.3
     dev: false
+
+  /@types/less/3.0.3:
+    resolution: {integrity: sha512-1YXyYH83h6We1djyoUEqTlVyQtCfJAFXELSKW2ZRtjHD4hQ82CC4lvrv5D0l0FLcKBaiPbXyi3MpMsI9ZRgKsw==}
+    dev: true
 
   /@types/node/18.6.3:
     resolution: {integrity: sha512-6qKpDtoaYLM+5+AFChLhHermMQxc3TOEFIDzrZLPRGHPrLEwqFkkT5Kx3ju05g6X7uDPazz3jHbKPX0KzCjntg==}

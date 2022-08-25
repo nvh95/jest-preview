@@ -446,7 +446,7 @@ function processSass(filename: string): string {
   return cssResult;
 }
 
-function processLess(filename: string): string {
+export function processLess(filename: string): string {
   console.log('processLess', filename);
   let less;
 
@@ -463,7 +463,7 @@ function processLess(filename: string): string {
     const fs = require('fs');
     const path = require('path');
     const cssContent = fs.readFileSync(path.resolve('${filename}'), 'utf8');
-    less.render(cssContent).then((output) => {
+    less.render(cssContent, { filename: '${filename}'}).then((output) => {
       console.log(output.css);
     });
     `,
