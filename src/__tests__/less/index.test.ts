@@ -4,7 +4,7 @@ import less from 'less';
 describe('Less', () => {
   it('should compile LESS successfully', () => {
     const result = processLess(path.resolve(__dirname, './style.less'));
-    expect(result).toMatchInlineSnapshot(`
+    expect(result.replace(/\r\n|\n|\r/g, '\n')).toMatchInlineSnapshot(`
       ".less-p {
         color: blue;
       }
