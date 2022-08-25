@@ -30,20 +30,22 @@ function havePostCss() {
   // TODO: Since we executing postcssrc() twice, the overall speed is slow
   // We can try to process the PostCSS here to reduce the number of executions
   // TODO: Does this break on Windows?
-  const result = spawnSync('node', [
-    '-e',
-    `const postcssrc = require('postcss-load-config');
+  const checkHavePostCssFileContent = `const postcssrc = require('postcss-load-config');
   
-    postcssrc().then(({ plugins, options }) => {
-      console.log(true)
-    })
-    .catch(error=>{
-      if (!/No PostCSS Config found/.test(error.message)) {
-        throw new Error("Failed to load PostCSS config", error)
-      }
-      console.log(false)
-    });`,
-  ]);
+  postcssrc().then(({ plugins, options }) => {
+    console.log(true)
+  })
+  .catch(error=>{
+    if (!/No PostCSS Config found/.test(error.message)) {
+      throw new Error("Failed to load PostCSS config", error)
+    }
+    console.log(false)
+  });`;
+  const tempFileName = createTempFile(checkHavePostCssFileContent);
+  const result = spawnSync('node', [tempFileName]);
+  fs.unlink(tempFileName, (error) => {
+    if (error) throw error;
+  });
   const stderr = result.stderr.toString('utf-8').trim();
   if (stderr) console.error(stderr);
   if (result.error) throw result.error;
@@ -249,7 +251,6 @@ function parsePostCssExternalOutput(output: string) {
   for (const line of lines) {
     const [key, value] = line.trim().split('|||');
     if (key === 'cssModulesExportedTokens') {
-      console.log(output);
       result.cssModulesExportedTokens = value;
     }
     if (key === 'css') {
@@ -448,26 +449,27 @@ function processSass(filename: string): string {
 
 export function processLess(filename: string): string {
   console.log('processLess', filename);
-  let less;
 
   try {
-    less = require('less');
+    require('less');
   } catch (err) {
     console.log(err);
     throw new Error('Less not found. Please install less and try again.');
   }
 
-  const result = spawnSync('node', [
-    '-e',
-    `const less = require('less');
-    const fs = require('fs');
-    const path = require('path');
-    const cssContent = fs.readFileSync('${filename}', 'utf8');
-    less.render(cssContent, { filename: '${filename}'}).then((output) => {
-      console.log(output.css);
-    });
-    `,
-  ]);
+  const processLessFileContent = `const less = require('less');
+  const fs = require('fs');
+  const path = require('path');
+  const cssContent = fs.readFileSync('${filename}', 'utf8');
+  less.render(cssContent, { filename: '${filename}'}).then((output) => {
+    console.log(output.css);
+  });`;
+
+  const tempFileName = createTempFile(processLessFileContent);
+  const result = spawnSync('node', [tempFileName]);
+  fs.unlink(tempFileName, (error) => {
+    if (error) throw error;
+  });
   const stderr = result.stderr.toString('utf-8').trim();
   if (stderr) console.error(stderr);
   if (result.error) throw result.error;
