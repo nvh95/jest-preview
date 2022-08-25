@@ -13,14 +13,23 @@ import { createCacheFolderIfNeeded } from './utils';
 const cssLangs = `\\.(css|less|sass|scss|styl|stylus|pcss|postcss)($|\\?)`;
 const cssModuleRE = new RegExp(`\\.module${cssLangs}`);
 
-// TODO: Add less, styl, stylus...
+function isSass(filename: string): boolean {
+  return /.(sass|scss)$/.test(filename);
+}
+
+function isLess(filename: string): boolean {
+  return /.(less)$/.test(filename);
+}
+
+// TODO: Add styl, stylus...
 function isPreProcessor(filename: string): boolean {
-  return filename.endsWith('.scss') || filename.endsWith('.sass');
+  return isSass(filename) || isLess(filename);
 }
 
 function havePostCss() {
   // TODO: Since we executing postcssrc() twice, the overall speed is slow
   // We can try to process the PostCSS here to reduce the number of executions
+  // TODO: Does this break on Windows?
   const result = spawnSync('node', [
     '-e',
     `const postcssrc = require('postcss-load-config');
@@ -135,6 +144,7 @@ export function processFileCRA(
   src: string,
   filename: string,
 ): TransformedSource {
+  // TODO: To add deprecation warning here (using chalk)
   return processFile(src, filename);
 }
 
@@ -173,8 +183,12 @@ export function processCss(src: string, filename: string): TransformedSource {
   }
 
   // Pre-processor (sass, stylus, less)
-  if (isPreProcessorFile) {
+  if (isSass(filename)) {
     cssSrc = processSass(filename);
+  }
+
+  if (isLess(filename)) {
+    cssSrc = processLess(filename);
   }
 
   // Process PostCSS (postcss.config.js can be present or not)
@@ -430,4 +444,32 @@ function processSass(filename: string): string {
   }
 
   return cssResult;
+}
+
+function processLess(filename: string): string {
+  console.log('processLess', filename);
+  let less;
+
+  try {
+    less = require('less');
+  } catch (err) {
+    console.log(err);
+    throw new Error('Less not found. Please install less and try again.');
+  }
+
+  const result = spawnSync('node', [
+    '-e',
+    `const less = require('less');
+    const fs = require('fs');
+    const path = require('path');
+    const cssContent = fs.readFileSync(path.resolve('${filename}'), 'utf8');
+    less.render(cssContent).then((output) => {
+      console.log(output.css);
+    });
+    `,
+  ]);
+  const stderr = result.stderr.toString('utf-8').trim();
+  if (stderr) console.error(stderr);
+  if (result.error) throw result.error;
+  return result.stdout.toString();
 }

@@ -13,6 +13,7 @@ import './assets/css/App.css';
 import './assets/_scss/style.scss';
 import { cssModule } from './style.module.css';
 import { scssModule } from './style.module.scss';
+import './style.less';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -25,6 +26,7 @@ function App() {
         </LogoWrapper>
         <img src={logo2} className="logo2" alt="logo2" />
         <p>Hello Vite + React!</p>
+        <p className="less-p">Less: Blue + Dynamic size (break point 400px)</p>
         <p className={scssModule}>Styled by SCSS Modules</p>
         <StyledText>This text is styled by styled-components</StyledText>
         <p className="global-css">
