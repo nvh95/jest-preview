@@ -460,8 +460,10 @@ export function processLess(filename: string): string {
   const processLessFileContent = `const less = require('less');
   const fs = require('fs');
   const path = require('path');
-  const cssContent = fs.readFileSync('${filename}', 'utf8');
-  less.render(cssContent, { filename: '${filename}'}).then((output) => {
+  const cssContent = fs.readFileSync(${JSON.stringify(filename)}, 'utf8');
+  less.render(cssContent, { filename: ${JSON.stringify(
+    filename,
+  )}}).then((output) => {
     console.log(output.css);
   });`;
 
