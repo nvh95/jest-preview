@@ -462,7 +462,7 @@ export function processLess(filename: string): string {
     `const less = require('less');
     const fs = require('fs');
     const path = require('path');
-    const cssContent = fs.readFileSync(path.resolve('${filename}'), 'utf8');
+    const cssContent = fs.readFileSync('${filename}', 'utf8');
     less.render(cssContent, { filename: '${filename}'}).then((output) => {
       console.log(output.css);
     });
