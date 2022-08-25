@@ -50,7 +50,7 @@ Enable Jest Preview inside `jest.config.js`. Note that the Jest config object re
       // Use babel-jest to transpile tests with the next/babel preset
       // https://jestjs.io/docs/configuration#transform-objectstring-pathtotransformer--pathtotransformer-object
       '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
-+     '^.+\\.(css|scss|sass)$': 'jest-preview/transforms/css',
++     '^.+\\.(css|scss|sass|less)$': 'jest-preview/transforms/css',
 +     '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)': 'jest-preview/transforms/file',
     },
     transformIgnorePatterns: [

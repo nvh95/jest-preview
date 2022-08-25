@@ -10,7 +10,7 @@ module.exports =
     ],
     transform: {
       // '^.+\\.(ts|js|html)$': 'jest-preset-angular',
-      '^.+\\.(css|scss|sass)$': 'jest-preview/transforms/css',
+      '^.+\\.(css|scss|sass|less)$': 'jest-preview/transforms/css',
       '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)':
         'jest-preview/transforms/file',
     },
