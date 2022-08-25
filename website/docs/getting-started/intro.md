@@ -41,9 +41,9 @@ Would like to contribute? Great! We appreciate it a lot! Check our [Contributing
 
 Want to try the library before installing it? We got you covered! Check out [StackBlitz Demo App](https://stackblitz.com/edit/jest-preview?embed=1&file=README.md) or try it right here 😉
 
-[![](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/jest-preview?file=README.md)
+[![](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/jest-preview?file=src%2FApp.test.tsx,README.md)
 
-<iframe id="iframe" height="600px" width="100%" style={{marginBottom: "24px" }} src="https://stackblitz.com/edit/jest-preview?embed=1&ctl=1"></iframe>
+<iframe id="iframe" height="600px" width="100%" style={{marginBottom: "24px" }} src="https://stackblitz.com/edit/jest-preview?embed=1&ctl=1&file=src%2FApp.test.tsx,README.md"></iframe>
 
 :::tip Framework agnostic
 **Jest Preview** is initially designed to work with [jest](https://jestjs.io/) and [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/). The package is framework-agnostic, and you can use it with **any** testing library.
