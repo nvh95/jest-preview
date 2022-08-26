@@ -3,6 +3,7 @@
 ## Features
 
 - Inline `@import` statement
+- Support LESS
 
 # 0.3.0
 

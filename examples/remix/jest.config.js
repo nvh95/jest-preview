@@ -21,7 +21,7 @@ module.exports = {
     // Use @swc/jest to transpile tests
     // https://jestjs.io/docs/configuration#transform-objectstring-pathtotransformer--pathtotransformer-object
     '^.+\\.(js|jsx|ts|tsx)$': '@swc/jest',
-    '^.+\\.(css|scss|sass)$': 'jest-preview/transforms/css',
+    '^.+\\.(css|scss|sass|less)$': 'jest-preview/transforms/css',
     '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)':
       'jest-preview/transforms/file',
   },

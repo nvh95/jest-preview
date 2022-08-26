@@ -11,7 +11,7 @@ export default {
       },
     ],
     // Read more at https://www.jest-preview.com/docs/getting-started/installation
-    '^.+\\.(css|scss|sass)$': 'jest-preview/transforms/css',
+    '^.+\\.(css|scss|sass|less)$': 'jest-preview/transforms/css',
     '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)':
       'jest-preview/transforms/file',
   },
