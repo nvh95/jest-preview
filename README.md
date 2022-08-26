@@ -27,11 +27,12 @@ Debug your Jest tests. Effortlessly. 🛠🖼
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
 
-[![npm](https://img.shields.io/npm/v/jest-preview)](https://www.npmjs.com/package/jest-preview)
-[![npm](https://img.shields.io/npm/dt/jest-preview)](https://www.npmjs.com/package/jest-preview)
+[![npm version](https://img.shields.io/npm/v/jest-preview)](https://www.npmjs.com/package/jest-preview)
+[![npm total downloads](https://img.shields.io/npm/dt/jest-preview)](https://www.npmjs.com/package/jest-preview)
+![total GitHub stars](https://img.shields.io/github/stars/nvh95/jest-preview)
 [![Mentioned in Awesome Jest](https://awesome.re/mentioned-badge.svg)](https://github.com/jest-community/awesome-jest#debug)
 
-![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)](./CONTRIBUTING.md)
 [![Best of JS](https://img.shields.io/endpoint?url=https://bestofjs-serverless.now.sh/api/project-badge?fullName=nvh95%2Fjest-preview%26since=weekly)](https://bestofjs.org/projects/jest-preview)
 [![Discord](https://img.shields.io/discord/967456149735637002?logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/z4DRBmk7vx)
 
