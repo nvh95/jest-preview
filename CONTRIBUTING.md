@@ -68,6 +68,16 @@ pnpm run test:dev # Run jest
 
 Whenever `preview.debug()` is triggered, or whenever a test fails, you will see the changes reflected on the browser immediately.
 
+## Examples
+
+There are some examples to demonstrate how `jest-preview` can be used with popular frameworks at [examples](https://github.com/nvh95/jest-preview/tree/main/examples). Most of the packages have following npm scripts:
+
+- `jest-preview`: Start Jest Preview Server and open Jest Preview Dashboard
+- `test`/`test:watch`: Run test
+- `test:nc`: Run test without cache, useful when you use that example to develope/ debug an issue
+
+Before running any example, please help to temporary delete `tailwind.config.js` or `postcss.config.js` at `jest-preview`'s root. The reason is that example can read PostCSS/ TailwindCSS config and crash your test/ app. This is a workaround for this current setup and will be fixed when we migrate this repository to monorepo architecture.
+
 ## How jest-preview works
 
 - See [HOW_JEST_PREVIEW_WORKS.md](https://github.com/nvh95/jest-preview/tree/main/HOW_JEST_PREVIEW_WORKS.md)
