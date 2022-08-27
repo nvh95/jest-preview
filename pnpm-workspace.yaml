@@ -2,3 +2,4 @@ packages:
   - 'demo'
   - 'examples/vite-react'
   - 'examples/angular'
+  - '!examples/create-react-app'
