@@ -6,19 +6,28 @@
     "start": "npm run serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit"
+    "unit": "vue-cli-service test:unit",
+    "jest": "concurrently \"jest-preview\" \"wait-on http://localhost:3336 && npm run unit\""
   },
   "dependencies": {
-    "core-js": "^3.8.3",
-    "vue": "^3.2.13"
+    "vue": "^3.2.38"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-plugin-unit-jest": "~5.0.0",
-    "@vue/cli-service": "~5.0.0",
-    "@vue/test-utils": "^2.0.0-0",
-    "@vue/vue3-jest": "^27.0.0-alpha.1",
-    "babel-jest": "^27.0.6",
-    "jest": "^27.0.5"
+    "@babel/core": "7.18.10",
+    "@testing-library/vue": "^6.6.1",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-unit-jest": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
+    "@vue/test-utils": "^2.0.2",
+    "@vue/vue3-jest": "27.0.0",
+    "babel-jest": "27.5.1",
+    "concurrently": "^7.3.0",
+    "core-js": "^3.25.0",
+    "jest": "27.5.1",
+    "jest-environment-jsdom-global": "^4.0.0",
+    "jest-preview": "^0.3.1",
+    "jest-serializer-vue-tjw": "^3.19.0",
+    "ts-jest": "27.1.5",
+    "wait-on": "^6.0.1"
   }
 }
