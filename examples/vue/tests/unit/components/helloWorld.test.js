@@ -1,6 +1,5 @@
-import { render } from '@testing-library/vue';
-// import { shallowMount } from '@vue/test-utils';
-// const render = shallowMount;
+// import { render } from '@testing-library/vue';
+import { shallowMount as render } from '@vue/test-utils';
 
 import HelloWorld from '@/components/HelloWorld.vue';
 
