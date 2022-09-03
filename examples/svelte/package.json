@@ -1,5 +1,5 @@
 {
-  "name": "testing-svelte",
+  "name": "svelte",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -13,19 +13,20 @@
     "jest-preview": "jest-preview"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.11",
-    "@testing-library/svelte": "^3.0.3",
-    "@tsconfig/svelte": "^2.0.1",
-    "@types/jest": "^27.0.2",
-    "jest": "^27.2.4",
-    "jest-preview": "latest",
-    "svelte": "^3.37.0",
-    "svelte-check": "^2.1.0",
+    "@sveltejs/vite-plugin-svelte": "^1.0.4",
+    "@testing-library/svelte": "^3.2.1",
+    "@tsconfig/svelte": "^3.0.0",
+    "@types/jest": "^28",
+    "jest": "^28",
+    "jest-environment-jsdom": "^28",
+    "jest-preview": "workspace:*",
+    "svelte": "^3.50.0",
+    "svelte-check": "^2.9.0",
     "svelte-jester": "^2.3.2",
-    "svelte-preprocess": "^4.7.2",
-    "ts-jest": "^27.0.5",
+    "svelte-preprocess": "^4.10.7",
+    "ts-jest": "^28.0.8",
     "tslib": "^2.2.0",
     "typescript": "^4.3.2",
-    "vite": "^2.9.13"
+    "vite": "^3.0.9"
   }
 }
