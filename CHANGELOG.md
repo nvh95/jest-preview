@@ -1,3 +1,9 @@
+# 0.3.2
+
+## Fixes
+
+- Support run `jest-preview` on remote server
+
 # 0.3.1
 
 ## Features
