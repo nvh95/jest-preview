@@ -1,7 +1,7 @@
 // PORT is replaced by `jest-dom` server
 const port = '$PORT';
 
-const socket = new WebSocket(`ws://localhost:${port}`);
+const socket = new WebSocket(`ws://${window.location.hostname}:${port}`);
 
 socket.addEventListener('message', async ({ data }) => {
   // handleMessage(JSON.parse(data))
