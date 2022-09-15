@@ -29,3 +29,7 @@ Automatic Mode is in the experimental phase. If you are experiencing any issues 
 ## The preview does not reload automatically
 
 This is likely that you are using a Linux system. Please update [jest-preview](https://www.npmjs.com/package/jest-preview) to the newest version (`>= 0.2.8`) to get the problem fixed. If it still persists, please help to [report a bug](https://github.com/nvh95/jest-preview/issues/new?assignees=&labels=bug&template=bug_report.md&title=) with a minimum reproduction.
+
+## Global style of `styled-components` does not work?
+
+Since `styled-components` handles global style in Node.js environment and browser environment in different ways. So please see the work around at <https://github.com/nvh95/jest-preview/tree/main/examples/vite-react/src/__tests__/global-style-components.test.tsx>
