@@ -7,10 +7,11 @@
     },
     "extends": [
         "plugin:react/recommended",
+        "plugin:react/jsx-runtime",
         "standard",
         "prettier"
     ],
-    "ignorePatterns": ["website/**/*", "examples/**/*"],
+    "ignorePatterns": ["website/**/*", "examples/**/*", "docs-e2e-testing/**/*"],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
@@ -25,7 +26,9 @@
     ],
     "rules": {
         "semi": ["error","always"],
-        "comma-dangle": ["error", "always-multiline"]
+        "comma-dangle": ["error", "always-multiline"],
+        "react/no-unknown-property": ["error", { "ignore": ["css"] }],
+        "react/no-unescaped-entities": "off"
     },
     "settings": {
         "react": {
