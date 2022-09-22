@@ -40,7 +40,7 @@ try {
     2,
   )}\n`;
   fs.writeFileSync('jest.config.js', jestConfigFileContent);
-  console.log(`Added jest.config.js to the project.`);
+  console.log('Added jest.config.js to the project.');
 
   // Try to prettier `jest.config.js`
   const execSync = require('child_process').execSync;
@@ -69,11 +69,11 @@ try {
       )
       // Require `env` direct from `react-scripts`
       .replace(
-        `require('../config/env');`,
-        `require('react-scripts/config/env');`,
+        "require('../config/env');",
+        "require('react-scripts/config/env');",
       )
       .trim() + '\n';
-  console.log(`Added scripts/test.js to the project.`);
+  console.log('Added scripts/test.js to the project.');
   if (!fs.existsSync('scripts')) {
     fs.mkdirSync('scripts');
   }
@@ -89,7 +89,7 @@ try {
     path.resolve(process.cwd(), 'package.json'),
     JSON.stringify(packageJson, null, 2) + '\n',
   );
-  console.log(`Update test script in package.json.`);
+  console.log('Update test script in package.json.');
 } catch (error) {
   console.error(error);
 }
@@ -99,7 +99,7 @@ try {
  * @param {string} filePath
  * @param {string} content
  */
-function injectToFileIfExisted(filePath, content) {
+function injectToFileIfExisted (filePath, content) {
   if (fs.existsSync(filePath)) {
     fs.appendFileSync(filePath, content);
   }
@@ -123,7 +123,7 @@ jestPreviewConfigure({
     path.resolve(process.cwd(), 'src/setupTests.js'),
     configToInject,
   );
-  console.log(`Configured Jest Preview in src/setupTests.(ts|js).`);
+  console.log('Configured Jest Preview in src/setupTests.(ts|js).');
 } catch (error) {
   console.error(error);
 }

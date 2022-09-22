@@ -43,7 +43,7 @@ if (fs.existsSync(INDEX_PATH)) {
   });
 }
 
-let defaultIndexHtml = `<!DOCTYPE html>
+const defaultIndexHtml = `<!DOCTYPE html>
 <html>
 <head>
   <link rel="shortcut icon" href="${FAV_ICON_PATH}">
@@ -73,8 +73,8 @@ fs.writeFileSync(INDEX_PATH, defaultIndexHtml);
 
 const wss = new WebSocketServer({ port: wsPort });
 
-wss.on('connection', function connection(ws) {
-  ws.on('message', function message(data) {
+wss.on('connection', function connection (ws) {
+  ws.on('message', function message (data) {
     console.log('received: %s', data);
     try {
       const dataJSON = JSON.parse(data);
@@ -94,7 +94,7 @@ const watcher = chokidar.watch([INDEX_PATH, PUBLIC_CONFIG_PATH], {
   disableGlobbing: true,
 });
 
-function handleFileChange(filePath) {
+function handleFileChange (filePath) {
   const basename = path.basename(filePath);
   // TODO: Check if this is the root cause for issue on linux
   if (basename === INDEX_BASENAME) {
@@ -123,14 +123,14 @@ watcher
  * @returns string
  */
 
-function injectToString(string, word, injectWord) {
+function injectToString (string, word, injectWord) {
   const breakPosition = string.indexOf(word) + word.length;
   return (
     string.slice(0, breakPosition) + injectWord + string.slice(breakPosition)
   );
 }
 
-function injectToHead(html, content) {
+function injectToHead (html, content) {
   return injectToString(html, '<head>', content);
 }
 
@@ -158,7 +158,7 @@ app.use((req, res, next) => {
       console.log('[WARN] File not found: ', req.url);
       console.log(`[WARN] Please check if ${req.url} is existed.`);
       console.log(
-        `[WARN] If it is existed, likely you forget to setup the code transformation, or you haven't flushed the old cache yet. Try to run "./node_modules/.bin/jest --clearCache" to clear the cache.\n`,
+        '[WARN] If it is existed, likely you forget to setup the code transformation, or you haven\'t flushed the old cache yet. Try to run "./node_modules/.bin/jest --clearCache" to clear the cache.\n',
       );
       // TODO: To send those warning to browser as an overlay/ toast, the idea is similar to https://www.npmjs.com/package/vite-plugin-checker
       // TODO: Known issue: in development, we can't find `favicon.ico` yet. So it will yell in the Preview Server logs

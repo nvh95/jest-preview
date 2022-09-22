@@ -79,9 +79,9 @@ type RawIt = (...args: Parameters<jest.It>) => ReturnType<jest.It>;
 
 function patchJestFunction(it: RawIt) {
   const originalIt = it;
-  const itWithPreview: RawIt = (name, callback, timeout) => {
+  const itWithPreview: RawIt = (name, callbackfunc, timeout) => {
     let callbackWithPreview: jest.ProvidesCallback | undefined;
-    if (!callback) {
+    if (!callbackfunc) {
       callbackWithPreview = undefined;
     } else {
       callbackWithPreview = async function (
@@ -89,7 +89,7 @@ function patchJestFunction(it: RawIt) {
       ) {
         try {
           // @ts-expect-error Just forward the args
-          return await callback(...args);
+          return await callbackfunc(...args);
         } catch (error) {
           debug();
           throw error;
@@ -103,7 +103,7 @@ function patchJestFunction(it: RawIt) {
 
 function autoRunPreview() {
   const originalIt = it;
-  let itWithPreview = patchJestFunction(it) as jest.It;
+  const itWithPreview = patchJestFunction(it) as jest.It;
   itWithPreview.each = originalIt.each;
   itWithPreview.only = patchJestFunction(originalIt.only) as jest.It;
   itWithPreview.skip = originalIt.skip;
@@ -114,7 +114,10 @@ function autoRunPreview() {
 
   // Overwrite global it/ test
   // Is there any use cases that `it` and `test` is undefined?
+  // eslint-disable-next-line no-global-assign
   it = itWithPreview;
+  // eslint-disable-next-line no-global-assign
   test = itWithPreview;
+  // eslint-disable-next-line no-global-assign
   fit = itWithPreview.only;
 }

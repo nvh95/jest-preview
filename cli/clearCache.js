@@ -11,7 +11,7 @@ const CACHE_DIRECTORY = path.resolve(
   './node_modules/.cache/jest-preview',
 );
 
-function clearJestCache() {
+function clearJestCache () {
   if (process.env.INIT_CWD === process.env.PWD) {
     console.log('Inside Jest Preview. Do not clear Cache.');
   } else {
@@ -21,7 +21,7 @@ function clearJestCache() {
   }
 }
 
-function clearJestPreviewCache() {
+function clearJestPreviewCache () {
   if (fs.existsSync(CACHE_DIRECTORY)) {
     // fs.rmSync needs node >= 14
     fs.rmSync(CACHE_DIRECTORY, { recursive: true });
