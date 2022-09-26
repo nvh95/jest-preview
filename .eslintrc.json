@@ -1,0 +1,38 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true,
+        "jest": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "plugin:react/jsx-runtime",
+        "standard",
+        "prettier"
+    ],
+    "ignorePatterns": ["website/**/*", "examples/**/*", "docs-e2e-testing/**/*", "transforms/**/*", "dist/**/*", "playground/**/*"],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "semi": ["error","always"],
+        "comma-dangle": ["error", "always-multiline"],
+        "react/no-unknown-property": ["error", { "ignore": ["css"] }],
+        "react/no-unescaped-entities": "off"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    }
+}

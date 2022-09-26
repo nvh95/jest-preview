@@ -20,7 +20,6 @@ module.exports = {
   transformIgnorePatterns: [
     '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$',
   ],
-  modulePaths: ['<rootDir>/demo'],
   moduleNameMapper: {
     '^react-native$': 'react-native-web',
     // Support import ~
