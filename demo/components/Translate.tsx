@@ -8,7 +8,7 @@ function Translate(){
       <p>Chinese: 你好</p>
       <p>Thai: สวัสดี</p>
     </div>
-  );
+  )
 }
 
 export default Translate;

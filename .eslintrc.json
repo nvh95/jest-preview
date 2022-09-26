@@ -11,7 +11,7 @@
         "standard",
         "prettier"
     ],
-    "ignorePatterns": ["website/**/*", "examples/**/*", "docs-e2e-testing/**/*"],
+    "ignorePatterns": ["website/**/*", "examples/**/*", "docs-e2e-testing/**/*", "transforms/**/*", "dist/**/*", "playground/**/*"],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
