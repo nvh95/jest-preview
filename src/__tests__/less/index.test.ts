@@ -1,6 +1,6 @@
 import path from 'path';
 import { processLess } from '../../transform';
-
+import less from 'less';
 describe('Less', () => {
   it('should compile LESS successfully', () => {
     const result = processLess(path.resolve(__dirname, './style.less'));

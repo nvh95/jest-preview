@@ -21,7 +21,7 @@ const { spawnSync } = require('child_process');
 // const a = result.stdout.toString();
 // console.log(a);
 
-function havePostCss () {
+function havePostCss() {
   const result = spawnSync('node', [
     '-e',
     `const postcssrc = require('postcss-load-config');

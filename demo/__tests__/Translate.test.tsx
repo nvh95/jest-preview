@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import Translate from '../components/Translate';
 import preview from '../../dist/index';
 

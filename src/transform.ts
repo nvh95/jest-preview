@@ -234,7 +234,7 @@ export function processCss(src: string, filename: string): TransformedSource {
 // As can be seen, only process or processAsync is mandatory to implement)
 
 // Convert from
-// cssModulesExportedTokens||| {"scssModule":"_scssModule_ujx1w_1"}
+//cssModulesExportedTokens||| {"scssModule":"_scssModule_ujx1w_1"}
 // ---
 // css||| ._scssModule_ujx1w_1 {
 //   color: #ff0000;
