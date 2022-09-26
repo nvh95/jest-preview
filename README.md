@@ -23,7 +23,7 @@ Debug your Jest tests. Effortlessly. 🛠🖼
 
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-28-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-29-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
 
@@ -172,7 +172,10 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center"><a href="https://github.com/SpadarShut"><img src="https://avatars.githubusercontent.com/u/738710?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Pavel Shut</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/issues?q=author%3ASpadarShut" title="Bug reports">🐛</a></td>
       <td align="center"><a href="https://github.com/davidhao3300"><img src="https://avatars.githubusercontent.com/u/5534398?v=4?s=100" width="100px;" alt=""/><br /><sub><b>David Z Hao</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/issues?q=author%3Adavidhao3300" title="Bug reports">🐛</a></td>
     </tr>
-  </tobdy>
+    <tr>
+      <td align="center"><a href="https://github.com/Rohitbels"><img src="https://avatars.githubusercontent.com/u/4401718?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Rohitbels</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=Rohitbels" title="Code">💻</a></td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->
