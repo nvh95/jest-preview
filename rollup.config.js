@@ -1,15 +1,25 @@
 import { defineConfig } from 'rollup';
 import typescript from 'rollup-plugin-typescript2';
+import resolve from '@rollup/plugin-node-resolve';
 
+import packageJson from './package.json';
 function makeBundle({ filePath, dir = 'dist' }) {
   return {
     input: filePath,
     output: {
-      dir: dir,
+      dir,
       format: 'cjs',
     },
-    plugins: [typescript()],
-    external: ['path', 'camelcase', 'fs', 'child_process'],
+    plugins: [
+      typescript({
+        tsconfig: 'tsconfig.prod.json',
+      }),
+      resolve(),
+    ],
+    external: [
+      ...Object.keys(packageJson.dependencies),
+      ...Object.keys(packageJson.devDependencies),
+    ],
   };
 }
 

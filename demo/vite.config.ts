@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => {
     {},
   );
 
-  // Inject NODE_ENV and make sure envWithProcessPrefix is not empty
+  // @ts-expect-error Inject NODE_ENV and make sure envWithProcessPrefix is not empty
   envWithProcessPrefix['process.env.NODE_ENV'] = `'${mode}'`;
 
   return {
