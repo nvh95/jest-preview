@@ -275,6 +275,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "vadhe",
+      "name": "Rivaldi Putra",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36479850?v=4",
+      "profile": "https://vadhe.dev/",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -282,5 +291,6 @@
   "projectOwner": "nvh95",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "angular"
 }
