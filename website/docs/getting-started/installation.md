@@ -10,7 +10,7 @@ sidebar_position: 4
 npm install --save-dev jest-preview
 # Or
 yarn add --dev jest-preview
-pnpm install --dev jest-preview
+pnpm add -D jest-preview
 ```
 
 ### 2. Configure jest's transform to transform CSS and files
