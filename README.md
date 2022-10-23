@@ -38,6 +38,8 @@ Debug your Jest tests. Effortlessly. 🛠🖼
 
 [![Try Jest Preview now](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/jest-preview?file=src%2FApp.test.tsx,README.md)
 
+_Using Vitest? Try [Vitest Preview](https://github.com/nvh95/vitest-preview)_
+
 ## Why **jest-preview**
 
 When writing tests using Jest, we usually debug by reading the HTML code. Sometimes, the HTML is too complicated to visualize the UI in our head. `jest-preview` previews your Jest tests right in a browser, then you can see your actual UI visually, which helps you write and debug Jest tests faster.
