@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => {
     {},
   );
 
-  // Inject NODE_ENV and make sure envWithProcessPrefix is not empty
+  // @ts-expect-error Inject NODE_ENV and make sure envWithProcessPrefix is not empty
   envWithProcessPrefix['process.env.NODE_ENV'] = `'${mode}'`;
 
   return {
@@ -39,7 +39,7 @@ export default defineConfig(({ mode }) => {
       preprocessorOptions: {
         scss: {
           includePaths: [
-            path.resolve(__dirname, 'demo/assets/_scss/loadPathsExample'),
+            path.resolve(__dirname, 'src/assets/_scss/loadPathsExample'),
           ],
         },
       },
@@ -58,6 +58,6 @@ export default defineConfig(({ mode }) => {
     server: {
       open: true,
     },
-    publicDir: 'demo/public',
+    publicDir: 'src/public',
   };
 });

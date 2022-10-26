@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-const jestPath = require.resolve('jest/bin/jest');
 const { execSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
@@ -15,6 +14,7 @@ function clearJestCache() {
   if (process.env.INIT_CWD === process.env.PWD) {
     console.log('Inside Jest Preview. Do not clear Cache.');
   } else {
+    const jestPath = require.resolve('jest/bin/jest');
     console.log('Clearing Jest cache...');
     execSync(`node ${jestPath} --clearCache`, { stdio: 'inherit' });
     console.log('Cleared Jest cache...');

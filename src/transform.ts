@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import chalk from 'chalk';
 import { spawnSync } from 'child_process';
 import { pathToFileURL } from 'url';
 import camelcase from 'camelcase';
@@ -53,7 +54,34 @@ function havePostCss() {
 }
 
 function getRelativeFilename(filename: string): string {
-  return slash(filename.split(process.cwd())[1]);
+  const cwd = process.cwd();
+  // /Users/your-name/oss/jest-preview/examples/vite-react/src/index.css
+  if (filename.startsWith(cwd)) {
+    return slash(filename.split(cwd)[1]);
+  } else {
+    // Maybe user is using monorepo that links to the root of the project
+    // Try to guess the symlink under node_modules
+    // /Users/your-name/oss/jest-preview/node_modules/.pnpm/animate.css@4.1.1/node_modules/animate.css/animate.css
+    const parts = filename.split('node_modules');
+    const locationUnderNodeModules = parts[parts.length - 1];
+    const symlink = path.join('./node_modules', locationUnderNodeModules);
+    if (fs.existsSync(symlink)) {
+      return slash(symlink);
+    } else {
+      // We might not think of this case. Just ignore it and ask user to report an issue
+      // TODO: Try with yarn workspace, npm workspace
+      console.log(
+        chalk.yellow(`jest-preview couldn't process ${filename} yet.`),
+      );
+      console.log(
+        chalk.yellow(
+          `Please help to report an issue at https://github.com/nvh95/jest-preview/issues with your minimum reproduction. Thanks.`,
+        ),
+      );
+    }
+  }
+  const result = slash(filename.split(process.cwd())[1]);
+  return result;
 }
 
 type TransformedSource = {

@@ -9,7 +9,7 @@ describe('File', () => {
       '/logo.svg',
     );
     expect((screen.getByAltText('logo2') as HTMLImageElement).src).toContain(
-      '/demo/assets/images/logo.svg',
+      '/src/assets/images/logo.svg',
     );
   });
 });

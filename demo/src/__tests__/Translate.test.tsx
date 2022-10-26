@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import Translate from '../components/Translate';
-import preview from '../../dist/index';
+import preview from 'jest-preview';
 
 describe('Translate', () => {
   it('should render in multiple languages', () => {

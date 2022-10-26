@@ -1,0 +1,6 @@
+packages:
+  - 'demo'
+  - 'examples/vite-react'
+  - 'examples/angular'
+  - 'examples/svelte'
+  - '!examples/create-react-app'

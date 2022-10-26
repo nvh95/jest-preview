@@ -1,21 +1,21 @@
 /** @type {import('@jest/types').Config.InitialOptions} */
 
 module.exports = {
-  roots: ['<rootDir>/demo', '<rootDir>/src'],
+  roots: ['<rootDir>/src'],
   collectCoverageFrom: [
-    'demo/**/*.{js,jsx,ts,tsx}',
-    '!demo/**/*.d.ts',
-    '!demo/mocks/**',
+    'src/**/*.{js,jsx,ts,tsx}',
+    '!src/**/*.d.ts',
+    '!src/mocks/**',
     // TODO: To report coverage in `src`. They are compiled to `dist` so it's difficult to report coverage directly
   ],
   coveragePathIgnorePatterns: [],
-  setupFilesAfterEnv: ['<rootDir>/demo/setupTests.js'],
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'],
   testEnvironment: 'jsdom',
-  modulePaths: ['<rootDir>/demo'],
+  modulePaths: ['<rootDir>/src'],
   transform: {
     '^.+\\.(ts|js|tsx|jsx)$': '@swc/jest',
-    '^.+\\.(css|scss|sass|less)$': '<rootDir>/transforms/css',
-    '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|json)$)': '<rootDir>/transforms/file',
+    '^.+\\.(css|scss|sass|less)$': 'jest-preview/transforms/css',
+    '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|json)$)': 'jest-preview/transforms/file',
   },
   transformIgnorePatterns: [
     '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$',
