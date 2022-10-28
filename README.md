@@ -23,7 +23,7 @@ Debug your Jest tests. Effortlessly. 🛠🖼
 
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-30-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-31-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
 
@@ -177,6 +177,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <tr>
       <td align="center"><a href="https://github.com/Rohitbels"><img src="https://avatars.githubusercontent.com/u/4401718?v=4?s=100" width="100px;" alt="Rohitbels"/><br /><sub><b>Rohitbels</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=Rohitbels" title="Code">💻</a></td>
       <td align="center"><a href="https://vadhe.dev/"><img src="https://avatars.githubusercontent.com/u/36479850?v=4?s=100" width="100px;" alt="Rivaldi Putra"/><br /><sub><b>Rivaldi Putra</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=vadhe" title="Documentation">📖</a></td>
+      <td align="center"><a href="https://github.com/KieraDOG"><img src="https://avatars.githubusercontent.com/u/6457082?v=4?s=100" width="100px;" alt="Long Zhao"/><br /><sub><b>Long Zhao</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=KieraDOG" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
