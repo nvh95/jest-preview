@@ -1,13 +1,13 @@
-#!/usr/bin/env node
-const http = require('http');
-const path = require('path');
-const fs = require('fs');
-const connect = require('connect');
-const sirv = require('sirv');
+import http from 'http';
+import path from 'path';
+import fs from 'fs';
+import connect from 'connect';
+import sirv from 'sirv';
+import chokidar from 'chokidar';
+import { WebSocketServer } from 'ws';
+import { openBrowser } from './browser';
+
 const app = connect();
-const chokidar = require('chokidar');
-const { openBrowser } = require('./browser');
-const { WebSocketServer } = require('ws');
 
 const port = process.env.PORT || 3336;
 // TODO: Can we reuse `port`, I think Vite they can do that
@@ -20,7 +20,7 @@ const INDEX_BASENAME = 'index.html';
 const INDEX_PATH = path.join(CACHE_DIRECTORY, INDEX_BASENAME);
 const PUBLIC_CONFIG_BASENAME = 'cache-public.config';
 const PUBLIC_CONFIG_PATH = path.join(CACHE_DIRECTORY, PUBLIC_CONFIG_BASENAME);
-const FAV_ICON_PATH = './node_modules/jest-preview/cli/server/favicon.ico';
+const FAV_ICON_PATH = './node_modules/jest-preview/dist/cli/favicon.ico';
 
 // Always set default public folder to `public` if not specified
 let publicFolder = 'public';
@@ -43,7 +43,7 @@ if (fs.existsSync(INDEX_PATH)) {
   });
 }
 
-let defaultIndexHtml = `<!DOCTYPE html>
+const defaultIndexHtml = `<!DOCTYPE html>
 <html>
 <head>
   <link rel="shortcut icon" href="${FAV_ICON_PATH}">
@@ -74,7 +74,7 @@ fs.writeFileSync(INDEX_PATH, defaultIndexHtml);
 const wss = new WebSocketServer({ port: wsPort });
 
 wss.on('connection', function connection(ws) {
-  ws.on('message', function message(data) {
+  ws.on('message', function message(data: string) {
     console.log('received: %s', data);
     try {
       const dataJSON = JSON.parse(data);
@@ -94,7 +94,7 @@ const watcher = chokidar.watch([INDEX_PATH, PUBLIC_CONFIG_PATH], {
   disableGlobbing: true,
 });
 
-function handleFileChange(filePath) {
+function handleFileChange(filePath: string) {
   const basename = path.basename(filePath);
   // TODO: Check if this is the root cause for issue on linux
   if (basename === INDEX_BASENAME) {
@@ -115,22 +115,14 @@ watcher
   .on('add', handleFileChange)
   .on('unlink', handleFileChange);
 
-/**
- *
- * @param {string} string
- * @param {string} word
- * @param {string} injectWord
- * @returns string
- */
-
-function injectToString(string, word, injectWord) {
+function injectToString(string: string, word: string, injectWord: string) {
   const breakPosition = string.indexOf(word) + word.length;
   return (
     string.slice(0, breakPosition) + injectWord + string.slice(breakPosition)
   );
 }
 
-function injectToHead(html, content) {
+function injectToHead(html: string, content: string) {
   return injectToString(html, '<head>', content);
 }
 
@@ -146,9 +138,9 @@ app.use((req, res, next) => {
   }
 
   // Check if req.url is existed, if not, look up in public directory
-  const filePath = path.join('.', req.url);
+  const filePath = path.join('.', req.url as string);
   if (!fs.existsSync(filePath)) {
-    const newPath = path.join(publicFolder, req.url);
+    const newPath = path.join(publicFolder, req.url as string);
     if (fs.existsSync(newPath)) {
       req.url = newPath;
     } else {
@@ -170,7 +162,7 @@ app.use((req, res, next) => {
 app.use('/', (req, res) => {
   const reloadScriptContent = fs
     .readFileSync(path.join(__dirname, './ws-client.js'), 'utf-8')
-    .replace(/\$PORT/g, wsPort);
+    .replace(/\$PORT/g, `${wsPort}`);
   let indexHtml = fs.readFileSync(INDEX_PATH, 'utf-8');
   indexHtml += `<script>${reloadScriptContent}</script>`;
   indexHtml = injectToHead(
