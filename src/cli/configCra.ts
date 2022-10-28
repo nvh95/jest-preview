@@ -1,10 +1,8 @@
-#!/usr/bin/env node
-// @ts-check
-const path = require('path');
-const fs = require('fs');
+import path from 'path';
+import fs from 'fs';
 // @ts-expect-error No typing for this package yet
 // TODO: Send them PR to add types
-const findNodeModules = require('find-node-modules');
+import findNodeModules from 'find-node-modules';
 const cwdNodeModules = findNodeModules({ relative: false });
 // Append recursively node_modules to the module search path,
 // so require('react-scripts') / require.resolve('react-scripts') can work.
@@ -13,10 +11,9 @@ module.paths.push(...cwdNodeModules);
 
 // 1. Create `jest.config.js`
 try {
-  // @ts-expect-error This is meant to run where react-scripts is installed
   const createJestConfig = require('react-scripts/scripts/utils/createJestConfig.js');
   const jestConfig = createJestConfig(
-    (/** @type {string} */ filePath) => path.posix.join('<rootDir>', filePath),
+    (filePath: string) => path.posix.join('<rootDir>', filePath),
     null,
     true,
   );
@@ -29,8 +26,7 @@ try {
   };
   jestConfig.transformIgnorePatterns =
     jestConfig.transformIgnorePatterns.filter(
-      (/** @type {string} */ pattern) =>
-        pattern !== '^.+\\.module\\.(css|sass|scss)$',
+      (pattern: string) => pattern !== '^.+\\.module\\.(css|sass|scss)$',
     );
   delete jestConfig.moduleNameMapper['^.+\\.module\\.(css|sass|scss)$'];
 
@@ -95,11 +91,7 @@ try {
 }
 
 // 4. Configure Jest Preview using jestPreviewConfigure in `src/setupTests.ts` or `src/setupTests.js`
-/**
- * @param {string} filePath
- * @param {string} content
- */
-function injectToFileIfExisted(filePath, content) {
+function injectToFileIfExisted(filePath: string, content: string) {
   if (fs.existsSync(filePath)) {
     fs.appendFileSync(filePath, content);
   }

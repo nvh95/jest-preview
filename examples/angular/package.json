@@ -39,6 +39,7 @@
     "@types/testing-library__jest-dom": "^5.14.5",
     "autoprefixer": "^10.4.8",
     "jest": "^28.1.3",
+    "jest-environment-jsdom": "28",
     "jest-preview": "^0.2.8",
     "postcss": "^8.4.16",
     "start-server-and-test": "^1.14.0",

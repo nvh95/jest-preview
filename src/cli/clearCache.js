@@ -1,8 +1,10 @@
-#!/usr/bin/env node
+import { execSync } from 'child_process';
+import path from 'path';
+import fs from 'fs';
+
+// TODO
+// import.meta.resolve
 const jestPath = require.resolve('jest/bin/jest');
-const { execSync } = require('child_process');
-const path = require('path');
-const fs = require('fs');
 
 const CACHE_DIRECTORY = path.resolve(
   // Post install: process.env.INIT_CWD
