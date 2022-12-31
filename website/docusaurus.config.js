@@ -94,6 +94,10 @@ const config = {
             label: 'Discord',
             position: 'right',
           },
+          {
+            type: 'localeDropdown',
+            position: 'right',
+          },
         ],
       },
       footer: {
@@ -164,6 +168,10 @@ const config = {
         indexName: 'jest-preview',
       },
     }),
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'vi-VN', 'zh-CN'],
+  },
 };
 
 module.exports = config;

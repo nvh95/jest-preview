@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
+import Translate, { translate } from '@docusaurus/Translate';
 
 type FeatureItem = {
   title: string;
@@ -8,46 +9,120 @@ type FeatureItem = {
   description: JSX.Element;
 };
 
+// FIXME The SVG here (or all static files) cannot be loaded in i18n dev mode
 const FeatureList: FeatureItem[] = [
   {
-    title: 'DX-Driven',
+    title: translate({
+      id: 'home.featureList.dx-driven.title',
+      message: 'DX-Driven',
+    }),
     Svg: '/img/dx.svg',
     description: (
-      <>
-        Jest Preview has a mission: To make front end developers' life easier.
-        It's built with the mindset of <strong>Developer Experience</strong>{' '}
-        first in mind.
-      </>
+      <Translate
+        id="home.featureList.dx-driven.description"
+        values={{
+          dx: (
+            <strong>
+              <Translate id="home.featureList.dx-driven.description.dx">
+                Developer Experience
+              </Translate>
+            </strong>
+          ),
+        }}
+      >
+        {
+          "Jest Preview has a mission: To make front end developers' life easier. It's built with the mindset of {dx} first in mind."
+        }
+      </Translate>
     ),
   },
   {
-    title: 'Fast',
+    title: translate({
+      id: 'home.featureList.fast.title',
+      message: 'Fast',
+    }),
     Svg: '/img/fast.svg',
     description: (
-      <>
-        Write tests in Jest and see the changes reflects in browser in{' '}
-        <strong>a few milliseconds</strong>.
-      </>
+      <Translate
+        id="home.featureList.fast.description"
+        values={{
+          ms: (
+            <strong>
+              <Translate
+                id="home.featureList.fast.description.ms"
+                description="a few milliseconds"
+              >
+                a few milliseconds
+              </Translate>
+            </strong>
+          ),
+        }}
+      >
+        {'Write tests in Jest and see the changes reflects in browser in {ms}'}
+      </Translate>
     ),
   },
 
   {
-    title: 'Framework-Agnostic',
+    title: translate({
+      id: 'home.featureList.framework-agnostic.title',
+      message: 'Framework-Agnostic',
+    }),
     Svg: '/img/agnostic.svg',
     description: (
-      <>
-        You can use Jest Preview with <strong>any testing libraries</strong> and{' '}
-        <strong>frontend frameworks</strong>.
-      </>
+      <Translate
+        id="home.featureList.framework-agnostic.description"
+        values={{
+          tl: (
+            <strong>
+              <Translate
+                id="home.featureList.framework-agnostic.description.tl"
+                description="any testing libraries"
+              >
+                any testing libraries
+              </Translate>
+            </strong>
+          ),
+          ff: (
+            <strong>
+              <Translate
+                id="home.featureList.framework-agnostic.description.ff"
+                description="frontend frameworks"
+              >
+                frontend frameworks
+              </Translate>
+            </strong>
+          ),
+        }}
+      >
+        {'You can use Jest Preview with {tl} and {ff}.'}
+      </Translate>
     ),
   },
   {
-    title: 'Productivity',
+    title: translate({
+      id: 'home.featureList.productivity.title',
+      message: 'Productivity',
+    }),
     Svg: '/img/productivity.svg',
     description: (
       <>
-        Don't waste time guessing what is your UI looks like. Let's Jest Preview{' '}
-        <strong>visualize</strong> it in a browser for you!
+        <Translate
+          id="home.featureList.productivity.description"
+          values={{
+            visualize: (
+              <strong>
+                <Translate id="home.featureList.productivity.description.visualize">
+                  visualize
+                </Translate>
+              </strong>
+            ),
+          }}
+        >
+          {
+            "Don't waste time guessing what is your UI looks like. Let's Jest Preview {visualize} it in a browser for you!"
+          }
+        </Translate>
       </>
     ),
   },
