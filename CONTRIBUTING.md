@@ -94,6 +94,10 @@ Following are brief descriptions of the repository architecture:
 - [examples](https://github.com/nvh95/jest-preview/tree/main/examples/): contains examples of how to integrate Jest Preview with various libraries and frameworks.
 - [website](https://github.com/nvh95/jest-preview/tree/main/website/): contains code for [www.jest-preview.com](https://www.jest-preview.com/)
 
+## Translation Contributing
+
+- See [TRANSLATION.md](./TRANSLATION.md)
+
 ## Submit a PR
 
 So you have decided to contribute code back to upstream by opening a pull request. You've invested a good chunk of time, and we appreciate it. We will do our best to work with you and get the PR looked at.
