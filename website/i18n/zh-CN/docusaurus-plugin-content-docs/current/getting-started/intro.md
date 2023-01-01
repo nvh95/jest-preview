@@ -1,20 +1,20 @@
 ---
 sidebar_position: 1
-description: 当使用Jest编写测试时，我们通常通过阅读HTML代码进行调试。有时HTML太复杂了，Jest Preview 帮助您在浏览器中“看见”您的测试。
+description: 当使用Jest编写测试时，我们通常通过阅读HTML代码进行调试。有时HTML太复杂了，Jest Preview 帮助你在浏览器中“看见”你的测试。
 ---
 
 # 介绍
 
 ## 认识 Jest Preview
 
-我们相信您已经厌倦了调试集成 UI 测试和阅读一大堆隐晦的 HTML 输出。要将 DOM 结构可视化，并发现那里出了问题以及为什么出了问题，这实在是相当困难。我们感同身受。这就是为什么我们创建了 Jest Preview！
+我们相信你已经厌倦了调试集成 UI 测试和阅读一大堆隐晦的 HTML 输出。要将 DOM 结构可视化，并发现那里出了问题以及为什么出了问题，这实在是相当困难。我们感同身受。这就是为什么我们创建了 Jest Preview！
 
-Jest Preview 是一个开源库使您的测试更轻松。它可以让您直接在浏览器中看到测试输出，就像您平时看您在做的应用程序一样。编写测试并观察渲染输出的相应变化，Jest Preview 让你专注于“真正的”的测试，而不是破译 HTML 代码。听起来是不是很有趣？快来试试吧 😉
+Jest Preview 是一个开源库使你的测试更轻松。它可以让你直接在浏览器中看到测试输出，就像你平时看你在做的应用程序一样。编写测试并观察渲染输出的相应变化，Jest Preview 让你专注于“真正的”的测试，而不是破译 HTML 代码。听起来是不是很有趣？快来试试吧 😉
 
 👇 继续阅读以了解更多信息并尝试 Jest Preview 的操作
 
 :::info
-您可以直接前往 [安装](https://www.jest-preview.com/docs/getting-started/installation) 指南，并在本地安装它
+你可以直接前往 [安装](https://www.jest-preview.com/docs/getting-started/installation) 指南，并在本地安装它
 :::
 
 ## 特性
@@ -39,7 +39,7 @@ Jest Preview 是一个开源库使您的测试更轻松。它可以让您直接�
 
 ## 在线 Demo
 
-想要在安装前尝试一下这个库吗？我们为您准备好了！前往 [StackBlitz Demo App](https://stackblitz.com/edit/jest-preview?embed=1&file=README.md) 或在此尝试 😉
+想要在安装前尝试一下这个库吗？我们为你准备好了！前往 [StackBlitz Demo App](https://stackblitz.com/edit/jest-preview?embed=1&file=README.md) 或在此尝试 😉
 
 [![](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/jest-preview?file=src%2FApp.test.tsx,README.md)
 
