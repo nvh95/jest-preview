@@ -1,6 +1,6 @@
 {
   "home.header.subtitle": {
-    "message": "轻松调试您的 Jest 测试 🛠🖼"
+    "message": "轻松调试你的 Jest 测试 🛠🖼"
   },
   "home.header.get-started": {
     "message": "入门"
@@ -28,7 +28,7 @@
     "description": "a few milliseconds"
   },
   "home.featureList.framework-agnostic.title": {
-    "message": "框架广泛"
+    "message": "框架兼容"
   },
   "home.featureList.framework-agnostic.description": {
     "message": "你可以在{tl}和{ff}中使用Jest Preview"
@@ -57,7 +57,7 @@
     "message": "欢迎在 {openCollectiveLink} 赞助我们，从 {oneDollar} 开始吧！"
   },
   "home.sponsors.want": {
-    "message": "想让您的公司标志出现在这里吗？{sponsorsLink}了解详情"
+    "message": "想让你的公司标志出现在这里吗？{sponsorsLink}了解详情"
   },
   "home.sponsors.want.sponsors-link": {
     "message": "在此"
@@ -75,7 +75,7 @@
     "description": "The title of the 404 page"
   },
   "theme.NotFound.p1": {
-    "message": "我们找不到您要找的页面。",
+    "message": "我们找不到你要找的页面。",
     "description": "The first paragraph of the 404 page"
   },
   "theme.NotFound.p2": {
