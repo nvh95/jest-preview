@@ -2,7 +2,7 @@
 
 ## How
 
-We use [docusaurus](https://docusaurus.io/) to build our document. Here is docusaurus i18n guide: <https://docusaurus.io/docs/i18n/introduction>
+We use [docusaurus](https://docusaurus.io/) to build our document. See [Docusaurus I18n Guide](https://docusaurus.io/docs/i18n/introduction)
 
 ## Add a new language (Optional)
 
