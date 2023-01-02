@@ -19,7 +19,7 @@ pnpm add -D jest-preview
 If you use Create React App, you only need to run `npx jest-preview config-cra` in this step.
 :::
 
-`jest-preview` comes with pre-configured transformations to intercept CSS and files. This is a recommended way to configure. However, you can configure it yourself using exported transform functions as well. See [Advanced configurations](#advanced-configurations) for more.
+`jest-preview` comes with pre-configured transformations to intercept CSS and files. This is a recommended way to configure. However, you can configure it yourself using exported transform functions as well. See [Advanced configurations](docs/advanced-guides/code-transform) for more.
 
 Update `jest.config.js`:
 
