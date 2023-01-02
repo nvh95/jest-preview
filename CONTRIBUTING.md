@@ -96,7 +96,7 @@ Following are brief descriptions of the repository architecture:
 
 ## Translation Contributing
 
-- See [TRANSLATION.md](./TRANSLATION.md)
+- See [TRANSLATION.md](https://github.com/nvh95/jest-preview/tree/main/TRANSLATION.md)
 
 ## Submit a PR
 
