@@ -97,6 +97,16 @@ const config = {
           {
             type: 'localeDropdown',
             position: 'right',
+            dropdownItemsAfter: [
+              {
+                type: 'html',
+                value: '<hr style="margin: 0.3rem 0;">',
+              },
+              {
+                href: 'https://github.com/nvh95/jest-preview/tree/main/TRANSLATION.md',
+                label: 'Help Us Translate',
+              },
+            ],
           },
         ],
       },
