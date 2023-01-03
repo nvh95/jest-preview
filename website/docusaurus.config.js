@@ -107,8 +107,12 @@ const config = {
                 href: 'https://www.jest-preview.com/',
               },
               {
-                label: '中文（中国',
+                label: '简体中文',
                 href: 'https://cn.jest-preview.com/',
+              },
+              {
+                type: 'html',
+                value: '<hr style="margin: 0.3rem 0;">',
               },
               {
                 href: 'https://github.com/nvh95/jest-preview/tree/main/TRANSLATION.md',
