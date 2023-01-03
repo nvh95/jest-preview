@@ -20,7 +20,7 @@
     "description": "The label for category Others in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.API Reference": {
-    "message": "API 参考",
+    "message": "API",
     "description": "The label for category API Reference in sidebar tutorialSidebar"
   }
 }
