@@ -23,7 +23,7 @@ You can go straight to [Installation](https://www.jest-preview.com/docs/getting-
 - 👀 Preview your actual app's HTML in a browser in milliseconds.
 - 🔄 Auto reload browser when executing `preview.debug()`.
 - 💅 Support CSS:
-  - ✅ [Direct CSS import](#3-configure-jests-transform-to-intercept-css-and-files)
+  - ✅ [Direct CSS import](/docs/getting-started/installation#2-configure-jests-transform-to-transform-css-and-files)
   - ✅ Number of CSS-in-JS libraries, such as:
     - ✅ [Styled-components](https://styled-components.com/)
     - ✅ [Emotion](https://emotion.sh/)

@@ -14,7 +14,7 @@ Jest Preview 是一个开源库使你的测试更轻松。它可以让你直接�
 👇 继续阅读以了解更多信息并尝试 Jest Preview 的操作
 
 :::info
-你可以直接前往 [安装](https://www.jest-preview.com/docs/getting-started/installation) 指南，并在本地安装它
+你可以直接前往 [安装](/docs/getting-started/installation) 指南，并在本地安装它
 :::
 
 ## 特性
@@ -23,11 +23,11 @@ Jest Preview 是一个开源库使你的测试更轻松。它可以让你直接�
 - 👀 在浏览器中以毫秒级的速度预览你的实际应用的 HTML
 - 🔄 自动刷新浏览器当执行 `preview.debug()`
 - 💅 支持 CSS：
-  - ✅ [Direct CSS import](#3-configure-jests-transform-to-intercept-css-and-files)
+  - ✅ [直接的 CSS 引入](/docs/getting-started/installation#2-配置-jest-的-transform-以转换-css-和文件)
   - ✅ 相对多的 CSS-in-JS 库，例如：
     - ✅ [Styled-components](https://styled-components.com/)
     - ✅ [Emotion](https://emotion.sh/)
-  - ✅ [Global CSS](/docs/getting-started/installation#4-optional-configure-global-css)
+  - ✅ [全局 CSS](/docs/getting-started/installation#4-可选配置全局-css)
   - ✅ [CSS Modules](https://github.com/css-modules/css-modules)
   - ✅ [Sass](https://sass-lang.com/)
 - 🌄 支持查看图片
