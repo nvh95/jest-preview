@@ -7,55 +7,54 @@ sidebar_position: 2
 ```js
 // src/setupTests.js
 import { jestPreviewConfigure } from 'jest-preview';
-// Configure external CSS
+// 配置外部 CSS
 import './global.css';
 import './global.scss';
 import '@your-design-system/css/dist/index.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 jestPreviewConfigure({
-  // Configure public folder if your public folder is not "public"
+  // 如果你的公共目录不是 "public"，配置公共目录
   publicFolder: 'your-public-folder-name',
 });
 ```
 
-## externalCss: string[] (Deprecated)
+## externalCss: string[]（已弃用）
 
-This option is deprecated. Please do not use it. Instead, import the CSS directly. See the instruction at [Deprecate CSS](/blog/deprecate-externalCss)
+此参数已弃用，请勿使用。直接导入 CSS 即可。请参阅 [弃用 CSS](/blog/deprecate-externalCss) 中的说明。
 
 ## sassLoadPaths: string[]
 
-Default: `[]`
+默认值：`[]`
 
-Paths in which to look for stylesheets loaded by rules like `@use` and `@import` in sass files should be configured via `sassLoadPaths` option. They should be path from root of your project. For example:
+通过 `sassLoadPaths` 参数应配置用于在 sass 文件中的规则（例如 `@use` 和 `@import`）加载样式表的路径。它们应该为在项目根目录下路径。例如：
 
 ```js
 jestPreviewConfigure({
-  // Configure Sass load paths
+  // 配置 Sass 加载路径
   sassLoadPaths: ['demo/assets/_scss/loadPathsExample'],
 });
 ```
 
 ## publicFolder: string
 
-Default: `undefined`.
+默认值：`undefined`
 
+在项目根目录下你的公共目录名。
 Name of your public folder from the project root.
 
-You don't have to configure this by yourself if your public folder is `public`. Below you can find a list of public directories which have different names than `public`:
+如果公共目录是 `public`，则无需自行配置。以下为公共目录名不是 `public` 的列表：
 
-<!-- Thanks msw for the idea https://github.com/mswjs/mswjs.io/blob/9f62d45a3740789cc4308ae1475027598541a007/docs/snippets/public-dir.mdx -->
-
-| Project name                         | Public directory |
-| ------------------------------------ | ---------------- |
-| [GatsbyJS](https://www.gatsbyjs.org) | `static`         |
-| [Angular](https://angular.io/)       | `src`            |
-| [Preact](https://preactjs.com)       | `src/static`     |
+| 项目名                               | 公共目录     |
+| ------------------------------------ | ------------ |
+| [GatsbyJS](https://www.gatsbyjs.org) | `static`     |
+| [Angular](https://angular.io/)       | `src`        |
+| [Preact](https://preactjs.com)       | `src/static` |
 
 ## autoPreview: boolean
 
-Default: `false`
+默认值：`false`
 
-Automatically preview the UI in the external browser when the test fails. You don't need to invoke `preview.debug()` by yourself anymore.
+当测试失败时，自动在外部浏览器中预览 UI。你不需要再自己调用 `preview.debug()` 了。
 
-Set to `false` if you experience any error or just want to opt out.
+如果遇到任何错误或只想选择退出，请设置为 `false` 。

@@ -4,11 +4,11 @@ sidebar_position: 1
 
 # debug()
 
-Preview application's UI when testing with Jest to an external browser. Need to [start the Jest Preview](/docs/getting-started/usage#2-run-the-jest-preview-server) server beforehand.
+在使用 Jest 测试时在外部浏览器中预览应用程序的 UI。需要预先[启动 Jest Preview 服务](/docs/getting-started/usage#2-运行-jest-preview-服务)。
 
 :::info
 
-[Automatic Mode](/blog/automatic-mode) is now available and is recommended for general use, instead of manually triggering `preview.debug()`.
+[自动模式](/blog/automatic-mode) 目前已可用，并推荐常用以代替手动触发 `preview.debug()`。
 :::
 
 ```diff
@@ -21,7 +21,7 @@ describe('App', () => {
 });
 ```
 
-Or:
+或：
 
 ```diff
 +import { debug } from 'jest-preview';

@@ -68,9 +68,9 @@ import '@your-design-system/css/dist/index.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 ```
 
-### 5. （可选）配置公共文件夹
+### 5. （可选）配置公共目录
 
-如果你的公共文件夹是 `public` 则无需改动。如果它不是，请按照如下方式配置:
+如果你的公共目录是 `public` 则无需改动。如果它不是，请按照如下方式配置:
 
 ```js
 // ./config/jest/setupTests.js
