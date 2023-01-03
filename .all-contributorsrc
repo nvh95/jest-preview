@@ -293,6 +293,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "jsun969",
+      "name": "Justin Sun",
+      "avatar_url": "https://avatars.githubusercontent.com/u/29330847?v=4",
+      "profile": "http://jsun969.cn",
+      "contributions": [
+        "translation"
+      ]
     }
   ],
   "contributorsPerLine": 7,
