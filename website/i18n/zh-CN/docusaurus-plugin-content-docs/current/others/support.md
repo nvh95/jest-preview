@@ -2,10 +2,10 @@
 sidebar_position: 3
 ---
 
-# Support
+# 支持
 
-Please [file an issue](https://github.com/nvh95/jest-preview/issues), or [add a new discussion](https://github.com/nvh95/jest-preview/discussions) if you encounter any issues.
+如果遇到任何问题，请[提交问题](https://github.com/nvh95/jest-preview/issues)，或[创建讨论](https://github.com/nvh95/jest-preview/discussions)。
 
-You can also mention [@JestPreview](https://twitter.com/JestPreview) or [@hung_dev](https://twitter.com/hung_dev) on twitter if you want to have some more discussions or suggestions.
+如果你想进行更多讨论或建议，你也可以在 Twitter 上提及 [@JestPreview](https://twitter.com/JestPreview) 或 [@hung_dev](https://twitter.com/hung_dev) 。
 
-We also have a Discord server: [![Discord](https://img.shields.io/discord/967456149735637002?logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/z4DRBmk7vx)
+我们还有一个 Discord 服务器：[![Discord](https://img.shields.io/discord/967456149735637002?logo=discord&logoColor=ffffff&style=flat-square)](https://discord.gg/z4DRBmk7vx)
