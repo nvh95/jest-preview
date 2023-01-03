@@ -4,6 +4,8 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
+const isChineseDocs = process.env.CHINESE_DOCS === '1';
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Jest Preview',
@@ -108,6 +110,26 @@ const config = {
               },
             ],
           },
+          {
+            type: 'dropdown',
+            label: '🌎 Languages',
+
+            position: 'right',
+            items: [
+              {
+                label: 'English',
+                href: 'https://www.jest-preview.com/',
+              },
+              {
+                label: '中文（中国',
+                href: 'https://cn.jest-preview.com/',
+              },
+              {
+                href: 'https://github.com/nvh95/jest-preview/tree/main/TRANSLATION.md',
+                label: 'Help Us Translate',
+              },
+            ],
+          },
         ],
       },
       footer: {
@@ -179,7 +201,7 @@ const config = {
       },
     }),
   i18n: {
-    defaultLocale: 'en',
+    defaultLocale: isChineseDocs ? 'zh-CN' : 'en',
     locales: ['en', 'zh-CN'],
   },
 };

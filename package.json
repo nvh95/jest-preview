@@ -36,6 +36,7 @@
   "scripts": {
     "docs": "cd website && npm run start",
     "build:docs": "cd website && npm run build",
+    "build:docs:cn": "cd website && npm run build:cn",
     "dev": "vite",
     "build:legacy::only": "vite build",
     "build:legacy:watch": "vite build --watch",
