@@ -180,7 +180,7 @@ const config = {
     }),
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'vi-VN', 'zh-CN'],
+    locales: ['en', 'zh-CN'],
   },
 };
 
