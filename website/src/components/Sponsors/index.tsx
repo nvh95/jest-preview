@@ -33,23 +33,37 @@ export default function Sponsors() {
       </div>
       <div className="row">
         <div className="col">
-          <h3 className={styles.bronzeHeading}>Bronze Sponsor 🥉</h3>
+          <h3 className={styles.bronzeHeading}>Bronze Sponsors 🥉</h3>
         </div>
       </div>
       <div className={styles.sponsorWrapper}>
-        <a className={styles.bronzeSponsor} href="https://webuild.community/">
-          <img
-            src="https://user-images.githubusercontent.com/8603085/170883918-8b9f111d-f3c6-4647-9cc1-de56dd98ea60.png"
-            width="94"
-            height="94"
-          />
-        </a>
         <a
           className={styles.bronzeSponsor}
           href="https://www.deploysentinel.com/"
         >
           <img
             src="https://github.com/DeploySentinel.png"
+            width="94"
+            height="94"
+          />
+        </a>
+        <a className={styles.bronzeSponsor} href="https://react-hook-form.com/">
+          <img
+            src="https://github.com/react-hook-form.png"
+            width="94"
+            height="94"
+          />
+        </a>
+      </div>
+      <div className="row">
+        <div className="col">
+          <h3 className={styles.pastSponsorHeading}>Past Sponsors</h3>
+        </div>
+      </div>
+      <div className={styles.sponsorWrapper}>
+        <a className={styles.bronzeSponsor} href="https://webuild.community/">
+          <img
+            src="https://user-images.githubusercontent.com/8603085/170883918-8b9f111d-f3c6-4647-9cc1-de56dd98ea60.png"
             width="94"
             height="94"
           />

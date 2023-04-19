@@ -35,3 +35,10 @@
   padding: 16px 16px 20px;
   font-style: italic;
 }
+
+.pastSponsorHeading {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+  margin-bottom: -1px;
+}
