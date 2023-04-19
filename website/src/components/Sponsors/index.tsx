@@ -47,10 +47,7 @@ export default function Sponsors() {
             height="94"
           />
         </a>
-        <a
-          className={styles.bronzeSponsor}
-          href="https://github.com/react-hook-form/"
-        >
+        <a className={styles.bronzeSponsor} href="https://react-hook-form.com/">
           <img
             src="https://github.com/react-hook-form.png"
             width="94"

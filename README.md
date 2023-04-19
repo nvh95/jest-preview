@@ -221,7 +221,7 @@ Your financial support helps the project alive and in a development mode. Make a
 <a href="https://www.deploysentinel.com/">
   <img src="https://github.com/DeploySentinel.png" width="94" height="94" />
 </a>
-<a href="https://github.com/react-hook-form/">
+<a href="https://react-hook-form.com/">
   <img src="https://github.com/react-hook-form.png" width="94" height="94" />
 </a>
 
