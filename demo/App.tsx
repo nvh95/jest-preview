@@ -38,6 +38,7 @@ function App() {
           This text is styled by global configured SASS
         </p>
         <p className="imported-sass">This text is styled by imported SASS</p>
+        <p className="imported-sass-shared-var">This text is styled by imported SASS using a shared mixin and variable</p>
         <p className="bg-yellow-400 font-bold m-5 text-red-500">
           This text is styled by Tailwind CSS
         </p>

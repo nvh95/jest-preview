@@ -6,7 +6,7 @@ import { pathToFileURL } from 'url';
 import camelcase from 'camelcase';
 import slash from 'slash';
 import { transform } from '@svgr/core';
-import { CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG } from './constants';
+import { CACHE_FOLDER, CACHE_SUB_FOLDER, SASS_LOAD_PATHS_CONFIG, SASS_SHARED_RESOURCES_CONCAT } from './constants';
 import { createCacheFolderIfNeeded } from './utils';
 
 // https://github.com/vitejs/vite/blob/c29613013ca1c6d9c77b97e2253ed1f07e40a544/packages/vite/src/node/plugins/css.ts#L97-L98
@@ -372,6 +372,10 @@ module.exports = ${output.cssModulesExportedTokens || '{}'}`,
   };
 }
 
+type BuildCssOptions = {
+  prependUseShared: boolean;
+};
+
 function processSass(filename: string): string {
   let sass;
 
@@ -397,6 +401,20 @@ function processSass(filename: string): string {
     sassLoadPathsConfig = [];
   }
 
+  // Workaround for ?bug? with sass.compileString that the location of the source file is not automatically included in load paths
+  sassLoadPathsConfig.push(path.parse(filename).dir);
+
+  const sharedSassResourcesPath = path.join(CACHE_FOLDER, SASS_SHARED_RESOURCES_CONCAT);
+  const buildOptions: BuildCssOptions = { prependUseShared: false};
+
+  if (fs.existsSync(sharedSassResourcesPath)) {
+    buildOptions.prependUseShared = true;
+  }
+
+  return buildCssResult(sass, sassLoadPathsConfig, filename, buildOptions);
+}
+
+function buildCssResult(sass: any, sassLoadPathsConfig: string[], filename: string, options: BuildCssOptions): string {
   let cssResult;
 
   // An importer that redirects relative URLs starting with "~" to `node_modules`
@@ -412,17 +430,32 @@ function processSass(filename: string): string {
     );
   };
 
-  if (sass.compile) {
-    cssResult = sass.compile(filename, {
-      loadPaths: sassLoadPathsConfig,
-      importers: [
-        {
-          findFileUrl(url: string) {
-            return tildeImporter(url);
-          },
+  if (options.prependUseShared && !sass.compileString) {
+    console.warn("WARNING: Config specifies sharedSassResources, but your version of Sass doesn't support it - consider updating to v1.45.0 or higher.")
+  }
+
+  const compileOptions = {
+    loadPaths: sassLoadPathsConfig,
+    importers: [
+      {
+        findFileUrl(url: string) {
+          return tildeImporter(url);
         },
-      ],
-    }).css;
+      },
+    ],
+  }
+
+  if (options.prependUseShared && sass.compileString) {
+    // Transform the filename for use in "use" statement
+    const sharedResourcesFilenameForUse = SASS_SHARED_RESOURCES_CONCAT.replace(/^_|\.scss$/g, '');
+    // Prepend a "use" statement so shared sass resources are accessible from all source files
+    const useSharedStatement = `@use '~${CACHE_SUB_FOLDER}/${sharedResourcesFilenameForUse}' as *;`;
+    const sassContent = fs.readFileSync(filename, 'utf8');
+    const sassPrefixedWithSharedResources = `${useSharedStatement}\n\n${sassContent}`;
+
+    cssResult = sass.compileString(sassPrefixedWithSharedResources, compileOptions).css;
+  } else if (sass.compile) {
+    cssResult = sass.compile(filename, compileOptions).css;
   }
   // Because sass.compile is only introduced since sass version 1.45.0
   // For older versions, we have to use the legacy API: renderSync
