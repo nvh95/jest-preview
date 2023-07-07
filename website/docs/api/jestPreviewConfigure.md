@@ -59,3 +59,9 @@ Default: `false`
 Automatically preview the UI in the external browser when the test fails. You don't need to invoke `preview.debug()` by yourself anymore.
 
 Set to `false` if you experience any error or just want to opt out.
+
+## sharedSassResources: string[]
+
+Default: `undefined`
+
+Optional list of paths to SASS files that define shared resources (e.g. variables, mixins, etc). The paths are relative to the root of the project. Requires SASS v1.45.0 or higher.
