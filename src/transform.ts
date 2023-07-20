@@ -372,10 +372,6 @@ module.exports = ${output.cssModulesExportedTokens || '{}'}`,
   };
 }
 
-type BuildCssOptions = {
-  prependUseShared: boolean;
-};
-
 function processSass(filename: string): string {
   let sass;
 
@@ -405,16 +401,21 @@ function processSass(filename: string): string {
   sassLoadPathsConfig.push(path.parse(filename).dir);
 
   const sharedSassResourcesPath = path.join(CACHE_FOLDER, SASS_SHARED_RESOURCES_CONCAT);
-  const buildOptions: BuildCssOptions = { prependUseShared: false};
 
+  let sassPrefixedWithSharedResources = '';
   if (fs.existsSync(sharedSassResourcesPath)) {
-    buildOptions.prependUseShared = true;
+    // Transform the filename for use in "use" statement
+    const sharedResourcesFilenameForUse = SASS_SHARED_RESOURCES_CONCAT.replace(/^_|\.scss$/g, '');
+    // Prepend a "use" statement so shared sass resources are accessible from all source files
+    const useSharedStatement = `@use '~${CACHE_SUB_FOLDER}/${sharedResourcesFilenameForUse}' as *;`;
+    const sassContent = fs.readFileSync(filename, 'utf8');
+    sassPrefixedWithSharedResources = `${useSharedStatement}\n\n${sassContent}`;
   }
 
-  return buildCssResult(sass, sassLoadPathsConfig, filename, buildOptions);
+  return buildCssResult(sass, sassLoadPathsConfig, sassPrefixedWithSharedResources, filename);
 }
 
-function buildCssResult(sass: any, sassLoadPathsConfig: string[], filename: string, options: BuildCssOptions): string {
+function buildCssResult(sass: any, sassLoadPathsConfig: string[], sassPrefixedWithSharedResources: string, filename: string): string {
   let cssResult;
 
   // An importer that redirects relative URLs starting with "~" to `node_modules`
@@ -430,8 +431,8 @@ function buildCssResult(sass: any, sassLoadPathsConfig: string[], filename: stri
     );
   };
 
-  if (options.prependUseShared && !sass.compileString) {
-    console.warn("WARNING: Config specifies sharedSassResources, but your version of Sass doesn't support it - consider updating to v1.45.0 or higher.")
+  if (sassPrefixedWithSharedResources && !sass.compileString) {
+    console.warn("WARNING: Config specifies sharedSassResources, but your version of Sass doesn't support it - consider updating to v1.45.0 or higher.");
   }
 
   const compileOptions = {
@@ -443,16 +444,9 @@ function buildCssResult(sass: any, sassLoadPathsConfig: string[], filename: stri
         },
       },
     ],
-  }
+  };
 
-  if (options.prependUseShared && sass.compileString) {
-    // Transform the filename for use in "use" statement
-    const sharedResourcesFilenameForUse = SASS_SHARED_RESOURCES_CONCAT.replace(/^_|\.scss$/g, '');
-    // Prepend a "use" statement so shared sass resources are accessible from all source files
-    const useSharedStatement = `@use '~${CACHE_SUB_FOLDER}/${sharedResourcesFilenameForUse}' as *;`;
-    const sassContent = fs.readFileSync(filename, 'utf8');
-    const sassPrefixedWithSharedResources = `${useSharedStatement}\n\n${sassContent}`;
-
+  if (sassPrefixedWithSharedResources && sass.compileString) {
     cssResult = sass.compileString(sassPrefixedWithSharedResources, compileOptions).css;
   } else if (sass.compile) {
     cssResult = sass.compile(filename, compileOptions).css;
