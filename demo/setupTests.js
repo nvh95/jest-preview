@@ -7,6 +7,10 @@ jestPreviewConfigure({
   publicFolder: 'demo/public',
   autoPreview: true,
   sassLoadPaths: ['demo/assets/_scss/loadPathsExample'],
+  sharedSassResources: [
+    'demo/assets/_scss/sharedSassResources/color-vars.scss',
+    'demo/assets/_scss/sharedSassResources/mixins.scss',
+  ],
 });
 
 window.matchMedia = (query) => ({

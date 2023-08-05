@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import chalk from 'chalk';
-import { CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG } from './constants';
+import { CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG, SASS_SHARED_RESOURCES_CONCAT } from './constants';
 import { createCacheFolderIfNeeded } from './utils';
 import { debug } from './preview';
 
@@ -13,6 +13,7 @@ interface JestPreviewConfigOptions {
   autoPreview?: boolean;
   publicFolder?: string;
   sassLoadPaths?: string[];
+  sharedSassResources?: string[];
 }
 
 export function jestPreviewConfigure(
@@ -21,6 +22,7 @@ export function jestPreviewConfigure(
     autoPreview = false,
     publicFolder,
     sassLoadPaths,
+    sharedSassResources,
   }: JestPreviewConfigOptions = {
     autoPreview: false,
     sassLoadPaths: [],
@@ -70,6 +72,24 @@ export function jestPreviewConfigure(
         encoding: 'utf-8',
         flag: 'w',
       },
+    );
+  }
+
+  if (sharedSassResources && sharedSassResources.length > 0) {
+    createCacheFolderIfNeeded();
+
+    const resourceFileContents = sharedSassResources.map((sassResourceFile) => {
+      const filenameComment = `// ${sassResourceFile}`;
+      const fileContents = fs.readFileSync(sassResourceFile, "utf-8");
+
+      return `${filenameComment}\n${fileContents}`;
+    });
+
+    const resourceFileContentsConcat = resourceFileContents.join('\n\n');
+
+    fs.writeFileSync(
+      path.join(CACHE_FOLDER, SASS_SHARED_RESOURCES_CONCAT),
+      resourceFileContentsConcat,
     );
   }
 }
