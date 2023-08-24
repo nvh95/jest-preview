@@ -140,6 +140,7 @@
     "vite": "^2.9.1",
     "vite-plugin-svgr": "^2.2.0"
   },
+  "packageManager": "pnpm@8.6.12",
   "bug": {
     "url": "https://github.com/nvh95/jest-preview/issues"
   }
