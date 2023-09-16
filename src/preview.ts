@@ -2,15 +2,19 @@ import fs from 'fs';
 import path from 'path';
 import { CACHE_FOLDER } from './constants';
 
-export function debug(): void {
-  if (!fs.existsSync(CACHE_FOLDER)) {
-    fs.mkdirSync(CACHE_FOLDER, {
+interface DebugOptions {
+  cacheFolder?: string;
+}
+
+export function debug({ cacheFolder = CACHE_FOLDER }: DebugOptions = {}): void {
+  if (!fs.existsSync(cacheFolder)) {
+    fs.mkdirSync(cacheFolder, {
       recursive: true,
     });
   }
 
   fs.writeFileSync(
-    path.join(CACHE_FOLDER, 'index.html'),
+    path.join(cacheFolder, 'index.html'),
     document.documentElement.outerHTML,
   );
 }

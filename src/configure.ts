@@ -13,6 +13,7 @@ interface JestPreviewConfigOptions {
   autoPreview?: boolean;
   publicFolder?: string;
   sassLoadPaths?: string[];
+  cacheFolder?: string;
 }
 
 export function jestPreviewConfigure(
@@ -21,17 +22,18 @@ export function jestPreviewConfigure(
     autoPreview = false,
     publicFolder,
     sassLoadPaths,
+    cacheFolder = CACHE_FOLDER,
   }: JestPreviewConfigOptions = {
     autoPreview: false,
     sassLoadPaths: [],
   },
 ) {
   if (autoPreview) {
-    autoRunPreview();
+    autoRunPreview({ cacheFolder });
   }
 
-  if (!fs.existsSync(CACHE_FOLDER)) {
-    fs.mkdirSync(CACHE_FOLDER, {
+  if (!fs.existsSync(cacheFolder)) {
+    fs.mkdirSync(cacheFolder, {
       recursive: true,
     });
   }
@@ -43,10 +45,10 @@ export function jestPreviewConfigure(
       (path) => `${process.cwd()}/${path}`,
     );
 
-    createCacheFolderIfNeeded();
+    createCacheFolderIfNeeded(cacheFolder);
 
     fs.writeFileSync(
-      path.join(CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG),
+      path.join(cacheFolder, SASS_LOAD_PATHS_CONFIG),
       JSON.stringify(sassLoadPathsConfig),
     );
   }
@@ -61,10 +63,12 @@ export function jestPreviewConfigure(
     );
   });
 
+  createCacheFolderIfNeeded(cacheFolder);
+
   if (publicFolder) {
-    createCacheFolderIfNeeded();
+    createCacheFolderIfNeeded(cacheFolder);
     fs.writeFileSync(
-      path.join(CACHE_FOLDER, 'cache-public.config'),
+      path.join(cacheFolder, 'cache-public.config'),
       publicFolder,
       {
         encoding: 'utf-8',
@@ -77,7 +81,11 @@ export function jestPreviewConfigure(
 // Omit only, skip, todo, concurrent, each. Couldn't use Omit. Just redeclare for simplicity
 type RawIt = (...args: Parameters<jest.It>) => ReturnType<jest.It>;
 
-function patchJestFunction(it: RawIt) {
+interface PatchJestFunctionOptions {
+  cacheFolder?: string;
+}
+
+function patchJestFunction(it: RawIt, { cacheFolder } : PatchJestFunctionOptions = {}) {
   const originalIt = it;
   const itWithPreview: RawIt = (name, callback, timeout) => {
     let callbackWithPreview: jest.ProvidesCallback | undefined;
@@ -91,7 +99,7 @@ function patchJestFunction(it: RawIt) {
           // @ts-expect-error Just forward the args
           return await callback(...args);
         } catch (error) {
-          debug();
+          debug({ cacheFolder });
           throw error;
         }
       };
@@ -101,15 +109,20 @@ function patchJestFunction(it: RawIt) {
   return itWithPreview;
 }
 
-function autoRunPreview() {
+interface AutoRunPreviewOptions {
+  cacheFolder?: string;
+}
+
+function autoRunPreview({ cacheFolder }: AutoRunPreviewOptions = {}) {
   const originalIt = it;
-  let itWithPreview = patchJestFunction(it) as jest.It;
+  const itWithPreview = patchJestFunction(it, { cacheFolder }) as jest.It;
   itWithPreview.each = originalIt.each;
-  itWithPreview.only = patchJestFunction(originalIt.only) as jest.It;
+  itWithPreview.only = patchJestFunction(originalIt.only, { cacheFolder }) as jest.It;
   itWithPreview.skip = originalIt.skip;
   itWithPreview.todo = originalIt.todo;
   itWithPreview.concurrent = patchJestFunction(
     originalIt.concurrent,
+    { cacheFolder },
   ) as jest.It;
 
   // Overwrite global it/ test
