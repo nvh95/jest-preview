@@ -1,7 +1,7 @@
 # Customize Cache Folder Location
 
 Sometimes you might want to run single tests right from within your IDE. Moreover, if you are using a monorepo, you
-might find your self with multiple Jest projects with multiple configurations.
+might find yourself with multiple Jest projects with multiple configurations.
 
 ## Case #1 Auto-Preview Monorepo setup with single test run from your IDE
 
@@ -71,7 +71,6 @@ describe('Index', () => {
 
         debug();
 
-        // change this to false and this will automatically update, thanks to autoPreview feature
         expect(baseElement).toEqual(true);
     });
 });
