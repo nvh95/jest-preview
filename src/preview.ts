@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { CACHE_FOLDER } from './constants';
-import {createCacheFolder} from "./utils";
+import { createCacheFolder } from './utils';
 
 interface DebugOptions {
   cacheFolder?: string;

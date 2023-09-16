@@ -79,7 +79,10 @@ interface PatchJestFunctionOptions {
   cacheFolder?: string;
 }
 
-function patchJestFunction(it: RawIt, { cacheFolder } : PatchJestFunctionOptions = {}) {
+function patchJestFunction(
+  it: RawIt,
+  { cacheFolder }: PatchJestFunctionOptions = {},
+) {
   const originalIt = it;
   const itWithPreview: RawIt = (name, callback, timeout) => {
     let callbackWithPreview: jest.ProvidesCallback | undefined;
@@ -111,13 +114,14 @@ function autoRunPreview({ cacheFolder }: AutoRunPreviewOptions = {}) {
   const originalIt = it;
   const itWithPreview = patchJestFunction(it, { cacheFolder }) as jest.It;
   itWithPreview.each = originalIt.each;
-  itWithPreview.only = patchJestFunction(originalIt.only, { cacheFolder }) as jest.It;
+  itWithPreview.only = patchJestFunction(originalIt.only, {
+    cacheFolder,
+  }) as jest.It;
   itWithPreview.skip = originalIt.skip;
   itWithPreview.todo = originalIt.todo;
-  itWithPreview.concurrent = patchJestFunction(
-    originalIt.concurrent,
-    { cacheFolder },
-  ) as jest.It;
+  itWithPreview.concurrent = patchJestFunction(originalIt.concurrent, {
+    cacheFolder,
+  }) as jest.It;
 
   // Overwrite global it/ test
   // Is there any use cases that `it` and `test` is undefined?
