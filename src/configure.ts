@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import chalk from 'chalk';
 import { CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG } from './constants';
-import { createCacheFolderIfNeeded } from './utils';
+import { createCacheFolder } from './utils';
 import { debug } from './preview';
 
 interface JestPreviewConfigOptions {
@@ -32,11 +32,7 @@ export function jestPreviewConfigure(
     autoRunPreview({ cacheFolder });
   }
 
-  if (!fs.existsSync(cacheFolder)) {
-    fs.mkdirSync(cacheFolder, {
-      recursive: true,
-    });
-  }
+  createCacheFolder(cacheFolder);
 
   let sassLoadPathsConfig: string[] = [];
   // Save sassLoadPathsConfig to cache, so we can use it in the transformer
@@ -45,7 +41,7 @@ export function jestPreviewConfigure(
       (path) => `${process.cwd()}/${path}`,
     );
 
-    createCacheFolderIfNeeded(cacheFolder);
+    createCacheFolder(cacheFolder);
 
     fs.writeFileSync(
       path.join(cacheFolder, SASS_LOAD_PATHS_CONFIG),
@@ -63,10 +59,8 @@ export function jestPreviewConfigure(
     );
   });
 
-  createCacheFolderIfNeeded(cacheFolder);
-
   if (publicFolder) {
-    createCacheFolderIfNeeded(cacheFolder);
+    createCacheFolder(cacheFolder);
     fs.writeFileSync(
       path.join(cacheFolder, 'cache-public.config'),
       publicFolder,

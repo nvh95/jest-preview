@@ -7,7 +7,7 @@ import camelcase from 'camelcase';
 import slash from 'slash';
 import { transform } from '@svgr/core';
 import { CACHE_FOLDER, SASS_LOAD_PATHS_CONFIG } from './constants';
-import { createCacheFolderIfNeeded } from './utils';
+import { createCacheFolder } from './utils';
 
 // https://github.com/vitejs/vite/blob/c29613013ca1c6d9c77b97e2253ed1f07e40a544/packages/vite/src/node/plugins/css.ts#L97-L98
 const cssLangs = `\\.(css|less|sass|scss|styl|stylus|pcss|postcss)($|\\?)`;
@@ -261,7 +261,7 @@ function parsePostCssExternalOutput(output: string) {
 }
 
 function createTempFile(content: string) {
-  createCacheFolderIfNeeded();
+  createCacheFolder();
   const tempFileName = path.join(
     CACHE_FOLDER,
     crypto.randomBytes(16).toString('hex'),
