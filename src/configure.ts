@@ -94,6 +94,7 @@ function patchJestFunction(
       ) {
         try {
           // @ts-expect-error Just forward the args
+          // eslint-disable-next-line n/no-callback-literal
           return await callback(...args);
         } catch (error) {
           debug({ cacheFolder });
@@ -125,7 +126,10 @@ function autoRunPreview({ cacheFolder }: AutoRunPreviewOptions = {}) {
 
   // Overwrite global it/ test
   // Is there any use cases that `it` and `test` is undefined?
+  // eslint-disable-next-line no-global-assign
   it = itWithPreview;
+  // eslint-disable-next-line no-global-assign
   test = itWithPreview;
+  // eslint-disable-next-line no-global-assign
   fit = itWithPreview.only;
 }
