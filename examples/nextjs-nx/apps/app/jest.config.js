@@ -14,6 +14,7 @@ const customConfig = {
     '^.+\\.[tj]sx?$': ['babel-jest', {presets: ['@nrwl/next/babel']}],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   coverageDirectory: '../../coverage/apps/app',
 };
 
