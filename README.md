@@ -218,15 +218,18 @@ Your financial support helps the project alive and in a development mode. Make a
 
 ### Bronze Sponsors 🥉
 
-<a href="https://www.deploysentinel.com/">
-  <img src="https://github.com/DeploySentinel.png" width="94" height="94" />
-</a>
 <a href="https://react-hook-form.com/">
   <img src="https://github.com/react-hook-form.png" width="94" height="94" />
+</a>
+<a href="https://iboysoft.com/">
+  <img src="https://images.opencollective.com/iboysoft/b3d7ddd/logo/256.png" width="94" height="94" />
 </a>
 
 # Past Sponsors
 
 <a href="https://webuild.community/">
   <img src="https://user-images.githubusercontent.com/8603085/170883918-8b9f111d-f3c6-4647-9cc1-de56dd98ea60.png" width="94" height="94" />
+</a>
+<a href="https://www.deploysentinel.com/">
+  <img src="https://github.com/DeploySentinel.png" width="94" height="94" />
 </a>
