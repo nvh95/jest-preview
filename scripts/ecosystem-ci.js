@@ -7,7 +7,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { spawn, spawnSync } = require('child_process');
+const { spawnSync } = require('child_process');
 
 // Make sure simulate CI environment when run in local
 if (!process.env.CI) {
