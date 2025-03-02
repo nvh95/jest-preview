@@ -302,6 +302,15 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "kantord",
+      "name": "Dániel Kántor",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3704904?v=4",
+      "profile": "https://daniel-kantor.com/cv/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -310,5 +319,6 @@
   "repoType": "github",
   "repoHost": "https://github.com",
   "skipCi": true,
-  "commitConvention": "angular"
+  "commitConvention": "angular",
+  "commitType": "docs"
 }
