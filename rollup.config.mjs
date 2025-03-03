@@ -44,6 +44,10 @@ export default defineConfig([
     filePath: 'src/preconfigTransform/fileCRA.ts',
     dir: 'transforms',
   }),
+  makeBundle({
+    filePath: 'src/cli/server/previewServer.new.ts',
+    dir: 'dist/cli/server',
+  }),
   {
     input: 'src/cli/index.ts',
     output: {

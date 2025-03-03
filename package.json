@@ -68,6 +68,7 @@
     "chokidar": "^3.5.3",
     "commander": "^9.2.0",
     "connect": "^3.7.0",
+    "express": "^4.21.2",
     "find-node-modules": "^2.1.3",
     "open": "^8.4.0",
     "postcss-import": "^14.1.0",
@@ -77,6 +78,7 @@
     "slash": "^3.0.0",
     "string-hash": "^1.1.3",
     "update-notifier": "^6.0.2",
+    "vite": "^6.2.0",
     "ws": "^8.5.0"
   },
   "devDependencies": {
