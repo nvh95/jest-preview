@@ -7,7 +7,7 @@ styleUrls.forEach((styleUrl) => import(styleUrl));
 describe('App', () => {
   it('should work as expected', async () => {
     const user = userEvent.setup();
-    await render(AppComponent);
+    const { detectChanges } = await render(AppComponent);
 
     await user.click(screen.getByTestId('increase'));
     await user.click(screen.getByTestId('increase'));
@@ -15,6 +15,8 @@ describe('App', () => {
     await user.click(screen.getByTestId('increase'));
     await user.click(screen.getByTestId('increase'));
     await user.click(screen.getByTestId('increase'));
+
+    detectChanges();
 
     // Open http://localhost:3336 to see preview
     // Require to run `jest-preview` server before

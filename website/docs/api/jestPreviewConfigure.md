@@ -36,6 +36,12 @@ jestPreviewConfigure({
 });
 ```
 
+## sharedSassResources: string[]
+
+Default: `undefined`
+
+Optional list of paths to SASS files that define shared resources (e.g. variables, mixins, etc). The paths are relative to the root of the project. Requires SASS v1.45.0 or higher.
+
 ## publicFolder: string
 
 Default: `undefined`.
