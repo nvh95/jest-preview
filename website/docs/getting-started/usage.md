@@ -35,7 +35,7 @@ Optionally, you can use `npm-run-all` to run Jest and `jest-preview` server in p
 ### 2. Run the `jest-preview` server
 
 ```bash
-# You can use PORT to customize port, default to 3336
+# You can use env variable PORT to customize port, default to 3336
 npm run jest-preview
 # Or
 yarn jest-preview
