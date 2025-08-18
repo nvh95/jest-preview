@@ -8,4 +8,12 @@ header {
   .imported-sass {
     color: pink;
   }
+
+  .imported-sass-shared-var {
+    color: purple;
+
+    @include desktop {
+      color: $limeGreen;
+    }
+  }
 }
