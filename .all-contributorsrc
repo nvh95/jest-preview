@@ -320,6 +320,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "dejavu1987",
+      "name": "Anil Maharjan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1720245?v=4",
+      "profile": "http://anilmaharjan.com.np",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
