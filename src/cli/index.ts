@@ -15,6 +15,13 @@ program
     import('./clearCache');
   });
 
+program
+  .command('legacy')
+  .description('Start Jest Preview server with the legacy implementation.')
+  .action(() => {
+    import('./server/previewServer.legacy');
+  });
+
 program.description('Start Jest Preview server.').action(() => {
   import('./server/previewServer');
 });
@@ -24,7 +31,7 @@ program.parse(process.argv);
 import('update-notifier').then(({ default: updateNotifier }) => {
   // Checks for available update and notify user
   const notifier = updateNotifier({
-      // Built output is at /cli so the relative path is ../package.json
+    // Built output is at /cli so the relative path is ../package.json
     pkg: require('../../package.json'),
     updateCheckInterval: 0, // How often to check for updates
     shouldNotifyInNpmScript: true, // Allows notification to be shown when running as an npm script
