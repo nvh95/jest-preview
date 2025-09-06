@@ -23,7 +23,7 @@ Debug your Jest tests. Effortlessly. 🛠🖼
 
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-34-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-35-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
 
@@ -181,6 +181,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="http://jsun969.cn"><img src="https://avatars.githubusercontent.com/u/29330847?v=4?s=100" width="100px;" alt="Justin Sun"/><br /><sub><b>Justin Sun</b></sub></a><br /><a href="#translation-jsun969" title="Translation">🌍</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://daniel-kantor.com/cv/"><img src="https://avatars.githubusercontent.com/u/3704904?v=4?s=100" width="100px;" alt="Dániel Kántor"/><br /><sub><b>Dániel Kántor</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=kantord" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/danieljung-seon"><img src="https://avatars.githubusercontent.com/u/110400888?v=4?s=100" width="100px;" alt="Dániel Jung"/><br /><sub><b>Dániel Jung</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=danieljung-seon" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://anilmaharjan.com.np"><img src="https://avatars.githubusercontent.com/u/1720245?v=4?s=100" width="100px;" alt="Anil Maharjan"/><br /><sub><b>Anil Maharjan</b></sub></a><br /><a href="https://github.com/nvh95/jest-preview/commits?author=dejavu1987" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>
