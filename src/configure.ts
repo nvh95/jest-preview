@@ -88,7 +88,7 @@ function patchJestFunction(it: RawIt) {
         // For `done` callback
         callbackWithPreview = function (done: jest.DoneCallback) {
           try {
-            return callback(done);
+            return (callback as (done: jest.DoneCallback) => void)(done);
           } catch (error) {
             debug();
             throw error;
@@ -98,7 +98,7 @@ function patchJestFunction(it: RawIt) {
         // For sync and promise functions
         callbackWithPreview = async function () {
           try {
-            return await callback();
+            return await (callback as () => void | Promise<void>)();
           } catch (error) {
             debug();
             throw error;
