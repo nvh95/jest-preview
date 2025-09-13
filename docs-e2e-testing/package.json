@@ -9,7 +9,7 @@
   "author": "huyenuet",
   "license": "MIT",
   "devDependencies": {
-    "cypress": "^10.2.0",
+    "cypress": "^15.2.0",
     "typescript": "^4.7.4"
   }
 }
