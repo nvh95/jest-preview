@@ -392,7 +392,8 @@ function processSass(filename: string): string {
       // E.g: input: ~animate-sass/animate
       // output: file:/Users/yourname/oss/jest-preview/node_modules/animate-sass/animate
       // => require.resolve('animate-sass') + animate
-      path.join(pathToFileURL('node_modules').href, url.substring(1)),
+      url.substring(1),
+      pathToFileURL('node_modules/'),
     );
   };
 
