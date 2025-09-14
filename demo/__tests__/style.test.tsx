@@ -1,8 +1,10 @@
 import { render } from '@testing-library/react';
 
 import App from '../App';
+import { materializeCssomIntoText } from '../../src/preview';
 
 function getDocumentHTML() {
+  materializeCssomIntoText();
   return document.documentElement.outerHTML.replace(/\r\n|\n|\r/g, '\n');
 }
 
@@ -35,10 +37,8 @@ describe('Style', () => {
     // TODO: new version of emotion has speedy mode, which inject css using
     // insertRule, which does not shown in document.documentElement.outerHTML
     // Need to get them out and inject into document.documentElement.outerHTML
-    // // emotion
-    // expect(getDocumentHTML()).toContain(
-    //   '<style data-emotion="css" data-s="">.css-2m18qq{color:orange;}</style>',
-    // );
+    // emotion
+    expect(getDocumentHTML()).toContain('.css-2m18qq {color: orange;}');
 
     // CSS Modules
     // Global

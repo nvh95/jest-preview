@@ -2,6 +2,11 @@ import '@testing-library/jest-dom/extend-expect';
 import { jestPreviewConfigure } from '../dist/index';
 import './global.css';
 import './assets/_scss/global-style.scss';
+import { sheet } from '@emotion/css';
+
+// Force emotion to use CSSOM
+// Read materializeCssomIntoText (src/preview.ts) for more
+sheet.speedy(true);
 
 jestPreviewConfigure({
   publicFolder: 'demo/public',
