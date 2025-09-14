@@ -9,7 +9,7 @@ jobs:
   build:
     strategy:
       matrix:
-        node-version: [22]
+        node-version: [20]
         os: [ubuntu-latest, windows-latest]
 
     runs-on: ${{ matrix.os }}
@@ -20,7 +20,7 @@ jobs:
           version: 9
       - name: Use Node.js ${{ matrix.node-version }}
         # `setup-node` already caches npm
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
