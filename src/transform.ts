@@ -26,6 +26,17 @@ function isPreProcessor(filename: string): boolean {
   return isSass(filename) || isLess(filename);
 }
 
+function spawnSyncWithNoColor(command: string, args: string[]) {
+  return spawnSync(command, args, {
+    env: {
+      ...process.env,
+      NO_COLOR: '1', // widely honored
+      FORCE_COLOR: '0', // chalk/kleur/supports-color
+      TERM: 'dumb', // many CLIs disable color on 'dumb'
+    },
+  });
+}
+
 function havePostCss() {
   // TODO: Since we executing postcssrc() twice, the overall speed is slow
   // We can try to process the PostCSS here to reduce the number of executions
@@ -42,7 +53,7 @@ function havePostCss() {
     console.log(false)
   });`;
   const tempFileName = createTempFile(checkHavePostCssFileContent);
-  const result = spawnSync('node', [tempFileName]);
+  const result = spawnSyncWithNoColor('node', [tempFileName]);
   fs.unlink(tempFileName, (error) => {
     if (error) throw error;
   });
@@ -337,7 +348,7 @@ postcss(plugins)
   }
   const tempFileName = createTempFile(processPostCssFileContent);
   // We have to write this file to disk since Windows cannot process the command with long arguments
-  const result = spawnSync('node', [tempFileName]);
+  const result = spawnSyncWithNoColor('node', [tempFileName]);
   fs.unlink(tempFileName, (error) => {
     if (error) throw error;
   });
@@ -453,7 +464,7 @@ export function processLess(filename: string): string {
   });`;
 
   const tempFileName = createTempFile(processLessFileContent);
-  const result = spawnSync('node', [tempFileName]);
+  const result = spawnSyncWithNoColor('node', [tempFileName]);
   fs.unlink(tempFileName, (error) => {
     if (error) throw error;
   });
