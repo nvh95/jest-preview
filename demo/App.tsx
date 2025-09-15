@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { css as emotionCss } from '@emotion/css';
 import emotionStyled from '@emotion/styled';
 import { styled as stichesStyled } from '@stitches/react';
 import '~animate.css/animate.css';
@@ -14,6 +15,12 @@ import './assets/_scss/style.scss';
 import { cssModule } from './style.module.css';
 import { scssModule } from './style.module.scss';
 import './styles/less/style.less';
+
+const emotionCssStyle = emotionCss`
+  background-color: blueviolet;
+  color: white;
+  padding: 16px;
+`;
 
 function App() {
   const [count, setCount] = useState(0);
@@ -55,6 +62,7 @@ function App() {
           Hover to change color.
         </button>
         <EmotionP>Styled by Emotion</EmotionP>
+        <div className={emotionCssStyle}>Styled by Emotion CSS</div>
         {/* TODO: Not work with Stiches yet since output css does not present directly in the head, but in Constructable Stylesheet Objects */}
         {/* Reference: https://developer.chrome.com/blog/css-in-js/ */}
         {/* https://wicg.github.io/construct-stylesheets/ */}
