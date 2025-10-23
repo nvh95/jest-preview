@@ -4,12 +4,13 @@
   "description": "e2e testing for JestPreview Docs website",
   "main": "index.js",
   "scripts": {
-    "cypress-test": "cypress open"
+    "cypress-test": "cypress open",
+    "cypress-run": "cypress run"
   },
   "author": "huyenuet",
   "license": "MIT",
   "devDependencies": {
-    "cypress": "^15.2.0",
-    "typescript": "^4.7.4"
+    "cypress": "^15.5.0",
+    "typescript": "^5.9.3"
   }
 }
