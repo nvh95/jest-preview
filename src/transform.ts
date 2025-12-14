@@ -26,6 +26,17 @@ function isPreProcessor(filename: string): boolean {
   return isSass(filename) || isLess(filename);
 }
 
+function spawnSyncWithNoColor(command: string, args: string[]) {
+  return spawnSync(command, args, {
+    env: {
+      ...process.env,
+      NO_COLOR: '1', // widely honored
+      FORCE_COLOR: '0', // chalk/kleur/supports-color
+      TERM: 'dumb', // many CLIs disable color on 'dumb'
+    },
+  });
+}
+
 function havePostCss() {
   // TODO: Since we executing postcssrc() twice, the overall speed is slow
   // We can try to process the PostCSS here to reduce the number of executions
@@ -42,7 +53,7 @@ function havePostCss() {
     console.log(false)
   });`;
   const tempFileName = createTempFile(checkHavePostCssFileContent);
-  const result = spawnSync('node', [tempFileName]);
+  const result = spawnSyncWithNoColor('node', [tempFileName]);
   fs.unlink(tempFileName, (error) => {
     if (error) throw error;
   });
@@ -159,18 +170,10 @@ export function processCss(src: string, filename: string): TransformedSource {
   let cssSrc = src;
   const isModule = cssModuleRE.test(filename);
   const isPreProcessorFile = isPreProcessor(filename);
-  const haveTailwindCss =
-    fs.existsSync(path.join(process.cwd(), 'tailwind.config.js')) ||
-    fs.existsSync(path.join(process.cwd(), 'tailwind.config.cjs'));
   const usePostCssExplicitly = havePostCss();
 
   // Pure CSS
-  if (
-    !isModule &&
-    !isPreProcessorFile &&
-    !usePostCssExplicitly &&
-    !haveTailwindCss
-  ) {
+  if (!isModule && !isPreProcessorFile && !usePostCssExplicitly) {
     // Transform to a javascript module that load a <link rel="stylesheet"> tag to the page.
     console.timeEnd(`Processing ${relativeFilename}`);
     return {
@@ -194,12 +197,11 @@ export function processCss(src: string, filename: string): TransformedSource {
   }
 
   // Process PostCSS (postcss.config.js can be present or not)
-  if (usePostCssExplicitly || haveTailwindCss || isModule) {
+  if (usePostCssExplicitly || isModule) {
     console.timeEnd(`Processing ${relativeFilename}`);
     return processPostCss(cssSrc, filename, {
       useConfigFile: usePostCssExplicitly,
       isModule,
-      haveTailwindCss,
     });
   }
 
@@ -276,8 +278,7 @@ function processPostCss(
   options: {
     useConfigFile: boolean;
     isModule: boolean;
-    haveTailwindCss: boolean;
-  } = { useConfigFile: true, isModule: false, haveTailwindCss: false },
+  } = { useConfigFile: true, isModule: false },
 ): TransformedSource {
   // TODO: SO SLOWWWWW. How can we speedup this?
   // It currently takes about 0.35 seconds to process one CSS file with PostCSS
@@ -329,7 +330,6 @@ function processPostCss(
   if (!options.useConfigFile) {
     processPostCssFileContent = `const postcss = require('postcss');
 const isModule = ${options.isModule};
-const haveTailwindCss = ${options.haveTailwindCss};
 const cssSrc = ${JSON.stringify(src)};
 
 let plugins = [];
@@ -338,11 +338,6 @@ if (isModule) {
   plugins.push(
     ${cssModulesPluginsContent},
   )
-}
-if (haveTailwindCss) {
-  // tailwindCss auto resolve config
-  // https://github.com/tailwindlabs/tailwindcss/blob/cef02e2dc395ed5b5d31b72183cf7504b3bd76c1/src/util/resolveConfigPath.js#L45-L52
-  plugins.push(require("tailwindcss")())
 }
 postcss(plugins)
 .process(cssSrc, { from: ${JSON.stringify(filename)} })
@@ -353,7 +348,7 @@ postcss(plugins)
   }
   const tempFileName = createTempFile(processPostCssFileContent);
   // We have to write this file to disk since Windows cannot process the command with long arguments
-  const result = spawnSync('node', [tempFileName]);
+  const result = spawnSyncWithNoColor('node', [tempFileName]);
   fs.unlink(tempFileName, (error) => {
     if (error) throw error;
   });
@@ -408,7 +403,8 @@ function processSass(filename: string): string {
       // E.g: input: ~animate-sass/animate
       // output: file:/Users/yourname/oss/jest-preview/node_modules/animate-sass/animate
       // => require.resolve('animate-sass') + animate
-      path.join(pathToFileURL('node_modules').href, url.substring(1)),
+      url.substring(1),
+      pathToFileURL('node_modules/'),
     );
   };
 
@@ -468,7 +464,7 @@ export function processLess(filename: string): string {
   });`;
 
   const tempFileName = createTempFile(processLessFileContent);
-  const result = spawnSync('node', [tempFileName]);
+  const result = spawnSyncWithNoColor('node', [tempFileName]);
   fs.unlink(tempFileName, (error) => {
     if (error) throw error;
   });

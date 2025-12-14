@@ -26,4 +26,9 @@ describe('App', () => {
 
     expect(screen.getByTestId('count')).toContainHTML('7');
   });
+
+  it('should work with done when setting autoPreview:true', (done) => {
+    expect(true).toBe(true);
+    done();
+  });
 });

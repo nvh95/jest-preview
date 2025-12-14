@@ -1,7 +1,7 @@
 ---
 slug: automatic-mode
 title: Introducing Automatic Mode
-authors: [nvh95, thanhsonng]
+authors: [nvh95, sonngdev]
 tags: [jest-preview, developer-experience]
 image: /img/automatic-mode.png
 ---

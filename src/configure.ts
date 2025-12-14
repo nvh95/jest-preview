@@ -84,17 +84,27 @@ function patchJestFunction(it: RawIt) {
     if (!callback) {
       callbackWithPreview = undefined;
     } else {
-      callbackWithPreview = async function (
-        ...args: Parameters<jest.ProvidesCallback>
-      ) {
-        try {
-          // @ts-expect-error Just forward the args
-          return await callback(...args);
-        } catch (error) {
-          debug();
-          throw error;
-        }
-      };
+      if (callback.length > 0) {
+        // For `done` callback
+        callbackWithPreview = function (done: jest.DoneCallback) {
+          try {
+            return (callback as (done: jest.DoneCallback) => void)(done);
+          } catch (error) {
+            debug();
+            throw error;
+          }
+        };
+      } else {
+        // For sync and promise functions
+        callbackWithPreview = async function () {
+          try {
+            return await (callback as () => void | Promise<void>)();
+          } catch (error) {
+            debug();
+            throw error;
+          }
+        };
+      }
     }
     return originalIt(name, callbackWithPreview, timeout);
   };

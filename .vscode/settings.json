@@ -7,7 +7,15 @@
     "typescriptreact"
   ],
   "files.insertFinalNewline": true,
-  "editor.formatOnPaste": false
+  "editor.formatOnPaste": false,
+  "gitlens.integrations.enabled": true,
+  "gitlens.remotes": [
+    {
+      "domain": "www.github.com",
+      "type": "GitHub"
+    }
+  ]
+
   // Turn off to record video
   // "editor.quickSuggestions": false,
   // "editor.suggestOnTriggerCharacters": false,

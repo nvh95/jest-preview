@@ -64,10 +64,10 @@
       ]
     },
     {
-      "login": "thanhsonng",
+      "login": "sonngdev",
       "name": "Thanh Son Nguyen",
       "avatar_url": "https://avatars.githubusercontent.com/u/28614996?v=4",
-      "profile": "http://linkedin.com/in/thanhsonng",
+      "profile": "http://linkedin.com/in/sonngdev",
       "contributions": [
         "code",
         "example",
@@ -302,6 +302,33 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "kantord",
+      "name": "Dániel Kántor",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3704904?v=4",
+      "profile": "https://daniel-kantor.com/cv/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "danieljung-seon",
+      "name": "Dániel Jung",
+      "avatar_url": "https://avatars.githubusercontent.com/u/110400888?v=4",
+      "profile": "https://github.com/danieljung-seon",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "dejavu1987",
+      "name": "Anil Maharjan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1720245?v=4",
+      "profile": "http://anilmaharjan.com.np",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -310,5 +337,6 @@
   "repoType": "github",
   "repoHost": "https://github.com",
   "skipCi": true,
-  "commitConvention": "angular"
+  "commitConvention": "angular",
+  "commitType": "docs"
 }
