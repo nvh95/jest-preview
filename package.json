@@ -56,7 +56,6 @@
     "prettier": "prettier cli src --check",
     "prettier:fix": "pnpm run prettier -- --write",
     "sort": "npx sort-package-json",
-    "postinstall": "node -e \"try{require('./dist/cli/clearCache')}catch(e){console.log(e)}\"",
     "publish:local": "npm publish --registry http://localhost:4873/",
     "ecosystem-ci": "node scripts/ecosystem-ci.js",
     "lint": "eslint . --ext .tsx,.ts,.js,.jsx"
