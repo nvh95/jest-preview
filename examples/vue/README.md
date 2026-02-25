@@ -1,11 +1,15 @@
-# Vue
+# Jest-Preview + Vue + Vue-CLI + Vue-Test-Utils
 
-See the full example at <https://github.com/nvh95/jest-preview/tree/main/examples/vue>
+**Running Locally:**
 
-## Installation and Usage
+* `npm install && npm start`
 
-Please refer to [Installation](https://www.jest-preview.com/docs/getting-started/installation/) and [Usage](https://www.jest-preview.com/docs/getting-started/usage/).
 
-## Caveats
+**Running Unit tests:**
 
-Currently, the [Scoped CSS](https://vuejs.org/api/sfc-css-features.html#scoped-css) is not supported yet. We are working to support soon in the future release.
+* `npm run unit`
+
+
+**Running Jest-Preview**
+
+* `npm run jest`
