@@ -14,11 +14,11 @@ const cssLangs = `\\.(css|less|sass|scss|styl|stylus|pcss|postcss)($|\\?)`;
 const cssModuleRE = new RegExp(`\\.module${cssLangs}`);
 
 function isSass(filename: string): boolean {
-  return /.(sass|scss)$/.test(filename);
+  return /\.(sass|scss)$/.test(filename);
 }
 
 function isLess(filename: string): boolean {
-  return /.(less)$/.test(filename);
+  return /\.(less)$/.test(filename);
 }
 
 // TODO: Add styl, stylus...
@@ -37,12 +37,14 @@ function spawnSyncWithNoColor(command: string, args: string[]) {
   });
 }
 
+let _havePostCss: boolean | undefined;
 function havePostCss() {
+  if (_havePostCss !== undefined) return _havePostCss;
   // TODO: Since we executing postcssrc() twice, the overall speed is slow
   // We can try to process the PostCSS here to reduce the number of executions
   // TODO: Does this break on Windows?
   const checkHavePostCssFileContent = `const postcssrc = require('postcss-load-config');
-  
+
   postcssrc().then(({ plugins, options }) => {
     console.log(true)
   })
@@ -54,17 +56,21 @@ function havePostCss() {
   });`;
   const tempFileName = createTempFile(checkHavePostCssFileContent);
   const result = spawnSyncWithNoColor('node', [tempFileName]);
-  fs.unlink(tempFileName, (error) => {
-    if (error) throw error;
-  });
+  try {
+    fs.unlinkSync(tempFileName);
+  } catch (error) {
+    console.error(error);
+  }
   const stderr = result.stderr.toString('utf-8').trim();
   if (stderr) console.error(stderr);
   if (result.error) throw result.error;
-  return result.stdout.toString().trim() === 'true';
+  _havePostCss = result.stdout.toString().trim() === 'true';
+  return _havePostCss;
 }
 
 function getRelativeFilename(filename: string): string {
-  return slash(filename.split(process.cwd())[1]);
+  const parts = filename.split(process.cwd());
+  return slash(parts.length > 1 ? parts[1] : filename);
 }
 
 type TransformedSource = {
@@ -167,51 +173,52 @@ export function processFileCRA(
 export function processCss(src: string, filename: string): TransformedSource {
   const relativeFilename = getRelativeFilename(filename);
   console.time(`Processing ${relativeFilename}`);
-  let cssSrc = src;
-  const isModule = cssModuleRE.test(filename);
-  const isPreProcessorFile = isPreProcessor(filename);
-  const usePostCssExplicitly = havePostCss();
+  try {
+    let cssSrc = src;
+    const isModule = cssModuleRE.test(filename);
+    const isPreProcessorFile = isPreProcessor(filename);
+    const usePostCssExplicitly = havePostCss();
 
-  // Pure CSS
-  if (!isModule && !isPreProcessorFile && !usePostCssExplicitly) {
-    // Transform to a javascript module that load a <link rel="stylesheet"> tag to the page.
-    console.timeEnd(`Processing ${relativeFilename}`);
-    return {
-      code: `const relativeCssPath = "${relativeFilename}";
+    // Pure CSS
+    if (!isModule && !isPreProcessorFile && !usePostCssExplicitly) {
+      // Transform to a javascript module that load a <link rel="stylesheet"> tag to the page.
+      return {
+        code: `const relativeCssPath = "${relativeFilename}";
   const link = document.createElement('link');
   link.rel = 'stylesheet';
   link.href = relativeCssPath;
   document.head.appendChild(link);
-  
+
   module.exports = JSON.stringify(relativeCssPath);`,
-    };
-  }
+      };
+    }
 
-  // Pre-processor (sass, stylus, less)
-  if (isSass(filename)) {
-    cssSrc = processSass(filename);
-  }
+    // Pre-processor (sass, stylus, less)
+    if (isSass(filename)) {
+      cssSrc = processSass(filename);
+    }
 
-  if (isLess(filename)) {
-    cssSrc = processLess(filename);
-  }
+    if (isLess(filename)) {
+      cssSrc = processLess(filename);
+    }
 
-  // Process PostCSS (postcss.config.js can be present or not)
-  if (usePostCssExplicitly || isModule) {
-    console.timeEnd(`Processing ${relativeFilename}`);
-    return processPostCss(cssSrc, filename, {
-      useConfigFile: usePostCssExplicitly,
-      isModule,
-    });
-  }
+    // Process PostCSS (postcss.config.js can be present or not)
+    if (usePostCssExplicitly || isModule) {
+      return processPostCss(cssSrc, filename, {
+        useConfigFile: usePostCssExplicitly,
+        isModule,
+      });
+    }
 
-  console.timeEnd(`Processing ${relativeFilename}`);
-  return {
-    code: `const style = document.createElement('style');
+    return {
+      code: `const style = document.createElement('style');
   style.appendChild(document.createTextNode(${JSON.stringify(cssSrc)}));
   document.head.appendChild(style);
   module.exports = {}`,
-  };
+    };
+  } finally {
+    console.timeEnd(`Processing ${relativeFilename}`);
+  }
 }
 
 // TODO: MEDIUM PRIORITY To research about getCacheKey
@@ -349,9 +356,11 @@ postcss(plugins)
   const tempFileName = createTempFile(processPostCssFileContent);
   // We have to write this file to disk since Windows cannot process the command with long arguments
   const result = spawnSyncWithNoColor('node', [tempFileName]);
-  fs.unlink(tempFileName, (error) => {
-    if (error) throw error;
-  });
+  try {
+    fs.unlinkSync(tempFileName);
+  } catch (error) {
+    console.error(error);
+  }
   // TODO: What happens if we do not pass `utf-8`?
   const stderr = result.stderr?.toString('utf-8').trim();
   if (stderr) console.error(stderr);
@@ -444,8 +453,6 @@ function processSass(filename: string): string {
 }
 
 export function processLess(filename: string): string {
-  console.log('processLess', filename);
-
   try {
     require('less');
   } catch (err) {
@@ -465,9 +472,11 @@ export function processLess(filename: string): string {
 
   const tempFileName = createTempFile(processLessFileContent);
   const result = spawnSyncWithNoColor('node', [tempFileName]);
-  fs.unlink(tempFileName, (error) => {
-    if (error) throw error;
-  });
+  try {
+    fs.unlinkSync(tempFileName);
+  } catch (error) {
+    console.error(error);
+  }
   const stderr = result.stderr.toString('utf-8').trim();
   if (stderr) console.error(stderr);
   if (result.error) throw result.error;
